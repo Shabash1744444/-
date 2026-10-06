@@ -2,19 +2,19 @@
 
 Date: 2026-10-07
 Canonical GREEN weights generation: G266
-Canonical runtime generation: G267
+Canonical runtime generation: G268
 Current organism: child_g266_object_permanence_green.c4m
 Weights size: 1737251 bytes
 Weights SHA256: 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
 
-## Runtime G267 — Russian Discourse Bridge — CURRENT
+## Runtime G268 — Surface / Verbalizer Repair — CURRENT
 Runtime artifact:
-- C4_RUNTIME_G267_DIALOGUE_BRIDGE_GREEN_2026-10-07.zip
-- SHA256 87141d5a1cdee1fce555b300a295ac3ffc77d53df5f884ed9a61b4fe7f87c77a
+- C4_RUNTIME_G268_SURFACE_VERBALIZER_GREEN_2026-10-07.zip
+- SHA256 db02d7f9c4da15cfbcc38ef4a3110e696e611eaaef90e3612effa84761cf60bb
 
 Combined runtime + weights:
-- C4_G267_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
-- SHA256 c574850e1fc1a03233cc0ce9f70f782956f1df99ea59f27bb6c3696c6b4f8d50
+- C4_G268_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
+- SHA256 ad93604fb662da091e696a31e7f66cf7794ea51a6fd71efaa32892cea69dc1aa
 
 Weights changed by G267: NO.
 
@@ -95,3 +95,23 @@ counterexample -> minimal repair -> re-attack -> regression -> physical checkpoi
 Use G267 runtime with exact G266 weights.
 Do NOT train around the old fallback screenshots.
 Next language work should test whether richer free Russian dialogue can reach existing knowledge through the new bridge before adding more language facts.
+
+
+## G268 Android screenshot re-attack
+Observed failures:
+- `Привет` fell into unresolved-language output.
+- `Я не понимаю тебя` leaked internal SELF grounding.
+- initiative exposed opaque graph labels like `g223 ... node A/B`.
+
+Minimal runtime repair:
+- basic social/discourse acts;
+- user-vs-C4 perspective for misunderstanding reports;
+- pronoun/internal-ID filtering in read-only mention grounding;
+- human-facing public-label firewall for initiative;
+- unrenderable internal gaps stay internal and cannot monopolize ASK output.
+
+Validation:
+- G267+G268 dialogue tests: 14/14 PASS;
+- full suite: 268 PASS / 9 unchanged missing-historical-artifact FAIL;
+- real G266 re-attack: all three screenshot classes fixed;
+- weights unchanged: still G266.
