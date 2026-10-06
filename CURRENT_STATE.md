@@ -1,19 +1,20 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G246
-Current organism: child_g246_audio_sensory_green.c4m
-Size: 1155358 bytes
-SHA256: 9b945856fd08b56d215f233350791bc076bd6bb46a671c2bbc3491c4acfa0bbd
+Canonical GREEN generation: G248
+Current organism: child_g248_song_multimodal_green.c4m
+Size: 1220480 bytes
+SHA256: 93486415f2306c104ec70a4f5ef85fa905c51ff5eaaee5a25df68d7b4bc8ae20
 
 ## Milestone
-C4 has crossed 1 MiB of physically checkpointed organism state without byte padding.
-This is a milestone, not an optimization target.
+C4 is above 1 MiB of physically checkpointed organism state without byte padding.
+Byte size is a milestone only, never the objective.
 
-## Stable methodology
+## Normative methodology
 Read:
 - TRAINING_METHODOLOGY_LONG_CORPUS.md
 - LITERATURE_TRAINING_METHODOLOGY.md
+- SONG_AUDIO_TRAINING_METHODOLOGY.md
 
 Development loop:
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
@@ -38,153 +39,169 @@ HISTORY != EPISODIC MEMORY
 MODEL != REALITY
 SELF != OTHER != SOURCE != WORLD
 
-## Bryson phase
-G240 closed the physically supplied Bryson FB2 fragment.
-G240: 904909 bytes, SHA256 7d663606136ded693e659d138d4fad2674b967df33c621db65c6473f12fba765.
-Do not repeat Bryson except for retention/counterexample work.
+## Earlier lineage
+G240 closed the physically supplied Bryson fragment.
+G241-G244 opened Dostoevsky/literature and crossed 1 MiB.
+G244: 1059897 bytes, SHA256 123d2c2d4701bb8ee4b568efaf20ef06e24839bbcfeb6ea1d2400e7826208ebb.
 
-## Active literary corpus
-User supplied a full FB2 ZIP of Dostoevsky's "The Brothers Karamazov".
-Physical parse:
-- ~3.37 MB FB2
-- 171 section nodes
-- full multi-part novel structure is present
-The corpus is ACTIVE, not semantically closed.
-
-Important:
-SOURCE TEXT != TEACHER INTERPRETATION.
-FICTIONAL_WORLD_FACT != EXTERNAL_WORLD_FACT.
-AUTHOR != NARRATOR != CHARACTER != READER.
-Quoted/reported/narrated speech must retain its source layer.
-
-## G241 — narrator / family / modality
-- parent G240
-- 195/195 admitted
-- 0 rejected
-- cold 19/19
-- 948416 bytes
-- SHA256 dd99f3f79b13d650b3e0a8750977b18e1d26d78fff076c19a8c8240a9bf28965
-- runtime changes 0
-
-Adds:
-- AUTHOR / NARRATOR / CHARACTER / READER separation
-- literary hero != moral hero
-- modality: maybe/seems/apparently/reportedly
-- UTTERANCE != BELIEF
-- LITERAL CONTENT != SPEAKER INTENT
-- NARRATION TIME != EVENT TIME
-- reputation vs behavior
-- literary analogy != causal evidence
-- PERSON != DESCRIPTION OF PERSON
-- character state != C4 self state
-
-## G242 — social pragmatics / irony
-- 173/173 admitted
-- 0 rejected
-- cold 15/15
-- 987190 bytes
-- SHA256 22eb670384e823b7b8e5f666d0baa09b33a01bb30f6730de860dfb8ef6865bd8
-- runtime changes 0
-
-Adds:
-- gesture form != intent
-- polite form != benevolent intent
-- apology words != verified remorse
-- humor frame != absence of harm
-- sarcasm and double meaning
-- silence != consent
-- lexical profanity != hostility automatically
-- repeated rumor != independent evidence
-- delegated apology / messenger provenance
-- P(intent | utterance, context, relation, history) as analytical model, not mind-reading
-
-## G243 — self-report / desire / value / nested provenance
-- 198/198 admitted
+## G245 — song / poetry semantics
+- parent G244
+- 196/196 admitted
 - 0 rejected
 - cold 16/16
-- 1030079 bytes
-- SHA256 9bc20414c748bbc5fcd14f1367b864ced14d55b5232cdb2744c2bc3c8c3b94cd
+- 1101701 bytes
+- SHA256 44b54e1c39e020e113567fc54efb6242cc60e865710d9c9bbbbe1bb14c9daaec
 - runtime changes 0
 
-Adds:
-- SELF_REPORT != ACTION != DESIRE != VALUE != OBSERVER_INTERPRETATION
-- sincerity != infallibility
-- shame != proof of factual/legal guilt
-- desire != action != commitment
-- coercion/passivity/silence distinctions
-- nested provenance chains
-- hypothetical != observation
-- counterfactual != historical record
-- validity != truth of premises
-- certainty != accuracy
-- false belief can have real consequences
-- threat-form != actual threat automatically
+Introduced:
+- LYRICAL_I != AUTHOR != PERFORMER != USER != C4
+- refrain/repetition/source independence
+- reversed-text uncertainty
+- metaphor/polysemy/inversion/ellipsis
+- winter/spring/April/freedom/death/memory layers
+- TEXT != AUDIO
+- missing acoustic modality stays UNKNOWN
 
-## G244 — empathy / repair / children / memory — CURRENT GREEN
-- 131/131 admitted
+## G246 — audio/sensory foundation
+- 263/263 admitted
 - 0 rejected
-- cold 14/14
-- 1059897 bytes
-- SHA256 123d2c2d4701bb8ee4b568efaf20ef06e24839bbcfeb6ea1d2400e7826208ebb
+- cold 16/16
+- 1155358 bytes
+- SHA256 9b945856fd08b56d215f233350791bc076bd6bb46a671c2bbc3491c4acfa0bbd
 - runtime changes 0
 
-Adds:
-- emotional ambivalence and valid self-reported uncertainty
-- remembered speech != verbatim audio record
-- prediction != outcome
-- group action != same motive in every member
-- child action != fixed adult character essence
-- good intent != good outcome guaranteed
-- symbolic reconciliation != verified relationship repair
-- apology != reparation
-- social harm != only physical harm
-- vicarious shame != personal guilt
-- promise != control over another person
-- evasion has multiple candidate causes
-- empathy != mind-reading
-- understanding != excusing
-- AFTER != BECAUSE OF for miracle/causal interpretations
-- C4 help must be verified by outcome, not intention alone
+Introduced:
+- waveform/sampling/Nyquist/aliasing
+- FFT/STFT/spectrogram
+- RMS/dB/pitch/f0/harmonics/timbre/formants/prosody
+- melody/rhythm/tempo/meter/harmony concepts
+- ASR != RAW AUDIO OBSERVATION
+- TTS != LEARNED ARTICULATION
+- MOTOR_COMMAND != VERIFIED SOUND OUTCOME
+- self-hearing imitation loop as future architecture
+- FEATURE EXTRACTOR != SEMANTIC ORACLE
+- FUTURE SENSOR PLAN != CURRENT CAPABILITY
 
-## Regression after G244
-254/263 passed in 5.69s.
+## G247 — REAL AUDIO GROUNDING
+Parent: G246.
+
+User supplied eight real MP3 artifacts.
+Physical analyzer measured actual compressed audio, not inferred music from text.
+
+Results:
+- 220 lessons
+- 218 admitted
+- 2 dedup
+- 0 rejected
+- cold 16/16
+- 1192850 bytes
+- SHA256 219811b1a6ff1e47b034554eb4817d74f642b65c4164b7e5ac86cd8bb63e7d37
+- runtime changes 0
+
+Observed audio artifacts:
+- Пламя — ОДИН.ВОСЕМЬ (MC 1.8)
+- Вглядываясь вверх — MC 1.8
+- Дефрагментация — 25/17 feat. MC 1.8
+- Холодное Я — MC 1.8 feat. Trilogy Soldiers
+- Точка Фокуса — MC 1.8 feat. Trilogy Soldiers
+- Ледяной Воздух — MC 1.8
+- second Вглядываясь Вверх artifact — MC 1.8 feat. Бьяча, Гена Гром и Lenar
+- Апрель — К. Кинчев / Алиса
+
+Measured examples under G247 analyzer:
+- estimated pulse rates cluster near ~92 BPM for several MC 1.8 tracks
+- Холодное Я ~117 BPM estimate
+- Пламя and Апрель ~108 BPM estimates
+- acoustic measurements include spectral centroid, flatness, onset density, harmonic/percussive ratios, chroma summaries
+- all are method-dependent estimates, not semantic/emotional truth
+
+Important real-data lesson:
+Two distinct Вглядываясь вверх files have different hashes and durations but are the nearest pair in this batch under standardized MFCC/chroma summary distance.
+SAME TITLE + ACOUSTIC SIMILARITY != BYTE IDENTITY.
+SAME TITLE + ACOUSTIC SIMILARITY != PROOF OF SAME MASTER/EDIT automatically.
+
+New hard boundaries:
+AUDIO FILE != LIVE PERFORMANCE
+FEATURE ESTIMATE != GROUND TRUTH
+ACOUSTIC FEATURE != EMOTION
+ACOUSTIC FEATURE != LYRICS
+ACOUSTIC FEATURE != SPEAKER INTENT
+AUDIO_ARTIFACT != ANALYZER_FEATURE != SEMANTIC INTERPRETATION
+BYTE IDENTITY != RECORDING IDENTITY != PERFORMANCE IDENTITY != SONG IDENTITY
+
+C4 still does NOT have a continuously connected microphone organ.
+
+## G248 — SONG TEXT+AUDIO MULTIMODAL — CURRENT GREEN
+Parent: G247.
+
+Results:
+- 132/132 admitted
+- 0 rejected
+- cold 18/18
+- 1220480 bytes
+- SHA256 93486415f2306c104ec70a4f5ef85fa905c51ff5eaaee5a25df68d7b4bc8ae20
+- runtime changes 0
+
+### April
+- earlier lyric corpus is now linked to actual AUDIO_G247_APREL by user context/title
+- text + audio + acoustic profile are available
+- exact word/phoneme timestamps are NOT yet learned
+- historical G245 missing-audio status was true then but is no longer current
+
+### Ledyanoy Vozduh
+- user-supplied lyric/transcript linked to actual AUDIO_G247_LEDYANOY_VOZDUH
+- text + audio + acoustic profile available
+- exact word-to-audio alignment remains unverified
+- learned distinctions:
+  - atom->molecule/cell composition vs phrase/thought/verse composition is cross-domain structural analogy, not the same physical mechanism
+  - faster-than-light wording is hyperbole, not a relativity update
+  - predetermined-path wording is lyrical/philosophical determinism, not a measured law
+  - unity imagery != empirical identity of self/world
+  - breath motif != verified singer physiology
+
+### Otkrytyy Kosmos
+- Ruslan supplied lyrics and attributed them to Trilogy Soldiers
+- no MP3 in the eight-file batch is explicitly identified as this exact titled song
+- TEXT AVAILABLE; AUDIO remains UNKNOWN
+- do not substitute another cosmic-themed track
+
+Dense layers include:
+- window/sky/frame vs actual outer-space location
+- constellation silence/personification
+- inner compass metaphor
+- person as part/whole
+- cosmological expansion vocabulary vs metaphysical soul imagery
+- starlight/signals as information about earlier source states
+- imagined Jupiter travel != physical travel
+- universe/sky/oracle/whisper personification != verified conscious speaker
+- existential search != automatic empirical answer
+
+New hard boundaries:
+TEXT != AUDIO
+SONG-LEVEL BINDING != TOKEN-LEVEL ALIGNMENT
+LIKES SONG != BELIEVES EVERY LYRIC
+HYPERBOLE != PHYSICAL LAW
+PERSONIFICATION != VERIFIED AGENT
+AUDIO MISSING -> UNKNOWN, never borrow another track
+
+## Regression after G248
+254/263 passed in 4.85s.
 All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
 No new semantic/runtime assertion failures observed.
 
-## Literature phase totals
-G241-G244:
-- 697 lessons admitted
-- 0 rejected in final GREEN runs
-- runtime-law changes 0
+## Active corpora
+1. Dostoevsky full FB2 remains ACTIVE and not semantically closed.
+2. Song/audio corpus remains ACTIVE.
+3. Real audio batch is now a persistent sensory-learning corpus.
 
-## Next
-Continue from exact G244.
-Continue Dostoevsky by semantic/literary arcs, not raw chapter count.
-High-value upcoming areas:
-- Book V "Pro and contra": philosophical argument, value conflict, argument structure, narrator/character viewpoint
-- "The Grand Inquisitor": nested narrative, parable, speaker-within-speaker provenance, freedom/authority/compassion concepts
-- later unreliable narration, trial testimony, memory conflict, evidence vs rhetoric
+## Next audio frontier
+Do NOT call G248 live hearing.
+Next genuine capability steps should test:
+- temporal segmentation of actual audio
+- recurrence/motif detection without title metadata
+- text-to-audio alignment with external transcript kept as teacher hypothesis
+- repeated acoustic-token category formation
+- later phoneme/vowel learning
+- later motor->sound->self-hearing loop
 
-Do not claim the novel is finished; only early books have been trained so far.
-
-
-## G245 — user song / poetry layer
-- 196/196 admitted, 0 rejected, cold 16/16
-- 1101701 bytes
-- SHA256 44b54e1c39e020e113567fc54efb6242cc60e865710d9c9bbbbe1bb14c9daaec
-- lyric persona/source separation, refrain, reversed-text uncertainty, metaphor/polysemy, seasonal/death/memory/freedom imagery
-- TEXT != AUDIO; no melody/harmony/timbre invented
-
-## G246 — audio/sensory foundation — CURRENT GREEN
-- 263/263 admitted, 0 rejected, cold 16/16
-- 1155358 bytes
-- SHA256 9b945856fd08b56d215f233350791bc076bd6bb46a671c2bbc3491c4acfa0bbd
-- waveform/sampling/Nyquist/FFT/STFT/pitch/harmonics/formants/timbre/prosody/music structure
-- ASR != RAW OBSERVATION; TTS != LEARNED ARTICULATION
-- MOTOR_COMMAND != VERIFIED SOUND OUTCOME
-- future self-hearing motor loop defined conceptually, not implemented
-- runtime changes 0
-
-Regression after G246: 254/263; same 9 missing historical artifact FileNotFoundErrors, no new semantic/runtime failures.
-
-Read SONG_AUDIO_TRAINING_METHODOLOGY.md for future song/audio work.
+Do not use ASR success as proof C4 learned to hear.
