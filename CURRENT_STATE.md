@@ -1,75 +1,85 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G262
-Current organism: child_g262_multimodal_ru_transfer_green.c4m
-Size: 1579851 bytes
-SHA256: d3505c1c4e49674e58488c7ee3ba57c21a1baf61817cb4bb9fe4ccac4dcefee7
+Canonical GREEN generation: G265
+Current organism: child_g265_synthetic_vision_grounding_green.c4m
+Size: 1707998 bytes
+SHA256: 6e62f3839ea41a13a9f420f0e579f549d3b1c95a766d93de01c076ea19a0d8de
 
 ## Active direction
-Russian-first deep language + multimodal abstraction transfer.
-English OmniCaption form remains quarantined; only abstract relations may transfer into Russian semantic curriculum.
+Russian-first deep language + multimodal abstraction + raw sensory nursery.
+English OmniCaption lexical/syntactic form remains quarantined; only abstract relations transfer.
 
-## G261 — OmniCaption abstraction pass 2
-Parent: G260.
-- 130/130 admitted
+## G263 — OmniCaption abstraction pass 3
+Parent: G262.
+- 117/117 admitted
 - 0 rejected
-- cold 18/18
-- 1559795 bytes
-- SHA256 597535081d9e753fade020269c89a52ca834f63519984e2aaa5214aee797b0b7
+- cold 14/14
+- 1602113 bytes
+- SHA256 8267844a7169641ea52382cc122c08a223e2eaf7f7f53ad4eec2853a30dd5b7c
 - runtime changes 0
 
-Added reusable abstractions:
-- observation-description separation
-- multimodal binding types
-- temporal alignment without causal collapse
-- instruction vs demonstration
-- gesture vs intent
-- object persistence/occlusion
-- affordance as object+agent+context
-- spatial frame dependence
-- camera motion/zoom/framing
-- screen text/UI/world separation
-- voice/source uncertainty
-- sound/off-screen source
-- editing vs world causality
-- social interaction timing
-- persuasion/evidence separation
-- sport/official measurement distinction
-- humor/mismatch structure
-- teacher-corpus -> held-out sensory transfer discipline
+Adds:
+- event boundaries
+- multi-step procedures
+- attempt vs success
+- incomplete observation
+- modality conflict
+- attention/highlight vs world property
+- number/graph vs measured quantity
+- map/schema/model vs object
+- background/foreground
+- multi-source information
+- social coordination
+- example/counterexample learning
+- multimodal evidence dependence
+- Russian semantic bridge through language firewall
 
-## G262 — Russian multimodal transfer — CURRENT GREEN
-Parent: G261.
-- 96/96 admitted
+## G264 — Russian sensory reasoning transfer
+Parent: G263.
+- 84/84 admitted
 - 0 rejected
-- cold 16/16
-- 1579851 bytes
-- SHA256 d3505c1c4e49674e58488c7ee3ba57c21a1baf61817cb4bb9fe4ccac4dcefee7
+- cold 14/14
+- 1619770 bytes
+- SHA256 aef1f49725358a46915955affe0e4c5ac58ad6055a735e576990fb818e072b3a
 - runtime changes 0
 
-Transfer examples:
-- zoomed object != physically grown object
-- person outside frame may continue to exist
-- subtitle != speech waveform
-- smile during refusal != consent
-- pointing gesture has context-dependent referent
-- occluded object may persist
-- tool proximity != completed tool action
-- off-screen sound permits unseen source
-- replay from several angles != several events
-- player UI != depicted world
-- advertising music != evidence
-- prediction != result
-- silence != consent
-- visible sequence != causality
-- symbol != universal fixed meaning
-- source first-person != C4 SELF
-- English teacher caption may teach semantics but not Russian grammar
+Purpose:
+Verify G263 abstractions on novel Russian scenes rather than OmniCaption-specific wording.
 
-## Regression after G262
-254 passed / 9 failed in 5.59s.
-All 9 are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
+Transfer includes:
+procedure, attempt/success, noisy/missing signal, modality conflict, attention, graph/schema, background, source chains, group motives, category learning, evidence independence, SELF/time and Russian-only explanation.
+
+## G265 — synthetic raw-image nursery — CURRENT GREEN
+Parent: G264.
+- physical corpus: 108 PNG images, 128x128
+- train split: 72
+- held-out split: 36
+- factors: круг/квадрат/треугольник; красный/зелёный/синий; слева/центр/справа; малый/большой; partial occlusion yes/no
+- Russian teacher labels only
+- exact raw-image SHA256 + low-level derived measurements stored in manifest
+
+Training:
+- 748/748 admitted
+- 0 rejected
+- cold 10/10
+- 1707998 bytes
+- SHA256 6e62f3839ea41a13a9f420f0e579f549d3b1c95a766d93de01c076ea19a0d8de
+- runtime changes 0
+
+Hard boundaries:
+RAW_IMAGE != DERIVED_FEATURE
+DERIVED_FEATURE != TEACHER_LABEL
+TEACHER_LABEL != C4_AUTONOMOUS_RECOGNITION
+SYNTHETIC TRANSFER != REAL-PHOTO GENERALIZATION
+FILE NAME/METADATA must be hidden during held-out sensory tests.
+
+Important RED:
+First G265 exam was RED 9/10 because the harness itself called _eid on a held-out label and thereby created the entity it intended to prove absent. That RED was not promoted. Only the test was fixed; G265 was regenerated from clean G264. Runtime unchanged.
+
+## Regression after G265
+254 passed / 9 failed in 5.84s.
+All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
 No new semantic/runtime assertion failures.
 
 ## Normative loop
@@ -80,11 +90,10 @@ No runtime change merely to make curriculum fit.
 No byte padding.
 
 ## Next
-Continue from exact G262.
-Keep Russian as active natural-language layer.
-Continue:
-- OmniCaption abstraction mining only through language firewall
-- Russian transfer on unseen surfaces
+Continue from exact G265.
+High-value next steps:
+- held-out visual tests without filename/teacher-label leakage
+- richer synthetic visual scenes: multiple objects, occlusion/reappearance, containment, motion
 - Russian speech/audio grounding
-- raw image nursery with Russian labels
-- Dostoevsky as complex discourse source, not worldview
+- OmniCaption abstraction mining only through language firewall
+- Dostoevsky/complex Russian discourse in parallel
