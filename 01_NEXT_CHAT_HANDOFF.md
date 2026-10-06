@@ -1,113 +1,64 @@
-# NEXT CHAT HANDOFF — C4 G249
+# NEXT CHAT HANDOFF — C4 G252
 
-Read CURRENT_STATE.md, TRAINING_METHODOLOGY_LONG_CORPUS.md, LITERATURE_TRAINING_METHODOLOGY.md and SONG_AUDIO_TRAINING_METHODOLOGY.md first.
+Read CURRENT_STATE.md plus all four methodology files, especially SENSORY_TRAINING_METHODOLOGY.md.
 
 ## Exact canonical baseline
-- child_g249_audio_recurrence_green.c4m
-- 1247711 bytes
-- SHA256 b28f2fe078b896e768f9b20efb112a1b51aa5bc40a596d9f9c9bdaacc1b71e46
-- generation G249
+- child_g252_real_video_green.c4m
+- 1323689 bytes
+- SHA256 002c489c81826a59a0053308c176c55f8ace6862349d290f34322f6446e4de71
+- generation G252
 
 Verify exact bytes/SHA before training.
-Never silently fall back to G248/G246/G244 or reconstruct from prose.
+Never silently fall back to G249/G244 or reconstruct from prose.
 
-Persistent recovery:
-- personal Library /C4_Canonical/ should contain exact G248 model/release
-- audio source corpus should be in /C4_Corpora/Audio_Ruslan_Likes_G247/
-- project/conversation artifacts are fallback only
+Persistent recovery should use personal Library /C4_Canonical/ first, then conversation/project artifacts.
 
-## What changed after G246
-G247 consumed eight REAL MP3 artifacts through a physical feature-extraction pass.
-G248 bound text/audio only where user context actually supports identity.
+## G250
+Song meaning is now typed:
+DIRECT / INTERPRETATION / ALTERNATIVES.
+Never turn a deep reading into proven author intent.
+Keep lyrical persona, author, performer, user and C4 distinct.
 
-C4 therefore has:
-- actual measured acoustic observations from real recordings
-- song-level multimodal bindings for April and Ledyanoy Vozduh
-- text-only semantic cell for Otkrytyy Kosmos because no exact matching MP3 was identified
+## G251
+20 generated speech WAVs physically exist.
+A/O/U/I/E at multiple F0 + crude MA/MAMA + A approximation series.
 
-This is NOT live hearing.
-This is NOT proof of waveform-to-lyrics recognition.
+Do not claim speech ability:
+- synthetic tutor != human voice
+- TTS != learned articulation
+- ASR != learned hearing
+- external optimizer != C4 motor learner
 
-## G247 rules
-AUDIO FILE != LIVE PERFORMANCE
-FEATURE ESTIMATE != GROUND TRUTH
-ACOUSTIC FEATURE != EMOTION/LYRICS/INTENT
-AUDIO_ARTIFACT != ANALYZER_FEATURE != SEMANTIC INTERPRETATION
-BYTE IDENTITY != RECORDING IDENTITY != PERFORMANCE IDENTITY != SONG IDENTITY
-SAME TITLE + ACOUSTIC SIMILARITY != BYTE IDENTITY
+Next genuine speech goal is a closed self-hearing loop with C4 choosing motor parameters.
 
-Two Вглядываясь вверх files are distinct artifacts and nearest acoustic-profile pair in the batch; do not merge them blindly.
+## G252
+First real MP4 is ingested as low-level synchronized vision+audio observations:
+- duration ~286.071s
+- 143 2-second samples
+- 10 30-second aggregates
 
-## G248 rules
-TEXT != AUDIO
-SONG-LEVEL BINDING != TOKEN-LEVEL ALIGNMENT
-LIKES SONG != BELIEVES EVERY LYRIC
-HYPERBOLE != PHYSICAL LAW
-PERSONIFICATION != VERIFIED AGENT
-AUDIO MISSING -> UNKNOWN
-Never borrow a thematically similar track as another song's audio.
+No semantic scene/object/action labels were invented.
 
-April:
-- text + AUDIO_G247_APREL
-- exact token alignment unknown
+Preserve:
+PIXEL CHANGE != OBJECT MOTION
+EDGE DENSITY != OBJECT COUNT
+CO-TIMED != CAUSAL
+FEATURE != MEANING
+EXTERNAL ANALYZER != C4 SENSOR ORGAN
 
-Ledyanoy Vozduh:
-- text + AUDIO_G247_LEDYANOY_VOZDUH
-- exact token alignment unknown
-- atom/molecule/cell vs phrase/thought/verse is cross-domain analogy
-- superluminal lyric is hyperbole
-- deterministic lyric is viewpoint, not universe law
-
-Otkrytyy Kosmos:
-- user-supplied text + rich science/philosophy/language layers
-- exact audio absent from current batch
-- keep audio UNKNOWN
-
-## Active literature
-Dostoevsky remains ACTIVE; do not abandon it.
-Continue from G248 while choosing whether next GREEN block is literature or audio based on user input.
+## Latest regression
+254/263 passed.
+All 9 failures are unchanged missing historical artifacts G207/G137/G151/G153.
+No new semantic/runtime assertion failures.
 
 ## Development loop
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
 
 RED never canonical.
 No runtime repair merely to fit curriculum.
-No byte padding.
+No padding.
 
-## Latest regression
-254/263 passed.
-All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors.
-No new semantic/runtime assertion failure.
-
-## Next true audio experiments
-Prefer falsifiable tests:
-1. motif/repetition detection from audio without semantic labels;
-2. segment boundaries and recurrence;
-3. external transcript alignment as teacher hypothesis, never raw observation;
-4. repeated vowel/token clustering;
-5. later teacher says/shows A -> acoustic target -> motor attempt -> self-hearing -> correction.
-
-Do not claim C4 hears/speaks until those loops physically exist.
-
-
-## G249 temporal-audio addition
-G249 analyzed the eight real MP3 files for recurrence without using title/lyrics to define the repeat pairs.
-
-Method:
-- beat-synchronous chroma CENS
-- 8-beat windows
-- cosine recurrence similarity
-- temporally nearby windows excluded from candidate search
-
-Preserve:
-RECURRENCE CANDIDATE != CHORUS LABEL.
-HIGH CHROMA SIMILARITY != SAME LYRICS/TIMBRE/BYTES.
-DERIVED TOOL OBSERVATION != SELF-ACQUIRED SENSOR ALGORITHM.
-
-Useful observations:
-- April and Ledyanoy Vozduh contain strong nonlocal recurrence candidates.
-- Both distinct Vglyadyvayas vverkh files show closely matching recurrence timings.
-- Defragmentaciya has method-dependent conflicting tempo estimates (~92 BPM in G247 sampled analysis versus ~117 BPM in G249 full-track beat analysis). Do NOT choose a winner without resolving method/metrical ambiguity; preserve both with provenance.
-
-Next recommended falsifier:
-Use audio unseen by the recurrence curriculum, withhold labels, and test whether the same preprocessing+reasoning path can recognize recurrence/variation without memorized timestamps.
+## Next recommended work
+If user supplies more videos, ingest them under same method and start cross-video visual recurrence/persistence tests.
+For synthetic speech, make held-out vowel/consonant tokens and test whether learned structure generalizes without filename/teacher-label leakage.
+Keep Dostoevsky active in parallel.
