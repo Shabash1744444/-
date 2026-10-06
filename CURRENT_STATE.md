@@ -1,10 +1,10 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G244
-Current organism: child_g244_karamazov_empathy_green.c4m
-Size: 1059897 bytes
-SHA256: 123d2c2d4701bb8ee4b568efaf20ef06e24839bbcfeb6ea1d2400e7826208ebb
+Canonical GREEN generation: G246
+Current organism: child_g246_audio_sensory_green.c4m
+Size: 1155358 bytes
+SHA256: 9b945856fd08b56d215f233350791bc076bd6bb46a671c2bbc3491c4acfa0bbd
 
 ## Milestone
 C4 has crossed 1 MiB of physically checkpointed organism state without byte padding.
@@ -166,3 +166,25 @@ High-value upcoming areas:
 - later unreliable narration, trial testimony, memory conflict, evidence vs rhetoric
 
 Do not claim the novel is finished; only early books have been trained so far.
+
+
+## G245 — user song / poetry layer
+- 196/196 admitted, 0 rejected, cold 16/16
+- 1101701 bytes
+- SHA256 44b54e1c39e020e113567fc54efb6242cc60e865710d9c9bbbbe1bb14c9daaec
+- lyric persona/source separation, refrain, reversed-text uncertainty, metaphor/polysemy, seasonal/death/memory/freedom imagery
+- TEXT != AUDIO; no melody/harmony/timbre invented
+
+## G246 — audio/sensory foundation — CURRENT GREEN
+- 263/263 admitted, 0 rejected, cold 16/16
+- 1155358 bytes
+- SHA256 9b945856fd08b56d215f233350791bc076bd6bb46a671c2bbc3491c4acfa0bbd
+- waveform/sampling/Nyquist/FFT/STFT/pitch/harmonics/formants/timbre/prosody/music structure
+- ASR != RAW OBSERVATION; TTS != LEARNED ARTICULATION
+- MOTOR_COMMAND != VERIFIED SOUND OUTCOME
+- future self-hearing motor loop defined conceptually, not implemented
+- runtime changes 0
+
+Regression after G246: 254/263; same 9 missing historical artifact FileNotFoundErrors, no new semantic/runtime failures.
+
+Read SONG_AUDIO_TRAINING_METHODOLOGY.md for future song/audio work.
