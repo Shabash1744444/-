@@ -1,76 +1,75 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G260
-Current organism: child_g260_russian_discourse_transfer_green.c4m
-Size: 1534757 bytes
-SHA256: cbb496c2eaca983a2a68c0e65106360a2442eb25293025931358fc3c157d286d
+Canonical GREEN generation: G262
+Current organism: child_g262_multimodal_ru_transfer_green.c4m
+Size: 1579851 bytes
+SHA256: d3505c1c4e49674e58488c7ee3ba57c21a1baf61817cb4bb9fe4ccac4dcefee7
 
-## Current direction
-Russian-first deep language grounding.
-Do not mix English lexical/syntactic form into the active Russian layer.
-Foreign corpora may still contribute abstract semantics under LANGUAGE_ID/source quarantine.
+## Active direction
+Russian-first deep language + multimodal abstraction transfer.
+English OmniCaption form remains quarantined; only abstract relations may transfer into Russian semantic curriculum.
 
-## G259 — Russian deep discourse from Dostoevsky Book V
-Source sections:
-- III Братья знакомятся
-- IV Бунт
-- V Великий инквизитор
-
-Results:
-- 143/143 admitted
+## G261 — OmniCaption abstraction pass 2
+Parent: G260.
+- 130/130 admitted
 - 0 rejected
-- cold 20/20
-- 1513912 bytes
-- SHA256 bf7c4f5651a56ec6eda35b61e20bdf737e92acbf7336c25b3dd82da34ed262c2
+- cold 18/18
+- 1559795 bytes
+- SHA256 597535081d9e753fade020269c89a52ca834f63519984e2aaa5214aee797b0b7
 - runtime changes 0
 
-Adds:
-- nested speaker/source ownership
-- argument vs conclusion/premise/evidence
-- rhetorical force vs proof
-- pronoun/reference under speaker changes
-- narration time vs event time vs C4 reading time
-- contradiction scope
-- irony/rhetoric
-- moral/philosophical layer separation
-- nested provenance in The Grand Inquisitor
-- source position != C4 belief
-- complex Russian syntax and particles
-- subtext as supported hypothesis, not hidden fact
+Added reusable abstractions:
+- observation-description separation
+- multimodal binding types
+- temporal alignment without causal collapse
+- instruction vs demonstration
+- gesture vs intent
+- object persistence/occlusion
+- affordance as object+agent+context
+- spatial frame dependence
+- camera motion/zoom/framing
+- screen text/UI/world separation
+- voice/source uncertainty
+- sound/off-screen source
+- editing vs world causality
+- social interaction timing
+- persuasion/evidence separation
+- sport/official measurement distinction
+- humor/mismatch structure
+- teacher-corpus -> held-out sensory transfer discipline
 
-Important RED note:
-First G259 run was RED 19/20 only because the harness queried an admitted fact under the wrong subject node. The RED output was not promoted. The harness was corrected and G259 was regenerated from clean G258 with 20/20 cold.
-
-## G260 — Russian discourse transfer — CURRENT GREEN
-Purpose: prevent source-specific memorization from being mistaken for language understanding.
-
-Results:
-- 104/104 admitted
+## G262 — Russian multimodal transfer — CURRENT GREEN
+Parent: G261.
+- 96/96 admitted
 - 0 rejected
-- cold 13/13
-- 1534757 bytes
-- SHA256 cbb496c2eaca983a2a68c0e65106360a2442eb25293025931358fc3c157d286d
+- cold 16/16
+- 1579851 bytes
+- SHA256 d3505c1c4e49674e58488c7ee3ba57c21a1baf61817cb4bb9fe4ccac4dcefee7
 - runtime changes 0
 
-Transfer structures:
-- quotation != speaker belief
-- conditional != fulfilled condition
-- possibility != event
-- deictic time depends on speech time
-- first-person narrative != C4 autobiography
-- Russian polysemy and metaphor on unseen surfaces
-- indirect request/pragmatic meaning
-- universal claim/counterexample logic
-- social explanation != justification
-- SELF/reference safety in Russian dialogue
-- Russian answer purity after foreign teacher exposure
-- unreliable narrator and composition
-- explicit epistemic language: source says / I think / possible / I do not know
+Transfer examples:
+- zoomed object != physically grown object
+- person outside frame may continue to exist
+- subtitle != speech waveform
+- smile during refusal != consent
+- pointing gesture has context-dependent referent
+- occluded object may persist
+- tool proximity != completed tool action
+- off-screen sound permits unseen source
+- replay from several angles != several events
+- player UI != depicted world
+- advertising music != evidence
+- prediction != result
+- silence != consent
+- visible sequence != causality
+- symbol != universal fixed meaning
+- source first-person != C4 SELF
+- English teacher caption may teach semantics but not Russian grammar
 
-## Regression after G260
-254 passed / 9 failed in 5.09s.
-All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
+## Regression after G262
+254 passed / 9 failed in 5.59s.
+All 9 are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
 No new semantic/runtime assertion failures.
 
 ## Normative loop
@@ -81,10 +80,11 @@ No runtime change merely to make curriculum fit.
 No byte padding.
 
 ## Next
-Continue Russian-only language/cognition growth.
-Prefer:
-- unseen Russian prose/dialogue for transfer
+Continue from exact G262.
+Keep Russian as active natural-language layer.
+Continue:
+- OmniCaption abstraction mining only through language firewall
+- Russian transfer on unseen surfaces
 - Russian speech/audio grounding
-- Russian visual teacher labels for raw-image nursery
+- raw image nursery with Russian labels
 - Dostoevsky as complex discourse source, not worldview
-- OmniCaption abstractions only through language firewall
