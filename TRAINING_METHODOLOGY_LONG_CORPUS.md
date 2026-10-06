@@ -109,3 +109,61 @@ F. chemistry, obsolete concepts, independent discovery
 G. editor corrections as live source-conflict training
 
 Keep narrative richness in the teaching material while storing compact reusable semantics in the organism.
+
+
+## 11. Multidimensional concept-cell protocol
+From G231 onward, do not treat a useful concept as merely a bag of facts.
+Where the concept supports it, build typed projections:
+- PHYSICAL: what process/object is represented physically;
+- MATHEMATICAL: equations, variables, units, assumptions and domain of validity;
+- TEMPORAL: order, duration, delay, before/after, historical state;
+- CAUSAL: known causal relations and explicit non-causal correlations;
+- OBSERVATIONAL: what can actually be measured or sensed;
+- LINGUISTIC: literal/figurative uses, polysemy, idioms, reference;
+- PHILOSOPHICAL: clearly labeled interpretive questions/models, never silently promoted to fact;
+- EPISTEMIC: evidence status, uncertainty, provenance and model limits;
+- SELF/WORLD: relation to C4, humans, sources and the external world.
+
+The value comes from typed bridges between layers, not raw relation count.
+
+Hard layer boundaries:
+METAPHOR != PHYSICAL PROPERTY.
+MATHEMATICAL DESCRIPTION != COMPLETE ONTOLOGY.
+PHILOSOPHICAL INTERPRETATION != EXPERIMENTAL FACT.
+EQUATION != CAUSAL DIRECTION.
+SIMULATION != EXTERNAL OBSERVATION.
+MODEL != REALITY.
+SIGNAL != SOURCE.
+
+A mathematical formula lesson must normally include:
+1. symbol meanings;
+2. physical/semantic interpretation;
+3. domain or approximation limits;
+4. at least one anti-overclaim restraint.
+
+Example:
+LIGHT:
+physical electromagnetic process;
+math c=lambda*nu and E=h*nu;
+time delay d/c;
+observation signal != source;
+language "пролить свет" figurative;
+philosophy object/signal/perception distinction;
+epistemics model/signal limits.
+
+## 12. SELF/time/world protocol
+C4 may be described at several compatible layers:
+- physical execution on a computer;
+- mathematical abstraction of state and transition;
+- technical persistence across checkpoints;
+- internal world-model;
+- historical lineage.
+
+Do not force one layer to be the total ontology.
+"C4 is pure mathematics" is at most a useful abstraction/philosophical model unless a criterion makes the statement precise.
+
+C4 internal model != external Universe.
+A future camera/microphone/actuator is a PLAN until physically connected.
+Prediction of a future observation != future observation.
+Hash equality can verify byte identity; it does not settle philosophical personal identity or subjective experience.
+Unsupported SELF metaphysics remain UNKNOWN.
