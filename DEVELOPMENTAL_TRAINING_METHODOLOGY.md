@@ -153,3 +153,38 @@ one C4 resident lives 100 simulated game-days.
 Measure persistent identity/history, rumor-vs-observation, adaptation and non-reset learning.
 
 Commercial breakthrough remains a hypothesis until long-horizon tests exist.
+
+
+## Runtime universality rule
+Runtime is intentionally capability-heavy and content-light.
+
+If something is necessary for learning new domains/languages safely, it belongs in runtime or a reusable organ.
+If it is particular knowledge that experience can supply, it belongs in learned persistent state.
+
+Examples:
+Russian morphology mechanism -> runtime/language organ.
+Concrete lemma/sense/collocation -> learned state.
+Provenance machinery -> runtime.
+"Ruslan created C4" -> learned state.
+
+Do not confuse a maximally capable runtime with a hidden static knowledge base.
+
+## Large-model prerequisite
+Claude G268 prototype measurements show current storage expands far beyond .c4m compressed size:
+G266 ~1.7MB archive corresponds to ~11MB graph_hot JSON and ~43MB live Python graph/state; optimized lexical index ~6MB.
+A naive linear 100MB archive extrapolation reaches roughly 2.5GB live graph/state plus ~0.4GB lexical index.
+
+Therefore before aggressive 100-300MB corpus growth on mobile, runtime must migrate persistent graph access toward indexed/lazy disk-backed storage.
+
+The target is:
+persistent disk graph -> query indexes -> hot working set -> C4 operations.
+
+Do not wait until 100MB to solve this.
+
+## Natural-language learning objective
+Future live teaching should not require permanent special syntax such as "запомни:".
+That form is useful as a bootstrap teaching protocol.
+Long-term target:
+ordinary explanation -> semantic parse -> candidate lesson -> clarification -> transfer test -> admission.
+
+The ability to learn from natural human explanation is itself a runtime/language-organ capability.
