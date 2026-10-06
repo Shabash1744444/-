@@ -188,3 +188,16 @@ Long-term target:
 ordinary explanation -> semantic parse -> candidate lesson -> clarification -> transfer test -> admission.
 
 The ability to learn from natural human explanation is itself a runtime/language-organ capability.
+
+
+## Lifelong learning requires consolidation
+Do not train toward 100-300MB as a final fixed ceiling.
+Those are scale checkpoints.
+
+If C4 succeeds as an online learner, raw accumulated experience may eventually exceed gigabytes or terabytes.
+The architecture must make retained state grow slower than raw experience by consolidating repeated structure.
+
+Training methodology must therefore include:
+learn -> use -> identify repeated structure -> consolidate -> re-test -> retain exceptions/provenance.
+
+Never teach compression by deleting difficult counterexamples.
