@@ -55,3 +55,72 @@ Audio/visual co-occurrence supports binding hypotheses but CO-OCCURRENCE != IDEN
 G246 has conceptual/mathematical foundations only.
 No live microphone, vision organ, or learned articulatory motor loop is currently connected.
 FUTURE SENSOR PLAN != CURRENT CAPABILITY.
+
+
+## Real-audio grounding protocol (G247+)
+When actual audio files are supplied, preserve three distinct layers:
+
+1. AUDIO ARTIFACT
+- exact file/hash/container identity
+- encoded samples/metadata
+- recording artifact provenance
+
+2. DERIVED ACOUSTIC MEASUREMENT
+- duration/sample timing
+- spectral summaries
+- onset/tempo hypotheses
+- harmonic/percussive decomposition
+- pitch/chroma/formant candidates
+- analyzer method + uncertainty
+
+3. SEMANTIC / MUSICAL INTERPRETATION
+- lyrics
+- song identity
+- emotion/style/theme
+- listener preference
+- metaphor/philosophy
+
+AUDIO_ARTIFACT != ANALYZER_FEATURE != SEMANTIC INTERPRETATION.
+FEATURE ESTIMATE != GROUND TRUTH.
+ACOUSTIC FEATURE != EMOTION/LYRICS/INTENT.
+
+## Audio identity hierarchy
+Do not collapse:
+BYTE IDENTITY
+RECORDING/MASTER IDENTITY
+PERFORMANCE IDENTITY
+SONG/COMPOSITION IDENTITY
+
+The same song can exist in different encodings.
+Similar acoustics + same title support an identity hypothesis but do not prove byte/master identity.
+
+## Cross-modal song binding
+TEXT != AUDIO.
+Song-level text/audio identity may be learned from user labels, metadata, temporal alignment or repeated evidence.
+SONG-LEVEL BINDING != TOKEN/PHONEME-LEVEL ALIGNMENT.
+
+A supplied transcript is a teacher/source layer. It does not prove C4 itself decoded the waveform.
+
+If exact audio for a titled lyric is absent:
+AUDIO = UNKNOWN.
+Never substitute a thematically similar recording.
+
+## Real audio does not equal live hearing
+Consuming analyzer-derived observations from stored MP3 files is grounded audio learning, but:
+STORED AUDIO ANALYSIS != CONTINUOUS MICROPHONE ORGAN.
+Do not claim live hearing until physical streaming sensor input exists.
+
+## Music and preference
+User liking a song is authoritative about reported preference, not about why the song is liked and not about truth of the lyrics.
+LIKES SONG != BELIEVES EVERY LYRIC.
+LIKE LABEL != KNOWN CAUSAL FEATURE OF PREFERENCE.
+
+## Next falsifiable ladder
+1. detect recurring structure/motifs from audio without title labels;
+2. segment events and repetitions;
+3. align external transcript as a separate teacher hypothesis;
+4. cluster repeated acoustic tokens/vowels;
+5. bind symbol/text to acquired acoustic category;
+6. motor attempt -> produced audio -> self-hearing -> compare -> update.
+
+ASR can assist as teacher/reference but ASR SUCCESS != C4 LEARNED HEARING.
