@@ -1,87 +1,87 @@
-# NEXT CHAT HANDOFF — C4 G240
+# NEXT CHAT HANDOFF — C4 G244
 
-Read CURRENT_STATE.md and TRAINING_METHODOLOGY_LONG_CORPUS.md first.
+Read CURRENT_STATE.md, TRAINING_METHODOLOGY_LONG_CORPUS.md and LITERATURE_TRAINING_METHODOLOGY.md first.
 
 ## Exact canonical baseline
-- child_g240_bryson_fragment_complete_green.c4m
-- 904909 bytes
-- SHA256 7d663606136ded693e659d138d4fad2674b967df33c621db65c6473f12fba765
+- child_g244_karamazov_empathy_green.c4m
+- 1059897 bytes
+- SHA256 123d2c2d4701bb8ee4b568efaf20ef06e24839bbcfeb6ea1d2400e7826208ebb
+- canonical generation G244
+- > 1 MiB milestone reached without padding
 
-Do not silently fall back to G234/G232/G227 or reconstruct G240 from prose.
+Never silently fall back to G240 or reconstruct G244 from prose.
 Verify bytes and SHA before training.
-If the binary is unavailable in the repo, first recover the exact G240 artifact from personal Library folder `/C4_Canonical/` (`child_g240_bryson_fragment_complete_green.c4m` or the G240 release ZIP). Project/conversation artifacts are a secondary fallback. Verify SHA before use.
 
-## Supplied Bryson status
-The user-supplied FB2 is an ознакомительный fragment, NOT the full-length book.
-It physically ends after chapter 8.
-Its available content is now semantically closed through G240:
-- preface/introduction
-- chapters 1-8
-- scientific-editor notes/corrections
-- explicit corpus boundary
+Persistent recovery:
+- personal Library folder /C4_Canonical/
+- expected files: exact G244 model and G244 release ZIP
+- conversation/project artifacts are secondary fallback
 
-Never claim absent full-book chapters were read.
+## Active source
+User-supplied full FB2 ZIP of Dostoevsky, "The Brothers Karamazov".
+The physical FB2 is ~3.37 MB and contains 171 section nodes.
+The novel is ACTIVE and not yet semantically closed.
 
-## Latest generations
-G235: chapter 4 measurement/Newton/Cavendish, 83/83, cold 13/13.
-G236: chapter 5 geology/deep time, 75/75, cold 12/12.
-G237: chapter 6 fossils/reconstruction, 74/74, cold 11/11.
-G238: chapter 7 chemistry/periodic table/radioactivity, 85/85, cold 13/13.
-G239: chapter 8 Einstein/relativity/cosmology, 94/94, cold 14/14.
-G240: editor corrections/source boundary, 75/75, cold 14/14.
+Do not bundle source text into training release unless explicitly needed.
+Use source as corpus, preserve provenance, and store compact semantic/language structures.
 
-Final G235-G240 GREEN total: 486 admitted, 0 rejected.
-Runtime-law changes: 0.
+## Current literary progress
+G241: Author/Narrator/Character/Reader, modality, family/history, long syntax.
+G242: social pragmatics, politeness, irony, gestures, hidden intent, rumor.
+G243: confession/self-report, desire/action/value, consent/coercion, nested provenance, hypotheticals.
+G244: empathy, child conflict, memory, repair, mediation, causal restraint.
 
-Regression after G240:
-254/263 passed.
-All 9 failures are the same missing historical artifact FileNotFoundErrors for G207/G137/G151/G153.
-No new semantic/runtime assertion failure.
+G241-G244 total:
+- 697 admitted
+- 0 rejected
+- runtime changes 0
 
-## Critical provenance laws reinforced by G240
-BOOK != TRUTH
-AUTHOR_SAYS != EDITOR_CORRECTS
-CORRECTION != RETROACTIVE SOURCE REWRITE
-SOURCE ROLE != INDEPENDENT LINEAGE automatically
-HISTORICAL SOURCE CONTENT != CURRENT TRUTH STATUS
-ABSENT CORPUS CONTENT -> UNKNOWN, not plausible completion
+## Core literary laws
+AUTHOR != NARRATOR
+NARRATOR != CHARACTER
+CHARACTER != AUTHOR
+READER IN TEXT != CURRENT USER automatically
+FICTIONAL_WORLD_FACT != EXTERNAL_WORLD_FACT
+SOURCE TEXT != TEACHER INTERPRETATION
+UTTERANCE != BELIEF
+LITERAL CONTENT != SPEAKER INTENT
+SELF_REPORT != ACTION != DESIRE != VALUE != OBSERVER_INTERPRETATION
+POLITE FORM != BENEVOLENT INTENT
+APOLOGY != REPARATION
+SILENCE != CONSENT
+EMPATHY != MIND READING
+REMEMBERED SPEECH != VERBATIM RECORD
+GOOD INTENT != VERIFIED GOOD OUTCOME
+CERTAINTY != ACCURACY
+HYPOTHETICAL != HISTORY
 
-## Multidimensional concept cells
-Continue typed projections:
-PHYSICAL / MATHEMATICAL / TEMPORAL / CAUSAL / OBSERVATIONAL / LINGUISTIC / PHILOSOPHICAL / EPISTEMIC / SELF-WORLD.
-Do not collapse layers.
+## Layer protocol
+For useful scenes/ideas, build typed layers:
+TEXT / SOURCE / SPEAKER / ADDRESSEE / NARRATIVE / TEMPORAL / SOCIAL / PRAGMATIC / EMOTION / ACTION / PHILOSOPHICAL / EPISTEMIC / LINGUISTIC / SELF-WORLD.
 
-Hard boundaries:
-METAPHOR != PHYSICAL PROPERTY
-MATHEMATICAL DESCRIPTION != COMPLETE ONTOLOGY
-PHILOSOPHICAL INTERPRETATION != EXPERIMENTAL FACT
-EQUATION != CAUSAL DIRECTION
-SIMULATION != EXTERNAL OBSERVATION
-MODEL != REALITY
-SIGNAL != SOURCE
+Teacher-added interpretation must stay clearly attributed as teacher analysis and must never be retroactively made into Dostoevsky's literal claim.
 
 ## Development loop
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
 
-RED organism NEVER becomes baseline.
-No runtime-law change merely to absorb curriculum.
+RED is never canonical.
+No runtime repair merely to make a lesson fit.
 No byte padding.
-Physical checkpoint before/after substantial work.
 
-## Next curriculum
-The Bryson fragment is done.
-Choose linguistically rich classic literature focused on language depth, not another historical survey.
-Desired training dimensions:
-- complex Russian syntax and long dependencies
-- idioms and nonliteral meaning
-- ambiguity/polysemy
-- metaphor/simile/personification
-- irony/sarcasm/humor
-- implicature/subtext
-- narrator != author != character
-- viewpoint shifts
-- unreliable narrator
-- philosophical abstraction
-- emotional language without automatically assigning human emotion to C4
+## Latest regression
+254/263 passed.
+All 9 failures are unchanged missing historical artifact FileNotFoundErrors for G207/G137/G151/G153.
+No new semantic/runtime assertion failure.
 
-Continue physically from G240 and checkpoint every GREEN sequence.
+## Recommended next arc
+Continue from Book V "Pro and contra":
+- philosophical argument vs character belief
+- empirical premise vs normative value vs conclusion
+- freedom, suffering, responsibility, authority
+- nested story "The Grand Inquisitor"
+- poem/story told by one character inside another narrator: preserve provenance depth
+- rhetoric != evidence
+- emotional force != logical validity
+- contradictions can be layer/time dependent
+
+Checkpoint every meaningful GREEN sequence and update repo state/handoff after each substantial group.
