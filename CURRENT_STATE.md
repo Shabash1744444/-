@@ -1,10 +1,10 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G257
-Current organism: child_g257_omnicaption_teacher_green.c4m
-Size: 1458745 bytes
-SHA256: 762e0991d4d92a898c12220a85e207bb2bf92513eaeddb52ac3bc8fd3f2ae213
+Canonical GREEN generation: G258
+Current organism: child_g258_russian_language_firewall_green.c4m
+Size: 1485478 bytes
+SHA256: 97d91d65b98171f16d398e9939b69a20de1b183546dbd429115f5a85cbb302cd
 
 ## Normative methodology
 Read:
@@ -14,6 +14,7 @@ Read:
 - SENSORY_TRAINING_METHODOLOGY.md
 - ABSTRACTION_TRANSFER_METHODOLOGY.md
 - SELF_WORLD_MULTIMODAL_METHODOLOGY.md
+- LANGUAGE_ISOLATION_METHODOLOGY.md
 
 Development loop:
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
@@ -22,75 +23,85 @@ RED is never promoted.
 No runtime-law change merely to absorb curriculum.
 No byte padding.
 
-## Recent canonical parent
-G256:
-- 1426007 bytes
-- SHA256 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
-- SELF/WORLD and cross-modal meaning boundaries
+## Recent lineage
+G256 SELF/WORLD multimodal: 1426007 bytes.
+G257 OmniCaption external multimodal teacher: 1458745 bytes, SHA256 762e0991d4d92a898c12220a85e207bb2bf92513eaeddb52ac3bc8fd3f2ae213.
 
-## G257 — OMNICAPTION EXTERNAL MULTIMODAL TEACHER — CURRENT GREEN
-Uploaded source:
-- OmniCaption.json
-- 1226 entries
-- 22,808,209 bytes
-- source SHA256 a26b854dce0cdb32f5a60f9eeec5058f1de5bdacd014bc54997fb296bd084bfb
-- 37,368 listed visual events
-- 18,093 listed speech events
-- 2,778 listed music events
-- 7,825 listed SFX events
-- 24,307 listed synergistic audiovisual relation descriptions
-
-Training:
-- 172/172 admitted
+## G258 — RUSSIAN LANGUAGE FIREWALL — CURRENT GREEN
+Parent: G257.
+- 130/130 admitted
 - 0 dedup
 - 0 rejected
-- cold 21/21
-- 1458745 bytes
-- SHA256 762e0991d4d92a898c12220a85e207bb2bf92513eaeddb52ac3bc8fd3f2ae213
+- cold 20/20
+- 1485478 bytes
+- SHA256 97d91d65b98171f16d398e9939b69a20de1b183546dbd429115f5a85cbb302cd
 - runtime changes 0
 
 Purpose:
-Use OmniCaption as an EXTERNAL TEACHER corpus for reusable multimodal relations, NOT as raw sensory experience.
+Keep Russian as the active natural-language learning channel while allowing foreign corpora to contribute abstract semantic structure without contaminating Russian lexicon/syntax.
 
-Critical boundaries:
-CAPTION TEXT != RAW VIDEO
-VISUAL EVENT TEXT != PIXELS
-AUDIO EVENT TEXT != WAVEFORM
-SYNERGISTIC EVENT TEXT != C4 AUTONOMOUS CROSS MODAL DISCOVERY
-VIDEO PATH REFERENCE != VIDEO BYTES
-same video described in multiple annotation fields != independent evidence
-shared annotation pipeline != independent evidence sources
+Core:
+LANGUAGE FORM != SEMANTIC CONCEPT.
+LANGUAGE_ID is a property of message form, not truth.
+LANG_RU is current active language-learning context.
+LANG_EN remains an external/source context unless a future bilingual curriculum explicitly activates it.
+Cross-language transfer must pass through semantic abstractions rather than mechanical word/syntax mixing.
 
-Reusable abstractions added:
-- visible speaker + aligned speech -> speaker-source hypothesis
-- visible action + transient sound -> action/sound common-event hypothesis
-- spoken instruction + visible motion -> instruction/demonstration relation
-- commentary + timer/scoreboard -> narration/data relation
-- overlay/title/logo -> presentation context vs depicted world
-- background music vs diegetic sound distinction
-- voiceover vs visible speaker distinction
-- edit/cut/replay/glitch vs physical-world event distinction
-- message transmission can distort across relays
-- sports prediction/commentary != verified result
-- advertisement claim != independently verified fact
-- travel montage != continuous physical path
-- audience reaction != proposition truth
-- performed emotion/persona != private identity
-- common editor/event can induce audiovisual correlation without direct causal relation
+Russian layer:
+- Russian morphology is learned from Russian forms.
+- Russian syntax is not copied from English word order.
+- Russian idioms are not literal calques by default.
+- Russian pronoun/reference mechanisms remain language-contextual.
+- foreign sentences are not examples of Russian grammar.
 
-Teacher-to-sensor curriculum:
-annotation can teach candidate concepts;
-held-out sensor exam must hide title/filename/label/caption;
-successful retrieval of annotation != autonomous perception;
-future raw image/audio datasets should test bottom-up transfer.
+English source quarantine:
+- English quotation remains SOURCE_TEXT LANG_EN.
+- English teacher text can teach an abstract relation without teaching Russian wording.
+- English vocabulary/syntax from OmniCaption is not counted as Russian language training.
+- foreign unknown fragments remain UNKNOWN rather than guessed.
 
-## Regression after G257
-254 passed / 9 failed in 5.13s.
-All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors.
+Translation/code-switching:
+TRANSLATION != COPYING.
+TRANSLITERATION != TRANSLATION.
+Accidental language mixture != intentional code-switching.
+Code-switching and bilingual competence are future separately tested capabilities.
+
+SELF/source:
+source language != owner of experience.
+source first-person != C4 autobiography.
+language/source/content/SELF are separate dimensions.
+
+Sensory language grounding:
+raw waveform is not Russian or English before speech interpretation.
+sound -> Russian word must be learned.
+image -> Russian word must be learned.
+one grounded concept may later acquire labels in several languages while preserving separate language rules.
+
+## OmniCaption language audit
+Uploaded OmniCaption remains a teacher-only corpus.
+Measured across collected annotation text:
+- Latin letters: ~15,964,104
+- Cyrillic letters: 155
+- Cyrillic detected in only 11 of 92,823 collected text fields
+Therefore this uploaded corpus is overwhelmingly English.
+Its abstract multimodal relations may transfer, but its English form is quarantined from Russian language curriculum.
+
+## MERA Multi boundary
+MERA Multi is a Russian multimodal benchmark and is reserved for evaluation, not training.
+Published MERA Multi terms prohibit use of benchmark sets for model training.
+This makes it valuable as a future unexposed Russian multimodal exam.
+
+## Regression after G258
+254 passed / 9 failed in 5.75s.
+All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotErrors.
 No new semantic/runtime assertion failures.
 
-## Active direction
-Acquire raw image and raw audio corpora next.
-Keep pixels/waveforms physically separate from teacher labels.
-Use labels/captions only as provenance-tagged teacher channel.
-Test held-out generalization without metadata leakage.
+## Recommended next Russian corpora
+Training candidates, subject to exact split/license verification before ingestion:
+- Russian LibriSpeech / RuLibriSpeech: Russian audio+transcript.
+- Common Voice Russian: diverse Russian voices/audio+transcript.
+- FLEURS ru_ru only: compact Russian speech+text.
+- Golos: very large Russian speech corpus, but more restrictive license; treat separately.
+
+For images, prefer raw pixels with Russian teacher labels or build a controlled synthetic visual nursery ourselves.
+Do not use MERA benchmark examples for training.
