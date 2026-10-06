@@ -1,98 +1,97 @@
 # CURRENT STATE
 
-Date: 2026-10-06
-Canonical GREEN generation: G266
+Date: 2026-10-07
+Canonical GREEN weights generation: G266
+Canonical runtime generation: G267
 Current organism: child_g266_object_permanence_green.c4m
-Size: 1737251 bytes
-SHA256: 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
+Weights size: 1737251 bytes
+Weights SHA256: 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
 
-## Active direction
-Russian-first language + multimodal abstraction + raw synthetic sensory nursery.
+## Runtime G267 — Russian Discourse Bridge — CURRENT
+Runtime artifact:
+- C4_RUNTIME_G267_DIALOGUE_BRIDGE_GREEN_2026-10-07.zip
+- SHA256 87141d5a1cdee1fce555b300a295ac3ffc77d53df5f884ed9a61b4fe7f87c77a
 
-## G263
-OmniCaption abstraction pass 3:
-- 117/117 admitted
-- cold 14/14
+Combined runtime + weights:
+- C4_G267_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
+- SHA256 c574850e1fc1a03233cc0ce9f70f782956f1df99ea59f27bb6c3696c6b4f8d50
+
+Weights changed by G267: NO.
+
+### Counterexample
+Android app repeatedly showed:
+`Я пока не понимаю эту фразу. Попробуй сказать проще или научи меня.`
+for distinct user inputs such as short contextual replies and meta-language questions.
+
+The exact fallback string was found in `c4child/dialogue.py`, proving a runtime language bottleneck rather than an APK-only UI string.
+
+### Root cause
+`RussianChildLanguageV0` is a bounded exact/compositional parser. When all semantic parsers return UNKNOWN, `dialogue.say()` collapses to one hard-coded fallback before rich G266 knowledge gets a chance to participate in ordinary dialogue.
+
+### Minimal repair
+Added `RussianDiscourseBridgeV1` above the exact parser:
+- exact existing semantic parser still wins when it understands the utterance;
+- compact dialogue history (16 turns);
+- short adjacency-pair answers: yes/no/continue/stop;
+- contextual elliptical teaching offers such as `Научу`;
+- meta-language/meta-capability questions;
+- unknown-language vs unknown-world-knowledge separation;
+- partial grounding report instead of opaque fallback;
+- dialogue history persists in runtime state;
+- after runtime emits ASK, further autonomous ASK events wait for a user/teacher response;
+- direct teacher events/rule examples clear the wait gate.
+
+Hard boundary:
+DISCOURSE CONTEXT != WORLD EVIDENCE.
+The bridge itself does not commit world facts.
+
+### G267 validation
+New adversarial dialogue tests: 7/7 PASS.
+Full source suite: 261 PASS / 9 FAIL.
+All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
+No new semantic/runtime assertion failure.
+
+Real G266 re-attack:
+- `Какие фразы ты знаешь?` -> meta-language response, not legacy fallback.
+- `Научу` -> OFFER_TEACH discourse act.
+- after C4 ASK `Можешь объяснить?`, `Научу` -> `Хорошо. Я слушаю.`
+- one ASK followed by 10 ticks without user input -> 0 extra ASK events.
+- context/wait state survive runtime_state save/load.
+
+## Weight lineage G263-G266
+G263:
+- OmniCaption abstraction pass 3
+- 117/117, cold 14/14
 - 1602113 bytes
 - SHA256 8267844a7169641ea52382cc122c08a223e2eaf7f7f53ad4eec2853a30dd5b7c
-- runtime changes 0
 
-## G264
-Russian sensory-reasoning transfer:
-- 84/84 admitted
-- cold 14/14
+G264:
+- Russian sensory-reasoning transfer
+- 84/84, cold 14/14
 - 1619770 bytes
 - SHA256 aef1f49725358a46915955affe0e4c5ac58ad6055a735e576990fb818e072b3a
-- runtime changes 0
 
-## G265
-Controlled raw-image nursery:
-- 108 physical PNG images 128x128
-- 72 train / 36 held-out
-- 748/748 admitted
-- cold 10/10
+G265:
+- 108 synthetic raw PNGs, 72 train / 36 held-out
+- 748/748, cold 10/10
 - 1707998 bytes
 - SHA256 6e62f3839ea41a13a9f420f0e579f549d3b1c95a766d93de01c076ea19a0d8de
-- runtime changes 0
 
-Hard boundaries:
-RAW_IMAGE != DERIVED_FEATURE
-DERIVED_FEATURE != TEACHER_LABEL
-TEACHER_LABEL != C4_AUTONOMOUS_RECOGNITION
-SYNTHETIC SUCCESS != REAL-PHOTO GENERALIZATION
-
-G265 RED note:
-First held-out test polluted itself by calling _eid on the held-out label. RED was not promoted. Harness-only fix; clean rerun from G264.
-
-## G266 — SYNTHETIC OBJECT PERMANENCE — CURRENT GREEN
-Parent: G265.
-- 18 controlled motion sequences
-- 162 physical PNG frames
-- moving shape with fixed occluder
-- environment maintains exact ENV_OBJECT_ID
-- 220/220 admitted
-- 0 rejected
-- cold 9/9
+G266:
+- 18 object-permanence sequences / 162 frames
+- 220/220, cold 9/9
 - 1737251 bytes
 - SHA256 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
-- runtime changes 0
 
-Core:
-WORLD_STATE != OBSERVABILITY
-OBSERVATION_MISSING != WORLD_OBJECT_MISSING
-PREDICTION != OBSERVATION
-object may remain in world while hidden from current sensor
-reappearance may support persistence
-synthetic ENV_OBJECT_ID is environment ground truth and must NOT be assumed available in real video
-real-video post-occlusion identity remains a hypothesis unless independently grounded
-
-SELF/world:
-external object identity remains separate from C4 internal representation
-sensory gap != C4 SELF disappearance
-internal prediction does not rewrite external history
-
-## Regression after G266
-254 passed / 9 failed in 6.57s.
-All 9 are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors.
-No new semantic/runtime assertion failures.
-
-## Language policy
-Russian remains active natural-language learning channel.
+## Current policy
+Russian remains active language-learning channel.
 English OmniCaption lexical/syntactic form remains quarantined.
-Only language-independent abstractions may cross that firewall.
+No runtime patch is allowed to rewrite epistemic/causal laws merely to improve chat UX.
 
 ## Normative loop
-counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
-
-RED never canonical.
-No runtime repair merely to fit curriculum.
-No byte padding.
+counterexample -> minimal repair -> re-attack -> regression -> physical checkpoint -> next
 
 ## Next
-Continue from exact G266.
-High-value next:
-- held-out shape/category generalization without teacher labels
-- richer multi-object synthetic scenes and containment/support/contact
-- real Russian speech/audio grounding
-- real-video persistence tests with uncertainty instead of ENV_OBJECT_ID
-- continue complex Russian discourse in parallel
+Use G267 runtime with exact G266 weights.
+Do NOT train around the old fallback screenshots.
+Next language work should test whether richer free Russian dialogue can reach existing knowledge through the new bridge before adding more language facts.
