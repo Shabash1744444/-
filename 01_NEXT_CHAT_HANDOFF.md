@@ -1,48 +1,55 @@
-# NEXT CHAT HANDOFF — C4 G258
+# NEXT CHAT HANDOFF — C4 G260
 
-Read CURRENT_STATE.md and all methodology files, especially LANGUAGE_ISOLATION_METHODOLOGY.md.
+Read CURRENT_STATE.md plus methodology files before training.
 
 ## Exact canonical baseline
-- child_g258_russian_language_firewall_green.c4m
-- 1485478 bytes
-- SHA256 97d91d65b98171f16d398e9939b69a20de1b183546dbd429115f5a85cbb302cd
-- generation G258
+- child_g260_russian_discourse_transfer_green.c4m
+- 1534757 bytes
+- SHA256 cbb496c2eaca983a2a68c0e65106360a2442eb25293025931358fc3c157d286d
+- generation G260
 
 Verify exact bytes/SHA before training.
-Persistent recovery: /C4_Canonical/ first.
+Recover from personal Library /C4_Canonical/ first if needed.
 
-## Language policy
-Russian is the active natural-language curriculum.
+## Latest progress
+G259:
+- Dostoevsky Book V deep Russian discourse
+- 143/143 admitted
+- cold 20/20
+- runtime changes 0
+- first attempted exam had a harness-only wrong-subject check; RED not promoted; clean rerun GREEN
 
-Preserve:
+G260:
+- source-independent Russian discourse transfer
+- 104/104 admitted
+- cold 13/13
+- runtime changes 0
+
+Regression:
+254 passed / 9 failed.
+All 9 are unchanged missing historical artifact FileNotFoundErrors.
+No new semantic/runtime assertion failure.
+
+## Critical language rule
+Russian remains the active language-learning channel.
+
 LANGUAGE FORM != SEMANTIC CONCEPT
-foreign source text != Russian lexical/syntactic training
-translation != copying
-transliteration != translation
-accidental mixture != code-switching
-source first-person != C4 SELF
+Foreign teacher corpus may teach abstract structure but not Russian word order/morphology/idiom.
+Do not let English OmniCaption examples leak into Russian lexical/syntactic learning.
 
-OmniCaption is overwhelmingly English and remains teacher-only:
-- abstract multimodal relations may transfer
-- English word/syntax patterns must not be used as Russian grammar examples
+## Current language capabilities being trained
+- nested speaker/source ownership
+- quotation vs belief
+- hypothesis/condition/counterfactual
+- Russian reference/pronouns
+- narration/event/reading time
+- polysemy/metaphor/pragmatics
+- argument/logic/rhetoric distinction
+- subtext and ambiguity
+- SELF/OTHER ownership in first-person language
+- Russian output purity
 
-Future bilingual learning must be an explicit separate phase after Russian grounding is stable.
-
-## MERA Multi
-Do NOT train on MERA Multi benchmark sets.
-Use them only as held-out Russian multimodal evaluation under their published terms.
-
-## G258
-130/130 admitted, cold 20/20, runtime changes 0.
-Regression 254/263 with only the same missing historical artifacts.
-
-## Recommended next data
-Prefer Russian raw sensory corpora:
-- RuLibriSpeech
-- Common Voice RU
-- FLEURS ru_ru
-- Golos only after license constraints are explicitly accepted
-
-For vision, either find a genuinely trainable Russian image-text dataset with clear license or generate a controlled raw-image nursery and attach Russian labels ourselves.
-
-Continue Dostoevsky, speech nursery and raw sensory work in parallel.
+## Next
+Continue physically from G260.
+Prefer new Russian surfaces and held-out transfer rather than source-specific padding.
+Russian speech/audio grounding is a high-value next branch.
