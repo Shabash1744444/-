@@ -1,15 +1,15 @@
-# NEXT CHAT HANDOFF — C4 G248
+# NEXT CHAT HANDOFF — C4 G249
 
 Read CURRENT_STATE.md, TRAINING_METHODOLOGY_LONG_CORPUS.md, LITERATURE_TRAINING_METHODOLOGY.md and SONG_AUDIO_TRAINING_METHODOLOGY.md first.
 
 ## Exact canonical baseline
-- child_g248_song_multimodal_green.c4m
-- 1220480 bytes
-- SHA256 93486415f2306c104ec70a4f5ef85fa905c51ff5eaaee5a25df68d7b4bc8ae20
-- generation G248
+- child_g249_audio_recurrence_green.c4m
+- 1247711 bytes
+- SHA256 b28f2fe078b896e768f9b20efb112a1b51aa5bc40a596d9f9c9bdaacc1b71e46
+- generation G249
 
 Verify exact bytes/SHA before training.
-Never silently fall back to G246/G244 or reconstruct from prose.
+Never silently fall back to G248/G246/G244 or reconstruct from prose.
 
 Persistent recovery:
 - personal Library /C4_Canonical/ should contain exact G248 model/release
@@ -88,3 +88,26 @@ Prefer falsifiable tests:
 5. later teacher says/shows A -> acoustic target -> motor attempt -> self-hearing -> correction.
 
 Do not claim C4 hears/speaks until those loops physically exist.
+
+
+## G249 temporal-audio addition
+G249 analyzed the eight real MP3 files for recurrence without using title/lyrics to define the repeat pairs.
+
+Method:
+- beat-synchronous chroma CENS
+- 8-beat windows
+- cosine recurrence similarity
+- temporally nearby windows excluded from candidate search
+
+Preserve:
+RECURRENCE CANDIDATE != CHORUS LABEL.
+HIGH CHROMA SIMILARITY != SAME LYRICS/TIMBRE/BYTES.
+DERIVED TOOL OBSERVATION != SELF-ACQUIRED SENSOR ALGORITHM.
+
+Useful observations:
+- April and Ledyanoy Vozduh contain strong nonlocal recurrence candidates.
+- Both distinct Vglyadyvayas vverkh files show closely matching recurrence timings.
+- Defragmentaciya has method-dependent conflicting tempo estimates (~92 BPM in G247 sampled analysis versus ~117 BPM in G249 full-track beat analysis). Do NOT choose a winner without resolving method/metrical ambiguity; preserve both with provenance.
+
+Next recommended falsifier:
+Use audio unseen by the recurrence curriculum, withhold labels, and test whether the same preprocessing+reasoning path can recognize recurrence/variation without memorized timestamps.
