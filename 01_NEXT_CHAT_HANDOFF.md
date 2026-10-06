@@ -1,28 +1,27 @@
-# NEXT CHAT HANDOFF — C4 G260
+# NEXT CHAT HANDOFF — C4 G262
 
-Read CURRENT_STATE.md plus methodology files before training.
+Read CURRENT_STATE.md and methodology files before training.
 
 ## Exact canonical baseline
-- child_g260_russian_discourse_transfer_green.c4m
-- 1534757 bytes
-- SHA256 cbb496c2eaca983a2a68c0e65106360a2442eb25293025931358fc3c157d286d
-- generation G260
+- child_g262_multimodal_ru_transfer_green.c4m
+- 1579851 bytes
+- SHA256 d3505c1c4e49674e58488c7ee3ba57c21a1baf61817cb4bb9fe4ccac4dcefee7
+- generation G262
 
 Verify exact bytes/SHA before training.
 Recover from personal Library /C4_Canonical/ first if needed.
 
 ## Latest progress
-G259:
-- Dostoevsky Book V deep Russian discourse
-- 143/143 admitted
-- cold 20/20
+G261:
+- OmniCaption abstraction pass 2
+- 130/130 admitted
+- cold 18/18
 - runtime changes 0
-- first attempted exam had a harness-only wrong-subject check; RED not promoted; clean rerun GREEN
 
-G260:
-- source-independent Russian discourse transfer
-- 104/104 admitted
-- cold 13/13
+G262:
+- Russian multimodal transfer
+- 96/96 admitted
+- cold 16/16
 - runtime changes 0
 
 Regression:
@@ -30,26 +29,26 @@ Regression:
 All 9 are unchanged missing historical artifact FileNotFoundErrors.
 No new semantic/runtime assertion failure.
 
-## Critical language rule
-Russian remains the active language-learning channel.
+## Language firewall
+Russian remains active language-learning channel.
+English OmniCaption lexical/syntactic form stays quarantined.
+Abstract semantic/multimodal relations may transfer through Russian formulations.
 
-LANGUAGE FORM != SEMANTIC CONCEPT
-Foreign teacher corpus may teach abstract structure but not Russian word order/morphology/idiom.
-Do not let English OmniCaption examples leak into Russian lexical/syntactic learning.
-
-## Current language capabilities being trained
-- nested speaker/source ownership
-- quotation vs belief
-- hypothesis/condition/counterfactual
-- Russian reference/pronouns
-- narration/event/reading time
-- polysemy/metaphor/pragmatics
-- argument/logic/rhetoric distinction
-- subtext and ambiguity
-- SELF/OTHER ownership in first-person language
-- Russian output purity
+## Core transfer capabilities now reinforced
+camera != world
+subtitle != speech
+gesture != intent
+occlusion != destruction
+tool affordance depends on agent/context
+off-screen sound source may be unseen
+replay/edit != repeated world event
+UI != media world
+persuasion != evidence
+prediction != result
+sequence != cause
+symbol != universal fixed meaning
+source first-person != C4 SELF
 
 ## Next
-Continue physically from G260.
-Prefer new Russian surfaces and held-out transfer rather than source-specific padding.
-Russian speech/audio grounding is a high-value next branch.
+Continue physically from G262.
+Prefer unseen Russian transfer and real Russian speech/audio grounding.
