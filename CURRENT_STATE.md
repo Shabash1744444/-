@@ -193,3 +193,22 @@ Persistent-state growth must be accompanied by runtime storage engineering:
 disk-backed indexed graph + lazy loading + hot working set + incremental durable writes + checkpoint/export.
 
 Track total deployed footprint, not .c4m compressed bytes alone.
+
+
+## Lifelong compression requirement
+New normative document:
+- MEMORY_CONSOLIDATION_COMPRESSION.md
+
+C4 is expected to become an SSD/disk-resident organism with a RAM hot working set rather than loading all persistent state at once.
+
+Compression means cognitive consolidation, not ZIP compression:
+episodes -> reusable schema + residual exceptions + provenance.
+
+Hard rules:
+SUMMARY != ORIGINAL EVIDENCE
+SCHEMA != OBSERVATION
+COMPRESSION != NEW TRUTH
+dependent evidence remains dependent after compaction
+
+100-300MB are scale milestones, not a final limit.
+If online learning succeeds, raw lifetime experience may be far larger; retained state should become sublinear where repeated structure can safely consolidate.
