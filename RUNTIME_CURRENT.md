@@ -1,43 +1,37 @@
-# RUNTIME CURRENT — G267 RUSSIAN DISCOURSE BRIDGE
+# RUNTIME CURRENT — G268 SURFACE / VERBALIZER REPAIR
 
 Canonical weights remain G266.
-Canonical runtime is G267.
 
 ## Files
 Runtime:
-C4_RUNTIME_G267_DIALOGUE_BRIDGE_GREEN_2026-10-07.zip
-SHA256 87141d5a1cdee1fce555b300a295ac3ffc77d53df5f884ed9a61b4fe7f87c77a
+C4_RUNTIME_G268_SURFACE_VERBALIZER_GREEN_2026-10-07.zip
+SHA256 db02d7f9c4da15cfbcc38ef4a3110e696e611eaaef90e3612effa84761cf60bb
 
 Runtime + G266 weights:
-C4_G267_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
-SHA256 c574850e1fc1a03233cc0ce9f70f782956f1df99ea59f27bb6c3696c6b4f8d50
+C4_G268_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
+SHA256 ad93604fb662da091e696a31e7f66cf7794ea51a6fd71efaa32892cea69dc1aa
 
-## Runtime architectural change
-Old:
-user surface -> bounded parser -> UNKNOWN -> canned fallback
+Weights:
+child_g266_object_permanence_green.c4m
+SHA256 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
 
-G267:
-user surface
--> bounded exact semantic parser
--> if UNKNOWN: RussianDiscourseBridgeV1 + dialogue context
--> safe discourse response / transparent unresolved-language status
+## What G268 fixes
+Android screenshots exposed three runtime-surface failures after G267:
+1. basic greeting still fell into unresolved-language output;
+2. user sentence `Я не понимаю тебя` leaked internal SELF grounding;
+3. initiative verbalized opaque graph labels like g223/node A/B.
 
-The bridge is conservative and read-only with respect to world facts.
+G268 adds:
+- basic Russian social/discourse acts;
+- correct speaker perspective for user misunderstanding reports;
+- discourse-pronoun/internal-ID filtering;
+- public-label firewall for autonomous initiative;
+- suppression of unrenderable internal gaps while preserving human-readable questions.
 
-## Initiative change
-ASK creates an awaiting-response state.
-Ticks cannot emit another ASK until a user/teacher turn arrives.
-This prevents initiative bursts without deleting initiative itself.
+## Validation
+- G267+G268 dialogue tests: 14/14 PASS.
+- full source suite: 268 PASS / 9 FAIL.
+- all 9 failures are unchanged missing historical G207/G137/G151/G153 model files.
+- real G266 screenshot re-attack passed.
 
-## Compatibility
-Runtime state keeps schema string C4_LIVING_RUNTIME_V0.2 for old consumers.
-G267 adds optional fields:
-- dialogue_history
-- awaiting_response
-- discourse_schema
-Old G266 runtime state loads with defaults.
-
-## Test status
-7/7 new dialogue tests PASS.
-261/270 full source tests PASS.
-9 failures are unchanged missing historical artifact files.
+G268 changes runtime only. Weights remain G266.
