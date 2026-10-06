@@ -95,3 +95,69 @@ counterexample -> minimal repair -> re-attack -> regression -> physical checkpoi
 Use G269 runtime with exact G266 weights in Android.
 Collect real dialogue counterexamples.
 Next language improvements should address remaining lexical morphology / WORD_FORM retrieval and Russian surface generation, without turning the runtime into an external LLM.
+
+
+## Development methodology now normative
+New mandatory documents:
+- DEVELOPMENTAL_TRAINING_METHODOLOGY.md
+- LEXICAL_GRAPH_SCALE_TARGETS.md
+- RUSSIAN_CURRICULUM_BOOK_ROADMAP.md
+- WEEK_ROADMAP_RUNTIME_WEIGHTS.md
+
+Key policy:
+- runtime and weights are co-equal but have different roles;
+- do not train around runtime defects;
+- do not hardcode corpus facts into runtime;
+- atomic live teaching is diagnostic until language acquisition is stronger;
+- Russian-first;
+- corpus growth must be measured by held-out transfer, not bytes.
+
+## Lexical graph scale hypothesis
+Practical broad-Russian reference: ~180k lemma nodes.
+Non-uniform semantic target:
+- 20k CORE * ~30 typed semantic edges = ~600k
+- 60k COMMON * ~12 = ~720k
+- 100k LONG TAIL * ~3 = ~300k
+- semantic total ~1.62M edges
+
+Rough morphology target:
+- ~180k lemmas * ~8 useful form/feature links = ~1.44M
+
+Combined engineering scale:
+~3.06M typed lexical+morphological links.
+
+This is NOT a proof or requirement for emergence. It is a measurable graph-density target.
+
+Random-graph sanity check only:
+for N=180k, N ln N / 2 is about 1.09M undirected edges.
+Semantic graphs are typed/non-random; connectivity != intelligence.
+
+Storage implication:
+current C4 serialization heuristically costs around 120-130 B per admitted relation in recent growth.
+At current storage ~3M links could exceed 350 MiB.
+A compact interned-ID representation near 32 B/link would put ~3M links near 93 MiB.
+Therefore the 100 MB target now has a concrete storage/graph hypothesis and may require serialization compaction without changing C4 physics.
+
+## Russian curriculum policy
+Before scaling novels aggressively:
+1. morphology / WORD_FORM substrate;
+2. dictionary/semantic relations;
+3. controlled RU dialogue nursery;
+4. simple compositional prose;
+5. varied classical prose;
+6. scientific/explanatory prose;
+7. complex argument/philosophy;
+8. speech/vision grounding.
+
+Dal is useful as HISTORICAL_RU for semantic neighborhoods, idioms and old vocabulary, but must not become the sole or default modern-Russian teacher.
+
+See RUSSIAN_CURRICULUM_BOOK_ROADMAP.md for the first 20 corpus/work sequence.
+
+## Immediate next work
+Runtime:
+continue from G269 with WORD_FORM/morphology/new-word acquisition/compositional teaching/persistence.
+
+Weights:
+continue from G266 under the new curriculum, prioritizing dense core-Russian connections and transfer over raw book count.
+
+A new chat MUST read the four normative methodology/roadmap documents before modifying runtime or weights.
