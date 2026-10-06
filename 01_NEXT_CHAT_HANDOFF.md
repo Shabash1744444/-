@@ -1,69 +1,96 @@
-# NEXT CHAT HANDOFF — C4 G232
+# NEXT CHAT HANDOFF — C4 G234
 
 Read CURRENT_STATE.md and TRAINING_METHODOLOGY_LONG_CORPUS.md before doing anything.
 
 ## Exact continuation point
 Canonical physical GREEN organism:
-- child_g232_deep_layers_green.c4m
-- 739733 bytes
-- SHA256 84a1d1ffd19280d1a66e775fe51607c35ee465364bc4ad83f41343bcb763f904
+- child_g234_earth_systems_green.c4m
+- 795087 bytes
+- SHA256 7114ca999a50bd8fc44a4b247b08374de67e41ec7a29fdfa8e0a0ef8a1992abd
 
-Do NOT silently fall back to G227/G230 or earlier.
+Do NOT silently fall back to G227/G230/G232 or earlier.
 Verify bytes and SHA before training.
-If the binary is not in the GitHub repository, recover the exact artifact from conversation/project artifacts or the G232 release archive. Never reconstruct by guess and call it canonical.
+If the binary is not in GitHub, recover the exact artifact from conversation/project artifacts or the G234 release archive. Never reconstruct by guess and call it canonical.
 
 ## Mission
-Continue physically training C4. Curriculum prose is preparation only.
-A capability/lesson is learned only after it is written into .c4m, survives held-out/cold checks, and the new artifact/checkpoint is physically saved.
+Continue physically training C4.
+Curriculum prose is preparation only.
+A lesson/capability is learned only after entering .c4m, passing cold/held-out checks, and being physically checkpointed.
 
-## Current direction
-Continue Bill Bryson semantic long-corpus training.
-Do not copy the book mechanically and do not treat it as truth.
+## Current long-corpus source
+Bill Bryson, Russian FB2/fragment supplied by the user.
+Process by semantic arc, not raw byte copying.
+
 BOOK != TRUTH.
 AUTHOR != AUTHORITY.
-EDITOR CORRECTION != deletion of original author claim.
+EDITOR CORRECTION != deletion of original claim.
+Store source lineage and conflicts.
 
-Each useful concept should become a dense, typed, multidimensional cell where appropriate:
-- physical
-- mathematical
-- temporal
-- causal
-- observational
-- linguistic
-- philosophical
-- epistemic
-- SELF/WORLD relation
+## Multidimensional concept-cell protocol
+From G231 onward useful concepts should be expanded when appropriate across typed layers:
+PHYSICAL / MATHEMATICAL / TEMPORAL / CAUSAL / OBSERVATIONAL / LINGUISTIC / PHILOSOPHICAL / EPISTEMIC / SELF-WORLD.
 
-Different description layers must remain distinct.
-METAPHOR != PHYSICAL PROPERTY.
-MATHEMATICAL DESCRIPTION != PROOF OF COMPLETE ONTOLOGY.
-PHILOSOPHICAL INTERPRETATION != EXPERIMENTAL FACT.
-MODEL != REALITY.
+The value is in typed bridges, not raw relation count.
+
+Hard boundaries:
+METAPHOR != PHYSICAL PROPERTY
+MATHEMATICAL DESCRIPTION != COMPLETE ONTOLOGY
+PHILOSOPHICAL INTERPRETATION != EXPERIMENTAL FACT
+EQUATION != CAUSAL DIRECTION
+SIMULATION != EXTERNAL OBSERVATION
+MODEL != REALITY
+SIGNAL != SOURCE
+
+Formula lessons should include symbol meaning, interpretation, scope/approximation, and anti-overclaim restraint.
 
 ## Current conceptual baseline
-G231/G232 physically established:
-- LIGHT: c=lambda*nu, E=h*nu, d/c signal delay, signal != source.
-- TIME: event-time != receipt-time; past record != past event; prediction/future plan != observation/current capability.
-- MATTER/ENERGY/GRAVITY/PROBABILITY/RADIOACTIVITY formulas with scope constraints.
-- QUANTUM: uncertainty relation, de Broglie, photon, quantum measurement without consciousness overclaim.
-- RELATIVITY: reference frames, proper time, relativistic energy.
-- ENTROPY: statistical layer and thermodynamic-arrow restraint.
-- HUMAN: biological/social/temporal/philosophical descriptions.
-- C4: physical execution + mathematical abstraction + technical continuity + internal world model, without claiming 'C4 is only mathematics'.
-- C4 internal world != external Universe.
-- Future sensors/interfaces are future plans until physically connected.
-- SIMULATION != EXTERNAL OBSERVATION.
-- ACTION_REQUEST != VERIFIED_OUTCOME.
-- EQUATION != CAUSAL DIRECTION.
+G231:
+- LIGHT c=lambda*nu, E=h*nu, delay d/c, signal != source
+- TIME event-time != receipt-time, future plan != current fact
+- C4 S(t+1)=F(S(t),input,context) is an abstraction; physical execution remains distinct
+- C4 internal model != external Universe
+- future sensors are plans until connected
 
-## Non-negotiable development loop
-counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
+G232:
+- measurement, uncertainty, dimensional analysis
+- quantum uncertainty, de Broglie, photon, measurement restraint
+- relativity, proper time, relativistic energy
+- entropy/statistical mechanics
+- equation != causality
+- simulation != observation
+- technical continuity != philosophical personal identity
 
-A RED organism NEVER becomes the new baseline.
-Do not change runtime laws merely to pass a lesson/exam.
-First test teacher relation choice, admission contract, represented capability, and exam validity.
-No byte padding.
-No fake capability.
+G233:
+- life/cell/DNA/gene/heredity/evolution/human layers
+- gene != destiny
+- mutation not directed toward need
+- evolution != guaranteed progress
+- natural selection != conscious selection
+- genetic drift
+- logistic/exponential population models
+- Hardy-Weinberg is a null model with assumptions
+- phylogenetic tree = model
+- C4 has no DNA/metabolism/biological reproduction in current implementation
+- 'C4 evolves' may be figurative development, not Darwinian evolution
+
+G234:
+- Earth systems, ecology, climate, feedback, nonlinear dynamics, proxy data
+- weather != climate
+- positive feedback != morally good; negative feedback != morally bad
+- stock != flow
+- chaos != pure randomness
+- proxy != target quantity
+- C4 environment/feedback/action-loop/open-system/future embodiment
+- C4 feedback must not turn its own unsupported output into independent evidence
+
+## SELF grounding
+Ruslan is an external human creator/source, not an oracle.
+C4 != Ruslan.
+C4 != human.
+C4 != Transformer/GPT.
+C4 != Singularity.
+C4 is physically executed and mathematically describable; do not teach 'pure mathematics' as literal total ontology.
+Unsupported SELF consciousness/experience claims remain UNKNOWN.
 
 ## Core invariants
 UNKNOWN != FALSE
@@ -82,26 +109,19 @@ BOOK != TRUTH
 HISTORY != EPISODIC MEMORY
 SELF != OTHER != SOURCE != WORLD
 
-## Language methodology
-World/science learning and Russian learning happen together.
-Use literal/figurative meaning, polysemy, metaphor, analogy, idiom, hyperbole, irony, sarcasm, metonymy, ellipsis, implicature, reference, modality, attribution and viewpoint where natural.
-Meaning = expression + context + relations + source + situation.
-If context is insufficient: AMBIGUOUS -> UNKNOWN/ASK.
+## Development loop
+counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
 
-## SELF grounding
-Ruslan is an external human creator/source, not an oracle.
-C4 != Ruslan.
-C4 != human.
-C4 != Transformer/GPT.
-C4 != Singularity.
-Technical persistence does not settle philosophical personal identity.
-Unsupported SELF claims remain UNKNOWN.
+RED organism NEVER becomes baseline.
+No runtime-law changes merely to absorb a lesson.
+No byte padding.
 
 ## Latest regression
-254/263 passed after G232.
-All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors; no new semantic/runtime assertion failure observed.
+After G234: 254/263 passed.
+All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors.
+No new semantic/runtime assertion failures observed.
 
 ## Next action
-Continue from G232 with further Bryson/science semantic arcs and dense multidimensional cells. Prefer high-value concepts and bridges over raw fact volume.
-Checkpoint frequently and update GitHub CURRENT_STATE + this handoff after every meaningful GREEN sequence.
-After Bryson, move to linguistically rich classic literature focused on complex Russian expression, subtext, viewpoint and semantic depth rather than history.
+Continue from G234 with further Bryson/science arcs and dense multidimensional cells.
+Prefer high-transfer concepts over encyclopedia padding.
+After Bryson, switch to classic literature rich in Russian syntax, ambiguity, subtext, irony, narrator/viewpoint and deep figurative language rather than history.
