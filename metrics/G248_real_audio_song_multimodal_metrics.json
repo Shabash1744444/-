@@ -1,0 +1,28 @@
+{
+  "generation": "G248",
+  "parent": "G247",
+  "model_bytes": 1220480,
+  "sha256": "93486415f2306c104ec70a4f5ef85fa905c51ff5eaaee5a25df68d7b4bc8ae20",
+  "g247": {
+    "lessons": 220,
+    "admitted": 218,
+    "dedup": 2,
+    "rejected": 0,
+    "cold": "16/16",
+    "audio_files": 8
+  },
+  "g248": {
+    "lessons": 132,
+    "admitted": 132,
+    "dedup": 0,
+    "rejected": 0,
+    "cold": "18/18"
+  },
+  "regression": {
+    "passed": 254,
+    "total": 263,
+    "missing_artifact_failures": 9,
+    "new_semantic_failures": 0
+  },
+  "runtime_changes": 0
+}
