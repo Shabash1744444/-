@@ -133,3 +133,11 @@ Therefore 100-300MB mobile growth requires disk-backed/lazy graph storage before
 Claude G268 Acquaintance is NOT canonical.
 Current canonical remains G266 weights + G269 runtime.
 Its improvements must be merged into G269 and tested as a new runtime generation.
+
+
+## MANDATORY MEMORY SCALE NOTE
+Read MEMORY_CONSOLIDATION.md.
+Long-term C4 may live primarily on SSD/flash with only a hot working set in RAM.
+100-300MB is a checkpoint range, not a final ceiling.
+Do not solve scale by dropping provenance, contradictions or rare counterexamples.
+Compression must preserve epistemic contracts and pass held-out transfer/retraction tests.
