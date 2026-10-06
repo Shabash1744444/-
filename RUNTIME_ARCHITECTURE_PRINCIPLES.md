@@ -163,3 +163,22 @@ DEPENDENT EVIDENCE must remain dependent after compaction.
 Most persistent state may live on SSD/flash; only a locality-aware working set needs to be resident in RAM.
 
 Read MEMORY_CONSOLIDATION_COMPRESSION.md before changing memory/storage architecture.
+
+
+## Memory consolidation is a core runtime ability
+C4 is a lifelong learner, so persistent state must not grow linearly with every observation or conversation.
+
+Use HOT/WARM/COLD tiers. Keep active working state in RAM and allow most long-term state to live on SSD/flash behind indexes and a hot cache.
+
+Compression is cognitive consolidation, not only file compression:
+repeated episodes -> reusable schema + exceptional residuals + provenance references.
+
+Preserve:
+SUMMARY != ORIGINAL EVIDENCE
+SCHEMA != OBSERVATION
+COMPRESSION != NEW TRUTH
+dependent evidence remains dependent after compaction
+
+Compression/forgetting changes require held-out transfer, provenance, retraction, cold-reload, bytes/RAM and latency tests.
+
+See MEMORY_CONSOLIDATION.md.
