@@ -139,3 +139,27 @@ Every runtime improvement:
 counterexample -> minimal reusable repair -> focused tests -> full regression -> real-device re-attack -> artifact/SHA -> checkpoint.
 
 Never promote because conversation merely sounds nicer.
+
+
+## 13. Memory consolidation and compression is a core runtime ability
+Compression is not postponed storage cleanup.
+A lifelong learner requires active consolidation.
+
+Runtime must support:
+HOT/WARM/COLD/ARCHIVE memory tiers,
+deduplication,
+schema extraction,
+common-subgraph factoring,
+provenance-preserving compaction,
+controlled forgetting,
+and disk-resident cold memory.
+
+Important invariants:
+SUMMARY != ORIGINAL EVIDENCE.
+SCHEMA != OBSERVATION.
+COMPRESSION != NEW TRUTH.
+DEPENDENT EVIDENCE must remain dependent after compaction.
+
+Most persistent state may live on SSD/flash; only a locality-aware working set needs to be resident in RAM.
+
+Read MEMORY_CONSOLIDATION_COMPRESSION.md before changing memory/storage architecture.
