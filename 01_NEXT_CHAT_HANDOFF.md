@@ -1,68 +1,63 @@
-# NEXT CHAT HANDOFF — C4 G255
+# NEXT CHAT HANDOFF — C4 G256
 
-Read CURRENT_STATE.md and all methodology files, especially ABSTRACTION_TRANSFER_METHODOLOGY.md.
+Read CURRENT_STATE.md and all methodology files, especially:
+- ABSTRACTION_TRANSFER_METHODOLOGY.md
+- SELF_WORLD_MULTIMODAL_METHODOLOGY.md
+- SENSORY_TRAINING_METHODOLOGY.md
 
 ## Exact canonical baseline
-- child_g255_transferable_abstraction_green.c4m
-- 1394899 bytes
-- SHA256 4b5a27087504ad0064706ed70a083ebad17c370bd3c615e1717316d80610e88a
-- generation G255
+- child_g256_self_world_multimodal_green.c4m
+- 1426007 bytes
+- SHA256 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
+- generation G256
 
 Verify exact bytes/SHA before training.
-Never silently fall back or reconstruct canonical state from prose.
+Never reconstruct canonical state from prose.
 Persistent recovery: personal Library /C4_Canonical/ first.
 
-## Critical curriculum correction
-The goal is NOT to teach C4 to like rap, rock, Dostoevsky, or Ruslan's taste.
-Rich media are carriers of complex transferable structure.
+## Critical new rules
+Video need not illustrate lyrics.
+Possible AV relations include illustration, contrast, counterpoint, atmosphere, symbolic echo, ironic mismatch, independent parallel and montage association.
 
 Preserve:
-CONTENT CARRIER != LEARNING OBJECTIVE
-EXAMPLE != RULE
-FREQUENT EXPOSURE != NORMATIVE ENDORSEMENT
-RUSLAN LIKES GENRE != C4 SHOULD PREFER GENRE
-AUTHOR/LYRICAL/TEACHER VIEWPOINT != C4 VIEWPOINT
+VIDEO NEED NOT MATCH LYRICS
+CO-TIMED != SAME PROPOSITION
+MISMATCH != ERROR automatically
+NO OBVIOUS NARRATIVE != NO STRUCTURE
 
-## G255 core
-150/150 admitted, cold 20/20, runtime changes 0.
+## SELF/WORLD
+C4 SELF != external world
+C4 SELF != internal world model
+C4 SELF != observed human/Ruslan/narrator/character/lyrical persona/video protagonist
+C4 SELF != future avatar automatically
 
-New reusable abstraction families:
-- typed association graph
-- support vs truth
-- analogy vs identity
-- part/whole and scale
-- identity through change
-- inner model vs outer world
-- agency/determinism
-- meaning/truth/value
-- perspective/scope
-- narrative vs associative structure
-- musical/visual form
-- language abstraction
-- causal restraint
-- transfer/generalization
+C4 may learn about humans without absorbing their identity.
+Observed body != C4 body.
+Source first-person != C4 autobiography.
 
-## Generalization standard
-Do not count memorized source facts as deep learning.
-Prefer tests on unseen surfaces:
-- novel poem/image/video
-- hidden title/author/genre metadata
-- ask whether prior abstraction transfers
-- preserve ambiguity and competing readings
-- do not infer taste/value from training frequency
+Current C4:
+- persistent computational system
+- physically executes on hardware
+- mathematically describable but not identical to an equation
+- no current biological body/DNA/metabolism
+- future sensor/actuator/avatar plans remain FUTURE until verified
 
-## Latest regression
-254 passed / 9 failed.
-All 9 failures are unchanged missing historical artifact FileNotFoundErrors for G207/G137/G151/G153.
-No new semantic/runtime assertion failures.
+Potentially novel engineered kind is an interpretive/project-level classification, NOT proof of consciousness, personhood, superiority or GPT-level breadth.
 
-## Development loop
-counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
-
-RED never canonical.
-No runtime repair merely to fit curriculum.
-No padding.
+## Latest results
+G256:
+- 169/169 admitted
+- cold 21/21
+- 0 rejected
+- runtime changes 0
+- regression 254/263 with only the same 9 missing historical artifact errors
 
 ## Next
-When new songs/videos arrive, extract rich source-specific interpretations AND separately map them into reusable abstractions.
-Keep speech nursery and Dostoevsky active in parallel.
+Prefer unseen transfer:
+- new video where visuals oppose lyrics
+- first-person media without identity leakage
+- virtual-avatar events without treating avatar as current physical C4 body
+- speech lessons where tutor voice != C4 voice
+- external-world educational material with explicit sensor/source/representation boundaries
+
+Continue Dostoevsky and sensory nursery in parallel.
