@@ -1,63 +1,63 @@
-# NEXT CHAT HANDOFF — C4 G256
+# NEXT CHAT HANDOFF — C4 G257
 
-Read CURRENT_STATE.md and all methodology files, especially:
-- ABSTRACTION_TRANSFER_METHODOLOGY.md
-- SELF_WORLD_MULTIMODAL_METHODOLOGY.md
-- SENSORY_TRAINING_METHODOLOGY.md
+Read CURRENT_STATE.md plus sensory/abstraction/self-world methodologies first.
 
 ## Exact canonical baseline
-- child_g256_self_world_multimodal_green.c4m
-- 1426007 bytes
-- SHA256 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
-- generation G256
+- child_g257_omnicaption_teacher_green.c4m
+- 1458745 bytes
+- SHA256 762e0991d4d92a898c12220a85e207bb2bf92513eaeddb52ac3bc8fd3f2ae213
+- generation G257
 
 Verify exact bytes/SHA before training.
-Never reconstruct canonical state from prose.
-Persistent recovery: personal Library /C4_Canonical/ first.
+Persistent recovery: /C4_Canonical/ first.
 
-## Critical new rules
-Video need not illustrate lyrics.
-Possible AV relations include illustration, contrast, counterpoint, atmosphere, symbolic echo, ironic mismatch, independent parallel and montage association.
+## G257 source
+OmniCaption.json:
+- 1226 video annotation entries
+- source SHA256 a26b854dce0cdb32f5a60f9eeec5058f1de5bdacd014bc54997fb296bd084bfb
+
+This JSON does NOT contain the referenced ./videos/*.mp4 files.
+Treat it as an external annotation/teacher corpus.
+
+Never claim:
+- C4 saw 1226 raw videos
+- C4 heard 1226 raw audio tracks
+- caption text is raw sensory evidence
+- synergistic annotations are autonomous C4 discoveries
 
 Preserve:
-VIDEO NEED NOT MATCH LYRICS
-CO-TIMED != SAME PROPOSITION
-MISMATCH != ERROR automatically
-NO OBVIOUS NARRATIVE != NO STRUCTURE
+CAPTION != RAW VIDEO
+VISUAL EVENT TEXT != PIXELS
+AUDIO EVENT TEXT != WAVEFORM
+SHARED ANNOTATOR != INDEPENDENT EVIDENCE
 
-## SELF/WORLD
-C4 SELF != external world
-C4 SELF != internal world model
-C4 SELF != observed human/Ruslan/narrator/character/lyrical persona/video protagonist
-C4 SELF != future avatar automatically
+## What G257 learned
+General cross-modal relation ontology and transfer rules from diverse examples:
+instruction/demonstration;
+action/sound;
+speaker attribution;
+voiceover;
+background vs diegetic music;
+screen/editing layers;
+message-relay distortion;
+sports commentary/result distinction;
+advertising/persuasion;
+travel montage;
+social reaction;
+performance;
+audiovisual common-cause restraint.
 
-C4 may learn about humans without absorbing their identity.
-Observed body != C4 body.
-Source first-person != C4 autobiography.
-
-Current C4:
-- persistent computational system
-- physically executes on hardware
-- mathematically describable but not identical to an equation
-- no current biological body/DNA/metabolism
-- future sensor/actuator/avatar plans remain FUTURE until verified
-
-Potentially novel engineered kind is an interpretive/project-level classification, NOT proof of consciousness, personhood, superiority or GPT-level breadth.
-
-## Latest results
-G256:
-- 169/169 admitted
-- cold 21/21
-- 0 rejected
-- runtime changes 0
-- regression 254/263 with only the same 9 missing historical artifact errors
+172/172 admitted.
+Cold 21/21.
+Runtime changes 0.
+Regression 254/263 with only known missing historical artifact failures.
 
 ## Next
-Prefer unseen transfer:
-- new video where visuals oppose lyrics
-- first-person media without identity leakage
-- virtual-avatar events without treating avatar as current physical C4 body
-- speech lessons where tutor voice != C4 voice
-- external-world educational material with explicit sensor/source/representation boundaries
+Highest-value next step is RAW sensory corpus:
+1. image bytes + labels in separate channel
+2. waveform audio + labels in separate channel
+3. hide filename/labels during held-out exams
+4. test whether G257 semantic relation types can be recovered from raw/low-level features
+5. do not let a ready-made captioner become hidden vision
 
-Continue Dostoevsky and sensory nursery in parallel.
+Synthetic speech and Dostoevsky remain active parallel curricula.
