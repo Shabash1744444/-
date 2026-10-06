@@ -9,7 +9,7 @@ Read CURRENT_STATE.md and TRAINING_METHODOLOGY_LONG_CORPUS.md first.
 
 Do not silently fall back to G234/G232/G227 or reconstruct G240 from prose.
 Verify bytes and SHA before training.
-If the binary is unavailable in the repo, recover the exact G240 artifact/release from Project/conversation artifacts.
+If the binary is unavailable in the repo, first recover the exact G240 artifact from personal Library folder `/C4_Canonical/` (`child_g240_bryson_fragment_complete_green.c4m` or the G240 release ZIP). Project/conversation artifacts are a secondary fallback. Verify SHA before use.
 
 ## Supplied Bryson status
 The user-supplied FB2 is an ознакомительный fragment, NOT the full-length book.
