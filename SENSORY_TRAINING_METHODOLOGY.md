@@ -134,3 +134,33 @@ ASR/phonetic guesses remain external hypotheses.
 LYRICS UNKNOWN -> do not invent transcript.
 Future verified transcript may be linked retrospectively to preserved AV observations.
 RETROSPECTIVE LINKING != RETROACTIVE OBSERVATION.
+
+
+## 13. Controlled synthetic vision nursery
+From G265 onward, synthetic image corpora may be generated when the environment provides exact ground truth.
+
+Keep distinct:
+RAW_IMAGE
+DERIVED_LOW_LEVEL_FEATURE
+TEACHER_GROUND_TRUTH
+C4_STORED_ASSOCIATION
+C4_AUTONOMOUS_RECOGNITION
+
+RAW_IMAGE != DERIVED_FEATURE.
+DERIVED_FEATURE != TEACHER_LABEL.
+TEACHER_LABEL != AUTONOMOUS VISION.
+
+Reserve held-out raw stimuli whose labels are not entered into C4. Hide filenames/metadata during exams.
+Synthetic transfer does not establish real-photo transfer.
+
+## 14. Object permanence and observability
+From G266 onward distinguish world state from current observability.
+
+WORLD_STATE != OBSERVABILITY.
+OBSERVATION_MISSING != WORLD_OBJECT_MISSING.
+PREDICTION != OBSERVATION.
+
+In a controlled simulator an ENV_OBJECT_ID may be an environment receipt for identity through occlusion.
+Real video normally lacks such a receipt; re-identification after occlusion must remain a hypothesis supported by temporal/visual evidence.
+Object disappearance from frame != destruction.
+Reappearance of a similar object != guaranteed identity.
