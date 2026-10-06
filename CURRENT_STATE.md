@@ -161,3 +161,35 @@ Weights:
 continue from G266 under the new curriculum, prioritizing dense core-Russian connections and transfer over raw book count.
 
 A new chat MUST read the four normative methodology/roadmap documents before modifying runtime or weights.
+
+
+## Runtime architecture is now normative
+Mandatory:
+- RUNTIME_ARCHITECTURE_PRINCIPLES.md
+- EXTERNAL_AUDIT_CLAUDE_G268_ACQUAINTANCE.md
+
+Key rule:
+runtime = maximally universal capability substrate;
+weights/persistent state = acquired content/experience.
+
+Do not hide factual corpora in runtime.
+Do not compensate for runtime limitations by memorizing special phrases into weights.
+
+## Claude G268 acquaintance import
+External candidate imported and archived as evidence, NOT canonical.
+Canonical remains:
+- G266 weights
+- G269 runtime
+
+Claude G268 adds useful acquaintance/deixis behavior and reports lexical-index reduction from ~27MB to ~6MB.
+It also establishes an important scale warning:
+current full-JSON/Python-object graph representation cannot scale naively to 100-300MB mobile weights.
+
+Before promoting any Claude G268 code:
+diff against G269 -> preserve discourse/perspective/initiative protections -> combined regression -> real-device re-attack -> new runtime generation only if GREEN.
+
+## 100-300MB mobile prerequisite
+Persistent-state growth must be accompanied by runtime storage engineering:
+disk-backed indexed graph + lazy loading + hot working set + incremental durable writes + checkpoint/export.
+
+Track total deployed footprint, not .c4m compressed bytes alone.
