@@ -1,64 +1,64 @@
-# NEXT CHAT HANDOFF — C4 G252
+# NEXT CHAT HANDOFF — C4 G254
 
-Read CURRENT_STATE.md plus all four methodology files, especially SENSORY_TRAINING_METHODOLOGY.md.
+Read CURRENT_STATE.md plus all methodology files, especially SENSORY_TRAINING_METHODOLOGY.md.
 
 ## Exact canonical baseline
-- child_g252_real_video_green.c4m
-- 1323689 bytes
-- SHA256 002c489c81826a59a0053308c176c55f8ace6862349d290f34322f6446e4de71
-- generation G252
+- child_g254_screen_media_layers_green.c4m
+- 1367411 bytes
+- SHA256 e88d41d19b77f3422438a5927369e606f986f2a11d65419e35fafd44d4fd952b
+- generation G254
 
 Verify exact bytes/SHA before training.
-Never silently fall back to G249/G244 or reconstruct from prose.
+Never silently fall back or reconstruct canonical state from prose.
 
-Persistent recovery should use personal Library /C4_Canonical/ first, then conversation/project artifacts.
+Persistent recovery:
+- personal Library /C4_Canonical/
+- video corpora in /C4_Corpora/Video/
+- Project/conversation artifacts secondary fallback
 
-## G250
-Song meaning is now typed:
-DIRECT / INTERPRETATION / ALTERNATIVES.
-Never turn a deep reading into proven author intent.
-Keep lyrical persona, author, performer, user and C4 distinct.
+## G253
+Three additional real screen-recorded videos were physically analyzed and trained.
+224/224 admitted, cold 12/12, runtime changes 0.
 
-## G251
-20 generated speech WAVs physically exist.
-A/O/U/I/E at multiple F0 + crude MA/MAMA + A approximation series.
+Important:
+- 20260308 and 20260309 have low-resolution cross-video near-duplicate visual candidates
+- 20260311 did not match them at the configured pHash threshold
+- one-second cut/change vs audio-onset correlations are negative for all three
+- that result is scale/method specific, not proof that audiovisual meaning/synchrony is absent
 
-Do not claim speech ability:
-- synthetic tutor != human voice
-- TTS != learned articulation
-- ASR != learned hearing
-- external optimizer != C4 motor learner
+## G254
+57/57 admitted, cold 11/11, runtime changes 0.
 
-Next genuine speech goal is a closed self-hearing loop with C4 choosing motor parameters.
-
-## G252
-First real MP4 is ingested as low-level synchronized vision+audio observations:
-- duration ~286.071s
-- 143 2-second samples
-- 10 30-second aggregates
-
-No semantic scene/object/action labels were invented.
+New semantic ontology:
+SENSOR / DIRECT / NARRATIVE / SYMBOLIC / ASSOCIATIVE / AFFECTIVE / PHILOSOPHICAL / EPISTEMIC.
 
 Preserve:
-PIXEL CHANGE != OBJECT MOTION
-EDGE DENSITY != OBJECT COUNT
-CO-TIMED != CAUSAL
-FEATURE != MEANING
-EXTERNAL ANALYZER != C4 SENSOR ORGAN
+NARRATIVE is not the only way to understand a clip.
+ASSOCIATION != CAUSATION.
+SYMBOL != SINGLE FIXED MEANING.
+INTERPRETATION SUPPORT != INTERPRETATION CERTAINTY.
+SCREEN CAPTURE FILE != DEPICTED MEDIA WORLD.
+PLAYER UI != ARTWORK CONTENT.
+CAPTURE TIME != DEPICTED EVENT TIME.
+LYRICS UNKNOWN -> do not invent transcript.
+A future verified transcript may be linked retrospectively without pretending it was previously observed.
+
+## Current user intent
+Ruslan explicitly wants:
+- direct song meaning
+- deep song meaning
+- many associations
+- visual+music+lyrics integration
+- narrative when useful, but not forced as the only semantic structure
+
+Treat that as CREATOR_REPORTED training intent, not as truth about any particular work.
 
 ## Latest regression
 254/263 passed.
-All 9 failures are unchanged missing historical artifacts G207/G137/G151/G153.
+All 9 failures are the same missing historical artifacts G207/G137/G151/G153.
 No new semantic/runtime assertion failures.
 
-## Development loop
-counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
-
-RED never canonical.
-No runtime repair merely to fit curriculum.
-No padding.
-
-## Next recommended work
-If user supplies more videos, ingest them under same method and start cross-video visual recurrence/persistence tests.
-For synthetic speech, make held-out vowel/consonant tokens and test whether learned structure generalizes without filename/teacher-label leakage.
-Keep Dostoevsky active in parallel.
+## Next
+If more videos arrive: ingest physically, preserve wrappers/content boundaries, search cross-video motifs.
+If exact song title/lyrics arrive: attach them as separate source layer and build direct/deep/alternative readings tied back to existing AV cues.
+Keep speech nursery and Dostoevsky active in parallel.
