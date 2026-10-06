@@ -124,3 +124,41 @@ LIKE LABEL != KNOWN CAUSAL FEATURE OF PREFERENCE.
 6. motor attempt -> produced audio -> self-hearing -> compare -> update.
 
 ASR can assist as teacher/reference but ASR SUCCESS != C4 LEARNED HEARING.
+
+
+## Temporal recurrence protocol (G249+)
+A static whole-track feature vector is not enough for musical structure.
+Preserve ordered temporal observations.
+
+Recommended low-level path:
+waveform -> onset/beat candidates -> time-frequency/pitch-class representation -> local temporal windows -> similarity/recurrence candidates.
+
+RECURRENCE CANDIDATE != CHORUS LABEL.
+RECURRENCE != EXACT REPETITION.
+HIGH CHROMA SIMILARITY != SAME LYRICS/TIMBRE/BYTES.
+LOCAL RECURRENCE != WHOLE-TRACK IDENTITY.
+
+Do not use source title or transcript to define a repeat during the sensory test.
+After recurrence is detected, source text may be used in a separate alignment/interpretation stage.
+
+## Measurement disagreement
+Real sensory measurements can disagree because of:
+- analysis window
+- estimator
+- meter/half-time/double-time ambiguity
+- section changes
+- noise/compression
+
+Store:
+VALUE + METHOD + WINDOW + SOURCE + UNCERTAINTY.
+
+A later estimate does not automatically supersede an earlier one.
+DIFFERENT ESTIMATORS/WINDOWS CAN DISAGREE without either being fraud or without requiring immediate runtime repair.
+
+## Autonomy boundary
+G249 recurrence was computed by an external low-level signal analyzer and then taught to C4.
+This is useful grounded sensory input but is not proof that C4 runtime has independently implemented motif detection.
+
+DERIVED TOOL OBSERVATION != SELF-ACQUIRED SENSOR ALGORITHM.
+
+The next stronger test is held-out audio recurrence/segmentation where semantic labels and timestamps are withheld.
