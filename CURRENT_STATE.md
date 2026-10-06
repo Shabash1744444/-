@@ -1,10 +1,10 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G248
-Current organism: child_g248_song_multimodal_green.c4m
-Size: 1220480 bytes
-SHA256: 93486415f2306c104ec70a4f5ef85fa905c51ff5eaaee5a25df68d7b4bc8ae20
+Canonical GREEN generation: G249
+Current organism: child_g249_audio_recurrence_green.c4m
+Size: 1247711 bytes
+SHA256: b28f2fe078b896e768f9b20efb112a1b51aa5bc40a596d9f9c9bdaacc1b71e46
 
 ## Milestone
 C4 is above 1 MiB of physically checkpointed organism state without byte padding.
@@ -131,7 +131,7 @@ BYTE IDENTITY != RECORDING IDENTITY != PERFORMANCE IDENTITY != SONG IDENTITY
 
 C4 still does NOT have a continuously connected microphone organ.
 
-## G248 — SONG TEXT+AUDIO MULTIMODAL — CURRENT GREEN
+## G248 — SONG TEXT+AUDIO MULTIMODAL
 Parent: G247.
 
 Results:
@@ -205,3 +205,55 @@ Next genuine capability steps should test:
 - later motor->sound->self-hearing loop
 
 Do not use ASR success as proof C4 learned to hear.
+
+
+## G249 — REAL AUDIO RECURRENCE / TEMPORAL STRUCTURE — CURRENT GREEN
+Parent: G248.
+
+Results:
+- 162/162 admitted
+- 0 rejected
+- cold 14/14
+- 1247711 bytes
+- SHA256 b28f2fe078b896e768f9b20efb112a1b51aa5bc40a596d9f9c9bdaacc1b71e46
+- runtime changes 0
+
+Method:
+- actual MP3 waveform input
+- onset/beat estimation
+- beat-synchronous chroma CENS
+- 8-beat windows, stride 2 beats
+- cosine similarity between temporally separated windows
+- title/lyrics were not used to define repeat pairs
+
+What this adds:
+- recurring temporal-acoustic structure derived from real audio rather than static whole-track summaries
+- recurrence candidates for all eight supplied tracks
+- April: strong candidate repeated windows including roughly 46.8s/117.9s and 145.2s/162.9s
+- Ledyanoy Vozduh: strong candidates roughly 47.7s/68.3s and 109.5s/129.9s
+- the two distinct Vglyadyvayas vverkh files show closely matching recurrence timing patterns, strengthening same-arrangement/song-family hypothesis without merging artifact identity
+- Defragmentaciya produced conflicting tempo estimates across G247 sampled-excerpt and G249 full-track methods; both retained with provenance instead of silently overwriting one
+
+New boundaries:
+RECURRENCE CANDIDATE != CHORUS LABEL
+RECURRENCE != EXACT REPETITION necessarily
+HIGH CHROMA SIMILARITY != SAME LYRICS/TIMBRE/BYTES
+LOCAL RECURRENCE != WHOLE-TRACK IDENTITY
+MEASUREMENT NUMBER requires METHOD/WINDOW/PROVENANCE
+DIFFERENT ESTIMATORS/WINDOWS CAN DISAGREE
+DERIVED TOOL OBSERVATION != SELF-ACQUIRED SENSOR ALGORITHM
+
+## Regression after G249
+254/263 passed in 5.08s.
+All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
+No new semantic/runtime assertion failures observed.
+
+## Next true audio frontier after G249
+- held-out recurrence detection on unseen audio
+- segment/section boundary hypotheses
+- align supplied transcript as separate teacher hypothesis, never raw sensor truth
+- repeated acoustic-token/vowel clustering
+- eventually live microphone stream
+- eventually motor -> sound -> self-hearing -> correction
+
+Do not call G249 live hearing or autonomous motif discovery inside runtime: the external low-level analyzer produced the structured observations.
