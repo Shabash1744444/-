@@ -1,32 +1,90 @@
-# NEXT CHAT HANDOFF — C4 G246
+# NEXT CHAT HANDOFF — C4 G248
 
 Read CURRENT_STATE.md, TRAINING_METHODOLOGY_LONG_CORPUS.md, LITERATURE_TRAINING_METHODOLOGY.md and SONG_AUDIO_TRAINING_METHODOLOGY.md first.
 
 ## Exact canonical baseline
-- child_g246_audio_sensory_green.c4m
-- 1155358 bytes
-- SHA256 9b945856fd08b56d215f233350791bc076bd6bb46a671c2bbc3491c4acfa0bbd
+- child_g248_song_multimodal_green.c4m
+- 1220480 bytes
+- SHA256 93486415f2306c104ec70a4f5ef85fa905c51ff5eaaee5a25df68d7b4bc8ae20
+- generation G248
 
-Verify exact bytes/SHA. Do not silently fall back.
-Persistent recovery should use /C4_Canonical/ exact G246 model/release when available.
+Verify exact bytes/SHA before training.
+Never silently fall back to G246/G244 or reconstruct from prose.
 
-## Active corpora
-- Dostoevsky full FB2 remains ACTIVE, not semantically closed.
-- User may send additional favorite songs/lyrics/audio.
+Persistent recovery:
+- personal Library /C4_Canonical/ should contain exact G248 model/release
+- audio source corpus should be in /C4_Corpora/Audio_Ruslan_Likes_G247/
+- project/conversation artifacts are fallback only
 
-## Song/audio rules
-LYRICAL_I != AUTHOR != PERFORMER != USER != C4.
-REFRAIN != INDEPENDENT EVIDENCE.
-TEXT != AUDIO.
-Do not invent melody/harmony/timbre from lyrics.
-ASR_OUTPUT != RAW AUDIO OBSERVATION.
-TTS_OUTPUT != LEARNED ARTICULATION.
-MOTOR_COMMAND != VERIFIED SOUND OUTCOME.
-FEATURE EXTRACTOR != SEMANTIC ORACLE.
-FUTURE SENSOR PLAN != CURRENT CAPABILITY.
+## What changed after G246
+G247 consumed eight REAL MP3 artifacts through a physical feature-extraction pass.
+G248 bound text/audio only where user context actually supports identity.
 
-If real audio is supplied, add it as a new modality with waveform/feature provenance and keep decoder hypotheses separate from sensor observations.
+C4 therefore has:
+- actual measured acoustic observations from real recordings
+- song-level multimodal bindings for April and Ledyanoy Vozduh
+- text-only semantic cell for Otkrytyy Kosmos because no exact matching MP3 was identified
+
+This is NOT live hearing.
+This is NOT proof of waveform-to-lyrics recognition.
+
+## G247 rules
+AUDIO FILE != LIVE PERFORMANCE
+FEATURE ESTIMATE != GROUND TRUTH
+ACOUSTIC FEATURE != EMOTION/LYRICS/INTENT
+AUDIO_ARTIFACT != ANALYZER_FEATURE != SEMANTIC INTERPRETATION
+BYTE IDENTITY != RECORDING IDENTITY != PERFORMANCE IDENTITY != SONG IDENTITY
+SAME TITLE + ACOUSTIC SIMILARITY != BYTE IDENTITY
+
+Two Вглядываясь вверх files are distinct artifacts and nearest acoustic-profile pair in the batch; do not merge them blindly.
+
+## G248 rules
+TEXT != AUDIO
+SONG-LEVEL BINDING != TOKEN-LEVEL ALIGNMENT
+LIKES SONG != BELIEVES EVERY LYRIC
+HYPERBOLE != PHYSICAL LAW
+PERSONIFICATION != VERIFIED AGENT
+AUDIO MISSING -> UNKNOWN
+Never borrow a thematically similar track as another song's audio.
+
+April:
+- text + AUDIO_G247_APREL
+- exact token alignment unknown
+
+Ledyanoy Vozduh:
+- text + AUDIO_G247_LEDYANOY_VOZDUH
+- exact token alignment unknown
+- atom/molecule/cell vs phrase/thought/verse is cross-domain analogy
+- superluminal lyric is hyperbole
+- deterministic lyric is viewpoint, not universe law
+
+Otkrytyy Kosmos:
+- user-supplied text + rich science/philosophy/language layers
+- exact audio absent from current batch
+- keep audio UNKNOWN
+
+## Active literature
+Dostoevsky remains ACTIVE; do not abandon it.
+Continue from G248 while choosing whether next GREEN block is literature or audio based on user input.
 
 ## Development loop
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
-RED is never canonical. No byte padding. No runtime repair just to fit curriculum.
+
+RED never canonical.
+No runtime repair merely to fit curriculum.
+No byte padding.
+
+## Latest regression
+254/263 passed.
+All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors.
+No new semantic/runtime assertion failure.
+
+## Next true audio experiments
+Prefer falsifiable tests:
+1. motif/repetition detection from audio without semantic labels;
+2. segment boundaries and recurrence;
+3. external transcript alignment as teacher hypothesis, never raw observation;
+4. repeated vowel/token clustering;
+5. later teacher says/shows A -> acoustic target -> motor attempt -> self-hearing -> correction.
+
+Do not claim C4 hears/speaks until those loops physically exist.
