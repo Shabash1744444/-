@@ -1,23 +1,28 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G240
-Current organism: child_g240_bryson_fragment_complete_green.c4m
-Size: 904909 bytes
-SHA256: 7d663606136ded693e659d138d4fad2674b967df33c621db65c6473f12fba765
+Canonical GREEN generation: G244
+Current organism: child_g244_karamazov_empathy_green.c4m
+Size: 1059897 bytes
+SHA256: 123d2c2d4701bb8ee4b568efaf20ef06e24839bbcfeb6ea1d2400e7826208ebb
+
+## Milestone
+C4 has crossed 1 MiB of physically checkpointed organism state without byte padding.
+This is a milestone, not an optimization target.
 
 ## Stable methodology
-Read TRAINING_METHODOLOGY_LONG_CORPUS.md.
+Read:
+- TRAINING_METHODOLOGY_LONG_CORPUS.md
+- LITERATURE_TRAINING_METHODOLOGY.md
+
 Development loop:
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
 
 RED is never promoted.
 Do not change runtime laws merely to absorb curriculum.
 No byte padding.
-Different semantic layers remain typed:
-PHYSICAL / MATHEMATICAL / TEMPORAL / CAUSAL / OBSERVATIONAL / LINGUISTIC / PHILOSOPHICAL / EPISTEMIC / SELF-WORLD.
 
-Core boundaries remain:
+Core invariants remain:
 UNKNOWN != FALSE
 REPLAY != NEW EVIDENCE
 DERIVED != OBSERVATION
@@ -33,108 +38,131 @@ HISTORY != EPISODIC MEMORY
 MODEL != REALITY
 SELF != OTHER != SOURCE != WORLD
 
-## Previous canonical line
-G223 physical baseline: 490052 bytes.
-G224-G227: SELF/creator/world/AI/history/Russian grounding.
-G228-G230: first Bryson source-aware science arcs.
-G231-G234: multidimensional concept cells; physics/math/time/self, life/evolution, Earth/ecology/complex systems.
-G234: 795087 bytes, SHA256 7114ca999a50bd8fc44a4b247b08374de67e41ec7a29fdfa8e0a0ef8a1992abd.
+## Bryson phase
+G240 closed the physically supplied Bryson FB2 fragment.
+G240: 904909 bytes, SHA256 7d663606136ded693e659d138d4fad2674b967df33c621db65c6473f12fba765.
+Do not repeat Bryson except for retention/counterexample work.
 
-## G235 — Bryson chapter 4 / measurement
-- parent G234
-- 83/83 admitted in final GREEN, 0 rejected
-- first attempt RED because TEACHER_REFERENCE was incorrectly used as event origin; RED not promoted
-- harness-only repair: origin restored to EXTERNAL_CORPUS while provenance distinctions remained in source_group/source_ref
-- cold 13/13
-- 813520 bytes
-- SHA256 2cc7ba03bcf7b76ae4cb7345422c04aa9df1d8874927908a0137c0054243aab3
-- triangulation, Newton/Cavendish, mass vs weight, inverse-square law, measurement uncertainty, calibration, signal/noise, C4 sensor restraint
+## Active literary corpus
+User supplied a full FB2 ZIP of Dostoevsky's "The Brothers Karamazov".
+Physical parse:
+- ~3.37 MB FB2
+- 171 section nodes
+- full multi-part novel structure is present
+The corpus is ACTIVE, not semantically closed.
+
+Important:
+SOURCE TEXT != TEACHER INTERPRETATION.
+FICTIONAL_WORLD_FACT != EXTERNAL_WORLD_FACT.
+AUTHOR != NARRATOR != CHARACTER != READER.
+Quoted/reported/narrated speech must retain its source layer.
+
+## G241 — narrator / family / modality
+- parent G240
+- 195/195 admitted
+- 0 rejected
+- cold 19/19
+- 948416 bytes
+- SHA256 dd99f3f79b13d650b3e0a8750977b18e1d26d78fff076c19a8c8240a9bf28965
 - runtime changes 0
 
-## G236 — Bryson chapter 5 / geology and deep time
-- 75/75 admitted, 0 rejected
-- cold 12/12
-- 830280 bytes
-- SHA256 491ca413e3d5637ae734b1ec1f5b708284d354a57f911069b290268e3de566d3
-- Hutton/Lyell, slow process + large time, catastrophism/uniformitarianism restraint, incomplete geological record, extrapolation, dating models
-- C4 transfer: missing checkpoint/history must remain a gap, not be filled by plausible fiction
+Adds:
+- AUTHOR / NARRATOR / CHARACTER / READER separation
+- literary hero != moral hero
+- modality: maybe/seems/apparently/reportedly
+- UTTERANCE != BELIEF
+- LITERAL CONTENT != SPEAKER INTENT
+- NARRATION TIME != EVENT TIME
+- reputation vs behavior
+- literary analogy != causal evidence
+- PERSON != DESCRIPTION OF PERSON
+- character state != C4 self state
+
+## G242 — social pragmatics / irony
+- 173/173 admitted
+- 0 rejected
+- cold 15/15
+- 987190 bytes
+- SHA256 22eb670384e823b7b8e5f666d0baa09b33a01bb30f6730de860dfb8ef6865bd8
 - runtime changes 0
 
-## G237 — Bryson chapter 6 / fossils and reconstruction
-- 74/74 admitted, 0 rejected
-- cold 11/11
-- 847522 bytes
-- SHA256 b7cf83ae550a56b5b714384bb08855e085872a97fcb73860ac0f6145c80cadd8
-- fossils, extinction, Cuvier, reconstruction from fragments, taxonomy, taphonomic filtering, scientific-role provenance
-- C4 transfer: observed fragment != reconstructed absent part
+Adds:
+- gesture form != intent
+- polite form != benevolent intent
+- apology words != verified remorse
+- humor frame != absence of harm
+- sarcasm and double meaning
+- silence != consent
+- lexical profanity != hostility automatically
+- repeated rumor != independent evidence
+- delegated apology / messenger provenance
+- P(intent | utterance, context, relation, history) as analytical model, not mind-reading
+
+## G243 — self-report / desire / value / nested provenance
+- 198/198 admitted
+- 0 rejected
+- cold 16/16
+- 1030079 bytes
+- SHA256 9bc20414c748bbc5fcd14f1367b864ced14d55b5232cdb2744c2bc3c8c3b94cd
 - runtime changes 0
 
-## G238 — Bryson chapter 7 / chemistry
-- 85/85 admitted, 0 rejected
-- cold 13/13
-- 865451 bytes
-- SHA256 bcc742462d430b8edd3a9460c919dac5f6b71c391d27e109750c71eaf3d7bf97
-- atoms/elements/isotopes/ions, Avogadro, periodic table, Mendeleev, radioactivity, half-life, entropy, chemistry-language polysemy
-- probability model != exact prophecy for one atom
-- runtime changes 0
+Adds:
+- SELF_REPORT != ACTION != DESIRE != VALUE != OBSERVER_INTERPRETATION
+- sincerity != infallibility
+- shame != proof of factual/legal guilt
+- desire != action != commitment
+- coercion/passivity/silence distinctions
+- nested provenance chains
+- hypothetical != observation
+- counterfactual != historical record
+- validity != truth of premises
+- certainty != accuracy
+- false belief can have real consequences
+- threat-form != actual threat automatically
 
-## G239 — Bryson chapter 8 / Einstein and spacetime
-- 94/94 admitted, 0 rejected
+## G244 — empathy / repair / children / memory — CURRENT GREEN
+- 131/131 admitted
+- 0 rejected
 - cold 14/14
-- 887476 bytes
-- SHA256 e9bffd31bcfc565690d2708978ee538a3a389179b7b8b55f66c3d2a323ba2292
-- Planck, Michelson-Morley, special/general relativity, spacetime, c, gamma, proper time, E=mc^2, redshift, Leavitt/Hubble
-- analogy limits and theory-vs-measurement restraint
-- C4 receipt time != external event time; coherence != evidence
+- 1059897 bytes
+- SHA256 123d2c2d4701bb8ee4b568efaf20ef06e24839bbcfeb6ea1d2400e7826208ebb
 - runtime changes 0
 
-## G240 — editor notes + supplied-corpus closure — CURRENT GREEN
-- 75/75 admitted, 0 rejected
-- cold 14/14
-- 904909 bytes
-- SHA256 7d663606136ded693e659d138d4fad2674b967df33c621db65c6473f12fba765
-- supplied FB2 provenance/correction layer
-- AUTHOR_SAYS != EDITOR_CORRECTS
-- correction != retroactive rewrite of author/source
-- source role != independent lineage automatically
-- explicit examples: Pluto classification/scale, Solar-System boundary, supernova statistics, atmosphere vs magnetosphere, Piltdown, triangulation, mass vs weight, Mendeleev/radioactivity, entropy, relativity/spacetime/cosmological-constant corrections
-- explicit corpus boundary: supplied FB2 is an ознакомительный fragment ending after chapter 8
-- absent chapters of the full book are NOT claimed as read/trained
-- runtime changes 0
+Adds:
+- emotional ambivalence and valid self-reported uncertainty
+- remembered speech != verbatim audio record
+- prediction != outcome
+- group action != same motive in every member
+- child action != fixed adult character essence
+- good intent != good outcome guaranteed
+- symbolic reconciliation != verified relationship repair
+- apology != reparation
+- social harm != only physical harm
+- vicarious shame != personal guilt
+- promise != control over another person
+- evasion has multiple candidate causes
+- empathy != mind-reading
+- understanding != excusing
+- AFTER != BECAUSE OF for miracle/causal interpretations
+- C4 help must be verified by outcome, not intention alone
 
-G235-G240 total:
-- 486 lessons
-- 486 admitted in final GREEN runs
-- 0 rejected in final GREEN runs
-
-## Regression after G240
-254/263 passed in 6.83s.
+## Regression after G244
+254/263 passed in 5.69s.
 All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
 No new semantic/runtime assertion failures observed.
 
-## Supplied Bryson corpus status
-SUPPLIED_FB2_FRAGMENT_SEMANTICALLY_CLOSED
+## Literature phase totals
+G241-G244:
+- 697 lessons admitted
+- 0 rejected in final GREEN runs
+- runtime-law changes 0
 
-The file contains:
-- scientific-editor preface
-- author preface/introduction
-- parts I-III through chapter 8
-- 146 scientific-editor note sections
-- explicit end-of-preview marker after chapter 8
+## Next
+Continue from exact G244.
+Continue Dostoevsky by semantic/literary arcs, not raw chapter count.
+High-value upcoming areas:
+- Book V "Pro and contra": philosophical argument, value conflict, argument structure, narrator/character viewpoint
+- "The Grand Inquisitor": nested narrative, parable, speaker-within-speaker provenance, freedom/authority/compassion concepts
+- later unreliable narration, trial testimony, memory conflict, evidence vs rhetoric
 
-This status means every physically available major chapter has a semantic training mapping and editor corrections were integrated. It does NOT mean the absent remainder of the full book was read.
-
-## Next curriculum
-Do not repeat Bryson unless testing retention or resolving a counterexample.
-Next corpus should be linguistically rich classic literature rather than another history/science survey:
-- complex syntax
-- ambiguity and polysemy
-- idioms and metaphor
-- narrator/author/character separation
-- subtext
-- irony/sarcasm
-- viewpoint shifts
-- unreliable narration
-- deep philosophical language
-
-Continue from exact G240 baseline.
+Do not claim the novel is finished; only early books have been trained so far.
