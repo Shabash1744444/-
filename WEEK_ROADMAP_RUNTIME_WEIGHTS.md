@@ -57,3 +57,22 @@ full regression
 cold reload where applicable
 checkpoint
 repo handoff update.
+
+
+## Storage/runtime work is now prerequisite to 100-300MB
+Before bulk growth reaches phone-breaking scale:
+1. benchmark current graph/object expansion precisely;
+2. design disk-backed graph schema;
+3. preserve provenance and relation typing;
+4. build lazy/indexed retrieval;
+5. keep hot dialogue/SELF/current-world subset resident;
+6. support atomic incremental learning;
+7. checkpoint/export back to portable C4 artifact;
+8. compare semantic behavior bit-for-bit/receipt-for-receipt against in-memory baseline.
+
+Do not optimize by dropping provenance, UNKNOWN semantics or source independence.
+
+## Claude G268 candidate merge
+A newer external Claude runtime candidate adds acquaintance/deixis improvements and reduces lexical-index memory.
+It is evidence/candidate, not canonical.
+Next runtime agent should diff it against canonical G269 and produce a new merged generation only after combined regression.
