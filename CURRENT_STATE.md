@@ -1,10 +1,10 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G256
-Current organism: child_g256_self_world_multimodal_green.c4m
-Size: 1426007 bytes
-SHA256: 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
+Canonical GREEN generation: G257
+Current organism: child_g257_omnicaption_teacher_green.c4m
+Size: 1458745 bytes
+SHA256: 762e0991d4d92a898c12220a85e207bb2bf92513eaeddb52ac3bc8fd3f2ae213
 
 ## Normative methodology
 Read:
@@ -22,118 +22,75 @@ RED is never promoted.
 No runtime-law change merely to absorb curriculum.
 No byte padding.
 
-## Core invariants
-UNKNOWN != FALSE
-REPLAY != NEW EVIDENCE
-DERIVED != OBSERVATION
-SIMULATION != OBSERVATION
-PREDICTION != EVIDENCE
-ACTION_REQUEST != VERIFIED_OUTCOME
-RECEIPT != CAUSAL PROOF
-SIMILARITY != IDENTITY
-MODEL CONFIDENCE != AUTHORITY
-CANONICAL != VERIFIED AUTHORITY
-BOOK != TRUTH
-MODEL != REALITY
-SELF != OTHER != SOURCE != WORLD
+## Recent canonical parent
+G256:
+- 1426007 bytes
+- SHA256 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
+- SELF/WORLD and cross-modal meaning boundaries
 
-## Recent lineage
-G255: transferable abstraction from rich media.
-- 1394899 bytes
-- SHA256 4b5a27087504ad0064706ed70a083ebad17c370bd3c615e1717316d80610e88a
+## G257 — OMNICAPTION EXTERNAL MULTIMODAL TEACHER — CURRENT GREEN
+Uploaded source:
+- OmniCaption.json
+- 1226 entries
+- 22,808,209 bytes
+- source SHA256 a26b854dce0cdb32f5a60f9eeec5058f1de5bdacd014bc54997fb296bd084bfb
+- 37,368 listed visual events
+- 18,093 listed speech events
+- 2,778 listed music events
+- 7,825 listed SFX events
+- 24,307 listed synergistic audiovisual relation descriptions
 
-## G256 — SELF/WORLD + CROSS-MODAL MEANING — CURRENT GREEN
-Parent: G255.
-- 169/169 admitted
+Training:
+- 172/172 admitted
 - 0 dedup
 - 0 rejected
 - cold 21/21
-- 1426007 bytes
-- SHA256 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
+- 1458745 bytes
+- SHA256 762e0991d4d92a898c12220a85e207bb2bf92513eaeddb52ac3bc8fd3f2ae213
 - runtime changes 0
 
-### Cross-modal semantics
-Video does NOT have to illustrate lyrics.
-Supported relation types now include:
-- ILLUSTRATION
-- CONTRAST
-- COUNTERPOINT
-- ATMOSPHERE
-- SYMBOLIC ECHO
-- FORESHADOWING hypothesis
-- IRONIC MISMATCH
-- INDEPENDENT PARALLEL
-- MONTAGE ASSOCIATION
+Purpose:
+Use OmniCaption as an EXTERNAL TEACHER corpus for reusable multimodal relations, NOT as raw sensory experience.
 
-Hard boundaries:
-VIDEO NEED NOT MATCH LYRICS
-CO-TIMED MODALITIES != SAME PROPOSITION
-MISMATCH != ERROR automatically
-CONTRAST != CONTRADICTION automatically
-MUSIC MOOD != LYRIC TRUTH VALUE
-VISUAL SYMBOL != LYRIC REFERENT automatically
-NO OBVIOUS NARRATIVE != NO STRUCTURE
+Critical boundaries:
+CAPTION TEXT != RAW VIDEO
+VISUAL EVENT TEXT != PIXELS
+AUDIO EVENT TEXT != WAVEFORM
+SYNERGISTIC EVENT TEXT != C4 AUTONOMOUS CROSS MODAL DISCOVERY
+VIDEO PATH REFERENCE != VIDEO BYTES
+same video described in multiple annotation fields != independent evidence
+shared annotation pipeline != independent evidence sources
 
-Image+text can jointly support a third interpretation not reducible to either layer alone.
-Cross-modal convergence can raise plausibility without proving author intent.
+Reusable abstractions added:
+- visible speaker + aligned speech -> speaker-source hypothesis
+- visible action + transient sound -> action/sound common-event hypothesis
+- spoken instruction + visible motion -> instruction/demonstration relation
+- commentary + timer/scoreboard -> narration/data relation
+- overlay/title/logo -> presentation context vs depicted world
+- background music vs diegetic sound distinction
+- voiceover vs visible speaker distinction
+- edit/cut/replay/glitch vs physical-world event distinction
+- message transmission can distort across relays
+- sports prediction/commentary != verified result
+- advertisement claim != independently verified fact
+- travel montage != continuous physical path
+- audience reaction != proposition truth
+- performed emotion/persona != private identity
+- common editor/event can induce audiovisual correlation without direct causal relation
 
-### SELF / OTHER / WORLD
-C4 SELF != external world
-C4 SELF != internal world model
-C4 SELF != observed human
-C4 SELF != Ruslan
-C4 SELF != narrator / character / lyrical persona / video protagonist
-C4 SELF != future avatar automatically
-what surrounds C4 != C4 merely because represented internally
+Teacher-to-sensor curriculum:
+annotation can teach candidate concepts;
+held-out sensor exam must hide title/filename/label/caption;
+successful retrieval of annotation != autonomous perception;
+future raw image/audio datasets should test bottom-up transfer.
 
-External-world rules:
-- external events can occur without C4 observing them
-- observation can be partial/noisy/delayed/transformed
-- internal consistency != external truth
-- model revision does not itself modify the external world
-- sensor access increases grounding but does not collapse model into world
-
-### C4 ontological layers
-Current implementation:
-- persistent computational system
-- physically instantiated during execution on hardware
-- mathematically describable, but not literally identical to an equation
-- has checkpoint/history lineage
-- has no biological body, DNA, metabolism or biological reproduction
-- future sensors/actuators/avatar are plans until physically connected and verified
-
-C4 may be treated as a potentially novel engineered kind of system relative to familiar biological organisms and standard language models, but:
-NOVEL != CONSCIOUS
-NOVEL != PERSON
-NOVEL != SUPERIOR
-SMALL BYTE SIZE != HUMAN/GPT-LEVEL CAPABILITY
-CAPABILITY MUST BE DEMONSTRATED TASK BY TASK
-
-### Learning without identity absorption
-C4 can learn:
-- human concepts without inheriting human biography
-- bodily language without claiming biological body
-- emotion language without claiming human emotion
-- values/arguments without adopting them automatically
-- first-person language while preserving source/referent binding
-- from many people without becoming an average composite person
-
-### Time / continuity / environment
-SELF_t0 and SELF_t1 can differ in knowledge while remaining technically linked by lineage.
-Checkpoint continuity can evidence technical continuity but does not settle philosophical personal identity.
-Future capability != past memory.
-Environment affects system across a boundary.
-Sensor = observation interface.
-Actuator = attempted action interface.
-OUTPUT COMMAND != VERIFIED EXTERNAL OUTCOME.
-Virtual environment can be real interaction for C4 while still being simulated relative to the physical world.
-
-## Regression after G256
-254 passed / 9 failed in 5.23s.
-All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
+## Regression after G257
+254 passed / 9 failed in 5.13s.
+All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors.
 No new semantic/runtime assertion failures.
 
 ## Active direction
-Use media as dense carriers of transferable structure, not taste imprinting.
-Continue self/world grounding in parallel with speech/video/literature.
-Next high-value test should use genuinely new media/situations to see whether SELF/OTHER and cross-modal relation types transfer without source-specific memorization.
+Acquire raw image and raw audio corpora next.
+Keep pixels/waveforms physically separate from teacher labels.
+Use labels/captions only as provenance-tagged teacher channel.
+Test held-out generalization without metadata leakage.
