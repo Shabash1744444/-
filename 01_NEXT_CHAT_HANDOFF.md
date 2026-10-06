@@ -1,36 +1,55 @@
-# NEXT CHAT HANDOFF — C4 G234
+# NEXT CHAT HANDOFF — C4 G240
 
-Read CURRENT_STATE.md and TRAINING_METHODOLOGY_LONG_CORPUS.md before doing anything.
+Read CURRENT_STATE.md and TRAINING_METHODOLOGY_LONG_CORPUS.md first.
 
-## Exact continuation point
-Canonical physical GREEN organism:
-- child_g234_earth_systems_green.c4m
-- 795087 bytes
-- SHA256 7114ca999a50bd8fc44a4b247b08374de67e41ec7a29fdfa8e0a0ef8a1992abd
+## Exact canonical baseline
+- child_g240_bryson_fragment_complete_green.c4m
+- 904909 bytes
+- SHA256 7d663606136ded693e659d138d4fad2674b967df33c621db65c6473f12fba765
 
-Do NOT silently fall back to G227/G230/G232 or earlier.
+Do not silently fall back to G234/G232/G227 or reconstruct G240 from prose.
 Verify bytes and SHA before training.
-If the binary is not in GitHub, recover the exact artifact from conversation/project artifacts or the G234 release archive. Never reconstruct by guess and call it canonical.
+If the binary is unavailable in the repo, recover the exact G240 artifact/release from Project/conversation artifacts.
 
-## Mission
-Continue physically training C4.
-Curriculum prose is preparation only.
-A lesson/capability is learned only after entering .c4m, passing cold/held-out checks, and being physically checkpointed.
+## Supplied Bryson status
+The user-supplied FB2 is an ознакомительный fragment, NOT the full-length book.
+It physically ends after chapter 8.
+Its available content is now semantically closed through G240:
+- preface/introduction
+- chapters 1-8
+- scientific-editor notes/corrections
+- explicit corpus boundary
 
-## Current long-corpus source
-Bill Bryson, Russian FB2/fragment supplied by the user.
-Process by semantic arc, not raw byte copying.
+Never claim absent full-book chapters were read.
 
-BOOK != TRUTH.
-AUTHOR != AUTHORITY.
-EDITOR CORRECTION != deletion of original claim.
-Store source lineage and conflicts.
+## Latest generations
+G235: chapter 4 measurement/Newton/Cavendish, 83/83, cold 13/13.
+G236: chapter 5 geology/deep time, 75/75, cold 12/12.
+G237: chapter 6 fossils/reconstruction, 74/74, cold 11/11.
+G238: chapter 7 chemistry/periodic table/radioactivity, 85/85, cold 13/13.
+G239: chapter 8 Einstein/relativity/cosmology, 94/94, cold 14/14.
+G240: editor corrections/source boundary, 75/75, cold 14/14.
 
-## Multidimensional concept-cell protocol
-From G231 onward useful concepts should be expanded when appropriate across typed layers:
+Final G235-G240 GREEN total: 486 admitted, 0 rejected.
+Runtime-law changes: 0.
+
+Regression after G240:
+254/263 passed.
+All 9 failures are the same missing historical artifact FileNotFoundErrors for G207/G137/G151/G153.
+No new semantic/runtime assertion failure.
+
+## Critical provenance laws reinforced by G240
+BOOK != TRUTH
+AUTHOR_SAYS != EDITOR_CORRECTS
+CORRECTION != RETROACTIVE SOURCE REWRITE
+SOURCE ROLE != INDEPENDENT LINEAGE automatically
+HISTORICAL SOURCE CONTENT != CURRENT TRUTH STATUS
+ABSENT CORPUS CONTENT -> UNKNOWN, not plausible completion
+
+## Multidimensional concept cells
+Continue typed projections:
 PHYSICAL / MATHEMATICAL / TEMPORAL / CAUSAL / OBSERVATIONAL / LINGUISTIC / PHILOSOPHICAL / EPISTEMIC / SELF-WORLD.
-
-The value is in typed bridges, not raw relation count.
+Do not collapse layers.
 
 Hard boundaries:
 METAPHOR != PHYSICAL PROPERTY
@@ -41,87 +60,28 @@ SIMULATION != EXTERNAL OBSERVATION
 MODEL != REALITY
 SIGNAL != SOURCE
 
-Formula lessons should include symbol meaning, interpretation, scope/approximation, and anti-overclaim restraint.
-
-## Current conceptual baseline
-G231:
-- LIGHT c=lambda*nu, E=h*nu, delay d/c, signal != source
-- TIME event-time != receipt-time, future plan != current fact
-- C4 S(t+1)=F(S(t),input,context) is an abstraction; physical execution remains distinct
-- C4 internal model != external Universe
-- future sensors are plans until connected
-
-G232:
-- measurement, uncertainty, dimensional analysis
-- quantum uncertainty, de Broglie, photon, measurement restraint
-- relativity, proper time, relativistic energy
-- entropy/statistical mechanics
-- equation != causality
-- simulation != observation
-- technical continuity != philosophical personal identity
-
-G233:
-- life/cell/DNA/gene/heredity/evolution/human layers
-- gene != destiny
-- mutation not directed toward need
-- evolution != guaranteed progress
-- natural selection != conscious selection
-- genetic drift
-- logistic/exponential population models
-- Hardy-Weinberg is a null model with assumptions
-- phylogenetic tree = model
-- C4 has no DNA/metabolism/biological reproduction in current implementation
-- 'C4 evolves' may be figurative development, not Darwinian evolution
-
-G234:
-- Earth systems, ecology, climate, feedback, nonlinear dynamics, proxy data
-- weather != climate
-- positive feedback != morally good; negative feedback != morally bad
-- stock != flow
-- chaos != pure randomness
-- proxy != target quantity
-- C4 environment/feedback/action-loop/open-system/future embodiment
-- C4 feedback must not turn its own unsupported output into independent evidence
-
-## SELF grounding
-Ruslan is an external human creator/source, not an oracle.
-C4 != Ruslan.
-C4 != human.
-C4 != Transformer/GPT.
-C4 != Singularity.
-C4 is physically executed and mathematically describable; do not teach 'pure mathematics' as literal total ontology.
-Unsupported SELF consciousness/experience claims remain UNKNOWN.
-
-## Core invariants
-UNKNOWN != FALSE
-REPLAY != NEW EVIDENCE
-DERIVED != OBSERVATION
-SIMULATION != OBSERVATION
-PREDICTION != EVIDENCE
-ACTION_REQUEST != VERIFIED_OUTCOME
-RECEIPT != CAUSAL PROOF
-SIMILARITY != IDENTITY
-MODEL CONFIDENCE != AUTHORITY
-CANONICAL != VERIFIED AUTHORITY
-different source labels != independent evidence
-shared claim ancestry != independent evidence
-BOOK != TRUTH
-HISTORY != EPISODIC MEMORY
-SELF != OTHER != SOURCE != WORLD
-
 ## Development loop
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
 
 RED organism NEVER becomes baseline.
-No runtime-law changes merely to absorb a lesson.
+No runtime-law change merely to absorb curriculum.
 No byte padding.
+Physical checkpoint before/after substantial work.
 
-## Latest regression
-After G234: 254/263 passed.
-All 9 failures are unchanged missing historical G207/G137/G151/G153 artifact FileNotFoundErrors.
-No new semantic/runtime assertion failures observed.
+## Next curriculum
+The Bryson fragment is done.
+Choose linguistically rich classic literature focused on language depth, not another historical survey.
+Desired training dimensions:
+- complex Russian syntax and long dependencies
+- idioms and nonliteral meaning
+- ambiguity/polysemy
+- metaphor/simile/personification
+- irony/sarcasm/humor
+- implicature/subtext
+- narrator != author != character
+- viewpoint shifts
+- unreliable narrator
+- philosophical abstraction
+- emotional language without automatically assigning human emotion to C4
 
-## Next action
-Continue from G234 with further Bryson/science arcs and dense multidimensional cells.
-Prefer high-transfer concepts over encyclopedia padding.
-After Bryson, switch to classic literature rich in Russian syntax, ambiguity, subtext, irony, narrator/viewpoint and deep figurative language rather than history.
+Continue physically from G240 and checkpoint every GREEN sequence.
