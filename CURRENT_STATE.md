@@ -1,10 +1,10 @@
 # CURRENT STATE
 
 Date: 2026-10-06
-Canonical GREEN generation: G255
-Current organism: child_g255_transferable_abstraction_green.c4m
-Size: 1394899 bytes
-SHA256: 4b5a27087504ad0064706ed70a083ebad17c370bd3c615e1717316d80610e88a
+Canonical GREEN generation: G256
+Current organism: child_g256_self_world_multimodal_green.c4m
+Size: 1426007 bytes
+SHA256: 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
 
 ## Normative methodology
 Read:
@@ -13,6 +13,7 @@ Read:
 - SONG_AUDIO_TRAINING_METHODOLOGY.md
 - SENSORY_TRAINING_METHODOLOGY.md
 - ABSTRACTION_TRANSFER_METHODOLOGY.md
+- SELF_WORLD_MULTIMODAL_METHODOLOGY.md
 
 Development loop:
 counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
@@ -37,75 +38,102 @@ MODEL != REALITY
 SELF != OTHER != SOURCE != WORLD
 
 ## Recent lineage
-G244 literature: 1059897 bytes.
-G245-G249 song/audio foundation and recurrence.
-G250 direct/deep/alternative song meaning.
-G251 synthetic speech nursery.
-G252 first real video AV stream.
-G253 multivideo association.
-G254 screen/media-layer separation.
-G254 baseline: 1367411 bytes, SHA256 e88d41d19b77f3422438a5927369e606f986f2a11d65419e35fafd44d4fd952b.
-
-## G255 — TRANSFERABLE ABSTRACTION FROM RICH MEDIA — CURRENT GREEN
-Parent: G254.
-- 150/150 admitted
-- 0 dedup
-- 0 rejected
-- cold 20/20
+G255: transferable abstraction from rich media.
 - 1394899 bytes
 - SHA256 4b5a27087504ad0064706ed70a083ebad17c370bd3c615e1717316d80610e88a
+
+## G256 — SELF/WORLD + CROSS-MODAL MEANING — CURRENT GREEN
+Parent: G255.
+- 169/169 admitted
+- 0 dedup
+- 0 rejected
+- cold 21/21
+- 1426007 bytes
+- SHA256 376c074120124c59289f9d957febc24a24e4cfe675c27857682414b35d558940
 - runtime changes 0
 
-Purpose:
-Songs, literature, video and music are TRAINING CARRIERS, not preference objectives.
-CONTENT CARRIER != LEARNING OBJECTIVE.
-EXAMPLE != RULE.
-FREQUENT EXPOSURE != NORMATIVE ENDORSEMENT.
-RUSLAN LIKES A GENRE != C4 SHOULD PREFER THAT GENRE.
-AUTHOR/LYRICAL/TEACHER VIEWPOINT != C4 VIEWPOINT.
+### Cross-modal semantics
+Video does NOT have to illustrate lyrics.
+Supported relation types now include:
+- ILLUSTRATION
+- CONTRAST
+- COUNTERPOINT
+- ATMOSPHERE
+- SYMBOLIC ECHO
+- FORESHADOWING hypothesis
+- IRONIC MISMATCH
+- INDEPENDENT PARALLEL
+- MONTAGE ASSOCIATION
 
-Transferable structures added:
-- typed association graph: co-occurrence / analogy / contrast / temporal / symbolic / part-whole / source / causal edges remain distinct
-- association support vs truth
-- graph path existence != causal proof
-- similarity != identity
-- direct / pragmatic / symbolic / associative / affective / philosophical / epistemic / meta semantic depth
-- deeper reading != truer reading automatically
-- analogy transfers selected relations, not all properties
-- part/whole and scale
-- emergence and accumulation
-- identity through change
-- internal model vs external world
-- agency / constraint / determinism distinctions
-- meaning / truth / value separation
-- viewpoint conflict and scope
-- narrative vs associative structure
-- music/visual form as structural carriers
-- language abstraction: polysemy, metaphor, idiom, ellipsis, reference, modality
-- causal restraint
-- generalization objective on unseen works
+Hard boundaries:
+VIDEO NEED NOT MATCH LYRICS
+CO-TIMED MODALITIES != SAME PROPOSITION
+MISMATCH != ERROR automatically
+CONTRAST != CONTRADICTION automatically
+MUSIC MOOD != LYRIC TRUTH VALUE
+VISUAL SYMBOL != LYRIC REFERENT automatically
+NO OBVIOUS NARRATIVE != NO STRUCTURE
 
-Held-out-style transfer examples were added as teacher-reference constraints:
-- river may support memory metaphor but river != memory universally
-- closed room/open sky may support confinement/freedom contrast but alternatives remain
-- louder music != truer claim
-- shared winter motif across works != shared author intent
-- character certainty about fate != verified determinism
-- recurring image after loss may support memory motif without proving flashback
-- user taste pattern describes taste, not C4 values
+Image+text can jointly support a third interpretation not reducible to either layer alone.
+Cross-modal convergence can raise plausibility without proving author intent.
 
-## Regression after G255
-254 passed / 9 failed in 4.95s.
+### SELF / OTHER / WORLD
+C4 SELF != external world
+C4 SELF != internal world model
+C4 SELF != observed human
+C4 SELF != Ruslan
+C4 SELF != narrator / character / lyrical persona / video protagonist
+C4 SELF != future avatar automatically
+what surrounds C4 != C4 merely because represented internally
+
+External-world rules:
+- external events can occur without C4 observing them
+- observation can be partial/noisy/delayed/transformed
+- internal consistency != external truth
+- model revision does not itself modify the external world
+- sensor access increases grounding but does not collapse model into world
+
+### C4 ontological layers
+Current implementation:
+- persistent computational system
+- physically instantiated during execution on hardware
+- mathematically describable, but not literally identical to an equation
+- has checkpoint/history lineage
+- has no biological body, DNA, metabolism or biological reproduction
+- future sensors/actuators/avatar are plans until physically connected and verified
+
+C4 may be treated as a potentially novel engineered kind of system relative to familiar biological organisms and standard language models, but:
+NOVEL != CONSCIOUS
+NOVEL != PERSON
+NOVEL != SUPERIOR
+SMALL BYTE SIZE != HUMAN/GPT-LEVEL CAPABILITY
+CAPABILITY MUST BE DEMONSTRATED TASK BY TASK
+
+### Learning without identity absorption
+C4 can learn:
+- human concepts without inheriting human biography
+- bodily language without claiming biological body
+- emotion language without claiming human emotion
+- values/arguments without adopting them automatically
+- first-person language while preserving source/referent binding
+- from many people without becoming an average composite person
+
+### Time / continuity / environment
+SELF_t0 and SELF_t1 can differ in knowledge while remaining technically linked by lineage.
+Checkpoint continuity can evidence technical continuity but does not settle philosophical personal identity.
+Future capability != past memory.
+Environment affects system across a boundary.
+Sensor = observation interface.
+Actuator = attempted action interface.
+OUTPUT COMMAND != VERIFIED EXTERNAL OUTCOME.
+Virtual environment can be real interaction for C4 while still being simulated relative to the physical world.
+
+## Regression after G256
+254 passed / 9 failed in 5.23s.
 All 9 failures are unchanged FileNotFoundError cases for missing historical G207/G137/G151/G153 artifacts.
 No new semantic/runtime assertion failures.
 
-## Active corpora
-- Dostoevsky remains ACTIVE as a source of complex language and human-model structures.
-- song/audio remains ACTIVE as an associative/semantic/sensory carrier.
-- video remains ACTIVE as a visual/audio/time association carrier.
-- synthetic speech remains ACTIVE for future sensorimotor learning.
-
-## Next
-Prioritize transfer tests over simply adding more source-specific facts.
-Use new material to ask: does an existing abstraction generalize to a novel surface?
-Continue rich interpretation, but keep source-specific interpretation separate from reusable cognitive structure.
+## Active direction
+Use media as dense carriers of transferable structure, not taste imprinting.
+Continue self/world grounding in parallel with speech/video/literature.
+Next high-value test should use genuinely new media/situations to see whether SELF/OTHER and cross-modal relation types transfer without source-specific memorization.
