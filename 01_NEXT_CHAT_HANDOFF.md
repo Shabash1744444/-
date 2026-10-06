@@ -68,3 +68,48 @@ UNKNOWN != FALSE
 Test G269 in Android with G266 weights.
 Treat new screenshots as runtime counterexamples only after verifying the response is coming from this runtime.
 Do not patch individual phrases unless they reveal a reusable discourse class.
+
+
+## MANDATORY NEW READING BEFORE CONTINUING
+Read these four files in full:
+1. DEVELOPMENTAL_TRAINING_METHODOLOGY.md
+2. LEXICAL_GRAPH_SCALE_TARGETS.md
+3. RUSSIAN_CURRICULUM_BOOK_ROADMAP.md
+4. WEEK_ROADMAP_RUNTIME_WEIGHTS.md
+
+They define the current methodology.
+
+### Critical curriculum update
+Do not simply feed 100 books.
+Build Russian as a typed lexical/semantic/morphological graph.
+
+Engineering reference:
+~180k lemma nodes;
+~1.62M semantic links target by non-uniform density;
+~1.44M morphology/form links;
+~3.06M combined typed links as a long-range scale hypothesis.
+
+This is not an emergence guarantee.
+Measure held-out transfer and graph quality.
+
+### 100 MB target
+100 MB is now a meaningful engineering milestone only if useful typed structure grows.
+Current representation may be too verbose; compact string interning/integer IDs/relation coding may be required.
+Storage optimization may change serialization but must preserve graph/provenance physics.
+
+### Russian book/corpus order
+Morphology/dictionaries/dialogue nursery BEFORE indiscriminate novel scaling.
+Dal is HISTORICAL_RU, not default modern Russian.
+Use varied prose + explanatory science + later philosophy/poetry.
+Verify rights/license/source before ingestion.
+
+### Runtime/weights split
+Runtime = reusable abilities/physics.
+Weights = acquired knowledge/experience.
+Do not compensate for runtime bugs by training weights.
+Do not hide corpus facts in runtime.
+
+### Live teaching
+Use atomic lessons:
+one relation -> one gap -> one answer -> one transfer example.
+Long paragraphs currently create malformed gaps and should be avoided.
