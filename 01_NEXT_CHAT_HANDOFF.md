@@ -1,64 +1,68 @@
-# NEXT CHAT HANDOFF — C4 G254
+# NEXT CHAT HANDOFF — C4 G255
 
-Read CURRENT_STATE.md plus all methodology files, especially SENSORY_TRAINING_METHODOLOGY.md.
+Read CURRENT_STATE.md and all methodology files, especially ABSTRACTION_TRANSFER_METHODOLOGY.md.
 
 ## Exact canonical baseline
-- child_g254_screen_media_layers_green.c4m
-- 1367411 bytes
-- SHA256 e88d41d19b77f3422438a5927369e606f986f2a11d65419e35fafd44d4fd952b
-- generation G254
+- child_g255_transferable_abstraction_green.c4m
+- 1394899 bytes
+- SHA256 4b5a27087504ad0064706ed70a083ebad17c370bd3c615e1717316d80610e88a
+- generation G255
 
 Verify exact bytes/SHA before training.
 Never silently fall back or reconstruct canonical state from prose.
+Persistent recovery: personal Library /C4_Canonical/ first.
 
-Persistent recovery:
-- personal Library /C4_Canonical/
-- video corpora in /C4_Corpora/Video/
-- Project/conversation artifacts secondary fallback
-
-## G253
-Three additional real screen-recorded videos were physically analyzed and trained.
-224/224 admitted, cold 12/12, runtime changes 0.
-
-Important:
-- 20260308 and 20260309 have low-resolution cross-video near-duplicate visual candidates
-- 20260311 did not match them at the configured pHash threshold
-- one-second cut/change vs audio-onset correlations are negative for all three
-- that result is scale/method specific, not proof that audiovisual meaning/synchrony is absent
-
-## G254
-57/57 admitted, cold 11/11, runtime changes 0.
-
-New semantic ontology:
-SENSOR / DIRECT / NARRATIVE / SYMBOLIC / ASSOCIATIVE / AFFECTIVE / PHILOSOPHICAL / EPISTEMIC.
+## Critical curriculum correction
+The goal is NOT to teach C4 to like rap, rock, Dostoevsky, or Ruslan's taste.
+Rich media are carriers of complex transferable structure.
 
 Preserve:
-NARRATIVE is not the only way to understand a clip.
-ASSOCIATION != CAUSATION.
-SYMBOL != SINGLE FIXED MEANING.
-INTERPRETATION SUPPORT != INTERPRETATION CERTAINTY.
-SCREEN CAPTURE FILE != DEPICTED MEDIA WORLD.
-PLAYER UI != ARTWORK CONTENT.
-CAPTURE TIME != DEPICTED EVENT TIME.
-LYRICS UNKNOWN -> do not invent transcript.
-A future verified transcript may be linked retrospectively without pretending it was previously observed.
+CONTENT CARRIER != LEARNING OBJECTIVE
+EXAMPLE != RULE
+FREQUENT EXPOSURE != NORMATIVE ENDORSEMENT
+RUSLAN LIKES GENRE != C4 SHOULD PREFER GENRE
+AUTHOR/LYRICAL/TEACHER VIEWPOINT != C4 VIEWPOINT
 
-## Current user intent
-Ruslan explicitly wants:
-- direct song meaning
-- deep song meaning
-- many associations
-- visual+music+lyrics integration
-- narrative when useful, but not forced as the only semantic structure
+## G255 core
+150/150 admitted, cold 20/20, runtime changes 0.
 
-Treat that as CREATOR_REPORTED training intent, not as truth about any particular work.
+New reusable abstraction families:
+- typed association graph
+- support vs truth
+- analogy vs identity
+- part/whole and scale
+- identity through change
+- inner model vs outer world
+- agency/determinism
+- meaning/truth/value
+- perspective/scope
+- narrative vs associative structure
+- musical/visual form
+- language abstraction
+- causal restraint
+- transfer/generalization
+
+## Generalization standard
+Do not count memorized source facts as deep learning.
+Prefer tests on unseen surfaces:
+- novel poem/image/video
+- hidden title/author/genre metadata
+- ask whether prior abstraction transfers
+- preserve ambiguity and competing readings
+- do not infer taste/value from training frequency
 
 ## Latest regression
-254/263 passed.
-All 9 failures are the same missing historical artifacts G207/G137/G151/G153.
+254 passed / 9 failed.
+All 9 failures are unchanged missing historical artifact FileNotFoundErrors for G207/G137/G151/G153.
 No new semantic/runtime assertion failures.
 
+## Development loop
+counterexample -> minimal repair -> re-attack -> regression -> cold reload -> physical checkpoint -> next
+
+RED never canonical.
+No runtime repair merely to fit curriculum.
+No padding.
+
 ## Next
-If more videos arrive: ingest physically, preserve wrappers/content boundaries, search cross-video motifs.
-If exact song title/lyrics arrive: attach them as separate source layer and build direct/deep/alternative readings tied back to existing AV cues.
+When new songs/videos arrive, extract rich source-specific interpretations AND separately map them into reusable abstractions.
 Keep speech nursery and Dostoevsky active in parallel.
