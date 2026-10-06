@@ -1,0 +1,19 @@
+{
+  "generation": "G249",
+  "parent": "G248",
+  "model_bytes": 1247711,
+  "sha256": "b28f2fe078b896e768f9b20efb112a1b51aa5bc40a596d9f9c9bdaacc1b71e46",
+  "lessons": 162,
+  "admitted": 162,
+  "dedup": 0,
+  "rejected": 0,
+  "cold": "14/14",
+  "method": "beat-synchronous chroma CENS, 8-beat windows, nonlocal cosine recurrence",
+  "regression": {
+    "passed": 254,
+    "total": 263,
+    "missing_artifact_failures": 9,
+    "new_semantic_failures": 0
+  },
+  "runtime_changes": 0
+}
