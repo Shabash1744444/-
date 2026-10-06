@@ -113,3 +113,23 @@ Do not hide corpus facts in runtime.
 Use atomic lessons:
 one relation -> one gap -> one answer -> one transfer example.
 Long paragraphs currently create malformed gaps and should be avoided.
+
+
+## ADDITIONAL MANDATORY READING
+- RUNTIME_ARCHITECTURE_PRINCIPLES.md
+- EXTERNAL_AUDIT_CLAUDE_G268_ACQUAINTANCE.md
+
+### Runtime principle
+Runtime should be as universal/capability-rich as possible while remaining content-light.
+Weights/persistent graph should contain learned world/language experience.
+
+### Scaling warning
+Claude G268 measured G266 at:
+~1.7MB archive, ~11MB graph_hot JSON, ~43MB live Python graph/state, ~6MB lexical index after optimization.
+Naive ~100MB archive extrapolation is ~2.5GB live graph/state + ~0.4GB lexical index.
+Therefore 100-300MB mobile growth requires disk-backed/lazy graph storage before the model reaches that size.
+
+### Candidate status
+Claude G268 Acquaintance is NOT canonical.
+Current canonical remains G266 weights + G269 runtime.
+Its improvements must be merged into G269 and tested as a new runtime generation.
