@@ -130,3 +130,39 @@ Then broaden to 80k.
 Then extend to ~180k long tail.
 
 Do not spend 100 MB on obscure words while ordinary Russian composition still fails.
+
+
+## Prototype scaling correction from Claude G268
+Measured G266 prototype:
+- archive ~1.7 MB;
+- 9,173 facts;
+- graph_hot JSON ~11 MB;
+- live Python graph/state ~43 MB;
+- lexical index ~6 MB after optimization.
+
+Naive x59 archive growth (~100MB):
+- ~540k facts;
+- ~650MB graph_hot JSON;
+- ~2.5GB live Python graph/state;
+- ~0.4GB lexical index.
+
+Therefore prior byte-per-edge estimates based only on .c4m archive size are insufficient for mobile feasibility.
+Track BOTH:
+- persistent/on-disk compressed bytes;
+- expanded live-memory bytes.
+
+The long-range ~3M-link lexical target may require far more than 100MB in the current format.
+100-300MB remains a useful persistent-state milestone only after storage compaction/lazy loading.
+
+## Storage metric
+For every scale checkpoint record:
+archive bytes
+expanded persistent graph bytes
+resident set size after load
+hot-cache size
+index size
+cold-load latency
+first-query latency
+steady-query latency
+
+Capability-per-byte should use total deployed footprint, not archive size alone.
