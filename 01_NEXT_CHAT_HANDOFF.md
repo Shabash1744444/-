@@ -1,4 +1,4 @@
-# NEXT CHAT HANDOFF — C4 G266 WEIGHTS + G267 RUNTIME
+# NEXT CHAT HANDOFF — C4 G266 WEIGHTS + G268 RUNTIME
 
 Read CURRENT_STATE.md first.
 
@@ -8,17 +8,17 @@ Read CURRENT_STATE.md first.
 - SHA256 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
 
 ## Exact canonical runtime
-- C4_RUNTIME_G267_DIALOGUE_BRIDGE_GREEN_2026-10-07.zip
-- SHA256 87141d5a1cdee1fce555b300a295ac3ffc77d53df5f884ed9a61b4fe7f87c77a
+- C4_RUNTIME_G268_SURFACE_VERBALIZER_GREEN_2026-10-07.zip
+- SHA256 db02d7f9c4da15cfbcc38ef4a3110e696e611eaaef90e3612effa84761cf60bb
 
 Combined recovery package:
-- C4_G267_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
-- SHA256 c574850e1fc1a03233cc0ce9f70f782956f1df99ea59f27bb6c3696c6b4f8d50
+- C4_G268_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
+- SHA256 ad93604fb662da091e696a31e7f66cf7794ea51a6fd71efaa32892cea69dc1aa
 
 Persistent recovery: personal Library /C4_Canonical/ first.
 
 ## Critical distinction
-G267 is a RUNTIME generation, not a new weight generation.
+G268 is a RUNTIME generation, not a new weight generation.
 Do not call the weights G267.
 Do not retrain G266 to memorize app fallback examples.
 
@@ -60,3 +60,11 @@ First test G267 in the Android app with G266 weights.
 Collect real dialogue counterexamples.
 Do not patch isolated phrases unless they expose a reusable discourse class.
 Continue Russian-first policy.
+
+
+## G268 additional fixes
+- `Привет` is a GREETING, not unknown language.
+- `Я не понимаю тебя` is interpreted from USER perspective; no SELF leakage.
+- opaque internal labels (g223/node/internal IDs) are never verbalized as teacher questions.
+- human-readable knowledge gaps can still initiate normally.
+- 14/14 dialogue adversarial tests PASS; full suite 268 PASS / 9 unchanged missing artifacts.
