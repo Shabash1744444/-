@@ -102,3 +102,35 @@ counterexample -> minimal repair -> re-attack -> regression -> cold reload -> ph
 
 RED never canonical.
 Do not modify runtime merely to force a sensory lesson through.
+
+## 10. Audiovisual association semantics
+From G253 onward, preserve multiple semantic layers:
+SENSOR / DIRECT / NARRATIVE / SYMBOLIC / ASSOCIATIVE / AFFECTIVE / PHILOSOPHICAL / EPISTEMIC.
+
+NARRATIVE is one layer and must not be forced onto montage/poetry when association structure is richer.
+ASSOCIATION != CAUSATION.
+SYMBOL != SINGLE FIXED MEANING.
+VISUAL MOTIF != OBJECTIVE AUTHOR INTENT.
+MUSIC-LYRIC CONGRUENCE is interpretive unless separately evidenced.
+AFFECTIVE READING != measured emotion of author/listener.
+
+An interpretation should retain support links back to source cues.
+Several interpretations may coexist.
+Rank by support/provenance instead of forcing one reading.
+
+## 11. Screen recording / nested media
+SCREEN CAPTURE FILE != DEPICTED MEDIA WORLD.
+PLAYER UI != ARTWORK CONTENT.
+CAPTURE TIME != DEPICTED EVENT TIME.
+PLAYBACK ORDER != STORY CHRONOLOGY necessarily.
+Seek/replay/loop can repeat frames without a repeated depicted event.
+
+Preserve nested context boundaries where possible:
+device UI -> player/container -> depicted artwork/world.
+
+## 12. Unknown lyrics
+Audio with vocals does not produce a verified transcript by itself.
+ASR/phonetic guesses remain external hypotheses.
+LYRICS UNKNOWN -> do not invent transcript.
+Future verified transcript may be linked retrospectively to preserved AV observations.
+RETROSPECTIVE LINKING != RETROACTIVE OBSERVATION.
