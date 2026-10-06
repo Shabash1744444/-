@@ -1,63 +1,48 @@
-# NEXT CHAT HANDOFF — C4 G257
+# NEXT CHAT HANDOFF — C4 G258
 
-Read CURRENT_STATE.md plus sensory/abstraction/self-world methodologies first.
+Read CURRENT_STATE.md and all methodology files, especially LANGUAGE_ISOLATION_METHODOLOGY.md.
 
 ## Exact canonical baseline
-- child_g257_omnicaption_teacher_green.c4m
-- 1458745 bytes
-- SHA256 762e0991d4d92a898c12220a85e207bb2bf92513eaeddb52ac3bc8fd3f2ae213
-- generation G257
+- child_g258_russian_language_firewall_green.c4m
+- 1485478 bytes
+- SHA256 97d91d65b98171f16d398e9939b69a20de1b183546dbd429115f5a85cbb302cd
+- generation G258
 
 Verify exact bytes/SHA before training.
 Persistent recovery: /C4_Canonical/ first.
 
-## G257 source
-OmniCaption.json:
-- 1226 video annotation entries
-- source SHA256 a26b854dce0cdb32f5a60f9eeec5058f1de5bdacd014bc54997fb296bd084bfb
-
-This JSON does NOT contain the referenced ./videos/*.mp4 files.
-Treat it as an external annotation/teacher corpus.
-
-Never claim:
-- C4 saw 1226 raw videos
-- C4 heard 1226 raw audio tracks
-- caption text is raw sensory evidence
-- synergistic annotations are autonomous C4 discoveries
+## Language policy
+Russian is the active natural-language curriculum.
 
 Preserve:
-CAPTION != RAW VIDEO
-VISUAL EVENT TEXT != PIXELS
-AUDIO EVENT TEXT != WAVEFORM
-SHARED ANNOTATOR != INDEPENDENT EVIDENCE
+LANGUAGE FORM != SEMANTIC CONCEPT
+foreign source text != Russian lexical/syntactic training
+translation != copying
+transliteration != translation
+accidental mixture != code-switching
+source first-person != C4 SELF
 
-## What G257 learned
-General cross-modal relation ontology and transfer rules from diverse examples:
-instruction/demonstration;
-action/sound;
-speaker attribution;
-voiceover;
-background vs diegetic music;
-screen/editing layers;
-message-relay distortion;
-sports commentary/result distinction;
-advertising/persuasion;
-travel montage;
-social reaction;
-performance;
-audiovisual common-cause restraint.
+OmniCaption is overwhelmingly English and remains teacher-only:
+- abstract multimodal relations may transfer
+- English word/syntax patterns must not be used as Russian grammar examples
 
-172/172 admitted.
-Cold 21/21.
-Runtime changes 0.
-Regression 254/263 with only known missing historical artifact failures.
+Future bilingual learning must be an explicit separate phase after Russian grounding is stable.
 
-## Next
-Highest-value next step is RAW sensory corpus:
-1. image bytes + labels in separate channel
-2. waveform audio + labels in separate channel
-3. hide filename/labels during held-out exams
-4. test whether G257 semantic relation types can be recovered from raw/low-level features
-5. do not let a ready-made captioner become hidden vision
+## MERA Multi
+Do NOT train on MERA Multi benchmark sets.
+Use them only as held-out Russian multimodal evaluation under their published terms.
 
-Synthetic speech and Dostoevsky remain active parallel curricula.
+## G258
+130/130 admitted, cold 20/20, runtime changes 0.
+Regression 254/263 with only the same missing historical artifacts.
+
+## Recommended next data
+Prefer Russian raw sensory corpora:
+- RuLibriSpeech
+- Common Voice RU
+- FLEURS ru_ru
+- Golos only after license constraints are explicitly accepted
+
+For vision, either find a genuinely trainable Russian image-text dataset with clear license or generate a controlled raw-image nursery and attach Russian labels ourselves.
+
+Continue Dostoevsky, speech nursery and raw sensory work in parallel.
