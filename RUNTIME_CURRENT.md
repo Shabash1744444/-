@@ -1,34 +1,33 @@
-# RUNTIME CURRENT — G296 TEMPORAL ORDER GREEN
+# RUNTIME CURRENT — G298 RETRACTION INVALIDATION GREEN
 
-Canonical runtime: G296.
+Canonical runtime: G298.
 Canonical weights: G297.
 
 Runtime:
-C4_RUNTIME_G296_TEMPORAL_ORDER_GREEN_2026-10-07.zip
-300,749 bytes
-SHA256 c12f86c80a61fe133cea1d62219d010886c523a434832fee27107fadbc5035e3
+C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
+302,268 bytes
+SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
 
 Weights SHA256:
 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
 
 Combined SHA256:
-9daf8aac6f1256543c925751da34c12f39089b6095d8d9914b693cc048bb8ab4
+55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
 
 Lineage:
 G293 SQLite store
 -> G294 inverse/symmetry algebra
--> G295 functional-slot source conflict visibility
--> G296 strict temporal order algebra
+-> G295 functional-slot conflict visibility
+-> G296 temporal order
+-> G298 retraction invalidation / functional current-source stance
 
-G296 safe temporal semantics:
-- BEFORE <-> AFTER
-- positive temporal paths compose transitively
-- reverse proven order refutes read-only
-- cycle -> CONFLICT
-- direct NEG vs positive path -> CONFLICT
-- derived order never persists
+G298 rules:
+EVIDENCE HISTORY != CURRENT SOURCE STANCE.
+RETRACTION != RESURRECTION OF OLD STANCE.
+DERIVED STATE MUST INVALIDATE WHEN SUPPORT DISAPPEARS.
+NEG OTHER VALUE != RETRACT CURRENT FUNCTIONAL VALUE.
 
-Hard boundaries:
+G296 temporal boundaries remain:
 ORDER != CAUSE.
 SHARED PREDECESSOR != ORDER BETWEEN SIBLINGS.
 TEMPORAL DERIVATION != NEW EVIDENCE.
