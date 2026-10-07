@@ -1,39 +1,31 @@
-# NEXT CHAT HANDOFF — C4 G302 WEIGHTS + G303 RUNTIME
+# NEXT CHAT HANDOFF — C4 G302 WEIGHTS + G304 RUNTIME
 
 Weights:
 child_g302_role_means_successor_scope_green.c4m
 SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime:
-C4_RUNTIME_G303_EVENT_TENSE_BOUNDARIES_GREEN_2026-10-07.zip
-SHA256 0aae1b33f1347b187ef06bb658cc21b3de8698053630455b4939a064eef870d8
+C4_RUNTIME_G304_EVENT_CONJUNCTION_SCOPE_GREEN_2026-10-07.zip
+SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae
 
 Combined:
-C4_G303_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
-SHA256 1b62fad41f045ecb6b39fdf54a9db283101e78aaf48171ee4b72a811005dbcc6
+C4_G304_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+SHA256 02bd772d97edf43ff7c0bdfbc385aa1e746fa48a962e87f3ac3d029331bfd77b
 
 ## G303
-Counterexamples repaired:
-1. negative past event was stored but its truth query was rejected;
-2. "Антон будет любить чай" created fake subject "Антон будет" and current LIKES.
+Future tense boundary + negative past truth query.
+No fake future-subject entity.
+FUTURE != VERIFIED OUTCOME.
 
-Now:
-PAST EPISODE != PRESENT STATE != FUTURE CLAIM.
-FUTURE CLAIM != VERIFIED OUTCOME.
+## G304
+Positive conjunction on SET-valued event predicate decomposes into separately queryable proposition-events.
+Negative conjunction stays unsplit without explicit scope evidence.
+Known multiword entity has priority over split.
 
-Focused event/tense tests 17/17.
-Exact G302 on G303:
-44/44 direct;
-24/24 restraint UNKNOWN;
-natural relation queries read-only;
-memory == SQLite.
-
-Full workspace regression:
-385/401 memory and 385/401 SQLite.
-All 16 failures are missing-file environment failures only:
-9 long-standing historical artifacts + 7 G281 tests missing old G280 artifact.
-New semantic assertion failures: 0.
+Focused 22/22.
+Full workspace memory/SQLite 390/406; 16 missing-file failures only.
+Exact G302 44/44 direct + 24/24 restraint; memory == SQLite.
 
 ## Next
-G304: event-frame/language coverage without fabricating personal memories.
-Then scope/cardinality and dirty-surface curriculum.
+Learned event/tense grammar rather than more hardcoded surface lists.
+Then continue cardinality/scope and dirty-language curriculum.
