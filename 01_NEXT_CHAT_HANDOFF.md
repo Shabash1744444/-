@@ -1,73 +1,51 @@
-# NEXT CHAT HANDOFF — C4 G274 WEIGHTS + G275 RUNTIME
-
-Read CURRENT_STATE.md and checkpoints/CP_C4_G275_RUNTIME_LIVE_TEACHING_MERGE_GREEN.md first.
+# NEXT CHAT HANDOFF — C4 G277 WEIGHTS + G276 RUNTIME
 
 ## Exact canonical weights
-- child_g274_dense_semantic_core_green.c4m
-- 1805052 bytes
-- SHA256 6e566b67e54504fbdb9f2924bdba0ed330dce5ce525acb97234d5dd33676c20e
+- child_g277_guided_measurement_core_green.c4m
+- 1814566 bytes
+- SHA256 84ab317de73d65b459447a31471715e69726d2df37122ea0352f6da38ca1f2c4
 
-## Exact canonical runtime
-- C4_RUNTIME_G275_LIVE_TEACHING_MERGE_GREEN_2026-10-07.zip
-- 324818 bytes
-- SHA256 1c7243de518c12cff4a27572cf2e423bd77c5bd6cf70925748e86ce698ef9a68
+## Exact runtime
+- C4_RUNTIME_G276_ACTIVE_GAPS_GREEN_2026-10-07.zip
+- 281120 bytes
+- SHA256 6a8e174e0d3e79bd90c04d66e55964b9c22feb16f5eb9d83f0724278506d2a17
 
-## Combined recovery
-- C4_G275_RUNTIME_PLUS_G274_WEIGHTS_2026-10-07.zip
-- 2113082 bytes
-- SHA256 10943a16639f4fa6b17eef0e107c1ccf16b864e1a616c0294153e515efde4c5d
+## Combined
+- C4_G276_RUNTIME_PLUS_G277_WEIGHTS_2026-10-07.zip
+- 2076668 bytes
+- SHA256 ceb2149903ea6ef47cefbeb1caeaabe963ebde84458cd00c7fc72881093ccf35
 
-Persistent recovery: personal Library /C4_Canonical/ first.
+Persistent recovery: /C4_Canonical/.
 
-## G275
-G275 is a three-way runtime merge, not a weight generation.
+## G276 ActiveGaps
+Ranks expected downstream unlock per approximate teacher cost.
+TEACHER definitions join ranked agenda.
+HUMAN one-question behavior remains unchanged.
+Controlled Teacher Cost benchmark: 4 -> 2 answers to 75% competency.
 
-Adds:
-- ordinary-dialogue teaching intent;
-- structured definition decomposition;
-- open teaching state that survives restart;
-- Russian speech inflection/agreement;
-- first/second-person dialogue;
-- autosave on state change.
+Regression: 321/330; same 9 missing historical artifacts only.
 
-Preserves:
-- G271 verb/POS morphology guard;
-- discourse history and perspective;
-- human-safe one-question initiative;
-- public-label firewall;
-- question-read-only behavior outside explicit teaching;
-- G274 weights unchanged.
+## G277 guided curriculum
+26 measurement instruments.
+53 EXTERNAL_CORPUS direct semantic events.
+C4 ignored five low-value distractor gaps and requested only three hierarchy relations.
+0/78 -> 78/78 held-out classification.
+104 novel derived relations / 56 direct lessons = 1.857.
+Cold reload 78/78.
 
-The external disposable acceptance-test token was not accepted as vocabulary and is absent from canonical weights/runtime package.
-
-## Validation
-- 317/326 full merged suite
-- 9 known missing historical artifacts only
-- 0 new assertion failures
+Cumulative:
 - nouns 260/260
 - verbs 756/756
 - adjectives 780/780
-- semantic derivations 472/472
-- canonical G274 SHA unchanged
+- G274 semantics 472/472
 
-## Next objective
-ActiveGaps / Teacher Cost.
+## Critical boundary
+G277 used structured semantic extraction from the educational material.
+Do not claim arbitrary raw article reading yet.
 
-Build a benchmark where C4:
-1. reads a small unseen text;
-2. identifies unresolved concepts/relations;
-3. ranks them by downstream utility;
-4. asks one highest-value question at a time;
-5. learns the answer structurally;
-6. re-evaluates remaining gaps;
-7. is tested on held-out combinations.
+## Next
+Build the next guided milestone:
+ordinary short Russian passage -> detect candidate structure and unknown terms -> create/rank gaps -> one teacher answer -> re-evaluate -> held-out exam.
 
-Track:
-- teacher questions;
-- teacher relations/words;
-- autonomous admissions;
-- correctly UNKNOWN;
-- false inference;
-- held-out competency.
-
-Do not bulk-ingest books/dictionaries before this loop is GREEN.
+Prioritize unknown terms inside action/predicate clauses.
+Measure teacher words and relations, not only question count.
