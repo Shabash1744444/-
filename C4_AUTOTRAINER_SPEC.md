@@ -220,3 +220,26 @@ Agent competence should be benchmarked in sandbox environments with held-out tas
 10. only later autonomous material selection.
 
 Do not build a giant GUI before the training loop is deterministic and resumable.
+
+
+## Run-local scheduler requirement
+
+AutoTrainer must distinguish:
+- organism-global gap backlog;
+- current-run gap queue.
+
+Every ingested chunk attaches run/source cause IDs.
+By default, answer-gaps operates only on gaps attributable to the active run or explicitly imported prerequisites.
+
+Loop:
+TOP scoped gap -> ONE question -> ONE answer -> refresh -> rerank.
+
+Never drain several unanswered questions in one scheduler call.
+
+Future commands:
+- c4train gaps --scope current-run
+- c4train gaps --scope global
+- c4train import-gap <gap_id>
+- c4train answer-next
+
+This became a concrete requirement during standardized G284: unrelated historical gaps could compete with the current curriculum unless orchestration scoped the queue.
