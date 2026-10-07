@@ -3,19 +3,20 @@
 C4 is NOT Singularity OS.
 
 ## Canonical — 2026-10-07
-Weights: G302
-Runtime: G305 SENSORY BRIDGE GREEN
+Weights: G306 SYNTHETIC SPATIAL PHYSICS GREEN
+Runtime: G306 SYNTHETIC 3D PHYSICS GREEN
 
 Weights SHA256:
-250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
+78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded
 
 Runtime SHA256:
-2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00
+c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb
 
-G305 adds durable multimodal sensory grounding to the living runtime without allowing vector similarity to become truth.
+G305 gave C4 durable multimodal sensory grounding.
+G306 gives it its first persistent verified synthetic 3D motor experience.
 
-SCREEN/AUDIO/SYMBOL can converge on one explicitly named graph entity and survive restart.
-Raw sensor data creates no graph fact by itself.
+88 simulation receipts teach 10 effects across varying position/yaw.
+10/10 novel-pose heldout.
+No graph-world truth is created by sandbox training.
 
-Next: synthetic embodied 3D physics.
 Quality > bytes > generation count.
