@@ -1,0 +1,17 @@
+# CP C4 G306 SYNTHETIC SPATIAL PHYSICS GREEN
+
+88 verified simulation interactions.
+10 learned SELF-relative effects.
+10/10 novel-pose heldout.
+Graph unchanged.
+Cold memory + SQLite GREEN.
+Exact G302 cognition retained.
+
+SIMULATION != OBSERVATION.
+ACTION_REQUEST != VERIFIED_OUTCOME.
+STALE ACTION REQUEST != SUCCESS.
+WORLD AXIS != EGOCENTRIC DIRECTION.
+MOTOR PRIOR != EXTERNAL-WORLD FACT.
+
+Weights SHA256 78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded.
+Runtime SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb.
