@@ -1,31 +1,28 @@
 # ARTIFACT MANIFEST
 
 Current weights:
-- child_g301_relation_language_bridge_green.c4m
-- 1,972,611 bytes
-- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
+- child_g302_role_means_successor_scope_green.c4m
+- 1,981,454 bytes
+- SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Weights release:
-- C4_G301_RELATION_LANGUAGE_BRIDGE_GREEN_2026-10-07.zip
-- 1,954,693 bytes
-- SHA256 c2e85467f67a53f2c39f3ca0f1d15b4c0bc48d445fc29a4c7becb9a0015f947c
+- C4_G302_ROLE_MEANS_SUCCESSOR_SCOPE_GREEN_2026-10-07.zip
+- SHA256 c07fd9925acc68ae1ab3345ac5fa030c22dd6bd6984cca85901b06ea4eebc221
 
 Current runtime:
 - C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
-- 293,368 bytes
 - SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
-- 2,234,874 bytes
-- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
+- C4_G300_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+- SHA256 4d0fe345dff230413ee849971eba3765df317ccc23bc1f56de4826f24c0e9ce0
 
 Support:
-- checkpoints/CP_C4_G299_LEXICAL_RELATION_RESTRAINT_GREEN.md
-- checkpoints/CP_C4_G300_RUNTIME_OPEN_RELATION_QUERY_GREEN.md
-- checkpoints/CP_C4_G301_RELATION_LANGUAGE_BRIDGE_GREEN.md
-- G299_*
-- G301_*
+- CP_C4_G302_ROLE_MEANS_SUCCESSOR_SCOPE_GREEN.md
+- G302_metrics.json
+- G302_source_manifest.json
+- G302_frozen_heldout.json
+- previous G299/G301 artifacts
 - CARDINALITY_SCOPE_NOTE.md
 
 Binary recovery: /C4_Canonical/.
