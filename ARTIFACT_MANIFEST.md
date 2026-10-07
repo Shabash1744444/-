@@ -1,14 +1,14 @@
 # ARTIFACT MANIFEST
 
-Current weights: G290
-- child_g290_mixed_explanatory_prose_green.c4m
-- 1,933,483 bytes
-- SHA256 57ac0bac91d16fd320df838c41e527038bf70e2ee1c8a18e3403c997e3670a8a
+Current weights: G292
+- child_g292_hierarchy_accelerated_concepts_green.c4m
+- 1,952,929 bytes
+- SHA256 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
 
 Weights release:
-- C4_G290_MIXED_EXPLANATORY_PROSE_GREEN_2026-10-07.zip
-- 1,918,226 bytes
-- SHA256 5460a0d5a8bd4d87555eef619a61e5c7179a6ae5ac79dc1512cdb10a44b3d7fd
+- C4_G292_HIERARCHY_ACCELERATED_CONCEPTS_GREEN_2026-10-07.zip
+- 1,946,902 bytes
+- SHA256 a902c9d0eaaad681d6a78afafe3f1e95595a331ed75c6f3e60fe58f270217804
 
 Runtime:
 - C4_RUNTIME_G289_MIXED_CHUNK_DEPENDENCY_GREEN_2026-10-07.zip
@@ -16,17 +16,21 @@ Runtime:
 - SHA256 8aedcf70f480ba821256d360d0c6139af915edcb477d4bdc969000b86c42a846
 
 Combined:
-- C4_G289_RUNTIME_PLUS_G290_WEIGHTS_2026-10-07.zip
-- 2,170,612 bytes
-- SHA256 73238df880d2334de65528287d8f7817c29a4aa610df056d6a4e4617f8973233
+- C4_G289_RUNTIME_PLUS_G292_WEIGHTS_2026-10-07.zip
+- 2,190,287 bytes
+- SHA256 6e6dc6b3ef89bc6c074285fcee23b63994b6d60e1c60a72cdb1b6a96ace8d89e
+
+Prior physical checkpoint:
+- G291 model SHA256 367cc98917c6ca0349c9f0bd15610de57a2b44edd0654549ae403c37539db3f3
+- C4_G291_DEEP_EXPLANATORY_HIERARCHY_GREEN_2026-10-07.zip
+- SHA256 cee0abada27397d5654920ba89f63277b803c4955b18681364cdb04383964aea
 
 Support:
-- G290_source_manifest.json
-- G290_frozen_heldout.json
-- G290_metrics.json
-- g290_cumulative_validation.json
-- CP_C4_G289_RUNTIME_MIXED_CHUNK_DEPENDENCY_GREEN.md
-- CP_C4_G290_MIXED_EXPLANATORY_PROSE_GREEN.md
-- AGENT_TASK_LIFECYCLE_NOTE.md
+- G292_source_manifest.json
+- G292_frozen_heldout.json
+- G292_metrics.json
+- g292_cumulative_validation.json
+- checkpoints/CP_C4_G291_DEEP_EXPLANATORY_HIERARCHY_GREEN.md
+- checkpoints/CP_C4_G292_HIERARCHY_ACCELERATED_CONCEPTS_GREEN.md
 
 Binary recovery: /C4_Canonical/.
