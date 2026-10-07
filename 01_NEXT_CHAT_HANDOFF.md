@@ -1,84 +1,65 @@
-# NEXT CHAT HANDOFF — C4 G270 WEIGHTS + G269 RUNTIME
+# NEXT CHAT HANDOFF — C4 G274 WEIGHTS + G271 RUNTIME
 
-Read CURRENT_STATE.md and checkpoints/CP_C4_G270_FAST_LEMMA_TRANSFER_GREEN.md first.
+Read CURRENT_STATE.md and checkpoints/CP_C4_G274_DENSE_SEMANTIC_CORE_GREEN.md first.
 
 ## Exact canonical weights
-- child_g270_fast_lemma_transfer_green.c4m
-- 1756887 bytes
-- SHA256 b081428bed0080f9982491247d98640009de4662d7f654c571946acd5e36fa1b
+- child_g274_dense_semantic_core_green.c4m
+- 1805052 bytes
+- SHA256 6e566b67e54504fbdb9f2924bdba0ed330dce5ce525acb97234d5dd33676c20e
 
 ## Exact canonical runtime
-- C4_RUNTIME_G269_KERNEL_FLOOR_DISCOURSE_GREEN_2026-10-07.zip
-- SHA256 5541f67d56ec2cf0cd373cbff58801f0fa6d4445e333a229d34215813290475a
+- C4_RUNTIME_G271_MORPH_VERB_GUARD_GREEN_2026-10-07.zip
+- 228891 bytes
+- SHA256 5d7720e172017f0b32f2c0b92fcee3eb88e6a8be40580c454778eec6f6a76f31
 
 ## Combined recovery
-- C4_G269_RUNTIME_PLUS_G270_WEIGHTS_2026-10-07.zip
-- SHA256 2b62bcd06bd588324fd7aa3ebc5b1ddf7f7b6744089cdf961ae135ef8e457dde
+- C4_G271_RUNTIME_PLUS_G274_WEIGHTS_2026-10-07.zip
+- 2036899 bytes
+- SHA256 e23bcff6cb54746d5aeda27b6d0477452eff81f6c291046706c00bdc97bd06d3
 
 Persistent recovery: personal Library /C4_Canonical/ first.
 
-## Critical distinction
-G269 is the runtime generation.
-G270 is a weights/persistent-state generation.
-Runtime physics did not change in G270.
+## What changed
+G271 runtime:
+- blocks verb suffix transforms from guessing noun lexical POS;
+- exact aliases still win;
+- full suite 289/298, same 9 missing historical artifact failures.
 
-## G270 Fast Curriculum result
-60 new noun lemmas were introduced with only noun type + grammatical gender.
-Their paradigms were withheld.
+G272 weights:
+- 84 target verbs, zero target paradigms;
+- 756/756 held-out;
+- transfer/direct 5.906.
 
-Direct:
-- 120 target typing facts
-- 38 anchor WORD_FORM facts
-- 0 target WORD_FORM facts
-- 158 total admitted facts
+G273 weights:
+- 78 target adjectives, zero target paradigms;
+- 780/780 held-out;
+- transfer/direct 7.879;
+- homograph quarantine introduced.
 
-Held-out:
-- before new anchors: 140/260 correct
-- after anchors: 260/260 correct
-- 0 wrong
-- 0 UNKNOWN
-- 19/19 decoy restraint
-- cold reload 260/260
+G274 weights:
+- 92 semantic members;
+- 114 direct facts;
+- 472 novel derived truths;
+- transfer/direct 4.140;
+- 10 unrelated decoys, zero false transitions.
 
-Efficiency:
-- transfer/direct = 1.646
-- extra transfer unlocked by anchors = 120
-- marginal transfer/anchor = 3.158
-
-Regression:
-- 288/297 PASS
-- same 9 missing historical artifact FileNotFoundErrors
-- 0 new semantic/runtime failures
+## Cumulative final re-attack
+- G270 nouns 260/260
+- G272 verbs 756/756
+- G273 adjectives 780/780
+- G274 semantics 472/472
+- verb safety 10/10
 
 ## Current learning objective
-Optimize teacher cost, not bytes.
+Move from BOOTSTRAP toward GUIDED learning by reducing Teacher Cost.
 
-A new curriculum block should report:
-- direct lessons
-- held-out transferable ability
-- correctly UNKNOWN
-- false inference
-- teacher interventions
-- bytes/RAM/latency
-- cold reload
-- regression
+Next:
+1. build active-gap utility scoring;
+2. measure which unresolved relation unlocks the most downstream queries;
+3. small unseen-text guided-reading benchmark;
+4. count teacher questions / teacher relations required for competency;
+5. only then scale Dense Core further.
 
-## Next
-Continue Fast Curriculum from exact G270:
-1. regular verb families and held-out conjugation;
-2. adjective agreement families;
-3. dense semantic cells for high-utility core lemmas;
-4. active-gap prioritization;
-5. repeat fixed developmental benchmark and track teacher burden.
-
-Do not dump books or dictionaries into weights without transfer tests.
+Do not bulk-ingest books or dictionaries.
+Do not resolve homographs by destructive merge.
 Do not train around runtime defects.
-Do not hardcode corpus facts in runtime.
-
-Mandatory reading:
-- DEVELOPMENTAL_TRAINING_METHODOLOGY.md
-- LEXICAL_GRAPH_SCALE_TARGETS.md
-- RUSSIAN_CURRICULUM_BOOK_ROADMAP.md
-- WEEK_ROADMAP_RUNTIME_WEIGHTS.md
-- RUNTIME_ARCHITECTURE_PRINCIPLES.md
-- MEMORY_CONSOLIDATION_COMPRESSION.md
