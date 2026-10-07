@@ -816,3 +816,24 @@ G291 -> G292 is the first explicit hierarchy-depth example:
 - teacher questions 0.
 
 This is evidence of curriculum-local cost reduction, not by itself a claim of general intelligence or universal emergent learning.
+
+
+---
+
+## 26. Disk-backed canonical runtime proof
+
+G293 establishes the first canonical disk-backed graph runtime proof before large-model scaling.
+
+Requirements demonstrated:
+- same cognition in memory and SQLite modes;
+- full canonical regression parity;
+- lazy/indexed graph access;
+- per-turn durable transaction;
+- checkpoint import/export without semantic state change;
+- USER_SAID carry-forward when newer weights replace the base checkpoint.
+
+Do not treat .c4db size as model intelligence or learned-state size.
+.c4m remains the canonical exchange/checkpoint artifact; .c4db is an execution representation.
+
+Known engineering debt:
+SQLite currently expands compressed checkpoints substantially on disk. Numeric IDs, shared string dictionaries and later architectural compression remain future work.
