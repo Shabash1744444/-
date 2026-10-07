@@ -790,3 +790,29 @@ prosody removed -> uncertainty should increase when interpretation depended on i
 
 Detailed future curriculum:
 PRAGMATICS_PROSODY_ATOMIC_CURRICULUM_NOTE.md
+
+
+---
+
+## 25. Developmental cost reduction must be measured directly
+
+A core C4 claim is not merely that stored knowledge grows, but that reusable structure makes later learning cheaper.
+
+Preferred experiment:
+1. generation A creates reusable hierarchy/schema/rules;
+2. freeze a new-concept evaluation pack;
+3. generation B adds only minimal concept classifications/definitions;
+4. count how many strict held-out relations become available without direct target storage;
+5. compare teacher/direct lesson cost to the previous stage;
+6. retain false-inference controls and cold reload.
+
+G291 -> G292 is the first explicit hierarchy-depth example:
+- G291 created reusable leaf/mid/root structure;
+- G292 added 16 new concept->leaf IS_A lessons and no new general semantic rules;
+- those 16 lessons yielded 96/96 strict inherited relations;
+- leverage = 6.0;
+- direct target semantic facts = 0;
+- negative controls 36/36 UNKNOWN;
+- teacher questions 0.
+
+This is evidence of curriculum-local cost reduction, not by itself a claim of general intelligence or universal emergent learning.
