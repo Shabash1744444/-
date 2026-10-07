@@ -2,7 +2,7 @@
 
 Date: 2026-10-07
 Canonical weights: G292
-Canonical runtime: G289
+Canonical runtime: G293
 
 Weights:
 - child_g292_hierarchy_accelerated_concepts_green.c4m
@@ -10,42 +10,26 @@ Weights:
 - SHA256 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
 
 Runtime:
-- C4_RUNTIME_G289_MIXED_CHUNK_DEPENDENCY_GREEN_2026-10-07.zip
-- 268,794 bytes
-- SHA256 8aedcf70f480ba821256d360d0c6139af915edcb477d4bdc969000b86c42a846
+- C4_RUNTIME_G293_SQLITE_STORE_GREEN_2026-10-07.zip
+- SHA256 a2ccaa0ecd862657328338f1b5e87726d21753748152a1a8989a368f1ac251c5
 
 Combined:
-- C4_G289_RUNTIME_PLUS_G292_WEIGHTS_2026-10-07.zip
-- 2,190,287 bytes
-- SHA256 6e6dc6b3ef89bc6c074285fcee23b63994b6d60e1c60a72cdb1b6a96ace8d89e
-
-## G291
-Long explanatory hierarchy:
-96/96 semantic inheritance;
-24/24 causal held-out;
-16/16 negatives;
-+16,023 bytes vs G290.
+- C4_G293_RUNTIME_PLUS_G292_WEIGHTS_2026-10-07.zip
+- SHA256 c526d21fb0c1bf7aaa5390f84bdcc5fecc35fc11337d2f4d67ec4fd4a3295541
 
 ## G292
-16 new concepts learned by 16 direct IS_A classifications.
-Prior G291/G290 hierarchy supplies six controlled inherited relations per concept.
-96/96 strict inherited relations, cold 96/96.
+16 concept lessons -> 96/96 inherited relations.
+Leverage 6.0.
 36/36 restraint UNKNOWN.
-0 direct target semantic facts.
-0 target WORD_FORM facts.
-0 teacher questions.
-Leverage = 6.0.
-Growth +3,423 bytes.
+No direct target semantic facts.
+No target WORD_FORM facts.
+Zero teacher questions.
 
-## Cumulative
-All protected G270-G291 capabilities remain GREEN.
-Full runtime suite 343/352; only nine historical missing-artifact failures.
+## G293 runtime
+SQLite disk-backed graph/query layer cherry-picked from Claude CL-G270 onto canonical G289.
+Memory and SQLite full suites both 352/361; only nine historical missing artifacts.
+Exact G292 validation: 96/96 semantic, 36/36 restraint.
+USER_SAID carry-forward verified.
 
 ## Current objective
-Measure whether learning cost continues to fall on new, less curated explanatory domains while keeping false inference bounded.
-
-
-## G1000 developmental target
-
-See C4_G1000_HUMAN_LIKE_PERCEPTION_TARGET.md.
-Target: broad trap-resistant perception, relation coverage, dirty language, discourse/deixis, pragmatics/prosody, source/conflict uncertainty, multimodal grounding and adversarial integration. Generation count is not itself a success criterion.
+Resume learning at G294 with relation algebra/trap coverage toward C4_G1000_HUMAN_LIKE_PERCEPTION_TARGET.md.
