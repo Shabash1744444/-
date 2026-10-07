@@ -1,30 +1,32 @@
 # ARTIFACT MANIFEST
 
-Current weights: G288
-- child_g288_branching_causal_motifs_green.c4m
-- 1,923,993 bytes
-- SHA256 4ab4d0172d0447c92796a6248e33aca00abd0dc1eef92101f1020ccccef9393c
+Current weights: G290
+- child_g290_mixed_explanatory_prose_green.c4m
+- 1,933,483 bytes
+- SHA256 57ac0bac91d16fd320df838c41e527038bf70e2ee1c8a18e3403c997e3670a8a
 
-Release:
-- C4_G288_BRANCHING_CAUSAL_MOTIFS_GREEN_2026-10-07.zip
-- 1,911,024 bytes
-- SHA256 2d6098328e0aa0439ab166ff1a0b136d6610e1aadaff066db3c36a2a4e1aaed9
+Weights release:
+- C4_G290_MIXED_EXPLANATORY_PROSE_GREEN_2026-10-07.zip
+- 1,918,226 bytes
+- SHA256 5460a0d5a8bd4d87555eef619a61e5c7179a6ae5ac79dc1512cdb10a44b3d7fd
 
 Runtime:
-- C4_RUNTIME_G286_CAUSAL_GUIDED_READING_GREEN_2026-10-07.zip
-- 894,581 bytes
-- SHA256 b51670f57fa3a3d953ac3d096203b4015fdcb74eb18ad43c872018b8e1daa896
+- C4_RUNTIME_G289_MIXED_CHUNK_DEPENDENCY_GREEN_2026-10-07.zip
+- 268,794 bytes
+- SHA256 8aedcf70f480ba821256d360d0c6139af915edcb477d4bdc969000b86c42a846
 
 Combined:
-- C4_G286_RUNTIME_PLUS_G288_WEIGHTS_2026-10-07.zip
-- 2,790,134 bytes
-- SHA256 acae250d1779a288abb8084b44c491ca12eff7821dd17721f412d7790b24603a
+- C4_G289_RUNTIME_PLUS_G290_WEIGHTS_2026-10-07.zip
+- 2,170,612 bytes
+- SHA256 73238df880d2334de65528287d8f7817c29a4aa610df056d6a4e4617f8973233
 
 Support:
-- G288_source_manifest.json
-- G288_frozen_heldout.json
-- G288_metrics.json
-- g288_cumulative_validation.json
-- CP_C4_G288_BRANCHING_CAUSAL_MOTIFS_GREEN.md
+- G290_source_manifest.json
+- G290_frozen_heldout.json
+- G290_metrics.json
+- g290_cumulative_validation.json
+- CP_C4_G289_RUNTIME_MIXED_CHUNK_DEPENDENCY_GREEN.md
+- CP_C4_G290_MIXED_EXPLANATORY_PROSE_GREEN.md
+- AGENT_TASK_LIFECYCLE_NOTE.md
 
 Binary recovery: /C4_Canonical/.
