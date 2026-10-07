@@ -6,17 +6,17 @@ Intended handoff: Friday evening after 20:00 local time
 ## Current canonical pair
 
 Weights:
-- child_g301_relation_language_bridge_green.c4m
-- 1,972,611 bytes
-- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
+- child_g302_role_means_successor_scope_green.c4m
+- 1,981,454 bytes
+- SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime:
-- C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
-- SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
+- C4_RUNTIME_G304_EVENT_CONJUNCTION_SCOPE_GREEN_2026-10-07.zip
+- SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae
 
 Combined:
-- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
-- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
+- C4_G304_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+- SHA256 02bd772d97edf43ff7c0bdfbc385aa1e746fa48a962e87f3ac3d029331bfd77b
 
 ## Mission
 
@@ -63,7 +63,7 @@ Your branch may focus aggressively on runtime engineering and agent execution.
 - sensor/action adapters cannot bypass epistemic admission.
 
 6. Compatibility and migration
-- exact current G301 weights must load;
+- exact current G302 weights must load;
 - future weights from training chat migrate without deleting USER_SAID/user-taught local experience;
 - keep prior DB backup and explicit schema migrations.
 
@@ -105,12 +105,12 @@ DO:
 improve runtime; add tests; benchmark; implement agent lifecycle; improve persistence/tool execution; package recovery artifacts; document invariants/migrations.
 
 DO NOT:
-retrain/alter canonical G301 weights; import nonce/test vocabulary; patch benchmark answers; weaken UNKNOWN/provenance/source distinctions; assume auto-canonical promotion; replace C4 reasoning with hidden LLM cognition.
+retrain/alter canonical G302 weights; import nonce/test vocabulary; patch benchmark answers; weaken UNKNOWN/provenance/source distinctions; assume auto-canonical promotion; replace C4 reasoning with hidden LLM cognition.
 
 ## Validation before handoff
 
 At minimum:
-1. exact canonical G301 weights open;
+1. exact canonical G302 weights open;
 2. memory mode if supported;
 3. SQLite/disk mode;
 4. cumulative regression;
@@ -127,7 +127,7 @@ Known historical missing-artifact failures must be separated from new regression
 
 ## Deliverables
 
-Runtime ZIP; combined runtime+exact G297 weights smoke package; checkpoint; changelog; benchmark/regression JSON; migration notes; hashes/sizes; patch/diff; README with changed/not-changed/risks/next.
+Runtime ZIP; combined runtime+exact G302 weights smoke package; checkpoint; changelog; benchmark/regression JSON; migration notes; hashes/sizes; patch/diff; README with changed/not-changed/risks/next.
 
 If a counterexample appears, preserve it and repair minimally or leave RED.
 
@@ -140,3 +140,17 @@ Runtime should prepare for these abilities without hardcoding training answers.
 
 Goal:
 make C4 an extremely capable persistent local organism/agent runtime while keeping cognition auditable and the organism independently trainable.
+
+
+## Main-line update through G304
+
+G303/G304 add event-time/scope boundaries:
+- PAST EPISODE != CURRENT STATE;
+- FUTURE CLAIM != CURRENT STATE;
+- FUTURE CLAIM != VERIFIED OUTCOME;
+- Russian future auxiliary must not become part of subject identity;
+- positive SET conjunction may distribute into proposition-events;
+- NEGATED CONJUNCTION != DISTRIBUTED NEGATION;
+- known multiword phrase identity outranks surface splitting.
+
+Preserve these boundaries in any future runtime work.
