@@ -1,31 +1,29 @@
-# NEXT CHAT HANDOFF — C4 G302 WEIGHTS + G304 RUNTIME
+# NEXT CHAT HANDOFF — C4 G302 WEIGHTS + G305 RUNTIME
 
 Weights:
 child_g302_role_means_successor_scope_green.c4m
 SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime:
-C4_RUNTIME_G304_EVENT_CONJUNCTION_SCOPE_GREEN_2026-10-07.zip
-SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae
+C4_RUNTIME_G305_SENSORY_BRIDGE_GREEN_2026-10-07.zip
+SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00
 
 Combined:
-C4_G304_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
-SHA256 02bd772d97edf43ff7c0bdfbc385aa1e746fa48a962e87f3ac3d029331bfd77b
+C4_G305_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+SHA256 606111ab5dce2108468a57b0e50621f195442dfc6622d8e8cc36c4a264adeda9
 
-## G303
-Future tense boundary + negative past truth query.
-No fake future-subject entity.
-FUTURE != VERIFIED OUTCOME.
+## G305
+Existing SensoryGrounder/NurseryState is now part of living runtime persistence.
+One unknown modality cannot create identity.
+Multimodal SCREEN/AUDIO/SYMBOL co-observation can create a sensory concept.
+Raw sensory observation does not mutate graph truth.
+Explicit naming binds the sensory concept to one graph entity.
+The binding survives real .c4m and SQLite restart.
 
-## G304
-Positive conjunction on SET-valued event predicate decomposes into separately queryable proposition-events.
-Negative conjunction stays unsplit without explicit scope evidence.
-Known multiword entity has priority over split.
-
-Focused 22/22.
-Full workspace memory/SQLite 390/406; 16 missing-file failures only.
-Exact G302 44/44 direct + 24/24 restraint; memory == SQLite.
+Exact G302: 44/44 direct + 24/24 restraint; memory == SQLite.
+Full workspace: 397 passed, 16 missing-file environment failures only, in both stores.
 
 ## Next
-Learned event/tense grammar rather than more hardcoded surface lists.
-Then continue cardinality/scope and dirty-language curriculum.
+Synthetic embodied 3D nursery:
+SELF-relative left/right/up/down/front/behind, near/far, toward/away, then verified action/outcome learning.
+SIMULATION != OBSERVATION must remain hard.
