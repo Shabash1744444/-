@@ -1,35 +1,31 @@
 # ARTIFACT MANIFEST
 
-Current weights: G297
-- child_g297_relation_diversity_green.c4m
-- 1,960,675 bytes
-- SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
+Current weights:
+- child_g301_relation_language_bridge_green.c4m
+- 1,972,611 bytes
+- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
 
 Weights release:
-- C4_G297_RELATION_DIVERSITY_GREEN_2026-10-07.zip
-- 1,941,677 bytes
-- SHA256 acc04dc3132768d70a6cf2f61bc5dcae1bc4b7db42fa0fc9c1d41d57026f47d6
+- C4_G301_RELATION_LANGUAGE_BRIDGE_GREEN_2026-10-07.zip
+- 1,954,693 bytes
+- SHA256 c2e85467f67a53f2c39f3ca0f1d15b4c0bc48d445fc29a4c7becb9a0015f947c
 
-Current runtime: G298
-- C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
-- 302,268 bytes
-- SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
+Current runtime:
+- C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
+- 293,368 bytes
+- SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-- C4_G298_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
-- 2,240,335 bytes
-- SHA256 55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
+- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
+- 2,234,874 bytes
+- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
 
 Support:
-- checkpoints/CP_C4_G295_RUNTIME_FUNCTIONAL_SLOT_CONFLICT_GREEN.md
-- checkpoints/CP_C4_G296_RUNTIME_TEMPORAL_ORDER_GREEN.md
-- checkpoints/CP_C4_G297_RELATION_DIVERSITY_GREEN.md
-- checkpoints/CP_C4_G298_RUNTIME_RETRACTION_INVALIDATION_GREEN.md
-- G297_source_manifest.json
-- G297_frozen_heldout.json
-- G297_metrics.json
-- g297_cumulative_validation.json
-- g298_g297_validation.json
-- g298_g297_cumulative_validation.json
+- checkpoints/CP_C4_G299_LEXICAL_RELATION_RESTRAINT_GREEN.md
+- checkpoints/CP_C4_G300_RUNTIME_OPEN_RELATION_QUERY_GREEN.md
+- checkpoints/CP_C4_G301_RELATION_LANGUAGE_BRIDGE_GREEN.md
+- G299_*
+- G301_*
+- CARDINALITY_SCOPE_NOTE.md
 
 Binary recovery: /C4_Canonical/.
