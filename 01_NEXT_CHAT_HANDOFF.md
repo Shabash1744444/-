@@ -1,143 +1,84 @@
-# NEXT CHAT HANDOFF — C4 G266 WEIGHTS + G269 RUNTIME
+# NEXT CHAT HANDOFF — C4 G270 WEIGHTS + G269 RUNTIME
 
-Read CURRENT_STATE.md first.
+Read CURRENT_STATE.md and checkpoints/CP_C4_G270_FAST_LEMMA_TRANSFER_GREEN.md first.
 
 ## Exact canonical weights
-- child_g266_object_permanence_green.c4m
-- 1737251 bytes
-- SHA256 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
+- child_g270_fast_lemma_transfer_green.c4m
+- 1756887 bytes
+- SHA256 b081428bed0080f9982491247d98640009de4662d7f654c571946acd5e36fa1b
 
 ## Exact canonical runtime
 - C4_RUNTIME_G269_KERNEL_FLOOR_DISCOURSE_GREEN_2026-10-07.zip
 - SHA256 5541f67d56ec2cf0cd373cbff58801f0fa6d4445e333a229d34215813290475a
 
-Combined recovery package:
-- C4_G269_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
-- SHA256 f205f0230b3038a2f5bfee2b8c7d05fab5bdffa01c2b31ac7941e80800d888d1
+## Combined recovery
+- C4_G269_RUNTIME_PLUS_G270_WEIGHTS_2026-10-07.zip
+- SHA256 2b62bcd06bd588324fd7aa3ebc5b1ddf7f7b6744089cdf961ae135ef8e457dde
 
 Persistent recovery: personal Library /C4_Canonical/ first.
 
 ## Critical distinction
-G269 is a RUNTIME generation, not a weight generation.
-Weights remain G266.
-Never reconstruct G269 from prose if exact runtime artifact is available.
+G269 is the runtime generation.
+G270 is a weights/persistent-state generation.
+Runtime physics did not change in G270.
 
-## Provenance of G269
-Base:
-user-supplied Claude G267 Kernel Floor runtime.
+## G270 Fast Curriculum result
+60 new noun lemmas were introduced with only noun type + grammatical gender.
+Their paradigms were withheld.
 
-That base was independently rerun:
-- 274/283 PASS
-- only the 9 known missing historical artifact failures
-- zero question-created entities/facts
-- strong read-only kernel fact retrieval and receipts
+Direct:
+- 120 target typing facts
+- 38 anchor WORD_FORM facts
+- 0 target WORD_FORM facts
+- 158 total admitted facts
 
-Independent re-attack found remaining gaps:
-- user/C4 perspective on `Я не понимаю тебя`
-- meta-language query `Какие фразы ты знаешь?`
-- ellipsis `Научу`
-- opaque g223/node initiative leakage
-- ASK burst across different gaps
+Held-out:
+- before new anchors: 140/260 correct
+- after anchors: 260/260 correct
+- 0 wrong
+- 0 UNKNOWN
+- 19/19 decoy restraint
+- cold reload 260/260
 
-G269 merges the Claude kernel floor with the previously proven G267/G268 discourse/perspective/initiative mechanisms.
+Efficiency:
+- transfer/direct = 1.646
+- extra transfer unlocked by anchors = 120
+- marginal transfer/anchor = 3.158
 
-## G269 validation
-Combined suite: 288/297 PASS.
-All 9 failures are unchanged missing G207/G137/G151/G153 artifact files.
-Focused overlap/adversarial: 41/41 PASS.
+Regression:
+- 288/297 PASS
+- same 9 missing historical artifact FileNotFoundErrors
+- 0 new semantic/runtime failures
 
-Real G266:
-- greeting PASS
-- user misunderstanding perspective PASS
-- meta-language capability PASS
-- ASK -> `Научу` PASS
-- object-permanence retrieval PASS
-- zero entity/fact growth from unknown questions PASS
-- no autonomous ASK burst while awaiting response PASS
-- opaque internal graph labels suppressed from human-facing initiative
+## Current learning objective
+Optimize teacher cost, not bytes.
 
-## Hard rules
-DISCOURSE CONTEXT != WORLD EVIDENCE
-LEXICAL RETRIEVAL != TRUTH
-SIMILARITY != IDENTITY
-QUESTION != ASSERTION
-ASK WAIT != GAP RESOLUTION
-UNKNOWN != FALSE
+A new curriculum block should report:
+- direct lessons
+- held-out transferable ability
+- correctly UNKNOWN
+- false inference
+- teacher interventions
+- bytes/RAM/latency
+- cold reload
+- regression
 
 ## Next
-Test G269 in Android with G266 weights.
-Treat new screenshots as runtime counterexamples only after verifying the response is coming from this runtime.
-Do not patch individual phrases unless they reveal a reusable discourse class.
+Continue Fast Curriculum from exact G270:
+1. regular verb families and held-out conjugation;
+2. adjective agreement families;
+3. dense semantic cells for high-utility core lemmas;
+4. active-gap prioritization;
+5. repeat fixed developmental benchmark and track teacher burden.
 
+Do not dump books or dictionaries into weights without transfer tests.
+Do not train around runtime defects.
+Do not hardcode corpus facts in runtime.
 
-## MANDATORY NEW READING BEFORE CONTINUING
-Read these four files in full:
-1. DEVELOPMENTAL_TRAINING_METHODOLOGY.md
-2. LEXICAL_GRAPH_SCALE_TARGETS.md
-3. RUSSIAN_CURRICULUM_BOOK_ROADMAP.md
-4. WEEK_ROADMAP_RUNTIME_WEIGHTS.md
-
-They define the current methodology.
-
-### Critical curriculum update
-Do not simply feed 100 books.
-Build Russian as a typed lexical/semantic/morphological graph.
-
-Engineering reference:
-~180k lemma nodes;
-~1.62M semantic links target by non-uniform density;
-~1.44M morphology/form links;
-~3.06M combined typed links as a long-range scale hypothesis.
-
-This is not an emergence guarantee.
-Measure held-out transfer and graph quality.
-
-### 100 MB target
-100 MB is now a meaningful engineering milestone only if useful typed structure grows.
-Current representation may be too verbose; compact string interning/integer IDs/relation coding may be required.
-Storage optimization may change serialization but must preserve graph/provenance physics.
-
-### Russian book/corpus order
-Morphology/dictionaries/dialogue nursery BEFORE indiscriminate novel scaling.
-Dal is HISTORICAL_RU, not default modern Russian.
-Use varied prose + explanatory science + later philosophy/poetry.
-Verify rights/license/source before ingestion.
-
-### Runtime/weights split
-Runtime = reusable abilities/physics.
-Weights = acquired knowledge/experience.
-Do not compensate for runtime bugs by training weights.
-Do not hide corpus facts in runtime.
-
-### Live teaching
-Use atomic lessons:
-one relation -> one gap -> one answer -> one transfer example.
-Long paragraphs currently create malformed gaps and should be avoided.
-
-
-## ADDITIONAL MANDATORY READING
+Mandatory reading:
+- DEVELOPMENTAL_TRAINING_METHODOLOGY.md
+- LEXICAL_GRAPH_SCALE_TARGETS.md
+- RUSSIAN_CURRICULUM_BOOK_ROADMAP.md
+- WEEK_ROADMAP_RUNTIME_WEIGHTS.md
 - RUNTIME_ARCHITECTURE_PRINCIPLES.md
-- EXTERNAL_AUDIT_CLAUDE_G268_ACQUAINTANCE.md
-
-### Runtime principle
-Runtime should be as universal/capability-rich as possible while remaining content-light.
-Weights/persistent graph should contain learned world/language experience.
-
-### Scaling warning
-Claude G268 measured G266 at:
-~1.7MB archive, ~11MB graph_hot JSON, ~43MB live Python graph/state, ~6MB lexical index after optimization.
-Naive ~100MB archive extrapolation is ~2.5GB live graph/state + ~0.4GB lexical index.
-Therefore 100-300MB mobile growth requires disk-backed/lazy graph storage before the model reaches that size.
-
-### Candidate status
-Claude G268 Acquaintance is NOT canonical.
-Current canonical remains G266 weights + G269 runtime.
-Its improvements must be merged into G269 and tested as a new runtime generation.
-
-
-## MANDATORY MEMORY SCALE NOTE
-Read MEMORY_CONSOLIDATION.md.
-Long-term C4 may live primarily on SSD/flash with only a hot working set in RAM.
-100-300MB is a checkpoint range, not a final ceiling.
-Do not solve scale by dropping provenance, contradictions or rare counterexamples.
-Compression must preserve epistemic contracts and pass held-out transfer/retraction tests.
+- MEMORY_CONSOLIDATION_COMPRESSION.md
