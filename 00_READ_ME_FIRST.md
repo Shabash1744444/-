@@ -21,31 +21,10 @@ Combined:
 Recovery: /C4_Canonical/.
 
 ## Latest
+G299: 40 SYNONYM/ANTONYM lessons -> 24/24 reverse derived, 16/16 non-transitivity/identity traps UNKNOWN, 0 leaks.
+G300: open relation-list questions now use safe read-only inverse/symmetric algebra. Memory 384/393; SQLite 384/393; same nine historical missing artifacts only.
+G301: learned ordinary Russian relation nouns: синоним, антоним, противоположность, роль, смысл, преемник. Natural queries 6/6 after/cold/SQLite, read-only.
 
-G299 weights:
-- 40 direct SYNONYM/ANTONYM lessons;
-- 24/24 reverse symmetry derived after/cold/SQLite;
-- 16/16 non-transitivity/identity traps UNKNOWN;
-- SYNONYM != IDENTITY;
-- growth +7,362 bytes vs G297.
-
-G300 runtime:
-- open list questions consume safe read-only inverse/symmetric algebra;
-- derived values are never persisted;
-- direct negative conflict blocks derived list output;
-- MEANS remains non-symmetric;
-- full memory 384/393;
-- SQLite split total 384/393;
-- same nine historical missing artifacts only.
-
-G301 weights:
-- learned relation nouns: синоним, антоним, противоположность, роль, смысл, преемник;
-- 6/6 natural relation queries after/cold/SQLite;
-- all query evaluation read-only;
-- G297 and G299 relation retention fully GREEN;
-- growth +4,574 bytes vs G299.
-
-Open architecture note:
-CARDINALITY_SCOPE_NOTE.md — COLOR/LOCATION/VALUE cannot be treated as universally context-free single-valued world properties.
+Open issue: CARDINALITY_SCOPE_NOTE.md. COLOR/LOCATION/VALUE are not universally context-free single-valued world properties.
 
 Quality > bytes > generation count.
