@@ -1,47 +1,45 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G306
-Canonical runtime: G306
+Canonical weights: G307
+Canonical runtime: G307
 
 Weights:
-- child_g306_synthetic_spatial_physics_green.c4m
-- 1,983,393 bytes
-- SHA256 78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded
+- child_g307_sound_grapheme_words_green.c4m
+- 1,988,842 bytes
+- SHA256 648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
 
 Runtime:
-- C4_RUNTIME_G306_SYNTHETIC_3D_PHYSICS_GREEN_2026-10-07.zip
-- 304,847 bytes
-- SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb
+- C4_RUNTIME_G307_SOUND_GRAPHEME_WORDS_GREEN_2026-10-07.zip
+- 307,584 bytes
+- SHA256 b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
 
 Combined:
-- C4_G306_RUNTIME_PLUS_G306_WEIGHTS_2026-10-07.zip
-- 2,258,483 bytes
-- SHA256 25aed1de0c7f3eda2d8937e748944e461856e5e1f7945c695a84cd31c9c9915e
-
-## G305
-Durable SCREEN/AUDIO/SYMBOL sensory grounding.
+- C4_G307_RUNTIME_PLUS_G307_WEIGHTS_2026-10-07.zip
+- 2,266,334 bytes
+- SHA256 4068e8c8c7a6128747433e3c92bb5795b1f33faed385784c27d3d3e095285f49
 
 ## G306
-Synthetic embodied 3D physics:
-- SELF-relative axes (+x right, +y up, +z forward);
-- yaw changes egocentric frame;
-- action request does not mutate world;
-- stale request != success;
-- only verified SANDBOX_RECEIPT can train spatial effects;
-- 88 verified interactions;
-- learned LEFT/RIGHT/UP/DOWN/FORWARD/BACKWARD, TURN_LEFT/RIGHT, TOWARD/AWAY;
-- 10/10 novel-pose heldout;
-- graph unchanged by simulated motor training;
-- cold memory + SQLite GREEN.
+Verified synthetic 3D motor priors.
 
-Exact older cognition retained:
-G302 44/44 direct + 24/24 restraint UNKNOWN; natural queries read-only.
+## G307
+Sound / grapheme / word-form grounding:
+- 6 phoneme-side concepts;
+- 6 grapheme-side concepts;
+- 24 repeated sound↔glyph alignments;
+- PHONEME != GRAPHEME;
+- many-to-many mapping allowed;
+- 5 words learned as separate audio and glyph sequences converging on one word entity;
+- noisy heldout 5/5 audio + 5/5 glyph;
+- SQLite 5/5 + 5/5;
+- proposition fact/evidence store unchanged by lexical-form training;
+- G306 spatial effects retained 10/10;
+- G302 reasoning retained 44/44 direct + 24/24 restraint in memory/SQLite.
 
 Full runtime regression:
-404 passed + 16 missing-file environment failures in memory;
-404 passed + 16 missing-file environment failures in SQLite;
+409 passed + 16 missing-file environment failures in memory;
+409 passed + 16 missing-file environment failures in SQLite;
 new semantic failures 0.
 
 ## Current objective
-Build phoneme/grapheme/sound-symbol sequence grounding without collapsing sound into letter identity; then contact/collision and mass/effort physics.
+Continue synthetic physics with contact/collision and effort/mass-like resistance; then expand audio/visual form grounding and connect application-room sensor adapters.
