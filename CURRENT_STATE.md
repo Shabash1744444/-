@@ -21,29 +21,19 @@ Combined:
 
 ## Relation line
 G294 inverse/symmetry.
-G295 functional slot conflict visibility.
+G295 functional conflict visibility.
 G296 strict temporal order.
-G298 retraction invalidation/current source stance.
+G298 retraction invalidation.
 G299 lexical relation restraint.
-G300 algebra available to open list questions.
-G301 human-language bridge to relation types.
+G300 structural algebra in open list questions.
+G301 natural-language relation bridge.
 
 ## Validation
-Runtime G300:
-- focused 4/4
-- memory 384/393
-- SQLite total 384/393
-- same nine historical missing artifacts only
-
-Weights G301:
-- 6/6 natural relation queries after/cold/SQLite
-- G297 32/32 + 26/26 retained
-- G299 24/24 + 16/16 retained
-- all older protected curriculum GREEN
+G300 runtime: focused 4/4; memory 384/393; SQLite total 384/393; only nine historical missing-artifact failures.
+G301: 6/6 natural queries after/cold/SQLite; G297 and G299 fully retained; all older protected curriculum GREEN.
 
 ## Open issue
-COLOR/LOCATION/VALUE cardinality is context/scope-sensitive.
-Do not replace FUNCTIONAL with SET without a scoped design.
+COLOR/LOCATION/VALUE cardinality requires context/scope design, not a blind FUNCTIONAL->SET change.
 
 ## Current objective
-Finish under-tested relation families and event-frame boundaries, then advance toward dirty human language/context resolution.
+Finish ROLE/MEANS/SUCCESSOR/EVENT relation traps, then advance toward dirty human language and contextual surface resolution.
