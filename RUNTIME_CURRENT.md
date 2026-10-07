@@ -1,23 +1,23 @@
-# RUNTIME CURRENT — G306 SYNTHETIC 3D PHYSICS GREEN
+# RUNTIME CURRENT — G307 SOUND / GRAPHEME / WORDS GREEN
 
-Canonical runtime: G306.
-Canonical weights: G306.
+Canonical runtime: G307.
+Canonical weights: G307.
 
 Runtime SHA256:
-c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb
+b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
 
 Weights SHA256:
-78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded
+648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
 
-Combined SHA256:
-25aed1de0c7f3eda2d8937e748944e461856e5e1f7945c695a84cd31c9c9915e
+New durable organ:
+SoundSymbolBridge — repeated many-to-many alignment between distinct acoustic and glyph sensory concepts.
 
-New app/training surfaces:
-- Synthetic3DWorld external sandbox adapter
-- SpatialEffectLearner durable SIMULATION-scoped experience
-- learn_spatial_transition(receipt, transition)
-- spatial_effect(action)
+New app-facing functions:
+learn_sound_symbol(...)
+glyphs_for_sound(...)
+sounds_for_glyph(...)
+observe_form_sequence(...)
+bind_sequence_name(...)
+resolve_form_sequence(...)
 
-Existing G305 sensory API remains.
-
-No action effect may be learned from an unverified/non-simulation receipt.
+G306 spatial APIs remain.
