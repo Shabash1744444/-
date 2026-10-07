@@ -1,14 +1,18 @@
 # RUNTIME CURRENT — G281 LEXICAL GAPS
 
 Canonical runtime: G281.
-Canonical weights: G282.
+Canonical weights: G283.
 
-Runtime SHA256: eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
-Weights SHA256: c1fabfa4028d993de7614c2dd321aab0bb2f99d8fb13011781d1048dffbeb243
-Combined SHA256: 9c73640ceb484315e58571d748ec03488934567d864e2fd453f184e45dc1f70d
+Runtime SHA256:
+eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
 
-G281 adds LEXICAL_TERM gaps to G278 guided reading.
-It asks for dictionary form and meaning but never predicts/commits a lemma.
+Weights SHA256:
+011fc6ce852ca169f4a2e3e66d9025c334fa10c904757b1f0c76ce7031fd141e
 
-Validation: 335/344 clean full suite; only 9 known missing historical artifacts.
-G282 cumulative fully GREEN.
+Combined SHA256:
+64fba4cf398d157a2239fb5819244eb23cf2520c1f5157f003e2d66bc25c7bc3
+
+G281 creates question-only LEXICAL_TERM gaps for unknown raw forms in supported predicate/action objects. It never predicts a lemma.
+
+Validation: 335/344 full suite, only 9 known missing historical artifacts.
+G283 cumulative fully GREEN.
