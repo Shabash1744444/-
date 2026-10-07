@@ -1,29 +1,30 @@
 # ARTIFACT MANIFEST
 
-Current weights: G284
-- child_g284_semantic_family_consolidation_green.c4m
-- 1,885,002 bytes
-- SHA256 efcdf9c63116fc056bf3fc19deeda83e62b08f922fe4123136b5a733f8b3a95b
+Current weights: G285
+- child_g285_family_accelerated_lexical_green.c4m
+- 1,898,738 bytes
+- SHA256 634c07b755e727d15e98e56a5d3a82f757e44aea4b77320b0204834510a1872e
 
 Weights release:
-- C4_G284_SEMANTIC_FAMILY_CONSOLIDATION_GREEN_2026-10-07.zip
-- 1,871,170 bytes
-- SHA256 650233c967e0c5f00b6002f0b6b7db6d716a370d1d8ffc5df64802f2efff7f17
+- C4_G285_FAMILY_ACCELERATED_LEXICAL_GREEN_2026-10-07.zip
+- 1,890,788 bytes
+- SHA256 2af843852476463c6df15d7e42b09acb5488d3115c722cd083b6e141108f1e6a
 
 Runtime G281:
 - C4_RUNTIME_G281_LEXICAL_GAPS_GREEN_2026-10-07.zip
 - SHA256 eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
 
 Combined:
-- C4_G281_RUNTIME_PLUS_G284_WEIGHTS_2026-10-07.zip
-- 2,126,157 bytes
-- SHA256 1c99dc714e8e38ee975fc9be28f48a5860825648f1c78561c4032819ce5d4219
+- C4_G281_RUNTIME_PLUS_G285_WEIGHTS_2026-10-07.zip
+- 2,173,302 bytes
+- SHA256 47d9dedce877b48e6da00a54ca23b4b3bbd62a944426fcc9777fd6d1adb8731f
 
 Support:
-- G284_source_manifest.json
-- G284_frozen_heldout.json
-- G284_semantic_family_metrics.json
-- g284_cumulative_validation.json
-- checkpoints/CP_C4_G284_SEMANTIC_FAMILY_CONSOLIDATION_GREEN.md
+- G285_source_manifest.json
+- G285_frozen_heldout.json
+- G285_metrics.json
+- G285_quarantine.md
+- g285_cumulative_validation.json
+- checkpoints/CP_C4_G285_FAMILY_ACCELERATED_LEXICAL_GREEN.md
 
 Binary recovery: /C4_Canonical/.
