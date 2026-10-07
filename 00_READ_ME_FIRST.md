@@ -7,59 +7,56 @@ C4 is NOT Singularity OS. They are separate architectures and separate projects.
 Do not merge their runtime, memory, actors, laws or terminology by assumption.
 
 ## Authority order
-1. Physically committed repository state and artifact hashes.
+1. Physically committed repository state and exact artifact hashes.
 2. Reproducible tests/checkpoints.
 3. Current chat context.
 4. Model/chat memory.
 
-If chat memory conflicts with the repository, the repository wins.
+If memory conflicts with repository state, repository wins.
 Unsaved work is LOST work. Never reconstruct a missing generation by guessing.
 
-## Current canonical baseline
-Last physically closed generation before this repository bootstrap: G221 MIXED MOTIF GREEN.
-G222 Dirty Evidence Collision is the active generation and was started but is not yet declared GREEN.
+## Current canonical state — 2026-10-07
+Weights / persistent learned state:
+- G270 FAST LEMMA TRANSFER GREEN
+- `child_g270_fast_lemma_transfer_green.c4m`
+- 1756887 bytes
+- SHA256 `b081428bed0080f9982491247d98640009de4662d7f654c571946acd5e36fa1b`
 
-G221 verified highlights:
-- mixed chain + convergence + divergence + diamond curriculum;
-- 210 directly taught causal edges;
-- 300/300 novel positive CHAIN held-out;
-- 360/360 structural restraint;
-- same behavior after cold reload;
-- dirty correction collision 9/9;
-- model size: 451,657 bytes.
+Runtime:
+- G269 KERNEL FLOOR + DISCOURSE
+- `C4_RUNTIME_G269_KERNEL_FLOOR_DISCOURSE_GREEN_2026-10-07.zip`
+- SHA256 `5541f67d56ec2cf0cd373cbff58801f0fa6d4445e333a229d34215813290475a`
 
-G219 reproducible structural-reuse result:
-- 240 directly taught edges;
-- 600/600 novel positive CHAIN inferences;
-- positive-transfer/taught = 2.50;
-- 1080/1080 negative structural controls after expanded reproduction;
-- cold reload preserved behavior.
-This is evidence of compositional reuse, NOT proof that primitive knowledge acquisition is 10x faster.
+Combined recovery:
+- `C4_G269_RUNTIME_PLUS_G270_WEIGHTS_2026-10-07.zip`
+- SHA256 `2b62bcd06bd588324fd7aa3ebc5b1ddf7f7b6744089cdf961ae135ef8e457dde`
 
-## Active work
-G222: Dirty Evidence Collision.
-Mix:
-- causal topology;
-- shared-ancestry evidence laundering;
-- genuinely independent evidence;
-- a plausible false causal edge;
-- later independent contradiction/retraction;
-- preservation of unrelated sources and alternate valid paths;
-- cold reload + regression.
+Persistent binary recovery is in personal Library `/C4_Canonical/`.
+
+## Latest result
+G270 is the first explicit Fast Curriculum lemma-transfer checkpoint:
+- 60 new noun lemmas
+- 0 direct target paradigms
+- 158 direct facts total
+- 260/260 held-out inflected surfaces resolved
+- 19/19 unknown-decoy restraint
+- cold reload GREEN
+- 288/297 runtime regression; only 9 unchanged missing historical artifact failures
+
+Read `checkpoints/CP_C4_G270_FAST_LEMMA_TRANSFER_GREEN.md`.
 
 ## Non-negotiable workflow
-counterexample -> minimal repair -> re-attack -> regression -> cold reload -> PHYSICAL CHECKPOINT -> next
+counterexample -> minimal repair/training -> held-out re-attack -> restraint -> regression -> cold reload -> PHYSICAL CHECKPOINT -> next
 
-Never modify architecture merely to make an exam pass.
-If a capability is not represented by current physics, record CAPABILITY BOUNDARY instead of faking it.
+Do not increase model size for its own sake.
+Every new layer or curriculum block should make later learning cheaper.
 
 ## Start here
-Read in order:
 1. 00_READ_ME_FIRST.md
 2. 01_NEXT_CHAT_HANDOFF.md
 3. CURRENT_STATE.md
 4. TRAINING_LAWS.md
-5. CAPABILITY_BOUNDARIES.md
-6. CHECKPOINT_JOURNAL.md
-
-Then inspect latest committed artifact/checkpoint before continuing.
+5. DEVELOPMENTAL_TRAINING_METHODOLOGY.md
+6. RUNTIME_ARCHITECTURE_PRINCIPLES.md
+7. MEMORY_CONSOLIDATION_COMPRESSION.md
+8. latest checkpoint
