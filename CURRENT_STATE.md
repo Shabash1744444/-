@@ -2,7 +2,7 @@
 
 Date: 2026-10-07
 Canonical weights: G302
-Canonical runtime: G303
+Canonical runtime: G304
 
 Weights:
 - child_g302_role_means_successor_scope_green.c4m
@@ -10,27 +10,29 @@ Weights:
 - SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime:
-- C4_RUNTIME_G303_EVENT_TENSE_BOUNDARIES_GREEN_2026-10-07.zip
-- SHA256 0aae1b33f1347b187ef06bb658cc21b3de8698053630455b4939a064eef870d8
+- C4_RUNTIME_G304_EVENT_CONJUNCTION_SCOPE_GREEN_2026-10-07.zip
+- 301,378 bytes
+- SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae
 
 Combined:
-- C4_G303_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
-- SHA256 1b62fad41f045ecb6b39fdf54a9db283101e78aaf48171ee4b72a811005dbcc6
+- C4_G304_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+- 2,261,376 bytes
+- SHA256 02bd772d97edf43ff7c0bdfbc385aa1e746fa48a962e87f3ac3d029331bfd77b
 
-## Development line
-G299 lexical restraint.
-G300 open relation queries.
-G301 relation-language bridge.
-G302 ROLE/MEANS/SUCCESSOR scope.
-G303 event tense boundaries.
+## Event line
+G303:
+PAST/PRESENT/FUTURE boundaries; negative past query; future is unverified event claim.
 
-## G303
-PAST negative queries are readable.
-Russian periphrastic FUTURE does not pollute current state.
-Future claims are event frames, not verified outcomes.
-Past/present/future coexist without cross-contamination.
+G304:
+positive conjunction over SET event predicates becomes separately queryable proposition-events.
+Negative conjunction is not distributed without scope evidence.
+Known multiword entity wins over splitting.
 
-Exact G302 compatibility: 44/44 direct + 24/24 restraint; memory == SQLite.
+## Validation
+Focused G303+G304+prior event tests: 22/22.
+Full workspace: 390/406 memory and 390/406 SQLite.
+All 16 failures are FileNotFound only; semantic assertion failures 0.
+Exact G302 retained: 44/44 direct, 24/24 restraint, relation queries read-only, memory == SQLite.
 
 ## Current objective
-G304 event-frame/language coverage, then scope/cardinality traps and dirty human language.
+Continue EVENT_* semantics and learned grammar, then scope/cardinality traps and dirty human language.
