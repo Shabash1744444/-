@@ -1,23 +1,44 @@
-# RUNTIME CURRENT — G307 SOUND / GRAPHEME / WORDS GREEN
+# RUNTIME CURRENT — G308 CONTACT / EFFORT PHYSICS GREEN
 
-Canonical runtime: G307.
-Canonical weights: G307.
+Canonical runtime: G308.
+Canonical weights: G308.
 
 Runtime SHA256:
-b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
+88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3
 
 Weights SHA256:
-648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
+7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5
 
-New durable organ:
-SoundSymbolBridge — repeated many-to-many alignment between distinct acoustic and glyph sensory concepts.
+## New durable physical organ
 
-New app-facing functions:
-learn_sound_symbol(...)
-glyphs_for_sound(...)
-sounds_for_glyph(...)
-observe_form_sequence(...)
-bind_sequence_name(...)
-resolve_form_sequence(...)
+ContactEffortLearner:
+- learns verified CONTACT / COLLISION / NO_CONTACT effects;
+- records empirical motor-effort -> measured-displacement response;
+- estimates displacement-per-effort;
+- compares response without asserting semantic mass labels;
+- persists through .c4m and SQLite runtime state.
+
+Runtime-facing methods:
+- learn_contact_transition(...)
+- contact_effect(...)
+- physical_response_profile(...)
+- compare_physical_response(...)
+- predict_push_displacement(...)
+
+SyntheticContactWorld is deterministic SANDBOX physics. Hidden response/anchor parameters are environment-only and are not learner transition fields.
+
+## Retained
 
 G306 spatial APIs remain.
+G307 SoundSymbolBridge remains.
+
+AUDIO FORM != TEXT FORM.
+PHONEME != GRAPHEME.
+SOUND ASSOCIATION != IDENTITY.
+SEQUENCE FORM != WORD ENTITY.
+WORD FORM != CONCEPT / MEANING.
+
+CONTACT != COLLISION.
+MOTOR EFFORT != OBJECT MASS.
+SIMULATION != OBSERVATION.
+ACTION_REQUEST != VERIFIED_OUTCOME.

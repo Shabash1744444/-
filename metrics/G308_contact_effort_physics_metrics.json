@@ -1,0 +1,33 @@
+{
+  "generation": "G308",
+  "status": "GREEN",
+  "parent": {"runtime": "G307", "weights": "G307"},
+  "training": {
+    "verified_interactions": 96,
+    "near_touch": 12,
+    "far_touch_no_contact": 4,
+    "movable_push": 64,
+    "far_push_no_contact": 8,
+    "anchored_push_zero_displacement": 8
+  },
+  "heldout": {"correct": 12, "total": 12, "cold_memory": true, "cold_sqlite": true},
+  "graph": {
+    "entities_before": 10720, "entities_after": 10720,
+    "facts_before": 10764, "facts_after": 10764,
+    "order_before": 22282, "order_after": 22282,
+    "graph_hot_unchanged": true
+  },
+  "retention": {
+    "g306_spatial": "10/10",
+    "g307_sound_symbol": "6/6",
+    "g307_sequence_chunks": "10/10",
+    "g307_word_entities": 5
+  },
+  "regression": {
+    "parent_same_environment": {"passed": 407, "missing_fixture_filenotfound": 18},
+    "g308": {"passed": 415, "missing_fixture_filenotfound": 18, "new_semantic_failures": 0}
+  },
+  "weights": {"bytes": 1990583, "sha256": "7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5"},
+  "runtime": {"bytes": 319082, "sha256": "88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3"},
+  "combined": {"bytes": 2289646, "sha256": "703dbba1666a2ea127c0bc4312e68f91c6b1971e8fa42c259a75b738fffe71ee"}
+}

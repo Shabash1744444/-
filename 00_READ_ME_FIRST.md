@@ -3,21 +3,36 @@
 C4 is NOT Singularity OS.
 
 ## Canonical — 2026-10-07
-Weights/runtime: G307 SOUND / GRAPHEME / WORDS GREEN
+Weights/runtime: G308 CONTACT / COLLISION / EFFORT-RESPONSE PHYSICS GREEN
 
 Weights SHA256:
-648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
+7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5
 
 Runtime SHA256:
-b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
+88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3
 
 G306 gives verified SELF-relative synthetic 3D experience.
+
 G307 adds a cross-channel lexical form layer:
-audio -> phoneme concepts -> sequence -> word
-glyph -> grapheme concepts -> sequence -> same word
+audio -> phoneme concepts -> sound sequence -> word
+glyph -> grapheme concepts -> glyph sequence -> same word
 
-Phoneme and grapheme are never collapsed into identity.
+G308 adds verified physical interaction learning:
+motor effort -> environment receipt -> contact/collision -> measured target displacement -> learned response profile.
+
+The simulator's hidden response parameter is NEVER learner input.
+The learner must infer response from verified outcomes.
+
+Hard separations:
+AUDIO FORM != TEXT FORM.
+PHONEME != GRAPHEME.
+SOUND ASSOCIATION != IDENTITY.
+SEQUENCE FORM != WORD ENTITY.
+WORD FORM != CONCEPT / MEANING.
+CONTACT != COLLISION.
+MOTOR EFFORT != OBJECT MASS.
+SIZE / APPEARANCE != PHYSICAL RESPONSE.
+SIMULATION != OBSERVATION.
+ACTION_REQUEST != VERIFIED_OUTCOME.
+
 Quality > bytes > generation count.
-
-
-Full chat recovery snapshot: `C4_MASTER_CHAT_HANDOFF_G307_2026-10-07.md` (also stored in `/C4_Canonical/`).

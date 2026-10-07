@@ -1,30 +1,75 @@
-# NEXT CHAT HANDOFF — C4 G307 WEIGHTS + G307 RUNTIME
+# NEXT CHAT HANDOFF — C4 G308 WEIGHTS + G308 RUNTIME
 
-Weights SHA256:
-648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
+Weights:
+- child_g308_contact_effort_physics_green.c4m
+- 1,990,583 bytes
+- SHA256 7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5
 
-Runtime SHA256:
-b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
+Runtime:
+- C4_RUNTIME_G308_CONTACT_EFFORT_PHYSICS_GREEN_2026-10-07.zip
+- 319,082 bytes
+- SHA256 88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3
 
-Combined SHA256:
-4068e8c8c7a6128747433e3c92bb5795b1f33faed385784c27d3d3e095285f49
+Combined:
+- C4_G308_RUNTIME_PLUS_G308_WEIGHTS_2026-10-07.zip
+- 2,289,646 bytes
+- SHA256 703dbba1666a2ea127c0bc4312e68f91c6b1971e8fa42c259a75b738fffe71ee
 
-G306: 88 verified 3D interactions -> 10 SELF-relative effects, 10/10 heldout.
-G307: separate phoneme/glyph concepts, repeated many-to-many alignments, sound and glyph sequences converge on explicit word entities.
+## GREEN lineage
 
-Heldout G307:
-5/5 noisy audio words;
-5/5 noisy glyph words;
-same in SQLite.
-Spatial G306 retained 10/10.
-G302 reasoning retained.
+G306:
+- 88 verified 3D interactions;
+- 10 learned SELF-relative effects;
+- 10/10 novel-pose heldout.
 
-Hard laws:
+G307:
+- separate phoneme and grapheme sensory concepts;
+- repeated many-to-many sound/glyph alignment;
+- sound and glyph sequences may converge on one explicit word entity;
+- noisy heldout 5/5 AUDIO + 5/5 GLYPH in memory and SQLite.
+
+G308:
+- 96 verified synthetic interactions;
+- TOUCH can yield CONTACT without COLLISION;
+- PUSH can yield CONTACT + COLLISION;
+- far attempts remain NO_CONTACT;
+- anchored object can yield verified contact with zero displacement;
+- response learned from displacement per motor effort, not object name or size;
+- large/mobile vs small/resistant anti-shortcut pair passed;
+- 12/12 novel effort/pose heldout;
+- graph unchanged;
+- cold memory + SQLite GREEN;
+- G306/G307 retained.
+
+Regression in same environment:
+- exact G307 parent: 407 PASS + 18 historical-fixture FileNotFoundError;
+- G308: 415 PASS + same 18;
+- new semantic/runtime assertion failures: 0.
+
+## Hard laws
+
+AUDIO FORM != TEXT FORM.
 PHONEME != GRAPHEME.
 SOUND ASSOCIATION != IDENTITY.
 SEQUENCE FORM != WORD ENTITY.
+WORD FORM != CONCEPT / MEANING.
+
+CONTACT != COLLISION.
+ACTION_SUCCESS != OBJECT_DISPLACEMENT.
+MOTOR EFFORT != OBJECT MASS.
+RESPONSE INDEX != WORD MEANING.
+SIZE / APPEARANCE != PHYSICAL RESPONSE.
+
 RAW SIGNAL != TEACHER LABEL.
 SIMULATION != OBSERVATION.
 ACTION_REQUEST != VERIFIED_OUTCOME.
 
-Next: contact/collision and effort/resistance physics, then richer synthetic audio/visual grounding.
+## Next
+
+Continue developmental physics without semantic shortcuts:
+1. support / release / fall regularities;
+2. richer collision/contact dynamics and relative velocity;
+3. bind already-grounded physical concepts to spoken and written forms without collapsing modalities;
+4. bridge the same receipt/sensory contracts into the Nursery application room.
+
+Do not teach the word "heavy" by writing a mass label into the learner. Let physical response exist first; naming comes later as a teaching/binding act.

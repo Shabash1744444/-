@@ -34,58 +34,55 @@ G299 lexical relation restraint.
 G300 open relation query.
 G301 relation language bridge.
 G302 ROLE/MEANS/SUCCESSOR scope.
-G303 event tense boundaries: negative past query repaired; future auxiliary no longer pollutes subject/current state; FUTURE != VERIFIED OUTCOME.
+G303 event tense boundaries.
+G304 event conjunction scope.
+G305 durable sensory bridge.
+G306 synthetic embodied 3D spatial physics.
+G307 sound / grapheme / word-form grounding.
+G308 contact / collision / effort-response physics.
 
-G303 focused 17/17.
-Exact G302: 44/44 direct, 24/24 restraint, memory/SQLite identical.
-Workspace full regression: 385/401 memory + 385/401 SQLite; 16 missing-file failures only, 0 semantic assertion regressions.
-
-Current weights SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
-Current runtime SHA256 0aae1b33f1347b187ef06bb658cc21b3de8698053630455b4939a064eef870d8
-
-
-G303 event tense boundaries:
-negative past query repaired; bounded future tense separated from current state; future claim != verified outcome.
-
-G304 event conjunction scope:
-positive SET conjunctions split into proposition-events; negative conjunction not distributed; known multiword entity wins.
-Focused 22/22.
-Full workspace 390/406 memory + 390/406 SQLite; 16 FileNotFound only, 0 semantic assertion failures.
-Exact G302 retained 44/44 direct + 24/24 restraint.
-
-Current runtime SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae.
-
-
-G305 durable sensory bridge:
-existing SensoryGrounder/NurseryState integrated into C4LivingRuntime.
+## G305
 SCREEN/AUDIO/SYMBOL converge only as weak multimodal identity evidence; raw sensory input does not create graph truth.
-Explicit naming binds to one graph entity.
-Real .c4m and SQLite restart persistence GREEN.
+Explicit naming binds sensory identity.
 Focused 54/54.
-Full workspace memory/SQLite: 397 passed + 16 FileNotFound only.
-Exact G302: 44/44 direct + 24/24 restraint.
+Full memory/SQLite: 397 PASS + 16 historical FileNotFound only.
+Runtime SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00.
 
-Current runtime SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00.
-
-
-G306 synthetic embodied 3D physics:
+## G306
 88 verified SANDBOX_RECEIPT interactions across varied positions/yaw.
 Learned SELF-relative LEFT/RIGHT/UP/DOWN/FORWARD/BACKWARD, TURN_LEFT/RIGHT, TOWARD/AWAY.
 10/10 novel-pose heldout.
-Graph unchanged by simulated motor training.
+Graph unchanged.
 Cold memory + SQLite GREEN.
-Full runtime 404 pass + 16 FileNotFound only in each store.
-Weights SHA256 78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded.
 Runtime SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb.
 
-
-G307 sound/grapheme/word grounding:
+## G307
 6 phoneme sensory concepts and 6 separate grapheme concepts.
 24 repeated supported alignments.
 5 words learned as distinct audio/glyph sequence chunks converging on one word entity.
 No phoneme-grapheme identity collapse.
 Heldout 5/5 audio + 5/5 glyph, memory and SQLite.
-G306 spatial effects retained 10/10.
-G302 reasoning retained.
 Weights SHA256 648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f.
 Runtime SHA256 b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca.
+
+## G308
+96 verified synthetic interactions.
+TOUCH distinguishes CONTACT from COLLISION.
+PUSH learns CONTACT + COLLISION only from verified environment receipts.
+NO_CONTACT controls retained.
+Anchored contact can succeed with zero displacement.
+Empirical displacement-per-effort response is learned without exposing simulator response/mass labels.
+Large/mobile vs small/resistant anti-shortcut passed.
+12/12 novel effort/pose heldout.
+Graph unchanged: 10,720 entities / 10,764 facts / order 22,282.
+Cold memory + SQLite GREEN.
+G306 spatial 10/10 retained.
+G307 lexical-form grounding retained.
+
+Same-environment regression:
+- exact parent G307: 407 PASS + 18 historical missing-fixture FileNotFoundError;
+- G308: 415 PASS + same 18;
+- new semantic/runtime assertion failures 0.
+
+Current weights SHA256 7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5.
+Current runtime SHA256 88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3.

@@ -1,45 +1,56 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G307
-Canonical runtime: G307
+Canonical weights: G308
+Canonical runtime: G308
 
 Weights:
-- child_g307_sound_grapheme_words_green.c4m
-- 1,988,842 bytes
-- SHA256 648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
+- child_g308_contact_effort_physics_green.c4m
+- 1,990,583 bytes
+- SHA256 7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5
 
 Runtime:
-- C4_RUNTIME_G307_SOUND_GRAPHEME_WORDS_GREEN_2026-10-07.zip
-- 307,584 bytes
-- SHA256 b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
+- C4_RUNTIME_G308_CONTACT_EFFORT_PHYSICS_GREEN_2026-10-07.zip
+- 319,082 bytes
+- SHA256 88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3
 
 Combined:
-- C4_G307_RUNTIME_PLUS_G307_WEIGHTS_2026-10-07.zip
-- 2,266,334 bytes
-- SHA256 4068e8c8c7a6128747433e3c92bb5795b1f33faed385784c27d3d3e095285f49
+- C4_G308_RUNTIME_PLUS_G308_WEIGHTS_2026-10-07.zip
+- 2,289,646 bytes
+- SHA256 703dbba1666a2ea127c0bc4312e68f91c6b1971e8fa42c259a75b738fffe71ee
 
 ## G306
-Verified synthetic 3D motor priors.
+Verified synthetic SELF-relative 3D motor priors.
 
 ## G307
-Sound / grapheme / word-form grounding:
-- 6 phoneme-side concepts;
-- 6 grapheme-side concepts;
-- 24 repeated sound↔glyph alignments;
-- PHONEME != GRAPHEME;
-- many-to-many mapping allowed;
-- 5 words learned as separate audio and glyph sequences converging on one word entity;
-- noisy heldout 5/5 audio + 5/5 glyph;
-- SQLite 5/5 + 5/5;
-- proposition fact/evidence store unchanged by lexical-form training;
-- G306 spatial effects retained 10/10;
-- G302 reasoning retained 44/44 direct + 24/24 restraint in memory/SQLite.
+Cross-channel lexical-form grounding:
+- phoneme-side and grapheme-side concepts remain distinct;
+- many-to-many sound/glyph association;
+- sound and glyph sequences can converge on one explicit word entity;
+- AUDIO FORM != TEXT FORM;
+- WORD FORM != CONCEPT / MEANING.
 
-Full runtime regression:
-409 passed + 16 missing-file environment failures in memory;
-409 passed + 16 missing-file environment failures in SQLite;
-new semantic failures 0.
+## G308
+Verified contact / collision / effort-response physics:
+- 96 verified synthetic interactions;
+- CONTACT and COLLISION learned as distinct effects;
+- NO_CONTACT controls retained;
+- anchored zero-displacement contact retained;
+- response learned from displacement per motor effort, not name or visual size;
+- hidden simulator response parameter never exposed to learner;
+- 12/12 heldout on new efforts/poses;
+- proposition graph unchanged;
+- cold memory and SQLite GREEN.
+
+Protected retention:
+- G306 spatial 10/10;
+- G307 sound-symbol 6/6;
+- G307 sequence chunks 10/10 / 5 shared word entities.
+
+Regression:
+- parent G307: 407 PASS + 18 historical missing-fixture FileNotFoundError;
+- G308: 415 PASS + same 18;
+- new semantic failures 0.
 
 ## Current objective
-Continue synthetic physics with contact/collision and effort/mass-like resistance; then expand audio/visual form grounding and connect application-room sensor adapters.
+Continue synthetic developmental physics with support/release/fall and richer contact dynamics. Only after physical concepts are grounded should spoken/written labels be attached as separate learned forms.
