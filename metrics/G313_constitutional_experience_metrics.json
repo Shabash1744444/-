@@ -1,0 +1,11 @@
+{
+  "runtime_generation": "G313",
+  "weights_generation": "G311",
+  "status": "CANDIDATE_GREEN_NOT_CANONICAL",
+  "focused_tests": "20/20",
+  "full_passed": 439,
+  "historical_missing_fixture_filenotfound": 19,
+  "new_semantic_failures": 0,
+  "sensory_heldout": "12/12",
+  "canonical_parent": "G309/G309"
+}
