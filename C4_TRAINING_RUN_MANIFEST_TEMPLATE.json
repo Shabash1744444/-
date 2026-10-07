@@ -1,0 +1,91 @@
+{
+  "schema": "C4_TRAINING_RUN_MANIFEST_V1",
+  "run_id": "GNNN_DESCRIPTIVE_NAME",
+  "status": "PLANNED",
+  "created_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "parent": {
+    "runtime_artifact": "C4_RUNTIME_....zip",
+    "runtime_sha256": "REQUIRED",
+    "weights_artifact": "child_....c4m",
+    "weights_sha256": "REQUIRED",
+    "weights_bytes": 0
+  },
+  "curriculum": {
+    "stage": "BOOTSTRAP|GUIDED|AUTONOMOUS|CONSOLIDATION|AGENT",
+    "objective": "REQUIRED",
+    "competency_threshold": "REQUIRED",
+    "direct_lesson_budget": null,
+    "stop_conditions": [],
+    "source_scope_ids": []
+  },
+  "sources": [
+    {
+      "source_id": "REQUIRED",
+      "source_class": "TRAINING|TEACHER_ONLY|EVALUATION_ONLY|ARCHIVE_ONLY",
+      "origin": "",
+      "sha256": "",
+      "license": "",
+      "language": "",
+      "authority_scope": "",
+      "world_scope": "EXTERNAL|FICTIONAL|HISTORICAL|OTHER"
+    }
+  ],
+  "evaluation": {
+    "candidate_generated_before_training": true,
+    "validation_complete": false,
+    "frozen_before_training": false,
+    "heldout_file": "",
+    "heldout_sha256": "",
+    "rejected_evaluation_ledger": "",
+    "near_miss_file": "",
+    "contamination_guard": "EVALUATION_ONLY hidden from teacher/training"
+  },
+  "gap_scheduler": {
+    "scope": "CURRENT_RUN",
+    "one_question_per_iteration": true,
+    "imported_prerequisite_gap_ids": []
+  },
+  "teacher": {
+    "provider": "HUMAN|CURATED|LLM_TEACHER_ONLY|MIXED",
+    "source_id": "",
+    "questions": 0,
+    "words": 0,
+    "relations": 0
+  },
+  "results": {
+    "attempted": 0,
+    "parsed": 0,
+    "skipped": 0,
+    "admitted": 0,
+    "rejected": 0,
+    "deduped": 0,
+    "quarantined": 0,
+    "direct_lessons": 0,
+    "heldout_before": null,
+    "heldout_after": null,
+    "strict_new_transfer": null,
+    "correct_unknown": null,
+    "false_inference": null,
+    "direct_target_leaks": null,
+    "cold_reload": false,
+    "cumulative_regression": false,
+    "full_runtime_regression": "",
+    "notes": []
+  },
+  "artifact": {
+    "weights_path": "",
+    "weights_bytes": 0,
+    "weights_sha256": "",
+    "runtime_changed": false,
+    "runtime_path": "",
+    "runtime_sha256": "",
+    "combined_path": "",
+    "combined_sha256": ""
+  },
+  "promotion": {
+    "green": false,
+    "physical_checkpoint": false,
+    "canonical_docs_updated": false,
+    "library_updated": false
+  }
+}
