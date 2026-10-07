@@ -1,24 +1,31 @@
-# RUNTIME CURRENT — G289 MIXED-CHUNK DEPENDENCY
+# RUNTIME CURRENT — G293 SQLITE STORE GREEN
 
-Canonical runtime: G289.
+Canonical runtime: G293.
 Canonical weights: G292.
 
 Runtime SHA256:
-8aedcf70f480ba821256d360d0c6139af915edcb477d4bdc969000b86c42a846
+a2ccaa0ecd862657328338f1b5e87726d21753748152a1a8989a368f1ac251c5
 
 Weights SHA256:
 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
 
 Combined SHA256:
-6e6dc6b3ef89bc6c074285fcee23b63994b6d60e1c60a72cdb1b6a96ace8d89e
+c526d21fb0c1bf7aaa5390f84bdcc5fecc35fc11337d2f4d67ec4fd4a3295541
 
-G289 = G286 plus:
-- one bounded same-chunk dependency retry after explicit pass-1 admissions;
-- explicit bounded PROPERTY grammar priority over generic learned predicate "иметь".
+G293 = canonical G289 cognition plus disk-backed storage/query infrastructure from CL-G270.
 
-Hard boundaries:
-SECOND PASS != GUESSING.
-UNKNOWN CAUSAL ENDPOINT != NEW ENTITY.
-EXPLICIT PROPERTY GRAMMAR > GENERIC HAVE PREDICATE.
+Capabilities:
+- SQLiteGraph lazy graph
+- indexed retrieval/reverse queries/rule coverage
+- streamed checkpoint import/export
+- per-turn durable transactions
+- USER_SAID carry-forward across changed weights
+- memory mode still supported
 
-Validation: 343/352; only nine known missing historical artifacts.
+Validation:
+- memory 352/361
+- SQLite 352/361
+- same nine historical missing artifacts only
+
+Boundary:
+STORAGE CHANGE != COGNITIVE CHANGE.
