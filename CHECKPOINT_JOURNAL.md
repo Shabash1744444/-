@@ -2,35 +2,45 @@
 
 ## Bootstrap
 Repository adopted as canonical external memory for C4 on 2026-10-06.
-Repository was empty before bootstrap.
 
-## Historical condensed chain
+## Condensed chain
 G207: last knowledge-rich canonical before G208 merge.
-G208: source identity/lineage merge line.
-G209: causal foundation curriculum.
-G210: correlation/causation curriculum.
-G211: common-cause restraint.
-G212: causal asymmetry; intervention semantics explicitly blocked.
-G213: causal convergence; conditional causality explicitly blocked.
-G214: causal divergence/diamonds.
-G215: causal error recovery; CANONICAL != VERIFIED AUTHORITY.
-G216: claim ancestry/evidence dependency.
-G217: dependency-root attestation.
-G218: structural scale.
-G219: long-chain structural transfer.
-G220: causal-schema acquisition boundary.
-G221: mixed-motif collision GREEN.
-G222: ACTIVE dirty-evidence collision.
+G208: source identity/lineage merge.
+G209-G221: causal foundations, restraint, evidence ancestry, structural transfer and mixed motifs.
+G222: dirty evidence collision GREEN.
+G223-G240: world/self grounding and Bryson fragment closure.
+G241-G244: literature/Karamazov growth to >1 MiB.
+G245-G249: song/audio grounding and recurrence.
+G250-G254: interpretation, synthetic speech, real video and multivideo association.
+G255: transferable abstraction.
+G256: SELF/WORLD multimodal separation.
+G257: OmniCaption teacher layer.
+G258: Russian language firewall.
+G259-G260: Russian discourse transfer.
+G261-G262: multimodal Russian transfer.
+G263-G264: sensor/reasoning continuation.
+G265: synthetic vision nursery GREEN.
+G266: object permanence GREEN.
+G267: runtime dialogue bridge GREEN; weights unchanged.
+G268: runtime surface verbalizer GREEN; weights unchanged.
+G269: runtime kernel floor + discourse GREEN; weights unchanged.
+G270: FAST LEMMA TRANSFER GREEN; 60 new noun lemmas, zero target paradigms, 260/260 held-out forms, 19/19 decoy restraint, cold reload GREEN.
+
+## G270 exact artifact
+- child_g270_fast_lemma_transfer_green.c4m
+- 1756887 bytes
+- SHA256 b081428bed0080f9982491247d98640009de4662d7f654c571946acd5e36fa1b
 
 ## Checkpoint discipline
 Every generation must leave:
-- start checkpoint;
-- counterexample/result;
-- exact repair if any;
-- re-attack result;
-- regression result;
-- cold reload result;
-- artifact/model hash and byte size when available;
+- exact parent baseline;
+- counterexample/objective;
+- direct training/repair;
+- held-out re-attack;
+- restraint/negative controls;
+- regression;
+- cold reload;
+- exact artifact hash and byte size;
 - next step.
 
-Never advance canonical generation number until the physical artifact/checkpoint exists.
+Never advance canonical generation until the physical artifact/checkpoint exists.
