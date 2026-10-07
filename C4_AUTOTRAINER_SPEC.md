@@ -285,3 +285,21 @@ convergence_nodes_correct
 divergence_nodes_correct
 cold_relation_score
 provenance_failures
+
+
+## Mixed-chunk dependency pass
+
+AutoTrainer safe-reader orchestration should support a bounded intra-chunk dependency retry:
+pass 1 -> admit supported definitions/classes -> retry initially skipped surfaces once -> final skipped/gaps.
+
+The retry uses the exact same deterministic parser and must not expand grammar or confidence.
+
+Metrics:
+pass1_parsed
+retry_recovered
+final_skipped
+relation_type_counts
+provenance_failures
+cross_type_failures
+
+This became required in G289/G290 when a single explanatory source mixed definitions, properties, functions and causal relations.
