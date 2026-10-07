@@ -1,62 +1,67 @@
-# NEXT CHAT HANDOFF — C4 G297 WEIGHTS + G298 RUNTIME
+# NEXT CHAT HANDOFF — C4 G301 WEIGHTS + G300 RUNTIME
 
 Weights:
-child_g297_relation_diversity_green.c4m
-1,960,675 bytes
-SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
+child_g301_relation_language_bridge_green.c4m
+1,972,611 bytes
+SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
 
 Runtime:
-C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
-302,268 bytes
-SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
+C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
+293,368 bytes
+SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-C4_G298_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
-2,240,335 bytes
-SHA256 55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
+C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
+2,234,874 bytes
+SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
 
-## G295
-Functional-slot source conflict is visible in specific truth queries without mutating truth.
+## G299
+Sparse lexical relation experience.
+20 SYNONYM + 20 ANTONYM source lessons.
+24/24 reverse symmetry derived, 0 direct leaks.
+16/16 traps UNKNOWN:
+- no synonym transitivity
+- no antonym transitivity
+- SYNONYM != IS_A
+- SYNONYM != MEANS
 
-## G296
-Strict temporal algebra:
-BEFORE/AFTER inverse + bounded read-only transitivity.
-Reverse path refutes.
-Cycle and explicit NEG vs positive path -> CONFLICT.
-ORDER != CAUSE.
-
-## G297
-40 sparse relation lessons:
-PART_OF 12 / OPPOSITE 8 / MEANS 8 / BEFORE 12.
-
-Held-out:
-32/32 derived after and cold.
-0 direct target leaks.
-26/26 cross-relation controls UNKNOWN after and cold.
-Exact SQLite 32/32 + 26/26.
-All prior G270-G292 cumulative GREEN.
-
-## G298
+## G300
 Counterexample:
-source B could assert a FUNCTIONAL value X, later negate X, yet functional conflict reconstruction still treated B as supporting X.
+yes/no reasoning could use safe relation algebra, but open list queries only saw direct/inherited facts.
 
 Repair:
-functional_source_stances reconstructs current stance in evidence order:
-- later POS selects/revises;
-- later NEG of selected value retracts;
-- NEG of another value does not erase current positive;
-- retracting a revised value does not resurrect old superseded value.
+open relation queries now include safe read-only algebraic values.
+Examples:
+PART_OF(маховик, двигатель) -> query HAS_PART can list маховик.
+SYNONYM(врач, доктор) -> query synonym of доктор can list врач.
 
-Derived invalidation:
-PART_OF/HAS_PART, OPPOSITE symmetry and temporal chains disappear when their support is removed.
+Focused 4/4.
+Full memory 384/393.
+SQLite total 384/393.
+Only same nine historical missing artifacts.
 
-Validation:
-focused G294-G298 32/32.
-Full memory 380/389.
-SQLite 380 pass + same 9 historical missing artifacts.
-Streaming 5/5.
-Exact G297 on G298: memory and SQLite 32/32 derived + 26/26 restraint, direct leaks 0.
+## G301
+Learned QUERY_RELATION vocabulary:
+синоним->SYNONYM
+антоним->ANTONYM
+противоположность->OPPOSITE
+роль->ROLE
+смысл->MEANS
+преемник->SUCCESSOR
+
+Natural relation questions 6/6 after, cold, SQLite.
+Questions are read-only.
+
+Retention:
+G297 32/32 derived + 26/26 traps, 0 leaks.
+G299 24/24 derived + 16/16 traps, 0 leaks.
+All protected G270-G292 GREEN.
 
 ## Next
-Continue G1000 relation coverage:
-LOCATION/COLOR/VALUE family semantics, ROLE/MEANS context/source traps, SUCCESSOR and event-frame boundaries, then dirty-language curriculum when relation algebra coverage is sufficiently broad.
+Continue relation coverage:
+ROLE/MEANS source/context scope;
+SUCCESSOR boundaries;
+EVENT_* event-frame semantics;
+then move toward dirty-surface/contextual resolution.
+
+Do not solve COLOR/LOCATION/VALUE cardinality by blindly changing FUNCTIONAL to SET; see CARDINALITY_SCOPE_NOTE.md.
