@@ -1,22 +1,19 @@
 # RUNTIME CURRENT — G286 CAUSAL GUIDED READING
 
 Canonical runtime: G286.
-Canonical weights: G287.
+Canonical weights: G288.
 
 Runtime SHA256:
 b51670f57fa3a3d953ac3d096203b4015fdcb74eb18ad43c872018b8e1daa896
 
 Weights SHA256:
-a45a68901a1f9ac79a0fdad729f0b25e93d380af2d1e7cd0265d7486f2f54a36
+4ab4d0172d0447c92796a6248e33aca00abd0dc1eef92101f1020ccccef9393c
 
 Combined SHA256:
-5abadbb7c8cb4165384846411ff33d64bffa62f2960ddd041a9ce0d64e92c5a3
+acae250d1779a288abb8084b44c491ca12eff7821dd17721f412d7790b24603a
 
-G286 = G281 plus conservative CAUSES ingestion in guided reading:
-- both endpoints must already exist;
-- CAUSES object kind is entity;
-- origin/source provenance preserved;
-- unknown endpoint causal prose skipped without mutation;
-- derived causal chains are never persisted as direct facts.
+G286 safely admits CAUSES from ordinary text only for known endpoint concepts.
+Unknown endpoint causal prose is skipped without mutation.
+Derived chains remain read-only and non-persistent.
 
-Validation: 339/348 full suite; only 9 known missing historical artifacts.
+Validation: 339/348 full suite, only 9 known missing historical artifacts.
