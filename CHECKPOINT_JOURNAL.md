@@ -18,11 +18,13 @@ G283 contextual quantities.
 G284 semantic family consolidation.
 G285 family-accelerated lexical.
 G286 causal guided reading.
-G287 linear causal prose: 40 direct -> 80/80 non-direct chains.
-G288 branching/converging causal motifs: 42 direct -> 60/60 indirect, 6/6 motif centers preserve two causes + three effects, 30/30 sibling/cross negatives UNKNOWN.
+G287 linear causal prose.
+G288 branching/converging causal motifs.
+G289 mixed-chunk dependency runtime: one deterministic retry + explicit PROPERTY priority; 343/352 full suite.
+G290 mixed explanatory prose: 64 surfaces; 48/48 semantic inheritance; 12/12 causal chains; 12/12 cross-type restraint; full cumulative GREEN.
 
-Current weights SHA256 4ab4d0172d0447c92796a6248e33aca00abd0dc1eef92101f1020ccccef9393c
-Current runtime SHA256 b51670f57fa3a3d953ac3d096203b4015fdcb74eb18ad43c872018b8e1daa896
+Current weights SHA256 57ac0bac91d16fd320df838c41e527038bf70e2ee1c8a18e3403c997e3670a8a
+Current runtime SHA256 8aedcf70f480ba821256d360d0c6139af915edcb477d4bdc969000b86c42a846
 
-Discipline:
-exact parent -> source manifest -> validated frozen held-out -> safe text ingestion -> local-structure audit -> negative controls -> full regression -> cold reload -> cumulative -> physical checkpoint.
+Future agent architecture note:
+AGENT_TASK_LIFECYCLE_NOTE.md
