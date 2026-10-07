@@ -752,3 +752,41 @@ SECOND PASS != GUESSING.
 
 Explicit bounded grammar should outrank broader learned predicates when the broader parser would erase relation type. Example established by G289:
 "X имеет свойство Y" => PROPERTY, not generic HAS("свойство Y").
+
+
+---
+
+## 24. Atomic pragmatics and prosody curriculum
+
+Natural-language pretraining must not collapse slang/profanity/nonstandard forms into one sentiment label.
+
+Separate:
+surface form,
+lexical identity,
+speech act,
+affect valence,
+arousal/intensity,
+stance,
+target/addressee,
+prosody,
+discourse context,
+world context,
+social register,
+confidence/ambiguity.
+
+Required boundaries:
+SURFACE FORM != INTENT.
+PROFANITY != NEGATIVE AFFECT.
+PROSODY != EMOTION.
+INTONATION != TRUTH.
+SLANG != ERROR.
+UNDERSTAND != EMIT.
+
+Train minimal contrasts:
+same words / different prosody;
+different words / same pragmatic act;
+same words / different context or target;
+prosody removed -> uncertainty should increase when interpretation depended on it.
+
+Detailed future curriculum:
+PRAGMATICS_PROSODY_ATOMIC_CURRICULUM_NOTE.md
