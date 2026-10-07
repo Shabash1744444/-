@@ -3,23 +3,22 @@
 C4 is NOT Singularity OS.
 
 ## Canonical — 2026-10-07
-Weights: G284 SEMANTIC FAMILY CONSOLIDATION GREEN
-- child_g284_semantic_family_consolidation_green.c4m
-- 1,885,002 bytes
-- SHA256 efcdf9c63116fc056bf3fc19deeda83e62b08f922fe4123136b5a733f8b3a95b
+Weights: G285 FAMILY-ACCELERATED LEXICAL GREEN
+- child_g285_family_accelerated_lexical_green.c4m
+- 1,898,738 bytes
+- SHA256 634c07b755e727d15e98e56a5d3a82f757e44aea4b77320b0204834510a1872e
 
 Runtime: G281 LEXICAL GAPS GREEN
 - C4_RUNTIME_G281_LEXICAL_GAPS_GREEN_2026-10-07.zip
 - SHA256 eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
 
 Combined:
-- C4_G281_RUNTIME_PLUS_G284_WEIGHTS_2026-10-07.zip
-- SHA256 1c99dc714e8e38ee975fc9be28f48a5860825648f1c78561c4032819ce5d4219
+- C4_G281_RUNTIME_PLUS_G285_WEIGHTS_2026-10-07.zip
+- SHA256 47d9dedce877b48e6da00a54ca23b4b3bbd62a944426fcc9777fd6d1adb8731f
 
 Recovery: /C4_Canonical/.
 
 ## Normative training entrypoint
-For any long pretraining run or autonomous training agent:
 1. C4_PRETRAINING_STANDARD_0_TO_1GB.md
 2. TRAINING_LAWS.md
 3. DEVELOPMENTAL_TRAINING_METHODOLOGY.md
@@ -30,15 +29,18 @@ Future orchestration:
 - C4_AUTOTRAINER_SPEC.md
 
 ## Latest
-G282/G283 proved contextual lexical learning with zero target WORD_FORM storage.
-G284 factors 37 acquired concepts into six semantic families:
-- 67 direct lessons
-- 148 strict-new inherited relations
-- 148/148 cold
+G284 factored 37 known concepts into six reusable semantic families.
+G285 tested whether those families make new lexical learning cheaper:
+- 40 new context-discovered lexemes
+- 40 questions / 147 teacher words
+- target WORD_FORM = 0
+- 60/60 unseen morphology, cold 60/60
+- 27 lexemes classified directly into G284 families
+- 108/108 strict family-rule inherited relations
 - 0 direct member copies
-- transfer/direct 2.209
-- +8,642 bytes
+- cross-family restraint 5/5
+- full runtime regression 335/344, only 9 known missing historical artifacts
 
-G284 is the first batch run under the formal 0-to-1GB standard with source manifest and frozen held-out created before teaching.
+A RED candidate with invalid generated form глянецом was rejected and rebuilt from clean G284. глянец remains quarantined.
 
 Quality > bytes > generation count.
