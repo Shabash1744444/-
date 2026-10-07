@@ -1,63 +1,54 @@
 # C4 — READ ME FIRST
 
-This repository is the canonical development state for C4.
-
-## Identity
 C4 is NOT Singularity OS.
 
-## Authority order
-1. Physically committed repository state and exact artifact hashes.
+## Authority
+1. Physical canonical artifacts/hashes.
 2. Reproducible tests/checkpoints.
-3. Current chat context.
-4. Model/chat memory.
+3. Current chat.
+4. Memory.
 
-## Current canonical state — 2026-10-07
+## Current canonical — 2026-10-07
 Weights:
-- G279 GUIDED PROSE CORE GREEN
-- child_g279_guided_prose_core_green.c4m
-- 1826213 bytes
-- SHA256 2e9aa26a12ee40210dd465335a3f48865e133728b6f99e95f3d2b821a7444d17
+- G280 GUIDED EVERYDAY CORE GREEN
+- child_g280_guided_everyday_core_green.c4m
+- 1,846,970 bytes
+- SHA256 8cae07434b776d9a101bb7390bfee930a0ca845d790dca9945e3544502006f8a
 
 Runtime:
 - G278 GUIDED READING GREEN
 - C4_RUNTIME_G278_GUIDED_READING_GREEN_2026-10-07.zip
-- 1082920 bytes
 - SHA256 009e33fb61aa7d173c1e5489d60dd19f50c2fd4bfded2f0ef98e029cc2e558ef
 
 Combined:
-- C4_G278_RUNTIME_PLUS_G279_WEIGHTS_2026-10-07.zip
-- 2893848 bytes
-- SHA256 eb810e3e440efab882be904c2360f5b38e3352450e13ad64f8cf4603a2b10e13
+- C4_G278_RUNTIME_PLUS_G280_WEIGHTS_2026-10-07.zip
+- SHA256 7a57a75082c7e294aefe2b99a610a7286449b3a0a572618654c4beaca3e562ab
 
 Persistent binaries: /C4_Canonical/.
 
-## Development chain
-G270 noun transfer 260/260.
-G271 morphology safety.
-G272 verb transfer 756/756.
-G273 adjective transfer 780/780.
-G274 dense semantics 472 novel derived.
-G275 live teaching/persistence.
-G276 ActiveGaps.
-G277 guided measurement 78/78.
-G278 conservative ordinary-text reading.
-G279 guided prose: 184 novel derived / 68 direct; hierarchy 126/126.
-
-## G278 validation
-328/337 clean suite; only 9 unchanged missing historical artifacts.
+## Current result
+G280:
+- 109 everyday concepts
+- 118 ordinary Russian text surfaces
+- 8 ActiveGap teacher relations / 24 teacher words
+- target set 124/338 before teacher -> 338/338 after
+- 327 strict-new transitions not already TRUE in G279
+- 126 direct new lessons
+- strict transfer/direct 2.595
+- +20,757 bytes vs G279
+- cumulative older skills fully GREEN
 
 ## Hard rules
 HOMOGRAPH != IDENTITY.
 ORTHOGRAPHIC SUFFIX != LEXICAL POS.
 TEST TOKEN != VOCABULARY KNOWLEDGE.
 SPEECH FORM != GRAPH FACT.
-AUTOSAVE != NEW EVIDENCE.
 QUESTION PRIORITY != TRUTH CONFIDENCE.
 UNSUPPORTED SENTENCE != FACT.
 OPEN CHAT QUESTION != EXTERNAL TEXT CONTEXT.
-GUIDED READING != ARBITRARY BOOK UNDERSTANDING.
+LEXICAL HYPOTHESIS != LEMMA FACT.
 
 ## Workflow
-counterexample -> minimal repair/training -> held-out -> restraint -> regression -> cold reload -> cumulative -> physical checkpoint -> next
+counterexample -> minimal repair/training -> held-out -> restraint -> full regression -> cold reload -> cumulative -> physical checkpoint -> next
 
-Every block must make later learning cheaper or safer.
+Quality is higher priority than model size or generation count.
