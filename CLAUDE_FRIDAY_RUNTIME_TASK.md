@@ -6,17 +6,17 @@ Intended handoff: Friday evening after 20:00 local time
 ## Current canonical pair
 
 Weights:
-- child_g297_relation_diversity_green.c4m
-- 1,960,675 bytes
-- SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
+- child_g301_relation_language_bridge_green.c4m
+- 1,972,611 bytes
+- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
 
 Runtime:
-- C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
-- SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
+- C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
+- SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-- C4_G298_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
-- SHA256 55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
+- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
+- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
 
 ## Mission
 
@@ -63,7 +63,7 @@ Your branch may focus aggressively on runtime engineering and agent execution.
 - sensor/action adapters cannot bypass epistemic admission.
 
 6. Compatibility and migration
-- exact current G297 weights must load;
+- exact current G301 weights must load;
 - future weights from training chat migrate without deleting USER_SAID/user-taught local experience;
 - keep prior DB backup and explicit schema migrations.
 
@@ -105,12 +105,12 @@ DO:
 improve runtime; add tests; benchmark; implement agent lifecycle; improve persistence/tool execution; package recovery artifacts; document invariants/migrations.
 
 DO NOT:
-retrain/alter canonical G297 weights; import nonce/test vocabulary; patch benchmark answers; weaken UNKNOWN/provenance/source distinctions; assume auto-canonical promotion; replace C4 reasoning with hidden LLM cognition.
+retrain/alter canonical G301 weights; import nonce/test vocabulary; patch benchmark answers; weaken UNKNOWN/provenance/source distinctions; assume auto-canonical promotion; replace C4 reasoning with hidden LLM cognition.
 
 ## Validation before handoff
 
 At minimum:
-1. exact canonical G297 weights open;
+1. exact canonical G301 weights open;
 2. memory mode if supported;
 3. SQLite/disk mode;
 4. cumulative regression;
