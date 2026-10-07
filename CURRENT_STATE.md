@@ -1,52 +1,49 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G297
-Canonical runtime: G298
+Canonical weights: G301
+Canonical runtime: G300
 
 Weights:
-- child_g297_relation_diversity_green.c4m
-- 1,960,675 bytes
-- SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
+- child_g301_relation_language_bridge_green.c4m
+- 1,972,611 bytes
+- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
 
 Runtime:
-- C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
-- 302,268 bytes
-- SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
+- C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
+- 293,368 bytes
+- SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-- C4_G298_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
-- 2,240,335 bytes
-- SHA256 55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
+- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
+- 2,234,874 bytes
+- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
 
-## Infrastructure
-G293: SQLite store / indexed retrieval / durable per-turn persistence.
-
-## Relation algebra line
-G294: inverse/symmetry.
-G295: functional-slot source conflict visibility.
-G296: strict temporal order algebra.
-G298: correction/retraction invalidation and current functional source-stance reconstruction.
-
-## G297 organism
-40 direct relation lessons.
-32/32 strict derived held-out.
-26/26 cross-relation traps UNKNOWN.
-0 direct target leaks.
-Growth vs G292 +7,746 bytes.
+## Relation line
+G294 inverse/symmetry.
+G295 functional slot conflict visibility.
+G296 strict temporal order.
+G298 retraction invalidation/current source stance.
+G299 lexical relation restraint.
+G300 algebra available to open list questions.
+G301 human-language bridge to relation types.
 
 ## Validation
-G298 runtime:
-- focused G294-G298 32/32
-- memory 380/389
-- SQLite 380 pass + same 9 historical missing-artifact failures
-- streaming SQLite 5/5
+Runtime G300:
+- focused 4/4
+- memory 384/393
+- SQLite total 384/393
+- same nine historical missing artifacts only
 
-Exact G297 on G298:
-- memory 32/32 derived + 26/26 restraint
-- SQLite 32/32 derived + 26/26 restraint
-- direct leaks 0
-- cumulative G270-G292 GREEN
+Weights G301:
+- 6/6 natural relation queries after/cold/SQLite
+- G297 32/32 + 26/26 retained
+- G299 24/24 + 16/16 retained
+- all older protected curriculum GREEN
+
+## Open issue
+COLOR/LOCATION/VALUE cardinality is context/scope-sensitive.
+Do not replace FUNCTIONAL with SET without a scoped design.
 
 ## Current objective
-Continue G1000 relation-algebra/trap coverage without confusing evidence history, current source stance, direct facts and structural derivations.
+Finish under-tested relation families and event-frame boundaries, then advance toward dirty human language/context resolution.
