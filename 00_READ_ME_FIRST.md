@@ -3,20 +3,18 @@
 C4 is NOT Singularity OS.
 
 ## Canonical — 2026-10-07
-Weights: G306 SYNTHETIC SPATIAL PHYSICS GREEN
-Runtime: G306 SYNTHETIC 3D PHYSICS GREEN
+Weights/runtime: G307 SOUND / GRAPHEME / WORDS GREEN
 
 Weights SHA256:
-78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded
+648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
 
 Runtime SHA256:
-c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb
+b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
 
-G305 gave C4 durable multimodal sensory grounding.
-G306 gives it its first persistent verified synthetic 3D motor experience.
+G306 gives verified SELF-relative synthetic 3D experience.
+G307 adds a cross-channel lexical form layer:
+audio -> phoneme concepts -> sequence -> word
+glyph -> grapheme concepts -> sequence -> same word
 
-88 simulation receipts teach 10 effects across varying position/yaw.
-10/10 novel-pose heldout.
-No graph-world truth is created by sandbox training.
-
+Phoneme and grapheme are never collapsed into identity.
 Quality > bytes > generation count.
