@@ -18,3 +18,6 @@ glyph -> grapheme concepts -> sequence -> same word
 
 Phoneme and grapheme are never collapsed into identity.
 Quality > bytes > generation count.
+
+
+Full chat recovery snapshot: `C4_MASTER_CHAT_HANDOFF_G307_2026-10-07.md` (also stored in `/C4_Canonical/`).
