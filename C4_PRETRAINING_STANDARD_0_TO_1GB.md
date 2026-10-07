@@ -651,3 +651,29 @@ more reusable structure
 The final objective is not “a 1 GB model.”
 
 It is a C4 for which the next domain is dramatically cheaper to learn than it was for the seed.
+
+
+---
+
+## 20. Run-local gap scope
+
+A persistent organism may carry unresolved gaps from many older experiences.
+
+A training run MUST NOT blindly drain the organism's entire global gap backlog.
+
+Use two layers:
+- GLOBAL GAP MEMORY: all unresolved needs retained by C4;
+- RUN-LOCAL QUEUE: only gaps caused by the current bounded curriculum source, plus explicitly imported prerequisites.
+
+Within a run-local queue:
+1. rank by expected downstream unlock / teacher cost;
+2. select exactly ONE gap;
+3. obtain one answer;
+4. re-evaluate;
+5. rank again.
+
+Do not emit several unanswered questions in one training scheduler step and count them as one teacher interaction.
+
+Historical gaps remain in global memory and can be revisited by a separate maintenance curriculum.
+
+Gap priority changes scheduling only. It does not change truth, evidence or epistemic status.
