@@ -1,32 +1,32 @@
 # ARTIFACT MANIFEST
 
 Current weights:
-- child_g308_contact_effort_physics_green.c4m
-- 1,990,583 bytes
-- SHA256 7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5
+- child_g309_support_fall_physics_green.c4m
+- 1,992,240 bytes
+- SHA256 ac396a927f3819ea38d1af5ed73b2e9ca3078b4cf0b5c4e4f276ef61aa81c197
 
 Weights release:
-- C4_G308_CONTACT_EFFORT_PHYSICS_GREEN_2026-10-07.zip
-- 1,978,035 bytes
-- SHA256 f71be423a2843420d77b35bf38b959a14e67b8605a8786a213c33f16618ba212
+- C4_G309_SUPPORT_FALL_PHYSICS_GREEN_2026-10-07.zip
+- 1,980,021 bytes
+- SHA256 8c179205934e70885ab3019e5d88dfbb0bff01f6ae55aeea85a9221ae3330a91
 
 Current runtime:
-- C4_RUNTIME_G308_CONTACT_EFFORT_PHYSICS_GREEN_2026-10-07.zip
-- 319,082 bytes
-- SHA256 88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3
+- C4_RUNTIME_G309_SUPPORT_FALL_PHYSICS_GREEN_2026-10-07.zip
+- 314,478 bytes
+- SHA256 01d7044d5fc64d86fa0a384c1ad005b1655f20bc9cbba1ddde1c645fd76232b4
 
 Combined:
-- C4_G308_RUNTIME_PLUS_G308_WEIGHTS_2026-10-07.zip
-- 2,289,646 bytes
-- SHA256 703dbba1666a2ea127c0bc4312e68f91c6b1971e8fa42c259a75b738fffe71ee
+- C4_G309_RUNTIME_PLUS_G309_WEIGHTS_2026-10-07.zip
+- 2,276,116 bytes
+- SHA256 aca30b080c2ba9e81a1d986121de545bda78495188f16ae3b25a5fb3c8fe0e6e
 
 Support:
-- checkpoints/CP_C4_G308_CONTACT_EFFORT_PHYSICS_GREEN.md
-- metrics/G308_contact_effort_physics_metrics.json
-- README_G308.md (binary recovery folder)
-- G308_metrics.json (binary recovery folder)
-- G308_source_manifest.json (binary recovery folder)
-- G308_frozen_heldout.json (binary recovery folder)
-- PATCH_G307_TO_G308.diff (binary recovery folder)
+- checkpoints/CP_C4_G309_SUPPORT_FALL_PHYSICS_GREEN.md
+- metrics/G309_support_fall_physics_metrics.json
+- README_G309.md (binary recovery folder)
+- G309_metrics.json (binary recovery folder)
+- G309_source_manifest.json (binary recovery folder)
+- G309_frozen_heldout.json (binary recovery folder)
+- PATCH_G308_TO_G309.diff (binary recovery folder)
 
 Binary recovery: /C4_Canonical/.

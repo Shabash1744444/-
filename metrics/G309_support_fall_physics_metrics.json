@@ -1,0 +1,27 @@
+{
+  "generation": "G309",
+  "status": "GREEN",
+  "parent": "G308",
+  "training_interactions": 104,
+  "training_breakdown": {
+    "release": 16,
+    "free_no_contact": 48,
+    "contact_below": 16,
+    "contact_onset": 16,
+    "held": 8
+  },
+  "heldout": {"passed": 20, "total": 20, "cold_memory": true, "cold_sqlite": true},
+  "learned_mean_acceleration_y": -1.6,
+  "graph": {"entities": 10720, "facts": 10764, "order": 22282, "unchanged": true},
+  "retention": {
+    "g306_spatial": "10/10",
+    "g307_sound_symbol": "6/6",
+    "g307_chunks": "10/10",
+    "g307_word_entities": 5,
+    "g308_contact_effort": "GREEN"
+  },
+  "regression": {"passed": 423, "missing_historical_fixture_filenotfound": 18, "new_semantic_failures": 0},
+  "weights": {"bytes": 1992240, "sha256": "ac396a927f3819ea38d1af5ed73b2e9ca3078b4cf0b5c4e4f276ef61aa81c197"},
+  "runtime": {"bytes": 314478, "sha256": "01d7044d5fc64d86fa0a384c1ad005b1655f20bc9cbba1ddde1c645fd76232b4"},
+  "combined": {"bytes": 2276116, "sha256": "aca30b080c2ba9e81a1d986121de545bda78495188f16ae3b25a5fb3c8fe0e6e"}
+}

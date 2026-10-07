@@ -40,49 +40,43 @@ G305 durable sensory bridge.
 G306 synthetic embodied 3D spatial physics.
 G307 sound / grapheme / word-form grounding.
 G308 contact / collision / effort-response physics.
-
-## G305
-SCREEN/AUDIO/SYMBOL converge only as weak multimodal identity evidence; raw sensory input does not create graph truth.
-Explicit naming binds sensory identity.
-Focused 54/54.
-Full memory/SQLite: 397 PASS + 16 historical FileNotFound only.
-Runtime SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00.
+G309 support / release / free vertical dynamics.
 
 ## G306
-88 verified SANDBOX_RECEIPT interactions across varied positions/yaw.
-Learned SELF-relative LEFT/RIGHT/UP/DOWN/FORWARD/BACKWARD, TURN_LEFT/RIGHT, TOWARD/AWAY.
+88 verified SANDBOX_RECEIPT interactions.
+10 learned SELF-relative effects.
 10/10 novel-pose heldout.
 Graph unchanged.
 Cold memory + SQLite GREEN.
-Runtime SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb.
 
 ## G307
-6 phoneme sensory concepts and 6 separate grapheme concepts.
+6 phoneme sensory concepts + 6 separate grapheme concepts.
 24 repeated supported alignments.
-5 words learned as distinct audio/glyph sequence chunks converging on one word entity.
-No phoneme-grapheme identity collapse.
-Heldout 5/5 audio + 5/5 glyph, memory and SQLite.
-Weights SHA256 648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f.
-Runtime SHA256 b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca.
+5 words as distinct audio/glyph chunks converging on shared word entities.
+Heldout 5/5 audio + 5/5 glyph.
 
 ## G308
 96 verified synthetic interactions.
-TOUCH distinguishes CONTACT from COLLISION.
-PUSH learns CONTACT + COLLISION only from verified environment receipts.
-NO_CONTACT controls retained.
-Anchored contact can succeed with zero displacement.
-Empirical displacement-per-effort response is learned without exposing simulator response/mass labels.
-Large/mobile vs small/resistant anti-shortcut passed.
+CONTACT != COLLISION.
+Effort-to-displacement response inferred from receipts.
 12/12 novel effort/pose heldout.
+Graph unchanged.
+Cold memory + SQLite GREEN.
+
+## G309
+104 verified synthetic interactions:
+16 RELEASE, 48 FREE_NO_CONTACT, 16 CONTACT_BELOW, 16 CONTACT_ONSET, 8 HELD.
+Frozen heldout 20/20.
+Free dynamics infer mean acceleration -1.6 from velocity changes, not simulator metadata.
+Contact below remains stable.
+Contact onset stops downward motion.
 Graph unchanged: 10,720 entities / 10,764 facts / order 22,282.
 Cold memory + SQLite GREEN.
-G306 spatial 10/10 retained.
-G307 lexical-form grounding retained.
+G306/G307/G308 retained.
 
-Same-environment regression:
-- exact parent G307: 407 PASS + 18 historical missing-fixture FileNotFoundError;
-- G308: 415 PASS + same 18;
-- new semantic/runtime assertion failures 0.
+Full regression:
+423 PASS + 18 historical missing-fixture FileNotFoundError.
+New semantic/runtime assertion failures: 0.
 
-Current weights SHA256 7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5.
-Current runtime SHA256 88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3.
+Current weights SHA256 ac396a927f3819ea38d1af5ed73b2e9ca3078b4cf0b5c4e4f276ef61aa81c197.
+Current runtime SHA256 01d7044d5fc64d86fa0a384c1ad005b1655f20bc9cbba1ddde1c645fd76232b4.

@@ -1,56 +1,62 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G308
-Canonical runtime: G308
+Canonical weights: G309
+Canonical runtime: G309
 
 Weights:
-- child_g308_contact_effort_physics_green.c4m
-- 1,990,583 bytes
-- SHA256 7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5
+- child_g309_support_fall_physics_green.c4m
+- 1,992,240 bytes
+- SHA256 ac396a927f3819ea38d1af5ed73b2e9ca3078b4cf0b5c4e4f276ef61aa81c197
 
 Runtime:
-- C4_RUNTIME_G308_CONTACT_EFFORT_PHYSICS_GREEN_2026-10-07.zip
-- 319,082 bytes
-- SHA256 88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3
+- C4_RUNTIME_G309_SUPPORT_FALL_PHYSICS_GREEN_2026-10-07.zip
+- 314,478 bytes
+- SHA256 01d7044d5fc64d86fa0a384c1ad005b1655f20bc9cbba1ddde1c645fd76232b4
 
 Combined:
-- C4_G308_RUNTIME_PLUS_G308_WEIGHTS_2026-10-07.zip
-- 2,289,646 bytes
-- SHA256 703dbba1666a2ea127c0bc4312e68f91c6b1971e8fa42c259a75b738fffe71ee
+- C4_G309_RUNTIME_PLUS_G309_WEIGHTS_2026-10-07.zip
+- 2,276,116 bytes
+- SHA256 aca30b080c2ba9e81a1d986121de545bda78495188f16ae3b25a5fb3c8fe0e6e
 
 ## G306
-Verified synthetic SELF-relative 3D motor priors.
+Verified SELF-relative 3D motor priors.
 
 ## G307
-Cross-channel lexical-form grounding:
-- phoneme-side and grapheme-side concepts remain distinct;
-- many-to-many sound/glyph association;
-- sound and glyph sequences can converge on one explicit word entity;
-- AUDIO FORM != TEXT FORM;
-- WORD FORM != CONCEPT / MEANING.
+Cross-channel lexical-form grounding with strict separation:
+AUDIO FORM != TEXT FORM.
+PHONEME != GRAPHEME.
+WORD FORM != CONCEPT / MEANING.
 
 ## G308
-Verified contact / collision / effort-response physics:
-- 96 verified synthetic interactions;
-- CONTACT and COLLISION learned as distinct effects;
-- NO_CONTACT controls retained;
-- anchored zero-displacement contact retained;
-- response learned from displacement per motor effort, not name or visual size;
-- hidden simulator response parameter never exposed to learner;
-- 12/12 heldout on new efforts/poses;
-- proposition graph unchanged;
-- cold memory and SQLite GREEN.
+Verified contact/collision and effort-to-displacement response learning.
+96 interactions. Heldout 12/12.
+Large/mobile vs small/resistant anti-shortcut passed.
+Graph unchanged.
+
+## G309
+Verified support/release/free vertical dynamics.
+104 interactions:
+- 16 RELEASE;
+- 48 FREE_NO_CONTACT;
+- 16 CONTACT_BELOW;
+- 16 CONTACT_ONSET;
+- 8 HELD controls.
+
+Frozen heldout 20/20.
+Mean synthetic vertical acceleration inferred from velocity changes: -1.6.
+The simulator constant itself was not learner input.
+Cold memory + SQLite GREEN.
+Graph unchanged.
 
 Protected retention:
 - G306 spatial 10/10;
-- G307 sound-symbol 6/6;
-- G307 sequence chunks 10/10 / 5 shared word entities.
+- G307 sound-symbol 6/6 and 10/10 chunks / 5 word entities;
+- G308 contact/effort-response GREEN.
 
-Regression:
-- parent G307: 407 PASS + 18 historical missing-fixture FileNotFoundError;
-- G308: 415 PASS + same 18;
-- new semantic failures 0.
+Full regression:
+423 PASS + same 18 historical missing-fixture FileNotFoundError.
+New semantic/runtime failures: 0.
 
 ## Current objective
-Continue synthetic developmental physics with support/release/fall and richer contact dynamics. Only after physical concepts are grounded should spoken/written labels be attached as separate learned forms.
+Continue developmental world physics: multi-step trajectories, richer collision dynamics, containment/support hierarchy; name grounded concepts only later through separate spoken/written form channels.

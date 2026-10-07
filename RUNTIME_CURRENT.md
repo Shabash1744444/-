@@ -1,44 +1,45 @@
-# RUNTIME CURRENT — G308 CONTACT / EFFORT PHYSICS GREEN
+# RUNTIME CURRENT — G309 SUPPORT / FALL PHYSICS GREEN
 
-Canonical runtime: G308.
-Canonical weights: G308.
+Canonical runtime: G309.
+Canonical weights: G309.
 
 Runtime SHA256:
-88532c2963c0d3a7bc302ae9363ba48a6a4f7477304c2538555a154abf9053c3
+01d7044d5fc64d86fa0a384c1ad005b1655f20bc9cbba1ddde1c645fd76232b4
 
 Weights SHA256:
-7514473482308858166670238b1bfbc946e223102443e22ec3c76e38fbf10ba5
+ac396a927f3819ea38d1af5ed73b2e9ca3078b4cf0b5c4e4f276ef61aa81c197
 
-## New durable physical organ
+## New durable organ
 
-ContactEffortLearner:
-- learns verified CONTACT / COLLISION / NO_CONTACT effects;
-- records empirical motor-effort -> measured-displacement response;
-- estimates displacement-per-effort;
-- compares response without asserting semantic mass labels;
-- persists through .c4m and SQLite runtime state.
+SupportFallLearner:
+- learns RELEASE as held-to-free without inventing motion at release time;
+- learns free no-contact vertical dynamics from verified before/after state;
+- estimates acceleration from velocity change / dt;
+- learns stable contact-below condition;
+- learns contact onset stopping downward motion;
+- keeps all outputs SIMULATION-scoped.
 
 Runtime-facing methods:
-- learn_contact_transition(...)
-- contact_effect(...)
-- physical_response_profile(...)
-- compare_physical_response(...)
-- predict_push_displacement(...)
+- learn_support_transition(...)
+- support_effect(...)
+- predict_free_vertical_step(...)
 
-SyntheticContactWorld is deterministic SANDBOX physics. Hidden response/anchor parameters are environment-only and are not learner transition fields.
+SyntheticSupportWorld is deterministic sandbox physics. Its acceleration constant is environment-private and absent from learner transitions.
 
-## Retained
+## Retained organs
+G306 SpatialEffectLearner.
+G307 SoundSymbolBridge.
+G308 ContactEffortLearner.
 
-G306 spatial APIs remain.
-G307 SoundSymbolBridge remains.
-
+## Boundaries
 AUDIO FORM != TEXT FORM.
 PHONEME != GRAPHEME.
-SOUND ASSOCIATION != IDENTITY.
-SEQUENCE FORM != WORD ENTITY.
 WORD FORM != CONCEPT / MEANING.
-
 CONTACT != COLLISION.
 MOTOR EFFORT != OBJECT MASS.
+RELEASE != MOTION.
+HELD != FREE.
+CONTACT_BELOW != HELD.
+DOWNWARD REGULARITY != WORD GRAVITY.
 SIMULATION != OBSERVATION.
 ACTION_REQUEST != VERIFIED_OUTCOME.
