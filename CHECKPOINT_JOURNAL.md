@@ -24,19 +24,13 @@ G289 mixed-chunk dependency runtime.
 G290 mixed explanatory prose.
 G291 deep explanatory hierarchy.
 G292 hierarchy-accelerated concepts: 16 lessons -> 96/96 inherited; leverage 6.0.
-G293 runtime SQLite store: CL-G270 storage physics cherry-picked onto G289; memory 352/361, SQLite 352/361; exact G292 retained.
+G293 SQLite store: Claude CL-G270 storage/query physics merged onto canonical cognition.
+G294 conservative relation algebra: PART_OF/HAS_PART and BEFORE/AFTER inverse; SYNONYM/ANTONYM/OPPOSITE symmetric; forbidden neighboring inferences remain UNKNOWN.
+
+G294 validation:
+focused 12/12 memory + 12/12 SQLite;
+full 360/369 memory + 360/369 SQLite;
+same nine historical missing artifacts only.
 
 Current weights SHA256 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
-Current runtime SHA256 a2ccaa0ecd862657328338f1b5e87726d21753748152a1a8989a368f1ac251c5
-
-
-G293 SQLite store merge:
-- source CL-G270 storage branch;
-- cherry-picked onto G289, not wholesale replacement;
-- G292 weights unchanged;
-- memory 352/361 and SQLite 352/361;
-- same nine historical missing artifacts only;
-- disk-backed graph + indexed queries + per-turn transactions;
-- canonical pair is now G293 runtime + G292 weights.
-
-Current runtime SHA256 a2ccaa0ecd862657328338f1b5e87726d21753748152a1a8989a368f1ac251c5
+Current runtime SHA256 3ce81d00f50a0cde28eef0d7e05bbe329f2665f41494a5a12fb9bd1b67998f32
