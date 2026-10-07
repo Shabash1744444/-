@@ -28,3 +28,15 @@ G293 runtime SQLite store: CL-G270 storage physics cherry-picked onto G289; memo
 
 Current weights SHA256 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
 Current runtime SHA256 a2ccaa0ecd862657328338f1b5e87726d21753748152a1a8989a368f1ac251c5
+
+
+G293 SQLite store merge:
+- source CL-G270 storage branch;
+- cherry-picked onto G289, not wholesale replacement;
+- G292 weights unchanged;
+- memory 352/361 and SQLite 352/361;
+- same nine historical missing artifacts only;
+- disk-backed graph + indexed queries + per-turn transactions;
+- canonical pair is now G293 runtime + G292 weights.
+
+Current runtime SHA256 a2ccaa0ecd862657328338f1b5e87726d21753748152a1a8989a368f1ac251c5
