@@ -6,17 +6,17 @@ Intended handoff: Friday evening after 20:00 local time
 ## Current canonical pair
 
 Weights:
-- child_g302_role_means_successor_scope_green.c4m
-- 1,981,454 bytes
-- SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
+- child_g307_sound_grapheme_words_green.c4m
+- 1,988,842 bytes
+- SHA256 648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
 
 Runtime:
-- C4_RUNTIME_G304_EVENT_CONJUNCTION_SCOPE_GREEN_2026-10-07.zip
-- SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae
+- C4_RUNTIME_G307_SOUND_GRAPHEME_WORDS_GREEN_2026-10-07.zip
+- SHA256 b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
 
 Combined:
-- C4_G304_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
-- SHA256 02bd772d97edf43ff7c0bdfbc385aa1e746fa48a962e87f3ac3d029331bfd77b
+- C4_G307_RUNTIME_PLUS_G307_WEIGHTS_2026-10-07.zip
+- SHA256 4068e8c8c7a6128747433e3c92bb5795b1f33faed385784c27d3d3e095285f49
 
 ## Mission
 
@@ -63,7 +63,7 @@ Your branch may focus aggressively on runtime engineering and agent execution.
 - sensor/action adapters cannot bypass epistemic admission.
 
 6. Compatibility and migration
-- exact current G302 weights must load;
+- exact current G307 weights must load;
 - future weights from training chat migrate without deleting USER_SAID/user-taught local experience;
 - keep prior DB backup and explicit schema migrations.
 
@@ -105,12 +105,12 @@ DO:
 improve runtime; add tests; benchmark; implement agent lifecycle; improve persistence/tool execution; package recovery artifacts; document invariants/migrations.
 
 DO NOT:
-retrain/alter canonical G302 weights; import nonce/test vocabulary; patch benchmark answers; weaken UNKNOWN/provenance/source distinctions; assume auto-canonical promotion; replace C4 reasoning with hidden LLM cognition.
+retrain/alter canonical G307 weights; import nonce/test vocabulary; patch benchmark answers; weaken UNKNOWN/provenance/source distinctions; assume auto-canonical promotion; replace C4 reasoning with hidden LLM cognition.
 
 ## Validation before handoff
 
 At minimum:
-1. exact canonical G302 weights open;
+1. exact canonical G307 weights open;
 2. memory mode if supported;
 3. SQLite/disk mode;
 4. cumulative regression;
@@ -127,7 +127,7 @@ Known historical missing-artifact failures must be separated from new regression
 
 ## Deliverables
 
-Runtime ZIP; combined runtime+exact G302 weights smoke package; checkpoint; changelog; benchmark/regression JSON; migration notes; hashes/sizes; patch/diff; README with changed/not-changed/risks/next.
+Runtime ZIP; combined runtime+exact G307 weights smoke package; checkpoint; changelog; benchmark/regression JSON; migration notes; hashes/sizes; patch/diff; README with changed/not-changed/risks/next.
 
 If a counterexample appears, preserve it and repair minimally or leave RED.
 
@@ -154,3 +154,24 @@ G303/G304 add event-time/scope boundaries:
 - known multiword phrase identity outranks surface splitting.
 
 Preserve these boundaries in any future runtime work.
+
+
+## Main-line update through G307
+
+G305 durable sensory grounding:
+- SCREEN/AUDIO/SYMBOL vectors are weak perceptual evidence;
+- raw observation does not create graph truth;
+- explicit naming binds sensory identity.
+
+G306 synthetic 3D:
+- SELF-relative axes;
+- verified sandbox action/outcome learning;
+- action request != verified outcome;
+- simulation != external-world truth.
+
+G307 lexical forms:
+- PHONEME != GRAPHEME;
+- sound/glyph association != identity;
+- separate sound and glyph sequences may converge on one explicit word entity.
+
+Preserve these boundaries in future runtime/body work.
