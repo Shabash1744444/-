@@ -1,23 +1,21 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G301
+Canonical weights: G302
 Canonical runtime: G300
 
 Weights:
-- child_g301_relation_language_bridge_green.c4m
-- 1,972,611 bytes
-- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
+- child_g302_role_means_successor_scope_green.c4m
+- 1,981,454 bytes
+- SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime:
 - C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
-- 293,368 bytes
 - SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
-- 2,234,874 bytes
-- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
+- C4_G300_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+- SHA256 4d0fe345dff230413ee849971eba3765df317ccc23bc1f56de4826f24c0e9ce0
 
 ## Relation line
 G294 inverse/symmetry.
@@ -25,15 +23,18 @@ G295 functional conflict visibility.
 G296 strict temporal order.
 G298 retraction invalidation.
 G299 lexical relation restraint.
-G300 structural algebra in open list questions.
-G301 natural-language relation bridge.
+G300 open relation query algebra.
+G301 relation-language bridge.
+G302 ROLE/MEANS/SUCCESSOR scope.
 
-## Validation
-G300 runtime: focused 4/4; memory 384/393; SQLite total 384/393; only nine historical missing-artifact failures.
-G301: 6/6 natural queries after/cold/SQLite; G297 and G299 fully retained; all older protected curriculum GREEN.
-
-## Open issue
-COLOR/LOCATION/VALUE cardinality requires context/scope design, not a blind FUNCTIONAL->SET change.
+## G302 validation
+44/44 novel direct facts.
+24/24 forbidden inferences UNKNOWN.
+G301 natural queries 6/6 read-only.
+G299 retained 24/24 + 16/16.
+G297 retained 32/32 + 26/26.
+0 direct leaks.
+Cold memory == SQLite.
 
 ## Current objective
-Finish ROLE/MEANS/SUCCESSOR/EVENT relation traps, then advance toward dirty human language and contextual surface resolution.
+Finish EVENT_* frame semantics and scope/cardinality traps before moving into dirty human language.
