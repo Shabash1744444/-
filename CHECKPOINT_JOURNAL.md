@@ -77,3 +77,15 @@ Cold memory + SQLite GREEN.
 Full runtime 404 pass + 16 FileNotFound only in each store.
 Weights SHA256 78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded.
 Runtime SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb.
+
+
+G307 sound/grapheme/word grounding:
+6 phoneme sensory concepts and 6 separate grapheme concepts.
+24 repeated supported alignments.
+5 words learned as distinct audio/glyph sequence chunks converging on one word entity.
+No phoneme-grapheme identity collapse.
+Heldout 5/5 audio + 5/5 glyph, memory and SQLite.
+G306 spatial effects retained 10/10.
+G302 reasoning retained.
+Weights SHA256 648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f.
+Runtime SHA256 b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca.
