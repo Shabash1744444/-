@@ -2,7 +2,7 @@
 
 ## Current canonical
 Weights generation: G274 DENSE SEMANTIC CORE GREEN
-Runtime generation: G271 MORPHOLOGY VERB GUARD GREEN
+Runtime generation: G275 LIVE TEACHING MERGE GREEN
 
 Weights:
 - child_g274_dense_semantic_core_green.c4m
@@ -15,27 +15,24 @@ Weights release:
 - SHA256 81edc7438c421519bcda4bca174bd53b769e3dd636d337ec4a41aed5ba13d340
 
 Runtime:
-- C4_RUNTIME_G271_MORPH_VERB_GUARD_GREEN_2026-10-07.zip
-- 228891 bytes
-- SHA256 5d7720e172017f0b32f2c0b92fcee3eb88e6a8be40580c454778eec6f6a76f31
+- C4_RUNTIME_G275_LIVE_TEACHING_MERGE_GREEN_2026-10-07.zip
+- 324818 bytes
+- SHA256 1c7243de518c12cff4a27572cf2e423bd77c5bd6cf70925748e86ce698ef9a68
 
 Combined:
-- C4_G271_RUNTIME_PLUS_G274_WEIGHTS_2026-10-07.zip
-- 2036899 bytes
-- SHA256 e23bcff6cb54746d5aeda27b6d0477452eff81f6c291046706c00bdc97bd06d3
-
-Intermediate releases:
-- G272 verb release: SHA256 22e1253fdaee960b8be050f827087fee831c63e6004088ae02b5e11c3a63a474
-- G273 adjective release: SHA256 73aa4e6a00764da2ef896ca40bd2e0fd612fddae216ec79519807f43a915eda7
+- C4_G275_RUNTIME_PLUS_G274_WEIGHTS_2026-10-07.zip
+- 2113082 bytes
+- SHA256 10943a16639f4fa6b17eef0e107c1ccf16b864e1a616c0294153e515efde4c5d
 
 Status:
-- runtime 289/298; only 9 unchanged missing historical artifacts
+- runtime full suite 317/326
+- only 9 unchanged missing historical artifacts
+- 0 new assertion failures
 - nouns 260/260
 - verbs 756/756
 - adjectives 780/780
 - semantic derivations 472/472
-- verb/noun safety 10/10
-- cold reload GREEN
+- canonical G274 weights unchanged
 
 ## Binary storage
 Binary .c4m/.zip artifacts are stored in personal Library /C4_Canonical/.
