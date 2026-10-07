@@ -1,18 +1,22 @@
-# RUNTIME CURRENT — G281 LEXICAL GAPS
+# RUNTIME CURRENT — G286 CAUSAL GUIDED READING
 
-Canonical runtime: G281.
-Canonical weights: G285.
+Canonical runtime: G286.
+Canonical weights: G287.
 
 Runtime SHA256:
-eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
+b51670f57fa3a3d953ac3d096203b4015fdcb74eb18ad43c872018b8e1daa896
 
 Weights SHA256:
-634c07b755e727d15e98e56a5d3a82f757e44aea4b77320b0204834510a1872e
+a45a68901a1f9ac79a0fdad729f0b25e93d380af2d1e7cd0265d7486f2f54a36
 
 Combined SHA256:
-47d9dedce877b48e6da00a54ca23b4b3bbd62a944426fcc9777fd6d1adb8731f
+5abadbb7c8cb4165384846411ff33d64bffa62f2960ddd041a9ce0d64e92c5a3
 
-G281 creates question-only LEXICAL_TERM gaps for unknown raw forms in supported predicate/action objects. It never predicts a lemma.
+G286 = G281 plus conservative CAUSES ingestion in guided reading:
+- both endpoints must already exist;
+- CAUSES object kind is entity;
+- origin/source provenance preserved;
+- unknown endpoint causal prose skipped without mutation;
+- derived causal chains are never persisted as direct facts.
 
-Validation remains 335/344 full suite, only 9 known missing historical artifacts.
-G285 cumulative fully GREEN.
+Validation: 339/348 full suite; only 9 known missing historical artifacts.
