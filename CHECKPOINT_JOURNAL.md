@@ -1,56 +1,36 @@
 # CHECKPOINT JOURNAL
 
-## Bootstrap
-Repository adopted as canonical external memory for C4 on 2026-10-06.
+Repository canonical external memory since 2026-10-06.
 
 ## Condensed chain
-G207-G221: source identity, causal foundations, evidence ancestry, structural transfer.
-G222: dirty evidence collision GREEN.
-G223-G240: world/self grounding and scientific curriculum.
-G241-G254: literature, audio/video and multimodal grounding.
-G255-G266: abstraction, self/world, Russian multimodal transfer, synthetic vision, object permanence.
-G267-G269: canonical runtime dialogue/surface/kernel-floor progression.
-G270: FAST LEMMA TRANSFER GREEN — noun held-out 260/260.
-G271: RUNTIME MORPH VERB GUARD GREEN — explicit verb evidence required.
-G272: FAST VERB TRANSFER GREEN — 756/756, transfer/direct 5.906.
-G273: FAST ADJECTIVE TRANSFER GREEN — 780/780, transfer/direct 7.879; homograph quarantine.
-G274: DENSE SEMANTIC CORE GREEN — 472 novel derived truths, transfer/direct 4.140.
-G275: LIVE TEACHING MERGE GREEN — external teaching/speech/autosave mechanisms merged with canonical G271 safety/discourse; G274 weights unchanged.
+G207-G266: source/causal/evidence development, scientific/literature/multimodal curriculum, synthetic vision, object permanence.
+G267-G269: canonical dialogue/surface/kernel-floor runtime progression.
+G270: noun Fast Curriculum 260/260.
+G271: verb/POS morphology safety.
+G272: verb transfer 756/756, 5.906.
+G273: adjective transfer 780/780, 7.879.
+G274: dense semantic core 472 novel derived, 4.140.
+G275: live teaching/persistence merge.
+G276: ActiveGaps/Teacher Cost GREEN; utility-ranked questions; clean suite 321/330.
+G277: guided measurement core GREEN; 3 teacher relations -> 78/78 held-out; 104 novel derived / 56 direct.
 
-## Current exact artifacts
+## Current artifacts
 Weights:
-- child_g274_dense_semantic_core_green.c4m
-- 1805052 bytes
-- SHA256 6e566b67e54504fbdb9f2924bdba0ed330dce5ce525acb97234d5dd33676c20e
+- child_g277_guided_measurement_core_green.c4m
+- 1814566 bytes
+- SHA256 84ab317de73d65b459447a31471715e69726d2df37122ea0352f6da38ca1f2c4
 
 Runtime:
-- C4_RUNTIME_G275_LIVE_TEACHING_MERGE_GREEN_2026-10-07.zip
-- 324818 bytes
-- SHA256 1c7243de518c12cff4a27572cf2e423bd77c5bd6cf70925748e86ce698ef9a68
+- C4_RUNTIME_G276_ACTIVE_GAPS_GREEN_2026-10-07.zip
+- 281120 bytes
+- SHA256 6a8e174e0d3e79bd90c04d66e55964b9c22feb16f5eb9d83f0724278506d2a17
 
 Combined:
-- C4_G275_RUNTIME_PLUS_G274_WEIGHTS_2026-10-07.zip
-- 2113082 bytes
-- SHA256 10943a16639f4fa6b17eef0e107c1ccf16b864e1a616c0294153e515efde4c5d
+- C4_G276_RUNTIME_PLUS_G277_WEIGHTS_2026-10-07.zip
+- SHA256 ceb2149903ea6ef47cefbeb1caeaabe963ebde84458cd00c7fc72881093ccf35
 
-## G275 validation
-- 317/326 full suite
-- 9 known missing historical files only
-- 0 new assertion failures
-- cumulative G274 retention fully GREEN
-- external disposable nonce not admitted to canonical weights
-
-## Checkpoint discipline
-Every generation must leave:
-- exact parent baseline;
-- objective/counterexample;
-- direct training/repair;
-- held-out re-attack;
-- restraint/negative controls;
-- regression;
-- cold reload;
-- cumulative earlier-skill re-attack;
-- exact artifact hash and byte size;
-- next step.
+## Discipline
+Every generation:
+exact parent -> objective/counterexample -> direct training/repair -> held-out -> restraint -> regression -> cold reload -> cumulative re-attack -> physical checkpoint -> next.
 
 Never advance canonical generation until physical artifact/checkpoint exists.
