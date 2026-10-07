@@ -66,3 +66,14 @@ Full workspace memory/SQLite: 397 passed + 16 FileNotFound only.
 Exact G302: 44/44 direct + 24/24 restraint.
 
 Current runtime SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00.
+
+
+G306 synthetic embodied 3D physics:
+88 verified SANDBOX_RECEIPT interactions across varied positions/yaw.
+Learned SELF-relative LEFT/RIGHT/UP/DOWN/FORWARD/BACKWARD, TURN_LEFT/RIGHT, TOWARD/AWAY.
+10/10 novel-pose heldout.
+Graph unchanged by simulated motor training.
+Cold memory + SQLite GREEN.
+Full runtime 404 pass + 16 FileNotFound only in each store.
+Weights SHA256 78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded.
+Runtime SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb.
