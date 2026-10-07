@@ -1,25 +1,23 @@
-# RUNTIME CURRENT — G305 SENSORY BRIDGE GREEN
+# RUNTIME CURRENT — G306 SYNTHETIC 3D PHYSICS GREEN
 
-Canonical runtime: G305.
-Canonical weights: G302.
+Canonical runtime: G306.
+Canonical weights: G306.
 
 Runtime SHA256:
-2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00
+c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb
+
+Weights SHA256:
+78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded
 
 Combined SHA256:
-606111ab5dce2108468a57b0e50621f195442dfc6622d8e8cc36c4a264adeda9
+25aed1de0c7f3eda2d8937e748944e461856e5e1f7945c695a84cd31c9c9915e
 
-G305 promotes NurseryState/SensoryGrounder into durable C4LivingRuntime state.
+New app/training surfaces:
+- Synthetic3DWorld external sandbox adapter
+- SpatialEffectLearner durable SIMULATION-scoped experience
+- learn_spatial_transition(receipt, transition)
+- spatial_effect(action)
 
-App-facing API:
-observe_sensory(bundle)
-bind_sensory_name(concept_id,label,...)
-sensory_resolve(modality,vec)
+Existing G305 sensory API remains.
 
-Laws:
-VECTOR SIMILARITY != IDENTITY.
-RAW SIGNAL != TEACHER LABEL.
-RAW SENSORY OBSERVATION != GRAPH TRUTH.
-SINGLE UNKNOWN MODALITY != NEW ENTITY.
-EXPLICIT NAMING IS A TEACHING ACT.
-ACTION REQUEST != VERIFIED OUTCOME.
+No action effect may be learned from an unverified/non-simulation receipt.
