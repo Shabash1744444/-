@@ -54,3 +54,16 @@ learned six Russian relation nouns -> QUERY_RELATION. 6/6 natural questions afte
 
 Current weights SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
 Current runtime SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
+
+
+G299 lexical relation restraint:
+40 direct SYNONYM/ANTONYM lessons -> 24/24 reverse symmetry; 16/16 transitivity/identity traps UNKNOWN; 0 leaks; +7,362 bytes.
+
+G300 open relation query:
+open list queries now consume safe read-only inverse/symmetric algebra. Focused 4/4; memory 384/393; SQLite total 384/393; same nine historical missing artifacts only.
+
+G301 relation language bridge:
+six Russian relation nouns -> QUERY_RELATION; 6/6 natural queries after/cold/SQLite; G297 and G299 fully retained; +4,574 bytes.
+
+Current weights SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
+Current runtime SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
