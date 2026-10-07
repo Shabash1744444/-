@@ -1,36 +1,34 @@
 # ARTIFACT MANIFEST
 
 ## Current canonical
-Weights generation: G277 GUIDED MEASUREMENT CORE GREEN
-Runtime generation: G276 ACTIVE GAPS GREEN
+Weights: G279 GUIDED PROSE CORE GREEN
+Runtime: G278 GUIDED READING GREEN
 
 Weights:
-- child_g277_guided_measurement_core_green.c4m
-- 1814566 bytes
-- SHA256 84ab317de73d65b459447a31471715e69726d2df37122ea0352f6da38ca1f2c4
+- child_g279_guided_prose_core_green.c4m
+- 1826213 bytes
+- SHA256 2e9aa26a12ee40210dd465335a3f48865e133728b6f99e95f3d2b821a7444d17
 
 Weights release:
-- C4_G277_GUIDED_MEASUREMENT_CORE_GREEN_2026-10-07.zip
-- 1795266 bytes
-- SHA256 bc322598ea9553c02c14bdc754dac12cb74006c54c4b2fc494ef0ae0c788fe35
+- C4_G279_GUIDED_PROSE_CORE_GREEN_2026-10-07.zip
+- 1813914 bytes
+- SHA256 e4b140156e94d426e7dbf6a2a60071395b32aa2342367b79d900d6a6cdb30f5e
 
 Runtime:
-- C4_RUNTIME_G276_ACTIVE_GAPS_GREEN_2026-10-07.zip
-- 281120 bytes
-- SHA256 6a8e174e0d3e79bd90c04d66e55964b9c22feb16f5eb9d83f0724278506d2a17
+- C4_RUNTIME_G278_GUIDED_READING_GREEN_2026-10-07.zip
+- 1082920 bytes
+- SHA256 009e33fb61aa7d173c1e5489d60dd19f50c2fd4bfded2f0ef98e029cc2e558ef
 
 Combined:
-- C4_G276_RUNTIME_PLUS_G277_WEIGHTS_2026-10-07.zip
-- 2076668 bytes
-- SHA256 ceb2149903ea6ef47cefbeb1caeaabe963ebde84458cd00c7fc72881093ccf35
+- C4_G278_RUNTIME_PLUS_G279_WEIGHTS_2026-10-07.zip
+- 2893848 bytes
+- SHA256 eb810e3e440efab882be904c2360f5b38e3352450e13ad64f8cf4603a2b10e13
 
 Status:
-- runtime clean suite 321/330; 9 missing historical artifacts only
-- G277 held-out 78/78
-- G270 nouns 260/260
-- G272 verbs 756/756
-- G273 adjectives 780/780
-- G274 semantics 472/472
-- cold reload GREEN
+- runtime 328/337, 9 known missing historical artifacts
+- cumulative old skills GREEN
+- G279 hierarchy 126/126
+- G279 shared purpose 58/58
+- unsupported reader restraint 0/0 mutation
 
-Binary artifacts are stored in personal Library /C4_Canonical/.
+Binary artifacts are stored in /C4_Canonical/.
