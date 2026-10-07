@@ -41,3 +41,16 @@ cumulative G270-G292 GREEN.
 
 Current weights SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
 Current runtime SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
+
+
+G299 lexical relation restraint:
+40 direct SYNONYM/ANTONYM lessons -> 24/24 reverse symmetry; 16/16 identity/transitivity traps UNKNOWN; +7,362 bytes.
+
+G300 open relation query:
+safe inverse/symmetric algebra is now visible to open list questions without persistence. Full memory 384/393; SQLite 384/393; same nine historical missing files.
+
+G301 relation language bridge:
+learned six Russian relation nouns -> QUERY_RELATION. 6/6 natural questions after/cold/SQLite. G297 and G299 retained fully. Growth +4,574 bytes.
+
+Current weights SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
+Current runtime SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
