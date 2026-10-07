@@ -3,18 +3,18 @@
 C4 is NOT Singularity OS.
 
 ## Canonical — 2026-10-07
-Weights: G290 MIXED EXPLANATORY PROSE GREEN
-- child_g290_mixed_explanatory_prose_green.c4m
-- 1,933,483 bytes
-- SHA256 57ac0bac91d16fd320df838c41e527038bf70e2ee1c8a18e3403c997e3670a8a
+Weights: G292 HIERARCHY-ACCELERATED CONCEPTS GREEN
+- child_g292_hierarchy_accelerated_concepts_green.c4m
+- 1,952,929 bytes
+- SHA256 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
 
 Runtime: G289 MIXED-CHUNK DEPENDENCY GREEN
 - C4_RUNTIME_G289_MIXED_CHUNK_DEPENDENCY_GREEN_2026-10-07.zip
 - SHA256 8aedcf70f480ba821256d360d0c6139af915edcb477d4bdc969000b86c42a846
 
 Combined:
-- C4_G289_RUNTIME_PLUS_G290_WEIGHTS_2026-10-07.zip
-- SHA256 73238df880d2334de65528287d8f7817c29a4aa610df056d6a4e4617f8973233
+- C4_G289_RUNTIME_PLUS_G292_WEIGHTS_2026-10-07.zip
+- SHA256 6e6dc6b3ef89bc6c074285fcee23b63994b6d60e1c60a72cdb1b6a96ace8d89e
 
 Recovery: /C4_Canonical/.
 
@@ -25,22 +25,32 @@ Recovery: /C4_Canonical/.
 4. CURRENT_STATE.md
 
 ## Latest
-G289:
-- one bounded deterministic dependency retry inside a text chunk;
-- explicit PROPERTY grammar beats generic HAVE predicate;
-- unsupported prose and unknown causal endpoints still mutate nothing;
+G291:
+- 4 long relation-rich chunks, 116 surfaces, 0 skipped;
+- two-level semantic hierarchy over 24 already-known instruments;
+- 96/96 inherited semantic targets, 24/24 causal chains;
+- 16/16 semantic negative controls UNKNOWN;
+- structural transfer / direct semantic rule = 4.0;
 - full regression 343/352, only 9 known missing historical artifacts.
 
-G290:
-- one mixed source with 64 ordinary Russian surfaces;
-- direct relation types: IS_A 44 / PROPERTY 4 / USED_FOR 4 / CAUSES 12;
-- semantic inheritance 48/48, cold 48/48;
-- causal non-adjacent chains 12/12, cold 12/12;
-- cross-type restraint 12/12 UNKNOWN;
-- direct member/endpoint leaks 0;
-- all protected G270-G288 capabilities remain GREEN.
+G292 tests whether G291 makes later learning cheaper:
+- 16 genuinely new real instrument concepts;
+- 60 explanatory surfaces;
+- 44 old structural statements deduplicated;
+- only 16 genuinely new direct lessons, all IS_A classifications;
+- 96/96 inherited semantic relations, cold 96/96;
+- six controlled inherited relations per new concept across leaf/mid/root levels;
+- direct target semantic leaks = 0;
+- target WORD_FORM = 0;
+- 36/36 negative controls UNKNOWN;
+- teacher questions = 0;
+- measured structural leverage = 96 / 16 = 6.0;
+- growth vs G291 = +3,423 bytes.
 
-Future agent note:
-AGENT_TASK_LIFECYCLE_NOTE.md
+This is a measured example of prior reusable structure lowering the direct cost of the next concept-learning block.
+
+Future language notes:
+- PRAGMATICS_PROSODY_ATOMIC_CURRICULUM_NOTE.md
+- CONTEXTUAL_SURFACE_RESOLUTION_NOTE.md
 
 Quality > bytes > generation count.
