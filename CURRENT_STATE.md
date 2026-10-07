@@ -2,7 +2,7 @@
 
 Date: 2026-10-07
 Canonical weights: G302
-Canonical runtime: G304
+Canonical runtime: G305
 
 Weights:
 - child_g302_role_means_successor_scope_green.c4m
@@ -10,29 +10,33 @@ Weights:
 - SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime:
-- C4_RUNTIME_G304_EVENT_CONJUNCTION_SCOPE_GREEN_2026-10-07.zip
-- 301,378 bytes
-- SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae
+- C4_RUNTIME_G305_SENSORY_BRIDGE_GREEN_2026-10-07.zip
+- 1,203,850 bytes
+- SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00
 
 Combined:
-- C4_G304_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
-- 2,261,376 bytes
-- SHA256 02bd772d97edf43ff7c0bdfbc385aa1e746fa48a962e87f3ac3d029331bfd77b
+- C4_G305_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+- 3,137,326 bytes
+- SHA256 606111ab5dce2108468a57b0e50621f195442dfc6622d8e8cc36c4a264adeda9
 
-## Event line
-G303:
-PAST/PRESENT/FUTURE boundaries; negative past query; future is unverified event claim.
+## Latest
+G303: PAST/PRESENT/FUTURE boundaries.
+G304: event conjunction scope.
+G305: durable post-codec sensory bridge.
 
-G304:
-positive conjunction over SET event predicates becomes separately queryable proposition-events.
-Negative conjunction is not distributed without scope evidence.
-Known multiword entity wins over splitting.
+SCREEN/AUDIO/SYMBOL vectors may converge into a persistent sensory concept, but:
+VECTOR SIMILARITY != IDENTITY.
+RAW SENSORY OBSERVATION != GRAPH TRUTH.
+SINGLE UNKNOWN MODALITY != NEW ENTITY.
+Only explicit naming binds a sensory concept to a graph entity.
 
-## Validation
-Focused G303+G304+prior event tests: 22/22.
-Full workspace: 390/406 memory and 390/406 SQLite.
-All 16 failures are FileNotFound only; semantic assertion failures 0.
-Exact G302 retained: 44/44 direct, 24/24 restraint, relation queries read-only, memory == SQLite.
+Nursery sensory state survives .c4m and SQLite restart.
+
+Validation:
+- focused sensory/event/embodiment/streaming pack 54/54;
+- full workspace memory 397 passed + 16 FileNotFound only;
+- full workspace SQLite 397 passed + 16 FileNotFound only;
+- exact G302 44/44 direct + 24/24 restraint, memory == SQLite.
 
 ## Current objective
-Continue EVENT_* semantics and learned grammar, then scope/cardinality traps and dirty human language.
+Build synthetic embodied 3D physics on top of the safe sensory bridge, then learn action/outcome structure without confusing simulation with external-world truth.
