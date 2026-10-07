@@ -1,28 +1,32 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G282
+Canonical weights: G283
 Canonical runtime: G281
 
-Weights SHA256: c1fabfa4028d993de7614c2dd321aab0bb2f99d8fb13011781d1048dffbeb243
-Weights bytes: 1860329
-Runtime SHA256: eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
-Combined SHA256: 9c73640ceb484315e58571d748ec03488934567d864e2fd453f184e45dc1f70d
+Weights:
+- child_g283_contextual_quantities_green.c4m
+- 1,876,360 bytes
+- SHA256 011fc6ce852ca169f4a2e3e66d9025c334fa10c904757b1f0c76ce7031fd141e
 
-## G281
-Question-only lexical discovery from supported predicate/action objects.
-Unknown raw surface never becomes a graph entity and no lemma is guessed.
-7/7 focused; 335/344 full suite; 9 known historical missing-file failures only.
+Runtime:
+- C4_RUNTIME_G281_LEXICAL_GAPS_GREEN_2026-10-07.zip
+- SHA256 eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
 
-## G282
-16 absent concepts discovered in 50 action sentences.
-Teacher: 16 lexical definitions / 48 words.
-Original contextual forms 16/16.
-Target WORD_FORM facts: 0.
-Held-out 14/31 before 6 non-target anchors -> 31/31 after -> 31/31 cold.
-Growth vs G280: +13359 bytes.
+Combined:
+- C4_G281_RUNTIME_PLUS_G283_WEIGHTS_2026-10-07.zip
+- SHA256 64fba4cf398d157a2239fb5819244eb23cf2520c1f5157f003e2d66bc25c7bc3
+
+## G283
+32 absent concepts discovered only as inflected forms in 64 action sentences.
+Teacher: 32 dictionary-form definitions / 96 words.
+Target WORD_FORM: 0.
+Encountered forms: 32/32.
+Held-out unseen morphology: 52/52, wrong 0, unknown 0, cold 52/52.
+No new morphology anchors were needed.
+
+уровня -> уровень failed reusable morphology and is quarantined for irregular training rather than patched directly.
 
 ## Cumulative
-260/260 nouns; 756/756 verbs; 780/780 adjectives; 472/472 G274; 78/78 G277; 184/184 G279; 327/327 G280; 31/31 G282.
-
-Next objective: larger mixed passages using the same question-first lexical path, then consolidate repeated semantic/morphological structure.
+G270 260/260; G272 756/756; G273 780/780; G274 472/472; G277 78/78; G279 184/184; G280 327/327; G282 31/31; G283 52/52.
+All core safety boundaries preserved.
