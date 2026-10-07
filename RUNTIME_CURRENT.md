@@ -1,47 +1,45 @@
 # RUNTIME CURRENT — G269 KERNEL FLOOR + DISCOURSE / INITIATIVE
 
-Canonical weights remain G266.
+Canonical runtime: G269.
+Canonical weights: G270.
 
 ## Files
 Runtime:
-C4_RUNTIME_G269_KERNEL_FLOOR_DISCOURSE_GREEN_2026-10-07.zip
-SHA256 5541f67d56ec2cf0cd373cbff58801f0fa6d4445e333a229d34215813290475a
-
-Runtime + G266 weights:
-C4_G269_RUNTIME_PLUS_G266_WEIGHTS_2026-10-07.zip
-SHA256 f205f0230b3038a2f5bfee2b8c7d05fab5bdffa01c2b31ac7941e80800d888d1
+- C4_RUNTIME_G269_KERNEL_FLOOR_DISCOURSE_GREEN_2026-10-07.zip
+- SHA256 5541f67d56ec2cf0cd373cbff58801f0fa6d4445e333a229d34215813290475a
 
 Weights:
-child_g266_object_permanence_green.c4m
-SHA256 1fbbf2c26c8253dab51c5e7555bbb0656a36ca0de98a7874a5589556017b3ea6
+- child_g270_fast_lemma_transfer_green.c4m
+- SHA256 b081428bed0080f9982491247d98640009de4662d7f654c571946acd5e36fa1b
+
+Combined:
+- C4_G269_RUNTIME_PLUS_G270_WEIGHTS_2026-10-07.zip
+- SHA256 2b62bcd06bd588324fd7aa3ebc5b1ddf7f7b6744089cdf961ae135ef8e457dde
 
 ## Architecture
 G269 = Claude G267 Kernel Floor base + proven G267/G268 discourse/perspective/initiative repairs.
 
-Claude base contributes:
+It provides:
 - read-only admitted-fact retrieval
 - resolve-only question paths
 - provenance receipts
 - bounded answers / more / why
 - broader ordinary Russian query surfaces
 - exact math oracle connection
-- zero question-created graph entities
-
-Merged surface layer contributes:
-- dialogue history
-- contextual short replies / ellipsis
+- zero question-created world entities/facts
+- dialogue history and contextual ellipsis
 - USER/C4 perspective
-- meta-language/meta-capability handling
+- meta-language handling
 - public-label firewall
 - ASK awaiting-response gate
 
-Unclassified language falls through to kernel-floor retrieval.
-The discourse bridge does not replace the graph/reasoner or commit world facts.
-
 ## Validation
-288/297 combined tests PASS.
+Runtime suite: 288/297 PASS.
 Only 9 known missing historical artifact FileNotFoundErrors remain.
-41/41 focused overlap/adversarial tests PASS.
-Real G266 re-attack PASS.
+G270 changes persistent learned state only; runtime physics is unchanged.
 
-G269 changes runtime only.
+## G270 compatibility
+Held-out inflections produced by G270 morphology are reachable through G269 dialogue:
+- проекте -> проект
+- словаре -> словарь
+- ядре -> ядро
