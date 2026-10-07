@@ -1,24 +1,14 @@
-# RUNTIME CURRENT — G278 GUIDED READING
+# RUNTIME CURRENT — G281 LEXICAL GAPS
 
-Canonical runtime remains G278.
-Canonical weights are G280.
+Canonical runtime: G281.
+Canonical weights: G282.
 
-Runtime SHA256:
-009e33fb61aa7d173c1e5489d60dd19f50c2fd4bfded2f0ef98e029cc2e558ef
+Runtime SHA256: eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
+Weights SHA256: c1fabfa4028d993de7614c2dd321aab0bb2f99d8fb13011781d1048dffbeb243
+Combined SHA256: 9c73640ceb484315e58571d748ec03488934567d864e2fd453f184e45dc1f70d
 
-Weights SHA256:
-8cae07434b776d9a101bb7390bfee930a0ca845d790dca9945e3544502006f8a
+G281 adds LEXICAL_TERM gaps to G278 guided reading.
+It asks for dictionary form and meaning but never predicts/commits a lemma.
 
-Combined SHA256:
-7a57a75082c7e294aefe2b99a610a7286449b3a0a572618654c4beaca3e562ab
-
-G278 behavior:
-- conservative guided_read ordinary Russian text
-- supported deterministic structures -> EXTERNAL_CORPUS
-- unsupported prose skipped
-- compound classes preserved only with corpus evidence
-- ActiveGap aggregation
-- external text isolated from live dialogue context
-
-Validation remains 328/337, only 9 known missing historical artifact failures.
-G280 uses this exact runtime unchanged.
+Validation: 335/344 clean full suite; only 9 known missing historical artifacts.
+G282 cumulative fully GREEN.
