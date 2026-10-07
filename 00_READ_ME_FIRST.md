@@ -3,10 +3,10 @@
 C4 is NOT Singularity OS.
 
 ## Canonical — 2026-10-07
-Weights: G301 RELATION LANGUAGE BRIDGE GREEN
-- child_g301_relation_language_bridge_green.c4m
-- 1,972,611 bytes
-- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
+Weights: G302 ROLE / MEANS / SUCCESSOR SCOPE GREEN
+- child_g302_role_means_successor_scope_green.c4m
+- 1,981,454 bytes
+- SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime: G300 OPEN RELATION QUERY GREEN
 - C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
@@ -14,17 +14,26 @@ Runtime: G300 OPEN RELATION QUERY GREEN
 - SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
-- 2,234,874 bytes
-- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
-
-Recovery: /C4_Canonical/.
+- C4_G300_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+- SHA256 4d0fe345dff230413ee849971eba3765df317ccc23bc1f56de4826f24c0e9ce0
 
 ## Latest
-G299: 40 SYNONYM/ANTONYM lessons -> 24/24 reverse derived, 16/16 non-transitivity/identity traps UNKNOWN, 0 leaks.
-G300: open relation-list questions now use safe read-only inverse/symmetric algebra. Memory 384/393; SQLite 384/393; same nine historical missing artifacts only.
-G301: learned ordinary Russian relation nouns: синоним, антоним, противоположность, роль, смысл, преемник. Natural queries 6/6 after/cold/SQLite, read-only.
+G299: lexical relation restraint.
+G300: open relation queries use read-only relation algebra.
+G301: Russian relation-language bridge.
+G302:
+- 44/44 novel direct lessons: MEANS 16 / ROLE 16 / SUCCESSOR 12
+- MEANS and ROLE correctly remain SET-valued
+- multiple meanings/roles coexist without false conflict
+- reverse MEANS 8/8 UNKNOWN
+- reverse ROLE 8/8 UNKNOWN
+- transitive SUCCESSOR endpoints 8/8 UNKNOWN
+- G301 natural relation queries 6/6 read-only
+- G299 and G297 relation packs fully retained
+- memory and SQLite identical
+- growth vs G301 +8,843 bytes
 
-Open issue: CARDINALITY_SCOPE_NOTE.md. COLOR/LOCATION/VALUE are not universally context-free single-valued world properties.
+Open issue remains:
+COLOR/LOCATION/VALUE cardinality needs explicit scope/context, not a blind FUNCTIONAL->SET change.
 
 Quality > bytes > generation count.
