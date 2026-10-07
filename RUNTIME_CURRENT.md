@@ -1,33 +1,28 @@
-# RUNTIME CURRENT — G298 RETRACTION INVALIDATION GREEN
+# RUNTIME CURRENT — G300 OPEN RELATION QUERY GREEN
 
-Canonical runtime: G298.
-Canonical weights: G297.
+Canonical runtime: G300.
+Canonical weights: G301.
 
-Runtime:
-C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
-302,268 bytes
-SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
+Runtime SHA256:
+00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Weights SHA256:
-0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
+a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
 
 Combined SHA256:
-55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
+cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
 
-Lineage:
-G293 SQLite store
--> G294 inverse/symmetry algebra
--> G295 functional-slot conflict visibility
--> G296 temporal order
--> G298 retraction invalidation / functional current-source stance
+G300 = G298 + read-only algebraic enumeration for open relation queries.
 
-G298 rules:
-EVIDENCE HISTORY != CURRENT SOURCE STANCE.
-RETRACTION != RESURRECTION OF OLD STANCE.
-DERIVED STATE MUST INVALIDATE WHEN SUPPORT DISAPPEARS.
-NEG OTHER VALUE != RETRACT CURRENT FUNCTIONAL VALUE.
+Safe behavior:
+- inverse/symmetric derived values may be spoken in open queries;
+- no derived fact is persisted;
+- direct contradiction blocks a derived list value;
+- MEANS remains non-symmetric;
+- query paths remain read-only.
 
-G296 temporal boundaries remain:
+Existing laws retained:
 ORDER != CAUSE.
-SHARED PREDECESSOR != ORDER BETWEEN SIBLINGS.
-TEMPORAL DERIVATION != NEW EVIDENCE.
+SYNONYM != IDENTITY.
+DERIVED != EVIDENCE.
+EVIDENCE HISTORY != CURRENT SOURCE STANCE.
