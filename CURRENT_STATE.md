@@ -43,3 +43,9 @@ Full runtime suite 343/352; only nine historical missing-artifact failures.
 
 ## Current objective
 Measure whether learning cost continues to fall on new, less curated explanatory domains while keeping false inference bounded.
+
+
+## G1000 developmental target
+
+See C4_G1000_HUMAN_LIKE_PERCEPTION_TARGET.md.
+Target: broad trap-resistant perception, relation coverage, dirty language, discourse/deixis, pragmatics/prosody, source/conflict uncertainty, multimodal grounding and adversarial integration. Generation count is not itself a success criterion.
