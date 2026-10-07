@@ -54,3 +54,15 @@ Full workspace 390/406 memory + 390/406 SQLite; 16 FileNotFound only, 0 semantic
 Exact G302 retained 44/44 direct + 24/24 restraint.
 
 Current runtime SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae.
+
+
+G305 durable sensory bridge:
+existing SensoryGrounder/NurseryState integrated into C4LivingRuntime.
+SCREEN/AUDIO/SYMBOL converge only as weak multimodal identity evidence; raw sensory input does not create graph truth.
+Explicit naming binds to one graph entity.
+Real .c4m and SQLite restart persistence GREEN.
+Focused 54/54.
+Full workspace memory/SQLite: 397 passed + 16 FileNotFound only.
+Exact G302: 44/44 direct + 24/24 restraint.
+
+Current runtime SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00.
