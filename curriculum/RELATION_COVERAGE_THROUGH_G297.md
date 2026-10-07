@@ -1,92 +1,61 @@
-# C4 RELATION COVERAGE — THROUGH G297
+# C4 RELATION COVERAGE — THROUGH G298
 
 Status: living coverage ledger for the G1000 perception target.
 
 ## Strongly tested
 
 IS_A:
-- direct
-- multi-hop transitive class path
-- negative vs positive path conflict
-- inheritance gateway
-- source disagreement/revalidation
+direct; multi-hop transitivity; negative-vs-positive-path conflict; inheritance gateway; source disagreement/revalidation.
 
 CAN / PROPERTY / USED_FOR:
-- typed inheritance
-- negative instance blocking
-- equal-depth conflict
-- multi-level reuse
-- strict held-out transfer
+typed inheritance; instance exclusions; equal-depth conflict; multi-level reuse; strict held-out transfer.
 
 CAUSES:
-- direct
-- bounded multi-hop
-- branching/convergence
-- reverse/cross restraint
-- source-aware text ingestion
-- order != causality
+direct; bounded multi-hop; branching/convergence; reverse/cross restraint; source-aware text ingestion; ORDER != CAUSE.
 
 PART_OF / HAS_PART:
-- read-only inverse
-- positive/negative polarity
-- conflict against inverse
-- HAS != HAS_PART
-- PART_OF not transitive by default
-- G297 real relation curriculum + inverse held-out
+read-only inverse; polarity; inverse conflict; HAS != HAS_PART; PART_OF non-transitive by default; real G297 curriculum; inverse derivation invalidates after support removal.
 
 BEFORE / AFTER:
-- inverse
-- read-only transitive paths
-- reverse-path refutation
-- direct NEG vs path conflict
-- cycle conflict
-- sibling-order restraint
-- order != CAUSES
+inverse; read-only transitivity; reverse-path refutation; direct NEG vs path conflict; cycle conflict; sibling restraint; ORDER != CAUSE; path invalidates after bridge removal.
 
 OPPOSITE:
-- symmetric read-only
-- no automatic persistence
-- G297 real lexical relation curriculum
+symmetric read-only; no persistence; real G297 curriculum; symmetric derivation invalidates after support removal.
 
 FUNCTIONAL slots:
-- same-source revision
-- independent-source alternate-value disagreement
-- specific yes/no conflict visibility
-- SET relation isolation
+same-source revision; independent-source alternate-value disagreement; specific yes/no conflict visibility; SET isolation; current source stance respects later retraction; NEG of unrelated value does not erase selected value; retraction does not resurrect superseded value.
 
 ## Partially tested / next
 
 MEANS:
-- direct
-- reverse explicitly restrained
-Need: source conflict, correction/retraction, context/sense scope.
+direct; reverse restrained; G297 real examples.
+Need source conflict, correction/retraction, contextual/sense scope.
 
 SYNONYM / ANTONYM:
-- symmetry and polarity tested
-Need: non-transitive/sense traps, no property substitution.
+symmetry and polarity.
+Need non-transitive/sense traps and no blind property substitution.
 
 ROLE:
-- explicitly not inherited/symmetric by default
-Need: context/time/source scope.
+not inherited/symmetric by default.
+Need context/time/source scope.
 
 LOCATION / COLOR / VALUE / WHEELS / HAS_SIDES / HAS_CORNERS:
-- functional storage semantics exist
-Need: relation-specific temporal persistence, correction/retraction, multi-source disagreement and dirty-language queries.
+functional storage and generic functional conflict/retraction semantics exist.
+Need relation-specific temporal persistence, correction semantics and dirty-language queries.
 
 HAS:
-- SET cardinality and HAS != HAS_PART
-Need: possession vs containment vs attribute ambiguity.
+SET cardinality; HAS != HAS_PART.
+Need possession/containment/attribute ambiguity.
 
 SUCCESSOR:
-Need: functional chain boundaries, predecessor absence, non-transitivity.
+Need chain boundaries, predecessor representation, non-transitivity and cycle traps.
 
 EVENT_*:
-Need: event-frame cardinality, temporal/context identity, correction and mixed-source traps.
+Need event-frame cardinality, temporal/context identity, correction and mixed-source traps.
 
 WORD_FORM / predicate/query relations:
-already covered heavily by morphology/language line; continue under dirty-surface curriculum.
+heavily covered by morphology/language line; continue under dirty-surface curriculum.
 
 ## Rule
-
-A relation is not "done" because a direct query passes.
+A relation is not done because a direct query passes.
 Promotion requires positive, negative, UNKNOWN, source/conflict, correction/retraction, cold persistence, valid composition, invalid-composition traps and cross-relation confusion tests where applicable.
