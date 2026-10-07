@@ -1,33 +1,32 @@
 # ARTIFACT MANIFEST
 
-Current weights: G292
-- child_g292_hierarchy_accelerated_concepts_green.c4m
-- 1,952,929 bytes
-- SHA256 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
+Current weights: G297
+- child_g297_relation_diversity_green.c4m
+- 1,960,675 bytes
+- SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
 
 Weights release:
-- C4_G292_HIERARCHY_ACCELERATED_CONCEPTS_GREEN_2026-10-07.zip
-- SHA256 a902c9d0eaaad681d6a78afafe3f1e95595a331ed75c6f3e60fe58f270217804
+- C4_G297_RELATION_DIVERSITY_GREEN_2026-10-07.zip
+- 1,941,677 bytes
+- SHA256 acc04dc3132768d70a6cf2f61bc5dcae1bc4b7db42fa0fc9c1d41d57026f47d6
 
-Current runtime: G294
-- C4_RUNTIME_G294_RELATION_ALGEBRA_GREEN_2026-10-07.zip
-- 297,804 bytes
-- SHA256 3ce81d00f50a0cde28eef0d7e05bbe329f2665f41494a5a12fb9bd1b67998f32
+Current runtime: G296
+- C4_RUNTIME_G296_TEMPORAL_ORDER_GREEN_2026-10-07.zip
+- 300,749 bytes
+- SHA256 c12f86c80a61fe133cea1d62219d010886c523a434832fee27107fadbc5035e3
 
 Combined:
-- C4_G294_RUNTIME_PLUS_G292_WEIGHTS_2026-10-07.zip
-- 2,230,029 bytes
-- SHA256 914873776a59e9e5f7ef75410e4191a357ff9825c5c05b558e49872a91af1e68
+- C4_G296_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
+- 2,238,816 bytes
+- SHA256 9daf8aac6f1256543c925751da34c12f39089b6095d8d9914b693cc048bb8ab4
 
-G294 support:
-- CP_C4_G294_RUNTIME_RELATION_ALGEBRA_GREEN.md
-- README_G294.md
-- PATCH_G293_TO_G294.diff
-- g294_full_memory.json
-- g294_full_sqlite.json
-
-G293 source integration:
-- CL_G270_STORE_MERGE_G293.md
-- CP_C4_G293_RUNTIME_SQLITE_STORE_GREEN.md
+Support:
+- checkpoints/CP_C4_G295_RUNTIME_FUNCTIONAL_SLOT_CONFLICT_GREEN.md
+- checkpoints/CP_C4_G296_RUNTIME_TEMPORAL_ORDER_GREEN.md
+- checkpoints/CP_C4_G297_RELATION_DIVERSITY_GREEN.md
+- G297_source_manifest.json
+- G297_frozen_heldout.json
+- G297_metrics.json
+- g297_cumulative_validation.json
 
 Binary recovery: /C4_Canonical/.
