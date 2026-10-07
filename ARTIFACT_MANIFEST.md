@@ -1,30 +1,22 @@
 # ARTIFACT MANIFEST
 
-## Current canonical
-Weights: G280 GUIDED EVERYDAY CORE GREEN
-Runtime: G278 GUIDED READING GREEN
-
-Weights:
-- child_g280_guided_everyday_core_green.c4m
-- 1,846,970 bytes
-- SHA256 8cae07434b776d9a101bb7390bfee930a0ca845d790dca9945e3544502006f8a
+Current weights: G282
+- child_g282_guided_action_terms_green.c4m
+- 1860329 bytes
+- SHA256 c1fabfa4028d993de7614c2dd321aab0bb2f99d8fb13011781d1048dffbeb243
 
 Weights release:
-- C4_G280_GUIDED_EVERYDAY_CORE_GREEN_2026-10-07.zip
-- SHA256 c09e4868e894b67f39e3b679f38eea1987181292357ee225775337a47fdf1ced
+- C4_G282_GUIDED_ACTION_TERMS_GREEN_2026-10-07.zip
+- SHA256 529e8a283c2f1e06f871779b0eb3d14a06b2341b1255c2d46ba6dbeaa2622148
 
-Runtime:
-- C4_RUNTIME_G278_GUIDED_READING_GREEN_2026-10-07.zip
-- SHA256 009e33fb61aa7d173c1e5489d60dd19f50c2fd4bfded2f0ef98e029cc2e558ef
+Runtime G281:
+- C4_RUNTIME_G281_LEXICAL_GAPS_GREEN_2026-10-07.zip
+- 285041 bytes
+- SHA256 eb1572c417c25eb7e6ef5a9d2b620b5692ada859ff5011931a561625aa18bc04
 
 Combined:
-- C4_G278_RUNTIME_PLUS_G280_WEIGHTS_2026-10-07.zip
-- SHA256 7a57a75082c7e294aefe2b99a610a7286449b3a0a572618654c4beaca3e562ab
+- C4_G281_RUNTIME_PLUS_G282_WEIGHTS_2026-10-07.zip
+- 2128807 bytes
+- SHA256 9c73640ceb484315e58571d748ec03488934567d864e2fd453f184e45dc1f70d
 
-Status:
-- G278 runtime regression 328/337, same 9 historical missing files only
-- G280 strict-new 327/327
-- all prior cumulative blocks GREEN
-- unsupported reader restraint 0/0 mutation
-
-Binary artifacts: /C4_Canonical/.
+Status: full cumulative GREEN. Binary recovery: /C4_Canonical/.
