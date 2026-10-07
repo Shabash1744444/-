@@ -1,75 +1,77 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical GREEN weights generation: G274
-Canonical runtime generation: G275
+Canonical GREEN weights: G277
+Canonical runtime: G276
 
-Current organism:
-- child_g274_dense_semantic_core_green.c4m
-- 1805052 bytes
-- SHA256 6e566b67e54504fbdb9f2924bdba0ed330dce5ce525acb97234d5dd33676c20e
+Weights:
+- child_g277_guided_measurement_core_green.c4m
+- 1814566 bytes
+- SHA256 84ab317de73d65b459447a31471715e69726d2df37122ea0352f6da38ca1f2c4
 
-Canonical runtime:
-- C4_RUNTIME_G275_LIVE_TEACHING_MERGE_GREEN_2026-10-07.zip
-- 324818 bytes
-- SHA256 1c7243de518c12cff4a27572cf2e423bd77c5bd6cf70925748e86ce698ef9a68
+Runtime:
+- C4_RUNTIME_G276_ACTIVE_GAPS_GREEN_2026-10-07.zip
+- 281120 bytes
+- SHA256 6a8e174e0d3e79bd90c04d66e55964b9c22feb16f5eb9d83f0724278506d2a17
 
 Combined:
-- C4_G275_RUNTIME_PLUS_G274_WEIGHTS_2026-10-07.zip
-- 2113082 bytes
-- SHA256 10943a16639f4fa6b17eef0e107c1ccf16b864e1a616c0294153e515efde4c5d
+- C4_G276_RUNTIME_PLUS_G277_WEIGHTS_2026-10-07.zip
+- 2076668 bytes
+- SHA256 ceb2149903ea6ef47cefbeb1caeaabe963ebde84458cd00c7fc72881093ccf35
 
-Persistent binary recovery: personal Library /C4_Canonical/.
+Persistent recovery: /C4_Canonical/.
 
-## G274 weights remain unchanged
-Fast Curriculum cumulative state:
-- nouns: 260/260
-- verbs: 756/756
-- adjectives: 780/780
-- semantic derivations: 472/472
+## G276
+ActiveGaps ranks learning questions by expected downstream unlock / approximate teacher cost.
+Definition gaps participate in TEACHER ranking.
+HUMAN behavior stays one-question and dialogue-safe.
 
-G274 SHA was verified unchanged before/after G275 probes.
+Controlled benchmark:
+- FIFO 4 answers to 75% competency.
+- ActiveGaps 2 answers.
 
-## G275 runtime
-External live-teaching work was reviewed but not adopted wholesale.
-Direct use reopened a closed failure where productive verb forms could resolve to noun `сеть`.
+Full clean-unzip suite: 321/330.
+All 9 failures are unchanged missing historical artifacts.
 
-G275 three-way merge keeps G271 safety and canonical discourse while adding:
-- explicit teaching announcements;
-- definitions decomposed into graph relations;
-- pending teaching/self-check state across restart;
-- Russian speech inflection/agreement;
-- first/second-person dialogue;
-- atomic autosave.
+## G277
+First GUIDED semantic curriculum block.
 
-The external disposable acceptance-test token remains test-only and is not vocabulary knowledge.
+26 measurement instruments.
+Direct:
+- 53 EXTERNAL_CORPUS semantic events
+- 3 USER_SAID high-leverage hierarchy relations
+- 56 direct new lessons total
 
-## Validation
-Full merged suite:
-- 317/326 PASS
-- 9 unchanged historical FileNotFoundError cases
-- 0 new semantic/runtime assertion failures
+C4 ignored five low-value distractor gaps and requested only:
+- measuring instrument -> instrument
+- instrument -> device
+- device -> object
 
-Exact G274 compatibility:
-- 260/260 noun forms
-- 756/756 verb forms
-- 780/780 adjective forms
-- 472/472 semantic derivations
-- verb/noun guard preserved
-- homograph quarantine preserved
+Held-out hierarchy:
+- before 0/78
+- after 78/78
+- cold reload 78/78
 
-## Normative boundaries
-TEST TOKEN != VOCABULARY KNOWLEDGE
-HOMOGRAPH != IDENTITY
-ORTHOGRAPHIC SUFFIX != LEXICAL POS
-SPEECH FORM != GRAPH FACT
-AUTOSAVE != NEW EVIDENCE
+Novel derived relations: 104.
+Transfer/direct: 1.857.
+Growth vs G274: +9514 bytes.
 
-## Immediate next work
-G276 candidate: ActiveGaps / Teacher Cost.
-Goal: C4 should choose questions by expected downstream learning value rather than asking every gap.
+## Cumulative retention
+- G270 nouns 260/260
+- G272 verbs 756/756
+- G273 adjectives 780/780
+- G274 semantic derivations 472/472
+- verb/noun collision safety preserved
+- homograph boundaries preserved
+- live teaching persists across reopen
 
-Benchmark:
-unseen text -> gaps -> utility ranking -> one teacher question -> structural answer -> re-evaluation -> held-out competency.
+## Current objective
+Next guided generation should operate on short ordinary Russian prose rather than pre-extracted semantic events.
+Need:
+- candidate semantic extraction;
+- unknown terms inside action/predicate clauses;
+- ActiveGap ranking;
+- measured teacher words/relations;
+- held-out transfer after each teacher answer.
 
-Do not increase corpus scale until Teacher Cost starts falling.
+Do not bulk-scale books yet.
