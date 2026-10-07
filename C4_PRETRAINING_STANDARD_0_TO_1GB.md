@@ -733,3 +733,22 @@ When ingesting causal prose:
 - source/provenance is mandatory;
 - unknown causal endpoints must not be invented from syntax alone;
 - qualify event labels with relevant context when an unqualified causal claim would be over-broad.
+
+
+---
+
+## 23. Intra-chunk dependency protocol
+
+A real explanatory chunk may define a concept and then use it in a later relation inside the same chunk.
+
+Safe reader policy:
+1. pass 1 admits only already-supported deterministic structures;
+2. after pass-1 admissions, previously skipped surfaces may be re-run through the SAME parser once;
+3. no new heuristic grammar may appear in retry;
+4. if still unsupported, SKIP/GAP;
+5. retry must preserve source/provenance.
+
+SECOND PASS != GUESSING.
+
+Explicit bounded grammar should outrank broader learned predicates when the broader parser would erase relation type. Example established by G289:
+"X имеет свойство Y" => PROPERTY, not generic HAS("свойство Y").
