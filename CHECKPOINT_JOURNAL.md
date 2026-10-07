@@ -33,7 +33,12 @@ G298 retraction invalidation.
 G299 lexical relation restraint.
 G300 open relation query.
 G301 relation language bridge.
-G302 ROLE/MEANS/SUCCESSOR scope: 44 novel lessons, 24/24 forbidden inferences UNKNOWN, G301/G299/G297 retention GREEN, memory/SQLite identical.
+G302 ROLE/MEANS/SUCCESSOR scope.
+G303 event tense boundaries: negative past query repaired; future auxiliary no longer pollutes subject/current state; FUTURE != VERIFIED OUTCOME.
+
+G303 focused 17/17.
+Exact G302: 44/44 direct, 24/24 restraint, memory/SQLite identical.
+Workspace full regression: 385/401 memory + 385/401 SQLite; 16 missing-file failures only, 0 semantic assertion regressions.
 
 Current weights SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
-Current runtime SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
+Current runtime SHA256 0aae1b33f1347b187ef06bb658cc21b3de8698053630455b4939a064eef870d8
