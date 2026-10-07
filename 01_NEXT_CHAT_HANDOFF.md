@@ -1,29 +1,30 @@
-# NEXT CHAT HANDOFF — C4 G306 WEIGHTS + G306 RUNTIME
+# NEXT CHAT HANDOFF — C4 G307 WEIGHTS + G307 RUNTIME
 
-Weights:
-child_g306_synthetic_spatial_physics_green.c4m
-SHA256 78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded
+Weights SHA256:
+648ba7eeaf1f1f1af038949e228b1e9a37afd115ff6920952533143bbda8350f
 
-Runtime:
-C4_RUNTIME_G306_SYNTHETIC_3D_PHYSICS_GREEN_2026-10-07.zip
-SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb
+Runtime SHA256:
+b18c746f61fa9e4ec6af5323657ac6af0ede64b5b30a4ef4a51c5c1a1731c7ca
 
-Combined:
-C4_G306_RUNTIME_PLUS_G306_WEIGHTS_2026-10-07.zip
-SHA256 25aed1de0c7f3eda2d8937e748944e461856e5e1f7945c695a84cd31c9c9915e
+Combined SHA256:
+4068e8c8c7a6128747433e3c92bb5795b1f33faed385784c27d3d3e095285f49
 
-G306 is the first canonical synthetic 3D motor experience generation.
-88 verified simulation receipts -> 10 stable SELF-relative effects.
-10/10 novel poses.
-SIMULATION remains explicitly scoped and graph truth is unchanged.
+G306: 88 verified 3D interactions -> 10 SELF-relative effects, 10/10 heldout.
+G307: separate phoneme/glyph concepts, repeated many-to-many alignments, sound and glyph sequences converge on explicit word entities.
+
+Heldout G307:
+5/5 noisy audio words;
+5/5 noisy glyph words;
+same in SQLite.
+Spatial G306 retained 10/10.
+G302 reasoning retained.
 
 Hard laws:
+PHONEME != GRAPHEME.
+SOUND ASSOCIATION != IDENTITY.
+SEQUENCE FORM != WORD ENTITY.
+RAW SIGNAL != TEACHER LABEL.
 SIMULATION != OBSERVATION.
 ACTION_REQUEST != VERIFIED_OUTCOME.
-STALE ACTION REQUEST != SUCCESS.
-WORLD AXIS != EGOCENTRIC DIRECTION.
-MOTOR PRIOR != EXTERNAL-WORLD FACT.
-VECTOR SIMILARITY != IDENTITY.
 
-Next:
-phoneme/grapheme/sound-symbol sequence grounding; then collision/mass/effort and application-room adapter alignment.
+Next: contact/collision and effort/resistance physics, then richer synthetic audio/visual grounding.
