@@ -42,3 +42,15 @@ Workspace full regression: 385/401 memory + 385/401 SQLite; 16 missing-file fail
 
 Current weights SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 Current runtime SHA256 0aae1b33f1347b187ef06bb658cc21b3de8698053630455b4939a064eef870d8
+
+
+G303 event tense boundaries:
+negative past query repaired; bounded future tense separated from current state; future claim != verified outcome.
+
+G304 event conjunction scope:
+positive SET conjunctions split into proposition-events; negative conjunction not distributed; known multiword entity wins.
+Focused 22/22.
+Full workspace 390/406 memory + 390/406 SQLite; 16 FileNotFound only, 0 semantic assertion failures.
+Exact G302 retained 44/44 direct + 24/24 restraint.
+
+Current runtime SHA256 59ca94c6dd2ab78c881e015eaf885ebbc1ca1407696ca0102707d1b032a51aae.
