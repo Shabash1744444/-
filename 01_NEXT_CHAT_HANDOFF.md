@@ -1,4 +1,4 @@
-# NEXT CHAT HANDOFF — C4 G297 WEIGHTS + G296 RUNTIME
+# NEXT CHAT HANDOFF — C4 G297 WEIGHTS + G298 RUNTIME
 
 Weights:
 child_g297_relation_diversity_green.c4m
@@ -6,48 +6,57 @@ child_g297_relation_diversity_green.c4m
 SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
 
 Runtime:
-C4_RUNTIME_G296_TEMPORAL_ORDER_GREEN_2026-10-07.zip
-SHA256 c12f86c80a61fe133cea1d62219d010886c523a434832fee27107fadbc5035e3
+C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
+302,268 bytes
+SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
 
 Combined:
-C4_G296_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
-SHA256 9daf8aac6f1256543c925751da34c12f39089b6095d8d9914b693cc048bb8ab4
+C4_G298_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
+2,240,335 bytes
+SHA256 55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
 
 ## G295
-Functional relation yes/no answers now surface slot-level source disagreement.
-Focused 6/6.
-Full memory 366/375; SQLite split 366 pass + same 9 historical missing artifacts.
+Functional-slot source conflict is visible in specific truth queries without mutating truth.
 
 ## G296
-Strict temporal order algebra:
-BEFORE/AFTER inverse + transitive positive paths.
-Reverse positive order refutes query read-only.
-Cycle or explicit NEG vs positive path -> CONFLICT.
-Shared predecessor does not order siblings.
-Temporal order != causality.
-Focused G294+G295+G296 25/25.
-Full memory 373/382; SQLite 373 pass + same 9 historical missing artifacts; streaming 5/5.
+Strict temporal algebra:
+BEFORE/AFTER inverse + bounded read-only transitivity.
+Reverse path refutes.
+Cycle and explicit NEG vs positive path -> CONFLICT.
+ORDER != CAUSE.
 
 ## G297
-40 sparse direct lessons:
+40 sparse relation lessons:
 PART_OF 12 / OPPOSITE 8 / MEANS 8 / BEFORE 12.
 
-Strict held-out:
-32/32 derived after and cold:
-- HAS_PART inverse 12
-- reverse OPPOSITE 8
-- temporal transitive/inverse endpoint 12
-
-Restraint:
-26/26 UNKNOWN after and cold:
-- HAS != HAS_PART
-- MEANS not symmetric
-- temporal order != CAUSES
-
+Held-out:
+32/32 derived after and cold.
 0 direct target leaks.
-SQLite exact G297: 32/32 + 26/26.
-All prior cumulative G270-G292 GREEN.
+26/26 cross-relation controls UNKNOWN after and cold.
+Exact SQLite 32/32 + 26/26.
+All prior G270-G292 cumulative GREEN.
+
+## G298
+Counterexample:
+source B could assert a FUNCTIONAL value X, later negate X, yet functional conflict reconstruction still treated B as supporting X.
+
+Repair:
+functional_source_stances reconstructs current stance in evidence order:
+- later POS selects/revises;
+- later NEG of selected value retracts;
+- NEG of another value does not erase current positive;
+- retracting a revised value does not resurrect old superseded value.
+
+Derived invalidation:
+PART_OF/HAS_PART, OPPOSITE symmetry and temporal chains disappear when their support is removed.
+
+Validation:
+focused G294-G298 32/32.
+Full memory 380/389.
+SQLite 380 pass + same 9 historical missing artifacts.
+Streaming 5/5.
+Exact G297 on G298: memory and SQLite 32/32 derived + 26/26 restraint, direct leaks 0.
 
 ## Next
-Continue G1000 relation-algebra/trap coverage:
-retraction/correction invalidation, functional cardinality by relation family, LOCATION/VALUE/COLOR traps, ROLE/MEANS context, and mixed source conflict.
+Continue G1000 relation coverage:
+LOCATION/COLOR/VALUE family semantics, ROLE/MEANS context/source traps, SUCCESSOR and event-frame boundaries, then dirty-language curriculum when relation algebra coverage is sufficiently broad.
