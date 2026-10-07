@@ -18,6 +18,17 @@ Combined:
 
 Recovery: /C4_Canonical/.
 
+## Normative training entrypoint
+For any new long pretraining run or autonomous training agent, read first:
+1. C4_PRETRAINING_STANDARD_0_TO_1GB.md
+2. TRAINING_LAWS.md
+3. DEVELOPMENTAL_TRAINING_METHODOLOGY.md
+4. MEMORY_CONSOLIDATION_COMPRESSION.md
+5. CURRENT_STATE.md
+
+Future orchestration design:
+- C4_AUTOTRAINER_SPEC.md
+
 ## Latest
 G281 asks about unknown inflected forms; it never guesses a lemma.
 G282 proved the path on 16 contextual terms and added six reusable morphology anchors.
