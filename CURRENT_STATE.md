@@ -1,13 +1,13 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G290
+Canonical weights: G292
 Canonical runtime: G289
 
 Weights:
-- child_g290_mixed_explanatory_prose_green.c4m
-- 1,933,483 bytes
-- SHA256 57ac0bac91d16fd320df838c41e527038bf70e2ee1c8a18e3403c997e3670a8a
+- child_g292_hierarchy_accelerated_concepts_green.c4m
+- 1,952,929 bytes
+- SHA256 d5631373fbdf24f2bf7a8068ca768edc0a4e94765e5b43035c90c3712aa2d246
 
 Runtime:
 - C4_RUNTIME_G289_MIXED_CHUNK_DEPENDENCY_GREEN_2026-10-07.zip
@@ -15,27 +15,31 @@ Runtime:
 - SHA256 8aedcf70f480ba821256d360d0c6139af915edcb477d4bdc969000b86c42a846
 
 Combined:
-- C4_G289_RUNTIME_PLUS_G290_WEIGHTS_2026-10-07.zip
-- 2,170,612 bytes
-- SHA256 73238df880d2334de65528287d8f7817c29a4aa610df056d6a4e4617f8973233
+- C4_G289_RUNTIME_PLUS_G292_WEIGHTS_2026-10-07.zip
+- 2,190,287 bytes
+- SHA256 6e6dc6b3ef89bc6c074285fcee23b63994b6d60e1c60a72cdb1b6a96ace8d89e
 
-## G289 runtime
-Same-chunk dependency retry and PROPERTY precedence.
-Focused 4/4.
-Full suite 343/352; only 9 historical missing-file failures.
+## G291
+Long explanatory hierarchy:
+96/96 semantic inheritance;
+24/24 causal held-out;
+16/16 negatives;
++16,023 bytes vs G290.
 
-## G290
-64 mixed explanatory surfaces.
-Semantic: 48/48 after + cold.
-Causal chain: 12/12 after + cold.
-Cross-type negatives: 12/12.
-Source relation counts: IS_A 44 / PROPERTY 4 / USED_FOR 4 / CAUSES 12.
-Growth vs G288: +9,490 bytes.
+## G292
+16 new concepts learned by 16 direct IS_A classifications.
+Prior G291/G290 hierarchy supplies six controlled inherited relations per concept.
+96/96 strict inherited relations, cold 96/96.
+36/36 restraint UNKNOWN.
+0 direct target semantic facts.
+0 target WORD_FORM facts.
+0 teacher questions.
+Leverage = 6.0.
+Growth +3,423 bytes.
 
 ## Cumulative
-All protected G270-G288 capabilities remain GREEN plus G290 mixed relation exam.
+All protected G270-G291 capabilities remain GREEN.
+Full runtime suite 343/352; only nine historical missing-artifact failures.
 
 ## Current objective
-Train on longer relation-rich explanatory passages, increasing dependency depth while preserving type separation and provenance.
-
-Agent-track architecture question is documented separately and not yet implemented.
+Measure whether learning cost continues to fall on new, less curated explanatory domains while keeping false inference bounded.
