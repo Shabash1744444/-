@@ -3,55 +3,49 @@
 C4 is NOT Singularity OS.
 
 ## Canonical — 2026-10-07
-Weights: G297 RELATION DIVERSITY GREEN
-- child_g297_relation_diversity_green.c4m
-- 1,960,675 bytes
-- SHA256 0db410bc1ebf71aba05e7571c58e82e6cfb3d17f8c72faea6c09e77e38a6cae9
+Weights: G301 RELATION LANGUAGE BRIDGE GREEN
+- child_g301_relation_language_bridge_green.c4m
+- 1,972,611 bytes
+- SHA256 a37a7a1eebb3e38df29f4f29535b74b8d3ce2159d0e2ecb5b0d27f7c06721708
 
-Runtime: G298 RETRACTION INVALIDATION GREEN
-- C4_RUNTIME_G298_RETRACTION_INVALIDATION_GREEN_2026-10-07.zip
-- 302,268 bytes
-- SHA256 7ff72ff492ef247c18fe9d44a6927ca06434945c4c7254781930ce960221897f
+Runtime: G300 OPEN RELATION QUERY GREEN
+- C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
+- 293,368 bytes
+- SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
 
 Combined:
-- C4_G298_RUNTIME_PLUS_G297_WEIGHTS_2026-10-07.zip
-- 2,240,335 bytes
-- SHA256 55c15d8f8dd03efb30074b4299037f932d07336ae899b32f3e8d4b06c0e61184
+- C4_G300_RUNTIME_PLUS_G301_WEIGHTS_2026-10-07.zip
+- 2,234,874 bytes
+- SHA256 cad9df74322bc94a8b9f5e4a5fb68416636889fa93ab3d63dd01fec86cb26a10
 
 Recovery: /C4_Canonical/.
 
 ## Latest
-G295:
-- FUNCTIONAL slot disagreement is visible in specific yes/no queries.
 
-G296:
-- strict BEFORE/AFTER temporal order;
-- transitive read-only temporal paths;
-- reverse-path refutation;
-- cycles and NEG-vs-positive-path -> CONFLICT;
-- ORDER != CAUSE.
+G299 weights:
+- 40 direct SYNONYM/ANTONYM lessons;
+- 24/24 reverse symmetry derived after/cold/SQLite;
+- 16/16 non-transitivity/identity traps UNKNOWN;
+- SYNONYM != IDENTITY;
+- growth +7,362 bytes vs G297.
 
-G297 weights:
-- 40 direct relation lessons;
-- 32/32 strict derived held-out after + cold;
-- 0 direct target leaks;
-- 26/26 cross-relation traps UNKNOWN;
-- all protected G270-G292 capabilities GREEN;
-- growth vs G292: +7,746 bytes.
+G300 runtime:
+- open list questions consume safe read-only inverse/symmetric algebra;
+- derived values are never persisted;
+- direct negative conflict blocks derived list output;
+- MEANS remains non-symmetric;
+- full memory 384/393;
+- SQLite split total 384/393;
+- same nine historical missing artifacts only.
 
-G298:
-- derived inverse/symmetric/temporal state invalidates immediately when support disappears;
-- FUNCTIONAL source stance reconstruction now respects later retraction;
-- retraction does not resurrect an older superseded value;
-- NEG of another value does not erase the current positive stance;
-- evidence history remains distinct from current source stance.
+G301 weights:
+- learned relation nouns: синоним, антоним, противоположность, роль, смысл, преемник;
+- 6/6 natural relation queries after/cold/SQLite;
+- all query evaluation read-only;
+- G297 and G299 relation retention fully GREEN;
+- growth +4,574 bytes vs G299.
 
-Validation:
-- focused G294-G298: 32/32;
-- full memory: 380/389;
-- SQLite split: 380 pass + same 9 historical missing artifacts;
-- streaming SQLite 5/5;
-- exact G297 on G298: memory 32/32 + 26/26, SQLite 32/32 + 26/26, direct leaks 0;
-- cumulative G270-G292 GREEN on G298.
+Open architecture note:
+CARDINALITY_SCOPE_NOTE.md — COLOR/LOCATION/VALUE cannot be treated as universally context-free single-valued world properties.
 
 Quality > bytes > generation count.
