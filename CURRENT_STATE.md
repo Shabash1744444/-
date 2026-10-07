@@ -2,7 +2,7 @@
 
 Date: 2026-10-07
 Canonical weights: G302
-Canonical runtime: G300
+Canonical runtime: G303
 
 Weights:
 - child_g302_role_means_successor_scope_green.c4m
@@ -10,31 +10,27 @@ Weights:
 - SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
 
 Runtime:
-- C4_RUNTIME_G300_OPEN_RELATION_QUERY_GREEN_2026-10-07.zip
-- SHA256 00d7be0378a0eb18b93c4e356dc9a7d28d9e1adc592ec9c16256cea8f069b27e
+- C4_RUNTIME_G303_EVENT_TENSE_BOUNDARIES_GREEN_2026-10-07.zip
+- SHA256 0aae1b33f1347b187ef06bb658cc21b3de8698053630455b4939a064eef870d8
 
 Combined:
-- C4_G300_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
-- SHA256 4d0fe345dff230413ee849971eba3765df317ccc23bc1f56de4826f24c0e9ce0
+- C4_G303_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
+- SHA256 1b62fad41f045ecb6b39fdf54a9db283101e78aaf48171ee4b72a811005dbcc6
 
-## Relation line
-G294 inverse/symmetry.
-G295 functional conflict visibility.
-G296 strict temporal order.
-G298 retraction invalidation.
-G299 lexical relation restraint.
-G300 open relation query algebra.
+## Development line
+G299 lexical restraint.
+G300 open relation queries.
 G301 relation-language bridge.
 G302 ROLE/MEANS/SUCCESSOR scope.
+G303 event tense boundaries.
 
-## G302 validation
-44/44 novel direct facts.
-24/24 forbidden inferences UNKNOWN.
-G301 natural queries 6/6 read-only.
-G299 retained 24/24 + 16/16.
-G297 retained 32/32 + 26/26.
-0 direct leaks.
-Cold memory == SQLite.
+## G303
+PAST negative queries are readable.
+Russian periphrastic FUTURE does not pollute current state.
+Future claims are event frames, not verified outcomes.
+Past/present/future coexist without cross-contamination.
+
+Exact G302 compatibility: 44/44 direct + 24/24 restraint; memory == SQLite.
 
 ## Current objective
-Finish EVENT_* frame semantics and scope/cardinality traps before moving into dirty human language.
+G304 event-frame/language coverage, then scope/cardinality traps and dirty human language.
