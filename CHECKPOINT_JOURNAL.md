@@ -12,16 +12,17 @@ G277 guided measurement.
 G278 guided reading.
 G279 guided prose.
 G280 everyday core.
-G281 lexical gaps without lemma guessing.
+G281 lexical gaps.
 G282 contextual action terms.
 G283 contextual quantities.
 G284 semantic family consolidation.
 G285 family-accelerated lexical.
-G286 runtime causal guided reading: ordinary CAUSES prose becomes source-aware structure only when endpoints are known; unknown endpoints mutate nothing.
-G287 guided causal prose: 40 direct causal lessons -> 80/80 derived non-adjacent chains; 24/24 reverse/cross controls UNKNOWN; cold GREEN.
+G286 causal guided reading.
+G287 linear causal prose: 40 direct -> 80/80 non-direct chains.
+G288 branching/converging causal motifs: 42 direct -> 60/60 indirect, 6/6 motif centers preserve two causes + three effects, 30/30 sibling/cross negatives UNKNOWN.
 
-Current weights SHA256 a45a68901a1f9ac79a0fdad729f0b25e93d380af2d1e7cd0265d7486f2f54a36
+Current weights SHA256 4ab4d0172d0447c92796a6248e33aca00abd0dc1eef92101f1020ccccef9393c
 Current runtime SHA256 b51670f57fa3a3d953ac3d096203b4015fdcb74eb18ad43c872018b8e1daa896
 
-Workflow:
-exact parent -> source manifest -> validated frozen held-out -> safe text ingestion -> held-out -> restraint -> full regression -> cold reload -> cumulative -> physical checkpoint -> next.
+Discipline:
+exact parent -> source manifest -> validated frozen held-out -> safe text ingestion -> local-structure audit -> negative controls -> full regression -> cold reload -> cumulative -> physical checkpoint.
