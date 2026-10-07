@@ -1,42 +1,47 @@
 # CURRENT STATE
 
 Date: 2026-10-07
-Canonical weights: G302
-Canonical runtime: G305
+Canonical weights: G306
+Canonical runtime: G306
 
 Weights:
-- child_g302_role_means_successor_scope_green.c4m
-- 1,981,454 bytes
-- SHA256 250625e164ffd6a7809f75129c2919a00a303cf97198cc27179ed9115f219ba7
+- child_g306_synthetic_spatial_physics_green.c4m
+- 1,983,393 bytes
+- SHA256 78d68b05845bd1b54cebc430d2b902d796b56b8efb9c7922328647989f8c5ded
 
 Runtime:
-- C4_RUNTIME_G305_SENSORY_BRIDGE_GREEN_2026-10-07.zip
-- 1,203,850 bytes
-- SHA256 2280f4383c0194262d3e3553e8a6ecb468fbfd71854c875d9f26df8e64228b00
+- C4_RUNTIME_G306_SYNTHETIC_3D_PHYSICS_GREEN_2026-10-07.zip
+- 304,847 bytes
+- SHA256 c8f7a4605655984910d76735e8e4a6f7ab68e7d5ec43d281dc6df32aae8eddbb
 
 Combined:
-- C4_G305_RUNTIME_PLUS_G302_WEIGHTS_2026-10-07.zip
-- 3,137,326 bytes
-- SHA256 606111ab5dce2108468a57b0e50621f195442dfc6622d8e8cc36c4a264adeda9
+- C4_G306_RUNTIME_PLUS_G306_WEIGHTS_2026-10-07.zip
+- 2,258,483 bytes
+- SHA256 25aed1de0c7f3eda2d8937e748944e461856e5e1f7945c695a84cd31c9c9915e
 
-## Latest
-G303: PAST/PRESENT/FUTURE boundaries.
-G304: event conjunction scope.
-G305: durable post-codec sensory bridge.
+## G305
+Durable SCREEN/AUDIO/SYMBOL sensory grounding.
 
-SCREEN/AUDIO/SYMBOL vectors may converge into a persistent sensory concept, but:
-VECTOR SIMILARITY != IDENTITY.
-RAW SENSORY OBSERVATION != GRAPH TRUTH.
-SINGLE UNKNOWN MODALITY != NEW ENTITY.
-Only explicit naming binds a sensory concept to a graph entity.
+## G306
+Synthetic embodied 3D physics:
+- SELF-relative axes (+x right, +y up, +z forward);
+- yaw changes egocentric frame;
+- action request does not mutate world;
+- stale request != success;
+- only verified SANDBOX_RECEIPT can train spatial effects;
+- 88 verified interactions;
+- learned LEFT/RIGHT/UP/DOWN/FORWARD/BACKWARD, TURN_LEFT/RIGHT, TOWARD/AWAY;
+- 10/10 novel-pose heldout;
+- graph unchanged by simulated motor training;
+- cold memory + SQLite GREEN.
 
-Nursery sensory state survives .c4m and SQLite restart.
+Exact older cognition retained:
+G302 44/44 direct + 24/24 restraint UNKNOWN; natural queries read-only.
 
-Validation:
-- focused sensory/event/embodiment/streaming pack 54/54;
-- full workspace memory 397 passed + 16 FileNotFound only;
-- full workspace SQLite 397 passed + 16 FileNotFound only;
-- exact G302 44/44 direct + 24/24 restraint, memory == SQLite.
+Full runtime regression:
+404 passed + 16 missing-file environment failures in memory;
+404 passed + 16 missing-file environment failures in SQLite;
+new semantic failures 0.
 
 ## Current objective
-Build synthetic embodied 3D physics on top of the safe sensory bridge, then learn action/outcome structure without confusing simulation with external-world truth.
+Build phoneme/grapheme/sound-symbol sequence grounding without collapsing sound into letter identity; then contact/collision and mass/effort physics.
