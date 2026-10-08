@@ -1,3 +1,11 @@
+# CURRENT PRIORITY — C4 UNIFIED COGNITIVE SKELETON (2026-10-08)
+
+**Correction:** A previous answer claimed *the whole chat had been saved*. That was false. The linked handoff includes 11 exact user messages, 3 older excerpts, a summarized conversation, evidence/decisions, a proposed skeleton, tests and next steps — **not a full verbatim transcript**. Hidden private reasoning and binary attachments are not archived there.
+
+**Start at [experimental_g330/handoff_2026-10-08/00_READ_ME_FIRST.md](experimental_g330/handoff_2026-10-08/00_READ_ME_FIRST.md).** User wants a complete shared cognitive skeleton of **C4**, then a real Python prototype and tests. **G323 is historical context only and NOT a prerequisite or next task.** Do not hunt G323 or block the new architecture work on a missing G323 archive. All G323 instructions below are **historical** and subordinate to this updated user intent.
+
+---
+
 # LATEST HANDOFF — CURRENT CHAT + COMPLETE C4 SKELETON (2026-10-08)
 
 Read **`experimental_g330/handoff_2026-10-08/00_READ_ME_FIRST.md`** FIRST when resuming this conversation. It links author's verbatim statements, visible discussion, evidence/error ledger, full typed architecture skeleton, acceptance gates and next-chat execution instructions. The handoff is a **specification, not implemented runtime**. Keep earlier G323 records below; do not conflate G323 with G329/G330.
