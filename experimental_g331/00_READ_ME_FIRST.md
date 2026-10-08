@@ -1,3 +1,8 @@
+# LATEST (2026-10-09): C004 INTEGRATED / DEVICE PENDING; C003 last DONE
+Read `02_RECOVERY_HANDOFF.md` newest top, `01_WORK_JOURNAL.md` last entry, and `checkpoints/CP_C4_G331_C004_INTEGRATED_DEVICE_PENDING.md`.
+C4 native code+ZIP: `f4fc8e5bb210cf9c1c39899be81c0a1865460e7b`; Github Actions SUCCESS `37845141293` (104 PASS, 2 SKIP). Companion Android app branch `experiments/c4-c004-native-host` build SUCCESS `37844344905`. **No real device live attestation.** Keep C004 open until physical proof; no C005 yet. Four owners, G215/source roots, anti-cascade gate and original .c4m remain mandatory.
+
+---
 # CURRENT: C003 DONE, C004 NOT STARTED (2026-10-08)
 Latest verified GitHub Actions: https://github.com/Shabash1744444/-/actions/runs/37836262293 (95 PASS, 2 SKIP). Read `01_WORK_JOURNAL.md` bottom + `02_RECOVERY_HANDOFF.md` top + `checkpoints/CP_C4_G331_C003_CI_GREEN.md`. The original C4 G329 .c4m was NOT replaced; local broad 633 PASS / 27 missing historic fixture FAIL; no Android live attestation. Follow constitutional and cascade laws; never start new memory or second runtime. C004 must write START before editing.
 
