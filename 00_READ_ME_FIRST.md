@@ -1,3 +1,9 @@
+# LATEST HANDOFF — CURRENT CHAT + COMPLETE C4 SKELETON (2026-10-08)
+
+Read **`experimental_g330/handoff_2026-10-08/00_READ_ME_FIRST.md`** FIRST when resuming this conversation. It links author's verbatim statements, visible discussion, evidence/error ledger, full typed architecture skeleton, acceptance gates and next-chat execution instructions. The handoff is a **specification, not implemented runtime**. Keep earlier G323 records below; do not conflate G323 with G329/G330.
+
+---
+
 # PRIORITY UPDATE — G323-P9
 
 ## Update — 2026-10-08: G323-P9 physical GREEN CANDIDATE (NOT CANONICAL)
