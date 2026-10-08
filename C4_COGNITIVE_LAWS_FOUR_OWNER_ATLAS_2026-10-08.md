@@ -232,7 +232,7 @@
 **MEDIATE:** наблюдает список и отчёт.  
 **Остаток, не выведенный из 4 законов:** Требуются временная динамика и механизмы кодирования.  
 **Попытка опровержения:** Изменить длину ряда и задержку перед воспроизведением.  
-**Источник:** [S9](#источники-и-ограничения). **Текущий уровень C4:** L0/L1 (проект анализа; запуск тестов ещё не выполнялся).
+**Источник:** [S23](#источники-и-ограничения). **Текущий уровень C4:** L0/L1 (проект анализа; запуск тестов ещё не выполнялся).
 
 #### M07. Мониторинг источника воспоминаний — ТЕОР
 
@@ -254,7 +254,7 @@
 **MEDIATE:** получает контекст ситуации.  
 **Остаток, не выведенный из 4 законов:** Нужна функция similarity и retrieval; правила C4 не предсказывают силу эффекта.  
 **Попытка опровержения:** Сравнить одинаковый/новый контекст извлечения.  
-**Источник:** [S9](#источники-и-ограничения). **Текущий уровень C4:** L0/L1 (проект анализа; запуск тестов ещё не выполнялся).
+**Источник:** [S24](#источники-и-ограничения). **Текущий уровень C4:** L0/L1 (проект анализа; запуск тестов ещё не выполнялся).
 
 ### Обучение и адаптация
 
@@ -663,12 +663,12 @@
 - **S1** — [Johnson et al. (2002), psychophysical laws](https://pubmed.ncbi.nlm.nih.gov/11954556/).
 - **S2** — [Kirkby (1974), Hick's law revisited](https://doi.org/10.1016/0001-6918(74)90012-2).
 - **S3** — [Todorov (2004), optimality in sensorimotor control](https://pmc.ncbi.nlm.nih.gov/articles/PMC1488877/).
-- **S4** — [Signal detection theory overview, methodological category](https://www.ncbi.nlm.nih.gov/books/).
+- **S4** — [Signal detection theory: discrimination and decision criteria (2020)](https://pmc.ncbi.nlm.nih.gov/articles/PMC7331002/).
 - **S5** — [Simons & Chabris (1999), inattentional blindness](https://pubmed.ncbi.nlm.nih.gov/10694957/).
-- **S6** — Attention/executive-control family: source validation pending. **TODO: нужна отдельная верификация источника**.
+- **S6** — [Stroop task conflict and cognitive control: mini-review (2019)](https://pubmed.ncbi.nlm.nih.gov/31379659/). **Coverage partial:** attentional blink requires separate primary source. **TODO: нужна отдельная верификация источника**.
 - **S7** — [Cowan (2001) and capacity review (2024)](https://pmc.ncbi.nlm.nih.gov/articles/PMC11259112/).
 - **S8** — [Carpenter, Pan & Butler (2022), spacing/retrieval](https://www.nature.com/articles/s44159-022-00089-1).
-- **S9** — Memory effects family: primary source validation pending. **TODO: нужна отдельная верификация источника**.
+- **S9** — [Interference and inhibition in memory: review (2021)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8467325/). **TODO: нужна отдельная верификация источника**.
 - **S10** — [Johnson, Hashtroudi & Lindsay (1993), source monitoring](https://pubmed.ncbi.nlm.nih.gov/8346328/).
 - **S11** — [Review of reinforcement prediction-error models](https://pmc.ncbi.nlm.nih.gov/articles/PMC4760620/).
 - **S12** — [Magee & Grienberger (2020), plasticity forms](https://www.annualreviews.org/content/journals/10.1146/annurev-neuro-090919-022842).
@@ -677,13 +677,16 @@
 - **S15** — [Wagemans et al. (2012), Gestalt review](https://pmc.ncbi.nlm.nih.gov/articles/PMC3482144/).
 - **S16** — [Friston (2010), free-energy principle proposal](https://www.nature.com/articles/nrn2787).
 - **S17** — [Tversky & Kahneman (1981), framing](https://pubmed.ncbi.nlm.nih.gov/7455683/).
-- **S18** — Bounded rationality / decision family: source validation pending. **TODO: нужна отдельная верификация источника**.
+- **S18** — [Herbert Simon (1955), A Behavioral Model of Rational Choice](https://doi.org/10.2307/1884852). **Coverage partial:** this does not independently validate every heuristic. **TODO: нужна отдельная верификация источника**.
 - **S19** — [Wellman et al. (2001), false-belief meta-analysis](https://pubmed.ncbi.nlm.nih.gov/11405571/).
-- **S20** — Pragmatics and irony family: source validation pending. **TODO: нужна отдельная верификация источника**.
-- **S21** — Metacognition/calibration family: source validation pending. **TODO: нужна отдельная верификация источника**.
+- **S20** — [Meta-analysis of pragmatic language comprehension (2019)](https://pubmed.ncbi.nlm.nih.gov/30414881/). **Coverage partial:** no universal post-post-irony law is implied. **TODO: нужна отдельная верификация источника**.
+- **S21** — [Fleming (2024), Metacognition and Confidence: Review and Synthesis](https://pubmed.ncbi.nlm.nih.gov/37722748/). **TODO: нужна отдельная верификация источника**.
 - **S22** — [Chater & Brown (2008), universals in cognition](https://onlinelibrary.wiley.com/doi/10.1080/03640210701801941).
 
-**Важно:** источники S6/S9/S18/S20/S21 оставлены как TODO, а некоторые записи используют обзор смежного семейства, не прямой эксперимент на конкретном эффекте. Пока такие пункты — рабочие гипотезы декомпозиции, а не доказанный научный каталог. Следующая редакция обязана уточнить первоисточники и границы применимости. Количественные параметры не извлекаются из четырёх законов без дополнительных допущений.
+- **S23** — [Computational Models of Memory Search: serial position effects (2019)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8389167/).
+- **S24** — [Tulving & Thomson (1973), Encoding Specificity and Retrieval Processes](https://eric.ed.gov/?id=EJ083912).
+
+**Важно:** S6 (внимание), S18 (эвристики), S20 (прагматика) и некоторые другие пункты используют обзор смежного семейства, а не прямой эксперимент для каждого частного эффекта. Для attentional blink, всех эвристик и предельно рекурсивной иронии нужны отдельные специализированные источники. Пока такие пункты — рабочие гипотезы декомпозиции, а не доказанный научный каталог. Следующая редакция обязана уточнить первоисточники и границы применимости. Количественные параметры не извлекаются из четырёх законов без дополнительных допущений.
 
 ## 5. Что НЕ изменено
 
