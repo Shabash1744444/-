@@ -186,12 +186,15 @@ def test_introspection_events_vs_own_utterances():
 
 
 def test_sensor_receipt_boundary_has_real_world_path():
-    c=C4()
-    receipt,verdict,claim=c.sense('trusted_probe',lambda:(P('temperature',('room','21C')),True),received_at=100)
+    c=C4(trusted_sensors={
+        'trusted_probe': lambda:(P('temperature',('room','21C')),True),
+        'unverified_probe': lambda:(P('temperature',('room','90C')),False),
+    })
+    receipt,verdict,claim=c.sense('trusted_probe',received_at=100)
     assert receipt.state=='OBSERVED' and receipt.verified
     assert verdict==Verdict.ADMIT and claim.scope==S.WORLD
     assert c.query(Q('temperature',('room',None),S.WORLD)).status=='SUPPORTED'
-    false_receipt,verdict2,claim2=c.sense('unverified_probe',lambda:(P('temperature',('room','90C')),False))
+    false_receipt,verdict2,claim2=c.sense('unverified_probe')
     assert false_receipt.state=='UNVERIFIED' and not false_receipt.verified
     assert claim2.scope==S.SOURCE
     assert c.query(Q('temperature',('room','90C'),S.WORLD)).status=='UNKNOWN'
