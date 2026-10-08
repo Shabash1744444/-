@@ -1,0 +1,6 @@
+# C004-R2 START — preserve DRIVE's target in native room execution
+Date 2026-10-09. C004 still DEVICE PENDING.
+Frozen RED on actual C004 runtime: SIM GOAL BALL LOCATION held→basket; teacher DEMO PLACE held→basket; PLAN returns ACTION_REQUEST for PLACE with requestId and BALL but WITHOUT target. Android private dispatcher also forwards only action/object; native executeRoomAction defaults PLACE target to floor-right. This causes a wrong physical effect and subsequent C4 receipt rejection.
+No code changes in this note. Must repair existing c4child/structured_cognition.py + private Emu Java dispatch; no second memory, no code-generated answer scripts. Only legitimate supported room target can pass; host must confirm before/after; invalid target must fail closed. Reattack different objects/destinations, replay/session controls, original C4M cold reload and both GitHub CI workflows.
+C004-R1: public WebView cannot preempt trial:* IDs; App CI run 37851176224 SUCCESS, C004_PRIVATE_EXECUTOR_CONTRACT PASS, APK built. This does not prove physical device runtime.
+If interrupted: C003 remains previous full DONE, C004 experimental integrated and device pending. Continue R2 from this frozen RED, not by reimplementing graph.
