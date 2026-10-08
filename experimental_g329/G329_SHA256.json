@@ -1,0 +1,18 @@
+{
+  "C4_G329_ANDROID_RUNTIME.zip": {
+    "bytes": 240850,
+    "sha256": "fbfcbd95662fcd7e8849c285a0c5c0b6c3383a1e656e282cab71018c885a9c91"
+  },
+  "C4_G329_ANDROID_CLEAN_ORGANISM.c4m": {
+    "bytes": 2065628,
+    "sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f"
+  },
+  "README_ANDROID_FIRST.md": {
+    "bytes": 5104,
+    "sha256": "1082a810b9637d3fd12c620f423e8f12bcfe9b3159695625725a39f69b56df4f"
+  },
+  "CHECKPOINT_G329_P0.md": {
+    "bytes": 6034,
+    "sha256": "6d6bbdec660c97c1d0d4731e55d4be77a49e5d1a0f52c1dd31b9a724a43c9ca4"
+  }
+}
