@@ -1586,14 +1586,12 @@ class C4LivingRuntime:
         if not callable(adapter):raise TypeError('CALLABLE_SIM_HOST_REQUIRED')
         self._sim_receipt_adapter=adapter
 
-    def handle_runtime_command(self,type_,payload):
-        """Android typed host channel. Never infer a receipt from USER_MESSAGE."""
-        if type_=='SIM_ACTION_RECEIPT' and self._sim_receipt_adapter is not None:
-            # The host must confirm that this is its own action receipt.
-            confirmed=self._sim_receipt_adapter(dict(payload))
-            if confirmed is None:return {'accepted':False,'error':'SIM_HOST_UNCONFIRMED'}
-            return structured_cognition.verified_sim_receipt(self,confirmed)
-        return {'accepted':False,'error':'CAPABILITY_UNAVAILABLE','command':type_}
+    def sim_action_receipt(self,payload):
+        """Internal host-bound SIM receipt. Does not hijack existing Android command routing."""
+        if self._sim_receipt_adapter is None:return {'accepted':False,'error':'SIM_HOST_NOT_BOUND'}
+        confirmed=self._sim_receipt_adapter(dict(payload))
+        if confirmed is None:return {'accepted':False,'error':'SIM_HOST_UNCONFIRMED'}
+        return structured_cognition.verified_sim_receipt(self,confirmed)
 
     def runtime_state(self):
         self._sync_inquiries()

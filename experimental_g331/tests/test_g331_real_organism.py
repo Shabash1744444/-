@@ -90,13 +90,13 @@ def test_competing_strategies_after_negative_consequence():
     first=msg(c,'PLAN',scope='SIM',scene='world-a')['cognitive']
     assert first['action'] in {'press','turn'}
     with pytest.raises(ValueError): sc.verified_sim_receipt(c,{'action_id':'unknown','success':True})
-    assert c.handle_runtime_command('SIM_ACTION_RECEIPT',{'action_id':first['action_id'],'success':False})['accepted'] is False
+    assert c.sim_action_receipt({'action_id':first['action_id'],'success':False})['accepted'] is False
     c.bind_sim_receipt_adapter(lambda payload:dict(payload))
-    ok=c.handle_runtime_command('SIM_ACTION_RECEIPT',{'action_id':first['action_id'],'success':False})
+    ok=c.sim_action_receipt({'action_id':first['action_id'],'success':False})
     assert ok['status']=='SIM_FAILURE'
     second=msg(c,'PLAN',scope='SIM',scene='world-a')['cognitive']
     assert second['action']!=first['action']
-    ok=c.handle_runtime_command('SIM_ACTION_RECEIPT',{'action_id':second['action_id'],'success':True})
+    ok=c.sim_action_receipt({'action_id':second['action_id'],'success':True})
     assert ok['status']=='SIM_SUCCESS'
     assert c.cognitive_goals[ok['goal_status'] if False else c.cognitive_actions[second['action_id']]['goal_id']]['status']=='ACHIEVED_SIM'
     assert msg(c,'REFLECT',scope='SIM',scene='world-a')['cognitive']['confirmed_sim']==2
