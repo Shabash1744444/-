@@ -19,14 +19,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo 'b9551694410aacbf798635d4d5bcb5485d8e2bc76a2e92e0233a960063b3fc4e  experimental_g331/assets/C4_G331_C002_NATIVE_RUNTIME.zip' | sha256sum -c -
+          echo 'eefcd7c89706357aafc5c5bae59ce3522ccdf2619817858b48cff5f90426d641  experimental_g331/assets/C4_G331_C004_NATIVE_RUNTIME.zip' | sha256sum -c -
           mkdir -p /tmp/c4-native
-          unzip -q experimental_g331/assets/C4_G331_C002_NATIVE_RUNTIME.zip -d /tmp/c4-native
+          unzip -q experimental_g331/assets/C4_G331_C004_NATIVE_RUNTIME.zip -d /tmp/c4-native
           test -s /tmp/c4-native/c4child/runtime.py
           test -s /tmp/c4-native/c4child/structured_cognition.py
-          echo '23fbb958695b0817bc22cef7ba79984f2978f5f8cd1e4c6882dfdb4f49f66bfd  experimental_g331/native_c4child/structured_cognition.py' | sha256sum -c -
-          cp experimental_g331/native_c4child/structured_cognition.py /tmp/c4-native/c4child/structured_cognition.py
+          echo '289ed311509b27d26ed04d19c522f8ac00706dbb8bc5cb3690aae8073631e311  experimental_g331/native_c4child/structured_cognition.py' | sha256sum -c -
+          echo 'fbb5f7bab5c0318ecba089ee8afa6b149dce9c6f52ecfb69169142d541fff1fb  experimental_g331/native_c4child/runtime.py' | sha256sum -c -
           cmp experimental_g331/native_c4child/structured_cognition.py /tmp/c4-native/c4child/structured_cognition.py
+          cmp experimental_g331/native_c4child/runtime.py /tmp/c4-native/c4child/runtime.py
       - name: Run frozen native cognition plus constitutional gates
         env:
           PYTHONPATH: /tmp/c4-native:experimental_g331
@@ -37,7 +38,8 @@ jobs:
             experimental_g331/tests/test_c002_nested_time.py \
             experimental_g331/tests/test_c002_foundational_gate.py \
             experimental_g331/tests/test_c002_training_gate.py \
-            experimental_g331/tests/test_c003_causal_credit.py
+            experimental_g331/tests/test_c003_causal_credit.py \
+            experimental_g331/tests/test_c004_native_host.py
       - name: Check constitution and block unsafe autonomous pretraining
         shell: bash
         env:
@@ -54,16 +56,17 @@ jobs:
             exit 1
           fi
           echo 'UNPROVEN_AUTONOMOUS_PRETRAINING_CORRECTLY_BLOCKED'
-      - name: Package precisely tested C003 Android native runtime
+      - name: Package precisely tested C004 Android native runtime
         shell: bash
         run: |
           set -euo pipefail
           cd /tmp/c4-native
-          zip -q -r "$GITHUB_WORKSPACE/C4_G331_C003_NATIVE_RUNTIME.zip" c4child -i 'c4child/*.py'
-          unzip -t "$GITHUB_WORKSPACE/C4_G331_C003_NATIVE_RUNTIME.zip" | tail -1
+          zip -q -r "$GITHUB_WORKSPACE/C4_G331_C004_NATIVE_RUNTIME.zip" c4child -i 'c4child/*.py'
+          unzip -t "$GITHUB_WORKSPACE/C4_G331_C004_NATIVE_RUNTIME.zip" | tail -1
           cmp c4child/structured_cognition.py "$GITHUB_WORKSPACE/experimental_g331/native_c4child/structured_cognition.py"
+          cmp c4child/runtime.py "$GITHUB_WORKSPACE/experimental_g331/native_c4child/runtime.py"
       - uses: actions/upload-artifact@v4
         with:
-          name: C4-G331-C003-TESTED-RUNTIME
-          path: C4_G331_C003_NATIVE_RUNTIME.zip
+          name: C4-G331-C004-TESTED-RUNTIME
+          path: C4_G331_C004_NATIVE_RUNTIME.zip
           if-no-files-found: error

@@ -117,6 +117,7 @@ class C4LivingRuntime:
         self.cognitive_demonstrations=[]
         self.cognitive_actions={}
         self._sim_receipt_adapter=None  # binding is host-only, not user message JSON.
+        self._native_room_session=None  # volatile host-only authority; never saved in C4M
         if hardened_truth_gate:self.enable_hardened_truth()
 
     def enable_hardened_truth(self):
@@ -1575,7 +1576,9 @@ class C4LivingRuntime:
 
     def poll(self,limit:int=100):
         out=[];budget=max(0,int(limit))
-        for _ in range(min(budget,len(self.outbox))):out.append(asdict(self.outbox.popleft()))
+        for _ in range(min(budget,len(self.outbox))):
+            event=self.outbox.popleft()
+            out.append(dict(event) if isinstance(event,dict) else asdict(event))
         for _ in range(min(budget-len(out),len(self._trace_outbox))):out.append(self._trace_outbox.popleft())
         return out
 
@@ -1592,6 +1595,61 @@ class C4LivingRuntime:
         confirmed=self._sim_receipt_adapter(dict(payload))
         if confirmed is None:return {'accepted':False,'error':'SIM_HOST_UNCONFIRMED'}
         return structured_cognition.verified_sim_receipt(self,confirmed)
+
+    def bind_native_room_session(self,session_id):
+        """Called by trusted native Java after an organism session opens.
+
+        Not exposed in the JSON command dispatcher or text protocol. The
+        host-owned session is intentionally ephemeral and invalid on cold load.
+        """
+        if not isinstance(session_id,str) or not session_id.startswith('c4-') or len(session_id)>120:
+            raise ValueError('INVALID_NATIVE_ROOM_SESSION')
+        self._native_room_session=session_id
+        return {'accepted':True,'host_bound':True}
+
+    def native_room_receipt(self,receipt,session_id):
+        """Private host-to-runtime contract, not an instruction from WebView.
+
+        The Java host must obtain the before/after locations from its own
+        sandbox state; no field in USER_MESSAGE or public ACTION_RECEIPT may
+        arrive here. In-process Python itself is not a cryptographic boundary.
+        """
+        if self._native_room_session is None or session_id!=self._native_room_session:
+            return {'accepted':False,'error':'NATIVE_SESSION_MISMATCH'}
+        if not isinstance(receipt,dict) or receipt.get('origin')!='SANDBOX' or receipt.get('world')!='HOME':
+            return {'accepted':False,'error':'NATIVE_RECEIPT_PROVENANCE_INVALID'}
+        aid=receipt.get('requestId');a=self.cognitive_actions.get(aid)
+        if not isinstance(a,dict) or a.get('status')!='PROPOSED_NOT_EXECUTED':
+            return {'accepted':False,'error':'NATIVE_PENDING_ACTION_REQUIRED'}
+        ctx=a.get('context') or {}
+        before=a.get('expected_before');after=a.get('expected_after')
+        if (ctx.get('scope')!='SIM' or ctx.get('scene')!='home' or
+                not isinstance(before,dict) or not isinstance(after,dict) or
+                before.get('relation')!='LOCATION' or after.get('relation')!='LOCATION'):
+            return {'accepted':False,'error':'NATIVE_ACTION_CONTEXT_INVALID'}
+        subject=before.get('subject');verb=a.get('action','').upper()
+        if (receipt.get('action')!=verb or receipt.get('object')!=subject or
+                verb not in {'LOOK','TAKE','GRASP','PLACE','RELEASE'} or
+                receipt.get('accepted') is not True or
+                type(receipt.get('executionSuccess')) is not bool or
+                receipt.get('replay') is True):
+            return {'accepted':False,'error':'NATIVE_ACTION_WITNESS_INVALID'}
+        b=receipt.get('before');z=receipt.get('after')
+        if (not isinstance(b,dict) or not isinstance(z,dict) or
+                type(b.get('location')) is not str or type(z.get('location')) is not str or
+                len(b['location'])>120 or len(z['location'])>120 or
+                b['location']!=before.get('object')):
+            return {'accepted':False,'error':'NATIVE_STATE_WITNESS_INVALID'}
+        # Java verifies this requestId is written only once on executed actions.
+        # Repeating an API call still fails: the prior proposal is no longer pending.
+        result=structured_cognition.verified_sim_receipt(self,{
+            'action_id':aid,'success':receipt['executionSuccess'],
+            'observed_action':verb,
+            'observed_before':{'subject':subject,'relation':'LOCATION','object':b['location']},
+            'observed_after':{'subject':subject,'relation':'LOCATION','object':z['location']},
+            'receipt_id':'android:'+session_id+':'+aid,
+            'root_id':'host_room_session:'+session_id+':'+aid})
+        return result
 
     def runtime_state(self):
         self._sync_inquiries()

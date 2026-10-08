@@ -1,0 +1,12 @@
+{
+  "sha_runtime_zip": "eefcd7c89706357aafc5c5bae59ce3522ccdf2619817858b48cff5f90426d641",
+  "native_module_count": 56,
+  "size": 254347,
+  "c4child_runtime_sha256": "fbb5f7bab5c0318ecba089ee8afa6b149dce9c6f52ecfb69169142d541fff1fb",
+  "c4child_structured_sha256": "289ed311509b27d26ed04d19c522f8ac00706dbb8bc5cb3690aae8073631e311",
+  "old_G329_model_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "test_status": "83/83 local PASS",
+  "android_app_ci": "0ba500e28bb406a1a6fb391ae55f233fe1249f29 SUCCESS",
+  "android_physical": "NOT_ATTESTED",
+  "c4_cycle": "C004 IN_PROGRESS_DEVICE_PENDING"
+}

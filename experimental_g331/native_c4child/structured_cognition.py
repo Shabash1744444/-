@@ -491,7 +491,26 @@ def process(r,p,source,publish=True):
                                       'remaining_steps':len(chain)} if chain is not None else {})}
         _record(r,'DRIVE','ACTION_PROPOSED',source,action_id=aid,action=action,goal_id=goal['goal_id'],
                 status='PROPOSED',basis=r.cognitive_actions[aid]['candidate_example_ids'])
-        # NO MEDIATE claim of execution/delivery/result.
+        # This is a host-facing *request*, NOT an executed or successful action.
+        # Only the native Android host can subsequently attest a room transition.
+        # Send only a narrowed, exact C4 SIM room contract, never arbitrary demo
+        # symbols as executable Android operations. No auto replay after cold load.
+        if (ctx['scope']=='SIM' and ctx['scene']=='home' and
+              'expected_before' in r.cognitive_actions[aid] and
+              action.upper() in {'LOOK','TAKE','GRASP','PLACE','RELEASE'} and
+              target['relation']=='LOCATION' and len(target['subject'])<=40 and
+              target['subject'].isascii() and target['subject'].isalpha() and
+              target['subject'].upper() in {'BALL','BLOCK','BOOK','PLANT','LAMP'}):
+            request={'type':'ACTION_REQUEST','kind':'ACTION_REQUEST',
+                     'schema':'C4_NATIVE_ROOM_ACTION_V1','scope':'SIM',
+                     'requestId':aid,'action':action.upper(),
+                     'object':target['subject'].upper(),
+                     'scene':'home','goalId':goal['goal_id'],
+                     'phase':'REQUEST_NOT_EXECUTED','sourceEventId':source}
+            r.outbox.append(request)
+            _record(r,'MEDIATE','ROOM_REQUEST_QUEUED',source,action_id=aid,
+                    status='REQUESTED_NOT_EXECUTED',room_object=target['subject'])
+        # No MEDIATE claim of execution/delivery/result.
         return _reply(r,'Могу попробовать в SIM действие '+action+', но выполнения и результата ещё нет.',op,source,mutated=True,publish=publish,
                       semantic={'action_id':aid,'status':'PROPOSED_NOT_EXECUTED','action':action,
                                 'remaining_steps':len(chain) if chain is not None else None})
