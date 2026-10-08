@@ -1,3 +1,11 @@
+## STATUS UPDATE — CODE IS REAL, LIBRARY ZIP IS COMPLETE
+
+The full tested source was saved in a ZIP to ChatGPT Library at `/C4_Code/C4_EXECUTABLE_COGNITIVE_CORE_M1_M3_2026-10-08.zip`. ZIP validation verified 11 entries, CLI included, SHA256 `4578bdd764e174e2c8b8a963cf864fea6df06b54e0c658caeee74fa1d26bb1d1`.
+
+**GitHub sync status:** the paths `C4_EXECUTABLE_COGNITIVE_CORE/c4core/kernel.py`, `c4core/__init__.py`, `tests/test_kernel.py`, `demo.py`, README, example JSONL and test logs were physically committed and read back. **The `c4core/cli.py` GitHub file upload was blocked**; it is present in the complete saved Library ZIP. As a result the GitHub-only checkout is NOT claimed fully executable/tested as-is. Execute the ZIP, not an incomplete GitHub-only checkout. Do not infer the other file's contents as full from manifest alone.
+
+---
+
 # C4 M1–M3 — ACTUAL PYTHON EXECUTABLE CHECKPOINT (2026-10-08)
 
 **STATUS:** EXPERIMENTAL PYTHON CODE EXECUTED; **28/28 local pytest checks PASS**; runnable demonstration and JSONL command loop checked. **NOT** AGI, not production C4, no G309/G329 model migration, no Android integration.
