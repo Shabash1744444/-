@@ -1,0 +1,9 @@
+{"op":"teach","actor":"AUTHOR","scene":"scene1","scope":"NARRATIVE","content":{"predicate":"located","args":["кубик","коробка"]}}
+{"op":"query","scene":"scene1","scope":"NARRATIVE","predicate":"located","args":["кубик",null]}
+{"op":"query","scene":"scene1","scope":"WORLD","predicate":"located","args":["кубик",null]}
+{"op":"teach","actor":"USER","scene":"scene1","scope":"NARRATIVE","content":{"holder":"Маша","mode":"BELIEF","content":{"predicate":"late","args":["Иван"]}}}
+{"op":"query","scene":"scene1","scope":"NARRATIVE","perspective":[["Маша","BELIEF"]],"predicate":"late","args":["Иван"]}
+{"op":"gap","topic":"temperature","question":"Что такое температура?"}
+{"op":"tick"}
+{"op":"status"}
+{"op":"exit"}
