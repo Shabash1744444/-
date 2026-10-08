@@ -1,0 +1,121 @@
+--- a/runtime/c4child/graph.py
++++ b/runtime/c4child/graph.py
+@@ -3,7 +3,7 @@
+ from functools import lru_cache
+ from pathlib import Path
+ from typing import Dict, List, Optional, Tuple, Iterable
+-from .constitution import LEGACY, STRICT, CONSTITUTION_VERSION, evaluate_mutation
++from .constitution import LEGACY, STRICT, CONSTITUTION_VERSION, ConstitutionDecision, evaluate_mutation
+ from .scope import KNOWLEDGE, SOURCE_ASSERTION, fact_scope, scope_allows
+ import hashlib, json, os, re
+ 
+@@ -205,6 +205,7 @@
+         # explicitly persist STRICT in the checkpoint.
+         self.constitutional_mode=LEGACY
+         self.constitution_version=CONSTITUTION_VERSION
++        self.hardened_gate=False  # Experimental candidate: prevent source-origin WORLD mutation via forged basis.
+ 
+     def _index_alias(self,kind:str,alias:str,eid:str)->None:
+         target=self._alias_exact if kind in STRICT_IDENTITY_KINDS else self._alias_lex
+@@ -425,6 +426,42 @@
+         self.constitutional_mode=m
+         self.audit.append({"order":int(self.order),"type":"CONSTITUTION_MODE","mode":m,"version":self.constitution_version})
+         return m
++
++    def _hardened_mutation(self, *, operation, subject, relation, origin, authority,
++                           constitutional_basis, verified):
++        """Opt-in common mutation boundary for new/live experiments.
++
++        Origins/bases are untrusted caller metadata. This policy deliberately
++        refuses raw OBS/RECEIPT/WORLD promotion until an independently verified
++        boundary mechanism exists. It never turns a claim into a world fact.
++        """
++        if not getattr(self,"hardened_gate",False):
++            return None
++        org=str(origin or '').upper();auth=str(authority or '').upper()
++        basis=str(constitutional_basis or '').upper();rel=rel_norm(relation)
++        op=str(operation or '').upper()
++        if org in {'USER_SAID','CREATOR_PRIOR','EXTERNAL_CORPUS','OBS','RECEIPT','SIMULATION','MODEL'}:
++            # Social self-report is a fact about a reporting relationship, not WORLD.
++            ent=self.entities.get(subject)
++            identity=(ent.label.upper() if ent and ent.kind=='identity' else '')
++            social=(org=='USER_SAID' and auth=='SOCIAL_REPORT' and (
++                (basis in {'SOCIAL_NAMING','SOCIAL_CORRECTION','SOCIAL_SELF_REPORT'} and
++                 rel=='NAME' and identity in {'SELF','USER'}) or
++                (basis=='SOCIAL_SELF_REPORT' and rel in {'LIKES','HAS','ROLE'} and identity=='USER')))
++            # Linguistic conventions are separately scoped and don't make WORLD claims.
++            from .scope import LANGUAGE_RELATIONS
++            linguistic=(org=='USER_SAID' and auth=='TEACHER' and
++                        basis=='LANGUAGE_CONVENTION' and rel in LANGUAGE_RELATIONS)
++            if social or linguistic:
++                return None
++            if op=='FORGET':
++                return ConstitutionDecision('REJECT','COMMIT','MASK','HARDENED_UNTRUSTED_RETRACTION')
++            return ConstitutionDecision('CLAIM_ONLY','EVAL','STATUS','HARDENED_UNGROUNDED_SOURCE')
++        if org=='SYSTEM' and auth=='SYSTEM' and basis in {'SYSTEM_INVARIANT'}:
++            return None
++        if op=='FORGET':
++            return ConstitutionDecision('REJECT','COMMIT','MASK','HARDENED_UNAUTHORIZED_RETRACTION')
++        return ConstitutionDecision('CLAIM_ONLY','EVAL','STATUS','HARDENED_UNKNOWN_MUTATION_ORIGIN')
+ 
+     def _record_claim_only(self,subject,relation,object_value,*,object_kind="literal",
+                            origin="USER_SAID",principal="SELF",privacy="PRIVATE",authority="USER",
+@@ -512,8 +549,11 @@
+                origin="USER_SAID",principal="SELF",privacy="PRIVATE",authority="USER",
+                confidence=1.0,source_ref=None,source_group=None,polarity="POS",
+                constitutional_basis=None,verified=False)->Fact:
+-        decision=evaluate_mutation(mode=getattr(self,'constitutional_mode',LEGACY),operation="COMMIT",origin=origin,authority=authority,
+-                                   constitutional_basis=constitutional_basis,verified=bool(verified))
++        decision=self._hardened_mutation(operation="COMMIT",subject=subject,relation=relation,origin=origin,
++                                         authority=authority,constitutional_basis=constitutional_basis,verified=verified)
++        if decision is None:
++            decision=evaluate_mutation(mode=getattr(self,'constitutional_mode',LEGACY),operation="COMMIT",origin=origin,authority=authority,
++                                       constitutional_basis=constitutional_basis,verified=bool(verified))
+         if decision.disposition=="COMMIT":
+             f=self._commit_unchecked(subject,relation,object_value,object_kind=object_kind,origin=origin,principal=principal,privacy=privacy,authority=authority,
+                                      confidence=confidence,source_ref=source_ref,source_group=source_group,polarity=polarity)
+@@ -534,8 +574,11 @@
+     def replace_relation(self,subject:str,relation:str,object_value:str,*,object_kind="literal",principal="SELF",
+                          constitutional_basis=None,verified=False,**kw)->Fact:
+         origin=kw.get("origin","USER_SAID");authority=kw.get("authority","USER")
+-        decision=evaluate_mutation(mode=getattr(self,'constitutional_mode',LEGACY),operation="REPLACE",origin=origin,authority=authority,
+-                                   constitutional_basis=constitutional_basis,verified=bool(verified))
++        decision=self._hardened_mutation(operation="REPLACE",subject=subject,relation=relation,origin=origin,
++                                         authority=authority,constitutional_basis=constitutional_basis,verified=verified)
++        if decision is None:
++            decision=evaluate_mutation(mode=getattr(self,'constitutional_mode',LEGACY),operation="REPLACE",origin=origin,authority=authority,
++                                       constitutional_basis=constitutional_basis,verified=bool(verified))
+         if decision.disposition!="COMMIT":
+             return self._record_claim_only(subject,relation,object_value,object_kind=object_kind,principal=principal,
+                                            origin=origin,privacy=kw.get("privacy","PRIVATE"),authority=authority,confidence=kw.get("confidence",1.0),
+@@ -569,8 +612,11 @@
+ 
+     def forget(self,subject:str,relation:str,*,principal="SELF",object_kind:Optional[str]=None,object_value:Optional[str]=None,
+                origin="SYSTEM",authority="SYSTEM",constitutional_basis=None,verified=False)->bool:
+-        decision=evaluate_mutation(mode=getattr(self,'constitutional_mode',LEGACY),operation="FORGET",origin=origin,authority=authority,
+-                                   constitutional_basis=constitutional_basis,verified=bool(verified))
++        decision=self._hardened_mutation(operation="FORGET",subject=subject,relation=relation,origin=origin,
++                                         authority=authority,constitutional_basis=constitutional_basis,verified=verified)
++        if decision is None:
++            decision=evaluate_mutation(mode=getattr(self,'constitutional_mode',LEGACY),operation="FORGET",origin=origin,authority=authority,
++                                       constitutional_basis=constitutional_basis,verified=bool(verified))
+         if decision.disposition!="COMMIT":
+             self.order+=1
+             self.audit.append({"order":self.order,"type":"CONSTITUTION_BLOCK_FORGET","subject":subject,"relation":rel_norm(relation),
+@@ -778,6 +824,7 @@
+         if getattr(self,"constitutional_mode",LEGACY)!=LEGACY:
+             out["constitutional_mode"]=getattr(self,"constitutional_mode",LEGACY)
+             out["constitution_version"]=getattr(self,"constitution_version",CONSTITUTION_VERSION)
++        if getattr(self,"hardened_gate",False):out["hardened_gate"]=True
+         return out
+ 
+     @classmethod
+@@ -812,7 +859,7 @@
+         else:
+             g.rebuild_evidence_from_facts()
+         g.lexicon_revision=sum(1 for f in g.facts.values() if f.relation=="WORD_FORM" and f.status in ACTIVE_STATUSES)
+-        g.audit=list(d.get("audit",[]));g.constitutional_mode=str(d.get("constitutional_mode",LEGACY)).upper();g.constitution_version=d.get("constitution_version",CONSTITUTION_VERSION);return g
++        g.audit=list(d.get("audit",[]));g.constitutional_mode=str(d.get("constitutional_mode",LEGACY)).upper();g.constitution_version=d.get("constitution_version",CONSTITUTION_VERSION);g.hardened_gate=bool(d.get("hardened_gate",False));return g
+ 
+     def save(self,path):
+         Path(path).write_text(json.dumps(self.to_dict(),ensure_ascii=False,separators=(",",":")),encoding="utf-8")
