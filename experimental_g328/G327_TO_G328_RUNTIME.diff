@@ -1,0 +1,188 @@
+--- /mnt/data/c4_g327/candidate/runtime/c4child/runtime.py	2026-10-08 12:41:04.972702608 +0000
++++ /mnt/data/c4_g328/candidate/runtime/c4child/runtime.py	2026-10-08 13:20:42.025874525 +0000
+@@ -24,6 +24,7 @@
+ from .perspective_composition import chain_summary, perspective_entity_inquiry
+ from .metacognitive_probe import inspect_question
+ from .discourse_bridge import resolve_disposition
++from .episodic_memory import index_event, is_query_batch, is_memory_query, answer_batch, answer_memory_query
+ 
+ @dataclass
+ class OutboundEvent:
+@@ -88,6 +89,14 @@
+         # G322: non-authoritative semantic/presence spine. Events and EVAL
+         # candidates live here; the spine never grants COMMIT authority.
+         self.semantic_spine=SemanticSpine()
++        # G328: immutable-source transcript episode index. No admission authority.
++        self.episode_index={}
++        # Observational telemetry is opt-in, non-persistent, and distinct from
++        # cognition. The host receives actual event records, never a fake chain.
++        self._trace_mode='OFF'
++        self._trace_scope='CONTINUOUS'
++        self._trace_outbox=deque(maxlen=1024)
++        self._trace_included=[]
+         # G318: cognition may formulate a public act without sending it yet.
+         # READY/BACKGROUND/PUBLISHED are communication STATUS, never truth status.
+         self.pending_public_acts=deque()
+@@ -136,6 +145,18 @@
+         if source_event_id is not None:row["source_event_id"]=str(source_event_id)
+         if extra:row.update(dict(extra))
+         self.life_events.append(row)
++        if getattr(self,'_trace_mode','OFF')!='OFF':
++            # These are materialized runtime events, not generated explanations.
++            channel='COMMIT' if ('COMMIT' in kind or 'TRANSACTION' in kind) else (
++                'DRIVE' if ('DRIVE' in kind or 'PUBLIC' in kind) else (
++                'EVAL' if ('EVAL' in kind or 'INTERPRETATION' in kind) else (
++                'MEDIATE' if ('RECEIPT' in kind or 'SENSORY' in kind) else 'EVENT')))
++            if self._trace_mode!='EVENTS' or channel in {'COMMIT','DRIVE','MEDIATE'}:
++                event={'type':'TRACE_'+channel,'kind':'TRACE_'+channel,'schema':'C4_COGNITIVE_TRACE_V1',
++                       'eventId':row['event_id'],'step':row['step'],'owner':channel,
++                       'sourceEventId':row.get('source_event_id'), 'record':dict(row),
++                       'epistemic':'INTERNAL_PROCESS_RECORD_NOT_WORLD_EVIDENCE'}
++                self._trace_outbox.append(event)
+         return row
+ 
+     def _record_turn(self,speaker,text,*,kind=None,reason=None,requires_user=False,event_id=None,parsed=None,semantic_eids=None):
+@@ -705,6 +726,9 @@
+         self.semantic_spine.record_event(event_id=eid,actor="OTHER",channel="CHAT_TEXT",payload=str(text),
+                                          internal_step=int(self.step),wall_time=wall,external_order=int(self.external_seq),status="RECEIVED")
+         self.semantic_spine.analyze_surface(eid,str(text))
++        indexed=index_event(eid,self.external_seq,str(text))
++        self.episode_index[eid]=indexed
++        # Indexing never creates WORLD facts or SELF autobiography.
+         return dict(ev)
+ 
+     def _speech_value(self,parsed,reply_kind,decision=None):
+@@ -835,6 +859,10 @@
+             ev["status"]="PROCESSED";ev["processed_step"]=int(self.step)
+             self._record_life_event("C4","COGNITIVE_PROCESS",status="DONE",source_event_id=ev["event_id"],extra={"reply_event_id":((out.get("event") or {}).get("event_id") if isinstance(out,dict) else None),"public_output":bool(out.get('reply') if isinstance(out,dict) else False)})
+             out["inbound_event"]=dict(ev)
++            if self._trace_mode!='OFF' and self._trace_scope=='NEXT_INTERACTION':
++                # End after the input's actual cognitive step. Already emitted
++                # trace events remain readable in the trace outbox.
++                self._trace_mode='OFF';self._trace_scope='CONTINUOUS'
+             return out
+         act=self._select_public_act()
+         if act is None and allow_background_return:
+@@ -864,6 +892,47 @@
+         self.human_active=True;self._asked_since_user=False
+         # Receiving a human event is a TRIGGER for DRIVE, not proof that any
+         # outstanding inquiry was answered.  Do not clear inquiry state here.
++        # G328: a long exam/question sheet is one READ-ONLY event family.
++        # Splitting 20 questions and sending each through dialogue.say() allowed
++        # test premises, quotes and simulated events to become teaching attempts.
++        # This applies to all topics/names, not to a fixed answer key.
++        indexed=self.episode_index.get(source_event_id) if source_event_id else None
++        if indexed is None:
++            indexed=index_event(source_event_id or ('internal:%s'%self.step),self.external_seq,str(text))
++        episodes=indexed['episodes']
++        candidate=None
++        if is_query_batch(episodes):
++            candidate=answer_batch(episodes,self.episode_index,current_event_id=source_event_id)
++        elif len(episodes)==1 and is_memory_query(episodes[0]['text']):
++            candidate=answer_memory_query(episodes[0]['text'],self.episode_index,current_event_id=source_event_id)
++        if candidate is not None:
++            self.step+=1;self.last_user_step=self.step
++            self._record_life_event('C4','EVAL_SOURCE_EPISODES',status='CANDIDATE',
++                                    source_event_id=source_event_id,extra={
++                                       'scope':'READ_ONLY_TRANSCRIPT', 'episode_count':len(episodes),
++                                       'basis_event_ids':list(dict.fromkeys(x['event_id'] for x in candidate.get('refs',[]))),
++                                       'candidate_status':candidate['status']})
++            self._record_life_event('C4','COMMIT_NOOP',status='BLOCKED',
++                                    source_event_id=source_event_id,
++                                    extra={'reason':'EXAM_OR_TRANSCRIPT_QUERY_NOT_TEACHING'})
++            self._record_life_event('C4','DRIVE_SPEECH_ACT',status='SELECTED',
++                                    source_event_id=source_event_id,
++                                    extra={'speech_act':'EVIDENCE_BOUNDED_RECALL','basis':'READ_ONLY_EPISODES'})
++            self._record_turn('USER',text,kind='QUERY_BATCH' if is_query_batch(episodes) else 'MEMORY_QUERY')
++            reply=candidate['reply'];ev=None
++            if publish:
++                ev=self._event('REPLY',reply,'SOURCE_RECALL',0.9,source_event_id,False)
++                self._record_turn('C4',reply,kind='REPLY',reason='SOURCE_RECALL',event_id=ev.event_id)
++            self._record_life_event('C4','SOURCE_RECALL_RESULT',status=candidate['status'],
++                                    source_event_id=source_event_id,extra={
++                                         'found_references':len(candidate.get('refs',[])),
++                                         'question_count':candidate.get('question_count',1)})
++            self._autosave_tick(False)
++            return {'reply':reply if publish else None,'proposed_reply':None if publish else reply,
++                    'mutated':False,'event':asdict(ev) if ev is not None else None,
++                    'parsed':{'kind':'READ_ONLY_EPISODIC_QUERY'},
++                    'reply_kind':'EVIDENCE_BOUNDED_RECALL','basis_event_ids':list(dict.fromkeys(x['event_id'] for x in candidate.get('refs',[]))),
++                    'episode_count':len(episodes),'status':candidate['status']}
+         surfaces=self._split_user_surfaces(text)
+         if not surfaces:
+             surfaces=[str(text).strip()] if str(text).strip() else ['']
+@@ -1379,9 +1448,42 @@
+         self._autosave_pending=getattr(self,'_autosave_pending',0)+1
+         if self._autosave_pending>=self._autosave_every:self.save(self._autosave_path)
+ 
++    def trace_config(self,config=None,**kwargs):
++        """Real runtime-side instrumentation accepted by Emu/Chaquopy adapter.
++
++        Recording is strictly observational, no graph writes. OFF drops pending
++        trace rows. NEXT_INTERACTION automatically turns itself off after input.
++        """
++        c=dict(config or {});c.update(kwargs)
++        mode=str(c.get('mode','OFF')).upper()
++        scope=str(c.get('scope','CONTINUOUS')).upper()
++        if mode not in {'OFF','EVENTS','DECISIONS','DEEP'}:raise ValueError('UNKNOWN_TRACE_MODE')
++        if scope not in {'CONTINUOUS','NEXT_INTERACTION'}:raise ValueError('UNKNOWN_TRACE_SCOPE')
++        self._trace_mode=mode;self._trace_scope=scope
++        self._trace_included=[str(x) for x in (c.get('include') or [])]
++        if mode=='OFF':self._trace_outbox.clear()
++        return {'accepted':True,'schema':'C4_COGNITIVE_TRACE_V1','mode':mode,'scope':scope,
++                'structured':True,'freeFormMonologue':False,
++                'availableOwners':['EVAL','COMMIT','DRIVE','MEDIATE'],
++                'warning':'Instrumented event ledger, not introspective hidden reasoning'}
++
++    def trace_snapshot(self,request=None,**kwargs):
++        """Non-mutating snapshot of actual causal and provenance records."""
++        req=dict(request or {});req.update(kwargs)
++        cap=max(1,min(80,int(req.get('limit',40))))
++        items=list(self.life_events)[-cap:]
++        return {'accepted':True,'schema':'C4_COGNITIVE_TRACE_V1',
++                'mode':self._trace_mode,'scope':self._trace_scope,
++                'internalStep':self.step,'lastExternalEventId':self.semantic_spine.last_external_event_id,
++                'actualEventRows':items, 'episodeIndexEvents':len(self.episode_index),
++                'graphFacts':len(self.dialogue.g.facts),'worldTruthNotInferred':True,
++                'transactions':list(self.semantic_spine.transactions[-min(cap,10):]),
++                'pendingInquiries':[dict(q) for q in self.inquiries.values() if q.get('status') in ('OPEN','BACKGROUND')][-10:]}
++
+     def poll(self,limit:int=100):
+-        out=[]
+-        for _ in range(min(int(limit),len(self.outbox))):out.append(asdict(self.outbox.popleft()))
++        out=[];budget=max(0,int(limit))
++        for _ in range(min(budget,len(self.outbox))):out.append(asdict(self.outbox.popleft()))
++        for _ in range(min(budget-len(out),len(self._trace_outbox))):out.append(self._trace_outbox.popleft())
+         return out
+ 
+     def pending_count(self):return len(self.pending_questions)+len(self.pending_conflicts)
+@@ -1405,6 +1507,7 @@
+                 "semantic_context":list(self.semantic_context),
+                 "semantic_composition":self.composition.to_dict(),
+                 "semantic_spine":self.semantic_spine.to_dict(),
++                "episode_index":list(self.episode_index.values()),
+                 "life_events":list(self.life_events),"inbound_events":list(self.inbound_events),"external_seq":int(self.external_seq),
+                 "pending_public_acts":list(self.pending_public_acts),
+                 "inquiries":[self.inquiries[qid] for qid in self.inquiry_order if qid in self.inquiries],
+@@ -1433,6 +1536,7 @@
+                 tuple((q.get('event_id'),q.get('status')) for q in self.inquiries.values()),len(self.inbound_events),self.external_seq,
+                 tuple((a.get('act_id'),a.get('status'),a.get('reviews',0)) for a in self.pending_public_acts),
+                 len(self.composition.units),len(self.composition.links),len(self.semantic_spine.events),len(self.semantic_spine.transactions),
++                len(self.episode_index),
+                 self.life_events[-1].get('event_id') if self.life_events else None)
+ 
+     def load_runtime_state(self,d):
+@@ -1464,6 +1568,13 @@
+         self.semantic_context=deque((dict(x) for x in d.get("semantic_context",[]) if isinstance(x,dict) and x.get("eid") in self.dialogue.g.entities),maxlen=96)
+         self.composition=SemanticComposition.from_dict(d.get("semantic_composition") or {})
+         self.semantic_spine=SemanticSpine.from_dict(d.get("semantic_spine") or {})
++        self.episode_index={str(e['event_id']):dict(e) for e in d.get('episode_index',[])
++                            if isinstance(e,dict) and e.get('event_id')}
++        # Backfill upgraded G327 checkpoints from recorded non-authoritative
++        # external transport events; no teaching/reasoning is replayed.
++        for eid,ev in self.semantic_spine.events.items():
++            if ev.get('actor')=='OTHER' and eid not in self.episode_index:
++                self.episode_index[eid]=index_event(eid,ev.get('external_order',0),ev.get('payload',''))
+         self.dialogue.set_context_entities(self._recent_context_eids())
+         self.inbound_events=deque((dict(x) for x in d.get("inbound_events",[]) if isinstance(x,dict)))
+         self.pending_public_acts=deque((dict(x) for x in d.get("pending_public_acts",[]) if isinstance(x,dict)))
