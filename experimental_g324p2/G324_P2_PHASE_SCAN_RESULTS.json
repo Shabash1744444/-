@@ -1,0 +1,252 @@
+{
+  "experiment": "C4_G324_P2_ADAPTIVE_GRAPH_BIFURCATION",
+  "date": "2026-10-08",
+  "scope": "SIMULATION_ONLY",
+  "parent": "G324-P1 candidate derived from G322-P8 model; no trained weights changed",
+  "model_baseline_sha256": "6baf2864ce8a811738d13cf3593f739e8dcc5a8734d17ce0f5647bc23da06301",
+  "method": "toy deterministic coupled logistic node maps + local rewiring with hysteresis + two levels of coarse-grained top-down feedback",
+  "frozen_cases": 6,
+  "seeds_per_setting": 8,
+  "regimes": [
+    {
+      "r": 2.9,
+      "feedback": "none",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1,
+      "mean_edges": 66,
+      "max_macro_span": 0.0
+    },
+    {
+      "r": 2.9,
+      "feedback": "meso_global",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1,
+      "mean_edges": 66,
+      "max_macro_span": 0.0
+    },
+    {
+      "r": 2.9,
+      "feedback": "strong",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1,
+      "mean_edges": 66,
+      "max_macro_span": 0.0
+    },
+    {
+      "r": 3.2,
+      "feedback": "none",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 2,
+      "mean_edges": 33,
+      "max_macro_span": 0.143615
+    },
+    {
+      "r": 3.2,
+      "feedback": "meso_global",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1.75,
+      "mean_edges": 40.5,
+      "max_macro_span": 0.285093
+    },
+    {
+      "r": 3.2,
+      "feedback": "strong",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1,
+      "mean_edges": 66,
+      "max_macro_span": 0.285106
+    },
+    {
+      "r": 3.5,
+      "feedback": "none",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 2,
+      "mean_edges": 31.75,
+      "max_macro_span": 0.201112
+    },
+    {
+      "r": 3.5,
+      "feedback": "meso_global",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 2,
+      "mean_edges": 33.125,
+      "max_macro_span": 0.256164
+    },
+    {
+      "r": 3.5,
+      "feedback": "strong",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1.625,
+      "mean_edges": 47.875,
+      "max_macro_span": 0.490616
+    },
+    {
+      "r": 3.56,
+      "feedback": "none",
+      "mean_churn_last100": 8.5,
+      "min_churn": 0,
+      "max_churn": 29,
+      "mean_graph_states": 1.75,
+      "mean_final_components": 3.125,
+      "mean_edges": 22.75,
+      "max_macro_span": 0.226466
+    },
+    {
+      "r": 3.56,
+      "feedback": "meso_global",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 2,
+      "mean_edges": 32.75,
+      "max_macro_span": 0.303478
+    },
+    {
+      "r": 3.56,
+      "feedback": "strong",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1.625,
+      "mean_edges": 47.875,
+      "max_macro_span": 0.539627
+    },
+    {
+      "r": 3.65,
+      "feedback": "none",
+      "mean_churn_last100": 92.625,
+      "min_churn": 80,
+      "max_churn": 96,
+      "mean_graph_states": 91.375,
+      "mean_final_components": 2.875,
+      "mean_edges": 19.625,
+      "max_macro_span": 0.342676
+    },
+    {
+      "r": 3.65,
+      "feedback": "meso_global",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 2,
+      "mean_edges": 33.75,
+      "max_macro_span": 0.407178
+    },
+    {
+      "r": 3.65,
+      "feedback": "strong",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1.875,
+      "mean_edges": 40.125,
+      "max_macro_span": 0.619247
+    },
+    {
+      "r": 3.8,
+      "feedback": "none",
+      "mean_churn_last100": 99.5,
+      "min_churn": 98,
+      "max_churn": 100,
+      "mean_graph_states": 99.5,
+      "mean_final_components": 4,
+      "mean_edges": 13.375,
+      "max_macro_span": 0.484899
+    },
+    {
+      "r": 3.8,
+      "feedback": "meso_global",
+      "mean_churn_last100": 90.875,
+      "min_churn": 87,
+      "max_churn": 95,
+      "mean_graph_states": 89.375,
+      "mean_final_components": 2.375,
+      "mean_edges": 27.875,
+      "max_macro_span": 0.727034
+    },
+    {
+      "r": 3.8,
+      "feedback": "strong",
+      "mean_churn_last100": 0,
+      "min_churn": 0,
+      "max_churn": 0,
+      "mean_graph_states": 1,
+      "mean_final_components": 1,
+      "mean_edges": 66,
+      "max_macro_span": 0.767402
+    }
+  ],
+  "logistic_control": [
+    {
+      "r": 2.9,
+      "period": 1,
+      "lyapunov": -0.10536
+    },
+    {
+      "r": 3.2,
+      "period": 2,
+      "lyapunov": -0.91629
+    },
+    {
+      "r": 3.5,
+      "period": 4,
+      "lyapunov": -0.87251
+    },
+    {
+      "r": 3.56,
+      "period": 8,
+      "lyapunov": -0.07714
+    },
+    {
+      "r": 3.65,
+      "period": null,
+      "lyapunov": 0.25842
+    },
+    {
+      "r": 3.8,
+      "period": null,
+      "lyapunov": 0.43574
+    }
+  ],
+  "nonlocal_leaf_effect": 0.001416,
+  "nonlocal_without_macro": 0.0,
+  "statistical_note": "8 initializations per setting are an exploratory sensitivity scan; no parameter fitting or inferential statistics; do not generalize to all adaptive graphs",
+  "negative_findings": [
+    "P2 is not a fractal dimension test",
+    "logistic period doubling is textbook known, not emergent from C4",
+    "threshold rewiring is not by itself a mathematically proven topology bifurcation",
+    "no perceptual learning, general intelligence or 54 cognitive effect reproduction",
+    "the existing G322 false WORLD admission was not touched"
+  ]
+}
