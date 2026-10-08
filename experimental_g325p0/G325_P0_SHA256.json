@@ -1,0 +1,9 @@
+{
+  "status": "EXPERIMENT_NOT_CANONICAL",
+  "archive_sha256": "b4c7d69aaf659dfb507ebee60e2c0e6e96144af501b667b4eb640d64f6eedef5",
+  "archive_bytes": 6368627,
+  "parent_model_sha256": "052f30fb0f79b79dad93e25ad77ad81f29ff5bc2be6981fefc85630a56f791c1",
+  "g325_model_sha256": "f33ecb8228ce19d910aa3cce2877f9b5d2544977f79d855efa2491c0c11f2b77",
+  "g325_model_bytes": 2030190,
+  "files_inside_zip": 179
+}
