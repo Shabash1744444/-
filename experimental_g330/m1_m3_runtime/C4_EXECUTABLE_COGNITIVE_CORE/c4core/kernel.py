@@ -49,8 +49,9 @@ class Proposition:
 
     def __post_init__(self):
         object.__setattr__(self, 'args', tuple(self.args))
-        if not self.predicate or not self.args or any(not x for x in self.args):
-            raise ValueError('Predicate and all arguments must be nonempty')
+        if (not isinstance(self.predicate, str) or not self.predicate or not self.args
+                or any(not isinstance(x, str) or not x for x in self.args)):
+            raise ValueError('Predicate and all arguments must be nonempty strings')
 
 
 @dataclass(frozen=True)
@@ -92,6 +93,7 @@ class Candidate:
     scene: str
     roots: tuple[str, ...]
     status: str = 'HYPOTHESIS'
+    id: str = ''  # EVAL-generated registration; unregistered data cannot be admitted
 
 
 @dataclass(frozen=True)
@@ -105,6 +107,7 @@ class Claim:
     status: str
     committed_step: int
     claimed_at: float | None
+    retracted_at: float | None = None
 
 
 @dataclass(frozen=True)
@@ -189,14 +192,20 @@ class Rule:
     supporting_roots: tuple[str, ...]
     exceptions: tuple[str, ...] = ()
     active: bool = True
+    scene: str = 'default'  # local simulation/story scope; no cross-scene leakage
 
 
 class C4:
-    VERSION = 'C4_EXECUTABLE_SPINE_M1_M3_V1'
+    VERSION = 'C4_EXECUTABLE_SPINE_M1_M3_V2_GUARDS'
+    LEGACY_VERSIONS = ('C4_EXECUTABLE_SPINE_M1_M3_V1',)
+    MAX_PERSPECTIVE_DEPTH = 64
+    MAX_TRACE_EVENTS = 5000
     INFLUENCES = ('MASK', 'VALUE', 'AVAIL', 'TRIGGER', 'STATUS')
     OWNERS = ('EVAL', 'COMMIT', 'DRIVE', 'MEDIATE')
 
-    def __init__(self):
+    def __init__(self, *, trusted_sensors: Mapping[str, Callable[[], tuple[Proposition, bool]]] | None = None):
+        # Only host code may supply adapters; user events cannot register one.
+        self._trusted_sensors = dict(trusted_sensors or {})
         self._events: dict[str, Event] = {}
         self._claims: dict[str, Claim] = {}
         self._candidates: dict[str, Candidate] = {}
@@ -243,6 +252,8 @@ class C4:
         if self._trace_enabled:
             self._trace.append({'step': self._step, 'owner': owner,
                                 'influence': influence, 'operation': operation, **kw})
+            if len(self._trace) > self.MAX_TRACE_EVENTS:
+                del self._trace[:len(self._trace) - self.MAX_TRACE_EVENTS]
 
     def set_trace(self, enabled: bool):
         self._trace_enabled = bool(enabled)
@@ -255,18 +266,30 @@ class C4:
                 kind='ASSERT', scope: Scope = Scope.SOURCE, scene='default',
                 parents: Iterable[str] = (), roots: Iterable[str] | None = None,
                 received_at: float = 0, claimed_at: float | None = None,
-                receipt_id: str | None = None, _mediated: bool = False) -> Event:
+                receipt_id: str | None = None) -> Event:
         """INGEST: no truth admission. roots of relayed events MUST be inherited.
         Fake received-at/claimed-at never count as verified-world receipt.
         """
         if not actor or not scene: raise ValueError('actor/scene required')
-        if actor == 'C4' and not _mediated:
+        # Enforce a resource budget at ingest, not after deep recursive decoding.
+        if isinstance(content, (Proposition, Perspective)):
+            cursor, depth = content, 0
+            while isinstance(cursor, Perspective):
+                depth += 1
+                if depth > self.MAX_PERSPECTIVE_DEPTH:
+                    raise CommitDenied('PERSPECTIVE_DEPTH_BUDGET_EXCEEDED')
+                cursor = cursor.content
+            if not isinstance(cursor, Proposition):
+                raise TypeError('Nested meaning must terminate at a typed proposition')
+        if actor == 'C4':
             raise CommitDenied('C4-origin public events require MEDIATE authorization')
         parents = tuple(parents)
         if any(x not in self._events for x in parents):
             raise ValueError('Unknown causal parent')
         if roots is not None and not parents:
             raise CommitDenied('Unparented event cannot claim arbitrary independent roots')
+        if roots is not None and not tuple(roots):
+            raise CommitDenied('Evidence lineage cannot be erased by a relayed event')
         if roots is not None and parents:
             parent_roots = set().union(*(set(self._events[x].roots) for x in parents))
             if not set(roots).issubset(parent_roots):
@@ -298,7 +321,7 @@ class C4:
             return None
         self._hyp_seq += 1
         cid = f'cand{self._hyp_seq:09d}'
-        candidate = Candidate(event_id, ev.payload, ev.scope, ev.scene, ev.roots)
+        candidate = Candidate(event_id, ev.payload, ev.scope, ev.scene, ev.roots, id=cid)
         self._candidates[cid] = candidate
         self._record('EVAL', 'AVAIL', 'CANDIDATE', candidate_id=cid,
                      event_id=event_id, roots=list(ev.roots), depth=self._meaning_depth(ev.payload))
@@ -309,11 +332,15 @@ class C4:
         """COMMIT is the *only* way to create a recognized Claim.
         Unverified WORLD proposals are downgraded to sourced claims.
         """
+        if not candidate.id or self._candidates.get(candidate.id) != candidate:
+            raise CommitDenied('Unregistered or modified EVAL candidate')
         if candidate.event_id not in self._events:
             raise CommitDenied('Candidate event not in the causal life-line')
         source = self._events[candidate.event_id]
-        if candidate.content != source.payload or candidate.roots != source.roots:
-            raise CommitDenied('Candidate does not match source evidence')
+        if (candidate.content != source.payload or candidate.roots != source.roots
+                or candidate.scope != source.scope or candidate.scene != source.scene
+                or candidate.status != 'HYPOTHESIS'):
+            raise CommitDenied('Candidate does not match original event content/scope/scene')
         scope = Scope(target or candidate.scope)
         verdict = Verdict.ADMIT
         if scope == Scope.WORLD:
@@ -356,9 +383,17 @@ class C4:
         first_source = self._events[old.event_ids[0]]
         if basis.actor != first_source.actor:
             raise CommitDenied('Only original source may retract its claim via this API')
+        same_slot = (isinstance(basis.payload, Proposition)
+                     and isinstance(old.content, Proposition)
+                     and basis.payload.predicate == old.content.predicate
+                     and basis.payload.args[:1] == old.content.args[:1])
+        explicit_target = (basis.kind == 'CORRECTION' and first_source.id in basis.parents)
+        if not (basis.scene == old.scene and basis.scope == old.scope
+                and (same_slot or explicit_target)):
+            raise CommitDenied('Retraction basis does not identify the original claim or its slot')
         if old.status != 'ACTIVE': return old
         self._step += 1
-        new = replace(old, status='RETRACTED')
+        new = replace(old, status='RETRACTED', retracted_at=basis.claimed_at)
         self._claims[claim_id] = new
         self._record('COMMIT', 'STATUS', 'RETRACT', claim_id=claim_id,
                      basis_event_id=basis_event_id, old_status='ACTIVE', new_status='RETRACTED')
@@ -381,9 +416,14 @@ class C4:
         refs: list[str] = []
         roots: set[str] = set()
         for c in self._claims.values():
-            if c.status != 'ACTIVE' or c.scope != query.scope or c.scene != query.scene:
+            if c.scope != query.scope or c.scene != query.scene:
                 continue
-            if query.as_of is not None and c.claimed_at is not None and c.claimed_at > query.as_of:
+            if query.as_of is not None and (c.claimed_at is None or c.claimed_at > query.as_of):
+                continue
+            if c.status == 'RETRACTED':
+                if query.as_of is None or c.retracted_at is None or c.retracted_at <= query.as_of:
+                    continue
+            elif c.status != 'ACTIVE':
                 continue
             p = self._unwrap(c.content, query.perspective)
             if p is None or p.predicate != query.predicate or len(p.args) != len(query.args):
@@ -405,7 +445,8 @@ class C4:
             return Answer('UNKNOWN', (), (), (), query.scope, query.scene, 'NO_SUPPORTED_RELATION')
         entity = query.args[0]
         for rule in self._rules.values():
-            if not rule.active or rule.scope != query.scope or rule.consequence != query.predicate:
+            if (not rule.active or rule.scope != query.scope or rule.scene != query.scene
+                    or rule.consequence != query.predicate):
                 continue
             if entity in rule.exceptions: continue
             matches: list[Claim] = []
@@ -451,14 +492,22 @@ class C4:
     def mediate(self, auth_id: str, *, delivered=False, boundary='PUBLIC_CHAT') -> Receipt:
         """SENT never implies DELIVERED. Internal THINK/WAIT are not outside events."""
         if auth_id not in self._auth: raise CommitDenied('DRIVE authorization required')
+        if delivered:
+            raise CommitDenied('Delivery requires an external verified boundary receipt; boolean is not evidence')
         auth = self._auth.pop(auth_id)
         action = self._actions[auth.action_id]
         if auth.kind in (Act.THINK, Act.WAIT, Act.REVISE):
             state = 'INTERNAL'
         else:
             state = 'DELIVERED' if delivered else 'SENT'
-        eid = self.receive('C4', action.subject, kind=auth.kind.value,
-                           scope=Scope.SELF, scene='self', _mediated=True)
+        # Only this MEDIATE path can emit C4-origin public/internal events.
+        eid_value = self._id('ev')
+        self._step += 1
+        eid = Event(eid_value, 'C4', auth.kind.value, action.subject, Scope.SELF,
+                    'self', (eid_value,), (), self._step, 0.0, None)
+        self._events[eid.id] = eid
+        self._record('MEDIATE', 'TRIGGER', 'SELF_EVENT_INGEST', event_id=eid.id,
+                     authorization=auth.id, kind=auth.kind.value)
         rid = self._id('rcpt')
         receipt = Receipt(rid, action.id, state, bool(delivered), boundary, eid.id)
         self._receipts[rid] = receipt
@@ -466,18 +515,22 @@ class C4:
                      event_id=eid.id, verified=receipt.verified)
         return receipt
 
-    def sense(self, sensor_id: str, observe: Callable[[], tuple[Proposition, bool]], *,
+    def sense(self, sensor_id: str, observe: Callable[[], tuple[Proposition, bool]] | None = None, *,
               scene='default', received_at: float = 0, claimed_at: float | None = None):
-        """Explicit MEDIATE mockable sensor boundary. `observe` is trusted only for this
-        invocation by the caller. True means *adapter attested*, not universal certainty.
+        """MEDIATE requires host-bound sensor adapters. Callback verification is
+        host attestation, NOT cryptographic certainty about external reality.
         No ordinary user message can forge this receipt through COMMIT.
         """
+        if sensor_id not in self._trusted_sensors:
+            raise CommitDenied('Unregistered sensor is not a trusted WORLD observation boundary')
+        if observe is not None and observe is not self._trusted_sensors[sensor_id]:
+            raise CommitDenied('Cannot replace host-bound sensor callback at runtime')
         action = self.propose(Act.SENSE, f'READ:{sensor_id}', 2.0)
         auth = self.arbitrate()
         if auth.action_id != action.id:
             raise CommitDenied('DRIVE did not authorize this sensory action')
         self._auth.pop(auth.id)
-        proposition, adapter_verified = observe()
+        proposition, adapter_verified = self._trusted_sensors[sensor_id]()
         if not isinstance(proposition, Proposition):
             raise TypeError('Sensor adapter must return a Proposition')
         scope = Scope.WORLD if adapter_verified else Scope.SOURCE
@@ -499,8 +552,14 @@ class C4:
             text = f'Не установлено ({query.scope.value}/{query.scene}); нужен источник.'
         else:
             text = f'{ans.status} {query.predicate}: {ans.bindings} ({query.scope.value}/{query.scene})'
-        self.propose(Act.ANSWER, text, utility=1.0)
+        outgoing = self.propose(Act.ANSWER, text, utility=1.0)
         a = self.arbitrate()
+        # DRIVE may lawfully choose a different higher-value action: no fake answer.
+        if a.action_id != outgoing.id:
+            receipt = self.mediate(a.id, delivered=False)
+            deferred = Answer('DEFERRED', (), ans.claim_ids, ans.roots, ans.scope,
+                              ans.scene, 'DRIVE_SELECTED_DIFFERENT_ACTION')
+            return deferred, receipt
         # External transport receipt has not been supplied.
         return ans, self.mediate(a.id, delivered=False)
 
@@ -513,8 +572,13 @@ class C4:
 
     def receive_gap_answer(self, gap_id: str, actor: str, proposition: Proposition):
         if gap_id not in self._questions: raise KeyError(gap_id)
-        _, cl = self.teach(actor, proposition, scope=Scope.SOURCE)
         gap = self._questions[gap_id]
+        topic = gap['topic'].casefold()
+        if topic not in (proposition.predicate.casefold(), *(x.casefold() for x in proposition.args)):
+            self.receive(actor, proposition, kind='UNRELATED_GAP_MESSAGE', scope=Scope.SOURCE)
+            self._record('EVAL','STATUS','UNRELATED_GAP_ANSWER',gap_id=gap_id)
+            return None
+        _, cl = self.teach(actor, proposition, scope=Scope.SOURCE)
         gap['candidate_claim'] = cl.id
         gap['status'] = 'ANSWER_CANDIDATE'  # not automatically verified or resolved
         self._record('COMMIT', 'STATUS', 'GAP_ANSWER_CANDIDATE', gap_id=gap_id,
@@ -545,6 +609,8 @@ class C4:
                       consequence: Proposition, *, scope=Scope.SIM, scene='default',
                       successful=True) -> Rule | None:
         ps = tuple(premises)
+        if Scope(scope) == Scope.WORLD:
+            raise CommitDenied('WORLD rules require independently verified evidence; teaching is not observation')
         ev = self.receive(actor, Demonstration(ps, consequence, bool(successful)),
                           kind='DEMONSTRATION', scope=scope, scene=scene)
         return self.add_example(ps, consequence, ev.id, successful=successful)
@@ -556,6 +622,8 @@ class C4:
         Never commits a predicted consequent as a world observation.
         """
         event = self._events[event_id]
+        if event.scope == Scope.WORLD:
+            raise CommitDenied('Unverified demonstrations cannot train WORLD rules')
         ps = tuple(premises)
         if (event.kind != 'DEMONSTRATION' or not isinstance(event.payload, Demonstration)
             or event.payload != Demonstration(ps, consequence, bool(successful))):
@@ -567,19 +635,19 @@ class C4:
             raise ValueError('Demonstration subject must agree')
         example = Example(ps, consequence, event.scope, event.scene, event.roots[0], bool(successful))
         self._examples.append(example)
-        key = (tuple(sorted(p.predicate for p in ps)), consequence.predicate, event.scope)
+        key = (tuple(sorted(p.predicate for p in ps)), consequence.predicate, event.scope, event.scene)
         positive = [x for x in self._examples
                     if x.successful and (tuple(sorted(p.predicate for p in x.premises)),
-                                         x.consequence.predicate, x.scope) == key]
+                                         x.consequence.predicate, x.scope, x.scene) == key]
         negative = [x for x in self._examples
                     if not x.successful and (tuple(sorted(p.predicate for p in x.premises)),
-                                             x.consequence.predicate, x.scope) == key]
+                                             x.consequence.predicate, x.scope, x.scene) == key]
         support_roots = tuple(sorted({x.root for x in positive}))
         subjects = {x.consequence.args[0] for x in positive}
-        rid = ':'.join((*key[0], key[1], event.scope.value))
+        rid = ':'.join((*key[0], key[1], event.scope.value, event.scene))
         exceptions = tuple(sorted({x.consequence.args[0] for x in negative}))
         active = len(support_roots) >= 2 and len(subjects) >= 2
-        rule = Rule(key[0], key[1], event.scope, support_roots, exceptions, active)
+        rule = Rule(key[0], key[1], event.scope, support_roots, exceptions, active, event.scene)
         self._rules[rid] = rule
         self._record('EVAL', 'STATUS', 'INDUCTIVE_RULE_CANDIDATE',
                      rule_id=rid, active=active, independent_example_roots=len(support_roots),
@@ -639,21 +707,22 @@ class C4:
         return checksum
 
     @classmethod
-    def load(cls, path: str | Path) -> 'C4':
+    def load(cls, path: str | Path, *, trusted_sensors: Mapping[str, Callable[[], tuple[Proposition, bool]]] | None = None) -> 'C4':
         doc = json.loads(Path(path).read_text('utf-8'))
         obj = doc['payload']
         raw = json.dumps(obj, sort_keys=True, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
         if hashlib.sha256(raw).hexdigest() != doc['sha256']:
             raise ValueError('CHECKPOINT_INTEGRITY_FAILURE')
-        if obj['version'] != cls.VERSION: raise ValueError('UNSUPPORTED_STATE_VERSION')
-        c = cls(); c._step=obj['step']; c._seq=obj['seq']
+        if obj['version'] not in (cls.VERSION, *cls.LEGACY_VERSIONS):
+            raise ValueError('UNSUPPORTED_STATE_VERSION')
+        c = cls(trusted_sensors=trusted_sensors); c._step=obj['step']; c._seq=obj['seq']
         for v in obj['events']:
             e = Event(v['id'],v['actor'],v['kind'],cls._decode_meaning(v['payload']),Scope(v['scope']),
                       v['scene'],tuple(v['roots']),tuple(v['parents']),v['step'],v['received_at'],v['claimed_at'],v['receipt_id'])
             c._events[e.id] = e
         for v in obj['claims']:
             z = Claim(v['id'],cls._decode_meaning(v['content']),Scope(v['scope']),v['scene'],tuple(v['roots']),
-                      tuple(v['event_ids']),v['status'],v['committed_step'],v['claimed_at'])
+                      tuple(v['event_ids']),v['status'],v['committed_step'],v['claimed_at'],v.get('retracted_at'))
             c._claims[z.id]=z
         c._questions=obj['questions']
         for v in obj['examples']:
@@ -662,8 +731,8 @@ class C4:
                                        v['scene'],v['root'],v['successful']))
         for v in obj['rules']:
             r=Rule(tuple(v['premises']),v['consequence'],Scope(v['scope']),tuple(v['supporting_roots']),
-                   tuple(v['exceptions']),v['active'])
-            c._rules[':'.join((*r.premises,r.consequence,r.scope.value))]=r
+                   tuple(v['exceptions']),v['active'],v.get('scene','default'))
+            c._rules[':'.join((*r.premises,r.consequence,r.scope.value,r.scene))]=r
         for v in obj['actions']:
             a=Action(v['id'],Act(v['kind']),v['subject'],v['utility'],v['proposed_by']);c._actions[a.id]=a
         for v in obj['auth']:
