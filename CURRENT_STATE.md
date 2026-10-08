@@ -1,62 +1,40 @@
 # CURRENT STATE
 
-Date: 2026-10-07
-Canonical weights: G309
-Canonical runtime: G309
+Date: 2026-10-08
 
-Weights:
-- child_g309_support_fall_physics_green.c4m
-- 1,992,240 bytes
-- SHA256 ac396a927f3819ea38d1af5ed73b2e9ca3078b4cf0b5c4e4f276ef61aa81c197
+## Canonical baseline
+Canonical weights/runtime remain G309.
 
-Runtime:
-- C4_RUNTIME_G309_SUPPORT_FALL_PHYSICS_GREEN_2026-10-07.zip
-- 314,478 bytes
-- SHA256 01d7044d5fc64d86fa0a384c1ad005b1655f20bc9cbba1ddde1c645fd76232b4
+## Latest physical GREEN candidate
+**G322-P8 Semantic / Presence Spine** — NOT CANONICAL.
 
-Combined:
-- C4_G309_RUNTIME_PLUS_G309_WEIGHTS_2026-10-07.zip
-- 2,276,116 bytes
-- SHA256 aca30b080c2ba9e81a1d986121de545bda78495188f16ae3b25a5fb3c8fe0e6e
+Graph:
+- 10,727 entities;
+- 10,781 facts;
+- order 22,306;
+- STRICT / C4_CONSTITUTION_V1;
+- composition 6 units / 5 links;
+- sensory concepts 16.
 
-## G306
-Verified SELF-relative 3D motor priors.
+Model: `child_g322_p8_semantic_presence_spine_candidate.c4m`
+SHA256 `6baf2864ce8a811738d13cf3593f739e8dcc5a8734d17ce0f5647bc23da06301`.
 
-## G307
-Cross-channel lexical-form grounding with strict separation:
-AUDIO FORM != TEXT FORM.
-PHONEME != GRAPHEME.
-WORD FORM != CONCEPT / MEANING.
+Runtime: `C4_RUNTIME_G322_P8_SEMANTIC_PRESENCE_SPINE_CANDIDATE_2026-10-08.zip`
+SHA256 `dd9e087c598b6c44472446a45eb02f9b51e9dcf389c927f9562499bae25cad8c`.
 
-## G308
-Verified contact/collision and effort-to-displacement response learning.
-96 interactions. Heldout 12/12.
-Large/mobile vs small/resistant anti-shortcut passed.
-Graph unchanged.
+Combined: `C4_G322_P8_RUNTIME_PLUS_STATE_CANDIDATE_2026-10-08.zip`
+SHA256 `be7308d40d7796b3f3818c63c73555202e0d23620b7022f056f282d688d59a3e`.
 
-## G309
-Verified support/release/free vertical dynamics.
-104 interactions:
-- 16 RELEASE;
-- 48 FREE_NO_CONTACT;
-- 16 CONTACT_BELOW;
-- 16 CONTACT_ONSET;
-- 8 HELD controls.
+Library: `/C4_Candidates/G322_P8/`.
 
-Frozen heldout 20/20.
-Mean synthetic vertical acceleration inferred from velocity changes: -1.6.
-The simulator constant itself was not learner input.
-Cold memory + SQLite GREEN.
-Graph unchanged.
-
-Protected retention:
-- G306 spatial 10/10;
-- G307 sound-symbol 6/6 and 10/10 chunks / 5 word entities;
-- G308 contact/effort-response GREEN.
-
-Full regression:
-423 PASS + same 18 historical missing-fixture FileNotFoundError.
-New semantic/runtime failures: 0.
+Validation:
+- 74/74 focused;
+- 496 PASS / 19 historical FileNotFound;
+- 2048/2048 structural spine combinations;
+- new semantic/runtime failures 0;
+- G321 frozen live replay preserved.
 
 ## Current objective
-Continue developmental world physics: multi-step trajectories, richer collision dynamics, containment/support hierarchy; name grounded concepts only later through separate spoken/written form channels.
+G323-P9: recursive perspective/presence frames for nested speech/thought/quote/irony and witness/participant roles, plus recursive self-review over prior outputs without self-generated text becoming evidence.
+
+See `C4_NEXT_CHAT_HANDOFF_G322_TO_G323_2026-10-08.md`.
