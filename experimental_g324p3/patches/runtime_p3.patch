@@ -1,0 +1,81 @@
+--- /mnt/data/c4_g324p2/candidate/runtime/c4child/runtime.py	2026-10-08 09:34:48.000000000 +0000
++++ /mnt/data/c4_g324p3/candidate/runtime/c4child/runtime.py	2026-10-08 11:26:39.777386556 +0000
+@@ -13,6 +13,7 @@
+ from .bootstrap import BootstrapTeacher
+ from .rule_induction import RuleInductionOrgan
+ from .epistemic import EpistemicAdmissionOrgan
++from .learned_constraints import EmpiricalConstraintLearner
+ from .discourse_ru import RussianDiscourseBridgeV1
+ from .guided_reading import GuidedReaderRU
+ from .sensory import NurseryState
+@@ -39,7 +40,7 @@
+     cognition may later emit ASK/PUBLISH events into an outbox without a new
+     user message. The shell delivers events but never invents them.
+     """
+-    def __init__(self,dialogue:Optional[C4ChildDialogue]=None,initiative_cooldown:int=8):
++    def __init__(self,dialogue:Optional[C4ChildDialogue]=None,initiative_cooldown:int=8,strict_world_admission:bool=False):
+         self.dialogue=dialogue or C4ChildDialogue()
+         self.step=0
+         self.outbox=deque()
+@@ -55,7 +56,9 @@
+         self.learning=LearningSessionRegistry()
+         self.competencies=CompetencyRegistry()
+         self.rule_induction=RuleInductionOrgan()
+-        self.epistemic=EpistemicAdmissionOrgan()
++        self.epistemic=EpistemicAdmissionOrgan(strict_world=strict_world_admission)
++        # G324-P3: experiments only; never writes WORLD knowledge.
++        self.causal_studies={}
+         self.discourse=RussianDiscourseBridgeV1()
+         # G305: durable post-codec sensory state. Vectors are weak perceptual evidence, never graph truth by themselves.
+         self.nursery=NurseryState()
+@@ -558,6 +561,34 @@
+                 gap.status=OPEN;gap.last_step=self.step
+         return out
+ 
++    def begin_causal_study(self, study_id, features, *, frame='ROOT', epoch='E0'):
++        """Experimental simulation-scoped association study (not world truth)."""
++        if study_id in self.causal_studies:
++            raise ValueError('study already registered')
++        self.causal_studies[study_id]=EmpiricalConstraintLearner(features,
++            scope='SIMULATION',frame=frame,epoch=epoch)
++        return {'study_id':study_id,'scope':'SIMULATION','status':'CREATED'}
++
++    def learn_simulated_constraint(self, study_id, inputs, outcome, *, root, receipt, frame=None, epoch=None):
++        """A trusted simulator adapter must supply the receipt and dependency root.
++
++        The method rejects missing receipts but cannot itself authenticate a caller.
++        """
++        study=self.causal_studies[study_id]
++        status=study.observe(inputs,outcome,root=root,receipt=receipt,
++            frame=frame or study.frame,epoch=epoch or study.epoch)
++        if status in {'LEARNABLE','ROOT_CONFLICT_QUARANTINED'}:
++            self._autosave_tick(mutated=True)
++        return {'status':status,'study_id':study_id,'world_committed':False}
++
++    def fit_causal_study(self, study_id):
++        result=self.causal_studies[study_id].fit()
++        self._autosave_tick(mutated=True)
++        return result
++
++    def predict_causal_study(self, study_id, inputs):
++        return self.causal_studies[study_id].predict(inputs)
++
+     def register_epistemic_source(self,source_id,source_family,source_class,source_lineage=None):
+         return self.epistemic.register_source(source_id,source_family,source_class,source_lineage)
+ 
+@@ -1291,6 +1322,7 @@
+                 "sound_symbol":self.sound_symbol.to_dict(),
+                 "contact_physics":self.contact_physics.to_dict(),
+                 "support_physics":self.support_physics.to_dict(),
++                "causal_studies":{k:v.to_dict() for k,v in self.causal_studies.items()},
+                 "learning_sessions":self.learning.to_dict(),"competencies":self.competencies.to_dict(),"rule_induction":self.rule_induction.to_dict(),"epistemic":self.epistemic.to_dict(),
+                 "last_initiative_step":self.last_initiative_step,"last_user_step":self.last_user_step,"initiative_cooldown":self.initiative_cooldown,
+                 "dialogue_focus_eid":self.dialogue.focus_eid,"dialogue_focus_stack":list(getattr(self.dialogue,"focus_stack",[])),
+@@ -1339,6 +1371,7 @@
+         self.competencies=CompetencyRegistry.from_dict(d.get('competencies'))
+         self.rule_induction=RuleInductionOrgan.from_dict(d.get('rule_induction') or {})
+         self.epistemic=EpistemicAdmissionOrgan.from_dict(d.get('epistemic') or {})
++        self.causal_studies={str(k):EmpiricalConstraintLearner.from_dict(v) for k,v in (d.get('causal_studies') or {}).items()}
+         self.nursery=NurseryState.from_dict(d['nursery']) if d.get('nursery') else NurseryState()
+         self.spatial_effects=SpatialEffectLearner.from_dict(d.get('spatial_effects') or {})
+         self.sound_symbol=SoundSymbolBridge.from_dict(d.get('sound_symbol') or {})
