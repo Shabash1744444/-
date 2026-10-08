@@ -1,46 +1,35 @@
-# C4 Experimental Executable Skeleton M1–M3 (2026-10-08)
+# C4 — Исполняемый скелет, Guard V2 (эксперимент)
 
-**Actual Python code, not a design-only document.** Experimental, separate from canonical C4; does not modify G309, G323, G329, C4M or Android. No dependency on OpenAI/LLM/cloud.
+**Python-код, НЕ AGI и НЕ готовое Android-приложение.** Это отдельный исследовательский прототип M1–M3 с принудительными проверками EVAL/COMMIT/DRIVE/MEDIATE. C4 != Singularity OS. Старые C4M/каноническая версия не изменяются.
 
-## Run
+## Смартфон — основной процесс
+Работать с GitHub из приложения или браузера телефона: код в ветке `experiments/c4-g330-device-red-cascade`, автоматические проверки — GitHub Actions `C4 Guard V2`. **Запускать Windows не требуется.** Программа запускается в Actions на удалённом Linux; это не запуск C4 на телефоне. Для Android понадобится отдельный адаптер/сборка APK.
 
-Python 3.11+:
+## Локальный запуск (только для желающих)
+`python -m pytest -q tests`, `python demo.py`, `python -m c4core.cli --state ./brain.c4j < example_session.jsonl`.
 
-```bash
-python demo.py
-python -m pytest -q tests
-```
+## Фактически реализовано
+- Typed propositions/perspectives; явная область истинности SOURCE/STORY/SIM/WORLD/SELF.
+- События, причинные родители, source roots, частичная временная история; query/event time vs correction time.
+- EVAL зарегистрированные кандидаты; COMMIT не принимает произвольно созданный/переписанный кандидат.
+- DRIVE выбирает действие; MEDIATE генерирует C4-акты только после действительного authorization, `delivered=True` запрещён как неподтверждённое утверждение.
+- Источники сенсоров связываются на стороне доверенного host при создании C4; пользовательский текст не регистрирует сенсор. Реальная достоверность зависит от правильности host adapter.
+- Короткая структурная индукция в рамках **отдельной** story/sim scene с контрпримерами; это EVAL-инференция, не подтверждённый факт WORLD.
+- Уточнения по topic не принимаются как ответы на чужие вопросы; нет фиктивных C4 ASK.
+- Сохранение/перезагрузка C4J, импорт legacy V1 C4J и переэкспорт V2, компактный ограниченный trace, лимит глубины вложения.
 
-## Implemented and verified by tests
+## Важные НЕзакрытые риски
+1. Это **структурный** рантайм. Он ещё не научился понимать свободный русский текст, сложные прагматические акты, иронию и постиронию; словарная подсистема не реализована.
+2. Python-объекты доступны для прямой мутации вызывающему коду: это *не security sandbox*. Реальный COMMIT должен быть отделён процессом/API с проверкой возможностей. Названия четырёх owners сами по себе не создают изоляцию.
+3. `trusted_sensors` передаёт доверие от host-кода: даже если callback вернул True, это НЕ криптографическое доказательство физического события.
+4. Нельзя считать две «демонстрации» от одного источника действительно независимыми измерениями без отдельной модели происхождения испытаний. Нынешняя индукция помечается INFERRED и не утверждает WORLD, но источник samples нужен для реального обучения.
+5. `Gap` пока связывает ответ с topic по структурному subject-id — **не полноценная семантическая проверка**. Не разрешать на этом основании WORLD, SELF или статус RESOLVED.
+6. Отдельные состояния `questions`, `rules`, `pending` живут в едином Python C4 объекте, но не все признанные изменения наделены отдельным формальным транзакционным владельцем. Это следующий архитектурный блокер перед большим обучением.
+7. История коррекции по as_of доступна только когда у обеих сторон есть корректное заявленное время; отсутствующее время остаётся неизвестностью. Между `event_time` и `known_at` пока нет полноценной двухосевой темпоральной модели.
+8. Нет реального аудио/видео/камеры/игрового мира/Android transport и гарантированной непрерывной real-time обработки.
+9. Нет физического C4M-переноса старых фактов/обучения, обученных весов, GPU-тренинга и бесконечной самостоятельной генерализации.
 
-- Dataclass-typed append-only life-line and separate receive/event-time/causal-parent order.
-- Recursive holder perspectives: arbitrary nested thought/quote/belief structures via typed `Perspective` and `Proposition`.
-- EVAL-only hypotheses and scoped queries; learning-scoped SOURCE/STORY/SIM answers cannot be interpreted as verified WORLD.
-- COMMIT-only recognized claim mutations with source roots; dependent relay copy keeps roots; explicit audited retraction.
-- DRIVE selects actions among candidates and autonomously ASK/THINKs in `tick()`; no global pending question lock.
-- MEDIATE requires drive authorization and tracks `SENT` vs `DELIVERED` (demo does *not* possess real physical-world receipt generation).
-- Basic relational induction: two independent unary *demonstrations* induce read-only provisional inference; per-entity counterexample blocks overgeneralization. Not a general learning theory.
-- Source-role memory: USER question about C4's asks is never indexed as C4 ASK.
-- Deterministic read-only trace OFF/ON and cold JSON snapshot with SHA256 integrity + atomic rename.
+## Релизный статус
+Original guard red: **7/7 RED** на старом M1–M3. Guard V2: **43/43 PASS** (28 унаследованных с ужесточением теста доверенного сенсора, 15 новых атакующих). Это означает защиту проверенных инвариантов, НЕ доказательство полного отсутствия будущих архитектурных ошибок.
 
-## Known gaps (not cosmetic)
-
-- Input to core is **structured**, not a free-form Russian conversation. A language organ that learns words, grammar, temporal discourse, intentions, irony, etc., remains future work.
-- This M1–M3 implements a small learning operator, *not* broad self-training, continual gradient updates, open-ended common-sense inference or AGI.
-- No real Android/PC transport, screen/audio/video, sensor receipts, GPU training, or full old C4M migration.
-- In-process Python code with direct object access is not a security sandbox. External sensors/tools need trusted adapters and an explicit boundary protocol.
-- Rules are very narrow unary structural patterns. They don't infer universal physics; synthetic examples are not independent physical evidence.
-
-## Status
-
-Requires test output + source/ZIP SHA and GitHub commit to be counted as a built experimental candidate. No pretense that an architectural skeleton alone proves general intelligence.
-
-## Interactive JSONL runtime
-
-```bash
-python -m c4core.cli --state ./my_brain.c4j < example_session.jsonl
-```
-
-Each line is an independent typed event; output contains structured status, scoped evidence roots and action receipts. `--state` reloads from disk at start and atomically persists after each successful command. Run interactively by starting without the input redirection and entering one JSON command per line.
-
-**Real-world observations:** `C4.sense(sensor_id, callback)` is a mockable adapter boundary. The caller is responsible for independently validating its sensor callback; the core itself cannot authenticate physical observations. Human/fiction assertions passed with `scope=WORLD` are downgraded to sourced claims.
+Читайте `HARDENING_REPORT.md` и `TEST_RESULTS.txt`.
