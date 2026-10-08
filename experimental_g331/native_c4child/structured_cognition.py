@@ -500,13 +500,17 @@ def process(r,p,source,publish=True):
               action.upper() in {'LOOK','TAKE','GRASP','PLACE','RELEASE'} and
               target['relation']=='LOCATION' and len(target['subject'])<=40 and
               target['subject'].isascii() and target['subject'].isalpha() and
-              target['subject'].upper() in {'BALL','BLOCK','BOOK','PLANT','LAMP'}):
+              target['subject'].upper() in {'BALL','BLOCK','BOOK','PLANT','LAMP'} and
+              (action.upper() not in {'PLACE','RELEASE'} or
+               target['object'] in {'floor-left','floor-right','shelf','desk','basket'})):
             request={'type':'ACTION_REQUEST','kind':'ACTION_REQUEST',
                      'schema':'C4_NATIVE_ROOM_ACTION_V1','scope':'SIM',
                      'requestId':aid,'action':action.upper(),
                      'object':target['subject'].upper(),
                      'scene':'home','goalId':goal['goal_id'],
                      'phase':'REQUEST_NOT_EXECUTED','sourceEventId':source}
+            if action.upper() in {'PLACE','RELEASE'}:
+                request['target']=target['object']
             r.outbox.append(request)
             _record(r,'MEDIATE','ROOM_REQUEST_QUEUED',source,action_id=aid,
                     status='REQUESTED_NOT_EXECUTED',room_object=target['subject'])
