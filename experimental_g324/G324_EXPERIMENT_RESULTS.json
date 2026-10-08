@@ -1,0 +1,47 @@
+{
+  "experiment": "C4_G324_UNIFIED_CAUSAL_CLOSURE_P0",
+  "baseline": "G322_P8 physical copy, no modification of G309 canonical, G323 source unavailable",
+  "mechanism": "typed finite-domain hyperfactor constraint closure with context/scope/time/frames/provenance and bounded non-authoritative inference",
+  "baseline_pytest": {
+    "passed": 488,
+    "failed_missing_historical_fixtures": 27
+  },
+  "candidate_pytest": {
+    "passed": 507,
+    "failed_missing_historical_fixtures": 27,
+    "new_failures": 0
+  },
+  "new_tests_passed": 19,
+  "synthetic_tests": {
+    "structural_identities_tested": 54,
+    "simultaneously_coupled_processes": 54,
+    "randomized_order_trials": 64,
+    "note": "these are artificial factor graph schemas, not validation of 54 cognitive laws"
+  },
+  "real_runtime_quote_tests": {
+    "new_adversarial_cases_passed": 4,
+    "result": "outer identity candidates suppressed when exclusively inside quotes; no social-name graph mutations"
+  },
+  "known_unresolved": {
+    "case": "Three registered reports of false source proposition can be admitted to WORLD",
+    "statuses": [
+      "PENDING",
+      "NEEDS_CHALLENGE",
+      "ADMITTED"
+    ],
+    "world_truth": "TRUE",
+    "fix_status": "NOT_FIXED"
+  },
+  "no_hardcoded_cognitive_behaviors": true,
+  "semantic_spine_patch_kind": "generic quote-span quarantine of outer NAME candidate",
+  "no_computed_World_commits": true,
+  "no_autonomous_DRIVE": true,
+  "unmodified_model_sha256": "6baf2864ce8a811738d13cf3593f739e8dcc5a8734d17ce0f5647bc23da06301",
+  "limits": [
+    "No open-domain perception solved; lexical parser remains legacy regex based",
+    "No learned factors or 54 numerical cognitive dependencies",
+    "Only structural toy domains plus real quote guard tested",
+    "Evidence root dedup inside EVAL does not change C4 epistemic admission in G322",
+    "Full regression not green owing to 27 missing historical fixtures"
+  ]
+}
