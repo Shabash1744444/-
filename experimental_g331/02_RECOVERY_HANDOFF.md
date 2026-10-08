@@ -1,3 +1,7 @@
+# CURRENT HANDOFF: C002 DONE → C003 NOT STARTED (2026-10-08)
+Start from `01_WORK_JOURNAL.md` bottom C002 DONE. Native code `8c88ed01c9a9914e495b7f94f043b0d056edbe7f`. Frozen regression workflow `10525f834f77175f92aae8d1142c363ac42d9013` (GitHub Actions 37832089735; inspect latest status). C002 79 directed PASS, 615 broad PASS / 27 historical fixture failures, original C4M cold 10781→10783. Runtime ZIP physically pinned at `experimental_g331/assets/C4_G331_C002_NATIVE_RUNTIME.zip`, same C4 G329/G331 model and native c4child. `governance/constitution_contract.json` and `tools/c4_stage_gate.py`: unproven autonomous pretraining BLOCKED. Android LIVE not attested.
+NEXT **C003**: before editing any source, write physical START checkpoint; freeze RED on independent-root learning, delayed verified SIM outcomes and multi-step causal transfer. Never rebuild second memory/weights. Export trace and cold C4M; journal every cycle. 
+
 # C4 — NEXT CHAT / RECOVERY HANDOFF
 
 ## На 2026-10-08
