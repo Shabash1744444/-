@@ -1,0 +1,11 @@
+{
+  "archive": "/mnt/data/c4_g326p0/C4_G326_P0_UNIFIED_PRELIVE_TRAINED_EXPERIMENT_2026-10-08.zip",
+  "archive_sha256": "fab6fa132accc9b81a52aca40d0863e05115b0df54787f3a2032bf8d33cb821c",
+  "archive_bytes": 8428670,
+  "model_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "model_bytes": 2065628,
+  "input_model_sha256": "f33ecb8228ce19d910aa3cce2877f9b5d2544977f79d855efa2491c0c11f2b77",
+  "files": 190,
+  "zip_integrity": true,
+  "status": "NOT_CANONICAL"
+}
