@@ -1,0 +1,52 @@
+{
+  "source": "/mnt/data/c4_g324p3/candidate/model/child_g322_p8_semantic_presence_spine_candidate.c4m",
+  "source_sha": "6baf2864ce8a811738d13cf3593f739e8dcc5a8734d17ce0f5647bc23da06301",
+  "trained_export": "/mnt/data/c4_g324p3/candidate/model/child_g324_p3_simulation_learned_candidate.c4m",
+  "trained_sha256": "052f30fb0f79b79dad93e25ad77ad81f29ff5bc2be6981fefc85630a56f791c1",
+  "size_bytes": 2009632,
+  "graph_state_before_and_after": [
+    10727,
+    10781,
+    22306
+  ],
+  "learning_kind": "SIMULATION_SCOPED_ASSOCIATIONS_ONLY",
+  "episodes": 900,
+  "learned_studies": {
+    "sim_study_XOR": {
+      "status": "LEARNED_ASSOCIATION",
+      "n": 300,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "penalized_nll": 15.328984987717112,
+      "quarantined_roots": 0,
+      "scope": "SIMULATION"
+    },
+    "sim_study_OR": {
+      "status": "LEARNED_ASSOCIATION",
+      "n": 300,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "penalized_nll": 15.328817777262326,
+      "quarantined_roots": 0,
+      "scope": "SIMULATION"
+    },
+    "sim_study_MAJORITY": {
+      "status": "LEARNED_ASSOCIATION",
+      "n": 300,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "penalized_nll": 30.50202842194802,
+      "quarantined_roots": 0,
+      "scope": "SIMULATION"
+    }
+  },
+  "cold_reloaded": true,
+  "world_commit_guard_enabled": true
+}
