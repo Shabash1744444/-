@@ -149,6 +149,14 @@ def process(r,p,source,publish=True):
     if op=='TOPIC':
         subject=_atom(p['subject']);eid=g.resolve(subject)
         evidence=[f for f in g.facts.values() if eid and f.subject==eid and f.status in {'ADMITTED','REVISED','SOURCE_ASSERTED'}]
+        if not evidence:
+            # Existing G329 curiosity organ, NOT a second agenda. An entity label
+            # is only an address for an unresolved topic, never evidence of truth.
+            eid=eid or g.entity(subject)
+            gap=r.register_gap('DEFINITION',eid,reason='USER_TOPIC_UNKNOWN',priority=.72,
+                               cause_id=source,schedule=True)
+            _record(r,'COMMIT','CURIOSITY_GAP',source,gap_id=gap.gap_id,status='OPEN',
+                    basis='TOPIC_NOT_KNOWLEDGE')
         msg=(f'Есть {len(evidence)} записей о теме «{subject}». Что именно исследуем?' if evidence
              else f'Про «{subject}» пока недостаточно оснований. Что ты хочешь выяснить?')
         _record(r,'DRIVE','TOPIC_INQUIRY',source,topic=subject,basis=[x.fact_id for x in evidence])

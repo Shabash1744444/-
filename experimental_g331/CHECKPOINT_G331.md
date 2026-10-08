@@ -13,7 +13,7 @@ Correct earlier assistant error that created a second, incompatible C4 LIFE V1 m
 - Strict source-only admission for structured user REPORT; source-based G215 conflict without trust downgrade; perspective / scene isolation; social dialogue event linking; exploratory goal-action hypotheses with no fake execution, optional host-bound SIM receipt for learning from results.
 
 ## Tests
-- New 22/22, prior directed 73/73, broad 558 PASS 27 missing-fixture fails.
+- New 23/23, prior directed 73/73, broad 559 PASS 27 missing-fixture fails.
 - Real G329 C4M 10,781 facts successfully loaded, saved and reloaded with new component state.
 - No new model weights: use existing backed up C4M.
 

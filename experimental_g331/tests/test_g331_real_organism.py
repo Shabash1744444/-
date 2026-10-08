@@ -145,3 +145,13 @@ def test_real_c4m_original_graph_conserved(tmp_path):
     assert len(graph2.facts)==original_facts+1
     assert msg(new,'QUERY',scope='STORY',scene='episode',fact=F('key','LOCATION','?'))['cognitive']['status']=='SOURCE_REPORTED'
     assert rs2['cognitive_g331']['goals']=={}
+
+
+def test_unknown_topic_enters_original_g329_drive_and_initiates_later():
+    c=C4LivingRuntime(initiative_cooldown=2)
+    seen=msg(c,'TOPIC',subject='moss')
+    assert 'moss' in seen['reply']
+    assert c.pending_questions  # no separate G331 question memory
+    e=c.tick(3)
+    assert any(x['kind']=='ASK' and 'moss' in x['text'] for x in e)
+    assert any(x.get('kind')=='COMMIT_CURIOSITY_GAP' for x in c.life_events)
