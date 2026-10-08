@@ -1,3 +1,13 @@
+# CONTINUATION UPDATE — G323-P9
+
+## Update — 2026-10-08: G323-P9 physical GREEN CANDIDATE (NOT CANONICAL)
+
+G322-P8 is the immediate inherited candidate parent; G309 remains the last canonical baseline.
+G323-P9 adds recursive perspective frames, third-party reported speech/thought/quote, actor/witness separation, and EVAL self-review with DRIVE-selected revision of unsent public acts. It DOES NOT prove unrestricted Russian language understanding.
+New G323 frozen/cold checks 17/17 PASS; full extracted-package check 505 PASS / 27 historical missing-file FAIL (same failures as G322 in this execution environment). Graph unchanged: 10,727 entities / 10,781 facts / order 22,306. Exact bytes/hashes in `checkpoints/CP_C4_G323_P9_RECURSIVE_PERSPECTIVE_GREEN.md`.
+**Binary artifact persistence note:** the binary release was created and verified in the originating conversation, but binary transfer to persistent Library was not confirmed. Re-obtain its combined ZIP or source patch from that conversation before starting implementation. Do not fabricate weights/paths.
+**Non-constitutional fifth law:** `C4_FIFTH_LAW_INTELLIGENCE_NON_CONSTITUTIONAL_2026-10-08.md` — author's definition, 'Интелект это способность решать нестандартные задачи не стандартными методами.' This is an intelligence capability/target criterion, not a modification of the four-law constitution or 80 influence classes.
+
 # NEXT CHAT HANDOFF — START HERE
 
 Current continuation point: **G322-P8 Semantic / Presence Spine GREEN CANDIDATE**.
