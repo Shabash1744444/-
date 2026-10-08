@@ -1,3 +1,5 @@
+> **G323 source blocker (verified 2026-10-08):** See [07_G323_SOURCE_BLOCKER_AND_RECOVERY.md](07_G323_SOURCE_BLOCKER_AND_RECOVERY.md). Full G323 sources NOT present under checked repo path; do not require them to implement experimental M1–M2. Do not claim missing sources are merged.
+
 # ПЕРЕДАЧА СЛЕДУЮЩЕМУ ЧАТУ — C4, 2026-10-08
 ## Зачем читать
 Пользователь попросил сохранить его идеи и доступную беседу на GitHub и собрать скелет когнитивной системы, прежде чем чат закончится. Эта задача находится в **том же самом чате**, не выдумывай «другой чат». C4 ≠ Singularity OS.
