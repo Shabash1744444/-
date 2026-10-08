@@ -1,0 +1,391 @@
+Binary files /mnt/data/c4_g328/candidate/runtime/c4child/__pycache__/episodic_memory.cpython-313.pyc and candidate/runtime/c4child/__pycache__/episodic_memory.cpython-313.pyc differ
+Binary files /mnt/data/c4_g328/candidate/runtime/c4child/__pycache__/inquiry_link.cpython-313.pyc and candidate/runtime/c4child/__pycache__/inquiry_link.cpython-313.pyc differ
+Binary files /mnt/data/c4_g328/candidate/runtime/c4child/__pycache__/runtime.cpython-313.pyc and candidate/runtime/c4child/__pycache__/runtime.cpython-313.pyc differ
+diff -ruN /mnt/data/c4_g328/candidate/runtime/c4child/episodic_memory.py candidate/runtime/c4child/episodic_memory.py
+--- /mnt/data/c4_g328/candidate/runtime/c4child/episodic_memory.py	2026-10-08 13:23:54.539722092 +0000
++++ candidate/runtime/c4child/episodic_memory.py	2026-10-08 13:49:05.644991623 +0000
+@@ -8,6 +8,7 @@
+ from __future__ import annotations
+ import re
+ from dataclasses import dataclass, asdict
++import math
+ from typing import Dict, List
+ 
+ _WORD = re.compile(r'[\wА-Яа-яЁё-]{3,}', re.U)
+@@ -24,6 +25,19 @@
+ def features(text:str)->set:
+     return {stem(x) for x in _WORD.findall(str(text)) if x.casefold() not in _STOP and len(x)>3}
+ 
++
++
++def outside_direct_questions(text:str)->str:
++    """Mask quotations to distinguish asked questions from reported questions."""
++    buf=[];stack=[];pair={'«':'»','“':'”','"':'"'}
++    for ch in str(text):
++        if stack and ch==stack[-1]:
++            stack.pop();buf.append(' ');continue
++        if ch in pair:
++            stack.append(pair[ch]);buf.append(' ');continue
++        buf.append(' ' if stack else ch)
++    return ''.join(buf)
++
+ def split_episodes(text:str)->List[dict]:
+     """Line/numbered spans, then punctuation outside nested quotations.
+ 
+@@ -50,7 +64,7 @@
+             if not part:continue
+             # Mark interrogative even when an item contains narrated quotes and
+             # several punctuation marks. Doesn't assert its premises.
+-            has_question='?' in part
++            has_question='?' in outside_direct_questions(part)
+             out.append({'number':n,'line':line_idx+1,'text':part,'kind':'QUESTION' if has_question else 'TEXT',
+                         'scope':'UNCOMMITTED_SURFACE'})
+     return out
+@@ -59,7 +73,9 @@
+     questions=sum(x['kind']=='QUESTION' for x in episodes)
+     # Three+ interrogatives form a batch; numbered list can also include questions
+     # with missing terminal '?' or nested quoted question punctuation.
+-    return questions>=3 or (len(episodes)>=5 and sum(x['number'] is not None for x in episodes)>=3 and questions>=2)
++    # Multiple direct interrogative acts are a single read-only inquiry transaction.
++    # No topic-specific answer key and no arbitrary 3/5-question safety threshold.
++    return questions>1
+ 
+ _MEMORY_CUES = re.compile(r'\b(?:помнишь|вспомни|помнит|помню|вспомина|раньше|прежде|прошл[а-я]*|стар[а-я]*\s+вопрос|до\s+этого|мы\s+(?:говорили|обсуждали)|я\s+(?:говорил|спрашивал|рассказывал)|ты\s+(?:говорила|спрашивала|отвечала|писала|задала)|из\s+нашего\s+разговора|еще\s+открыты|остались\s+без\s+ответа)\b',re.I)
+ 
+@@ -73,45 +89,100 @@
+             'source_kind':'USER_MESSAGE','epistemic':'SOURCE_SAID_ONLY'}
+ 
+ def retrieve(question:str,index:dict,current_event_id=None,limit:int=2)->List[dict]:
+-    """Evidence-only lexical candidate retrieval, not semantic entailment.
++    """Source-bounded old-event retrieval with inverse-frequency ranking.
+ 
+-    Insist on two independent content feature intersections to prevent the
+-    'буква И' kind of unrestricted subject-word top hits. Skips current event
+-    so repeating a question cannot manufacture a memory of a previous turn.
++    A single distinctive named entity can identify an actual witnessed event.
++    Similarity is never evidence the event's *content* happened in the world.
+     """
+     query=features(question)
+-    if len(query)<2:return []
+-    # A past *question about* an alleged event is evidence the question was
+-    # asked, not that the alleged event took place. Only queries explicitly
+-    # asking about earlier questions may prefer interrogative records.
++    if not query:return []
+     asks_about_questions=bool(re.search(r'\b(?:вопрос[а-я]*|спрашивал[а-я]*|спросил[а-я]*|задавал[а-я]*|задал[а-я]*)\b',question.casefold()))
+-    found=[]
++    asks_c4_reply=bool(re.search(r'\b(?:ты|тво[а-я]*|сво[а-я]*)\b',question.casefold()) and
++                         re.search(r'\b(?:сказал[а-я]*|говорил[а-я]*|ответил[а-я]*|писал[а-я]*)\b',question.casefold()))
++    docs=[]
+     for item in index.values():
+         if item.get('event_id')==current_event_id:continue
+         for ep in item.get('episodes',[]):
+-            text=ep.get('text','');f=features(text)
+-            shared=query & f
+-            if len(shared)<2:continue
+-            score=2*len(shared)/max(1,len(query)+len(f))
+-            if ep.get('kind')=='QUESTION':
+-                if not asks_about_questions:continue
+-                score*=1.03
+-            if item.get('scope')=='QUERY_BATCH' and not asks_about_questions:
+-                score*=.80
+-            if score<0.21:continue
+-            found.append({'event_id':item['event_id'],'external_order':item.get('external_order',0),
+-                          'line':ep.get('line',0),'text':text,'source_kind':item.get('source_kind'),
+-                          'episode_kind':ep.get('kind'), 'score':round(score,4), 'shared':sorted(shared)})
++            if ep.get('kind')=='QUESTION' and not asks_about_questions:continue
++            if item.get('source_kind')=='C4_REPLY' and not asks_c4_reply:continue
++            docs.append((item,ep,features(ep.get('text',''))))
++    if not docs:return []
++    df={w:sum(w in fs for _,_,fs in docs) for w in query}
++    idf={w:math.log1p((len(docs)+1)/(1+df[w])) for w in query}
++    denom=sum(idf.values())
++    found=[]
++    for item,ep,f in docs:
++        shared=query & f
++        if not shared:continue
++        score=sum(idf[w] for w in shared)/max(1e-9,denom)
++        # A match whose source span contains many unrelated concepts has
++        # lower retrieval priority, but is still valid as a transcript hit.
++        specificity=(1+len(shared))/(1+max(len(f),len(shared)))
++        score*=0.75+0.25*specificity
++        if item.get('scope')=='QUERY_BATCH' and not asks_about_questions:score*=.80
++        found.append({'event_id':item['event_id'],'external_order':item.get('external_order',0),
++                      'line':ep.get('line',0),'text':ep.get('text',''),'source_kind':item.get('source_kind'),
++                      'episode_kind':ep.get('kind'),'score':round(score,4), 'shared':sorted(shared)})
+     found.sort(key=lambda z:(z['score'],z['external_order']),reverse=True)
+-    dedup=set();unique=[]
+-    for p in found:
+-        k=(p['event_id'],p['text'])
+-        if k in dedup:continue
+-        dedup.add(k);unique.append(p)
++    seen=set();unique=[]
++    for row in found:
++        key=(row['event_id'],row['text'])
++        if key in seen:continue
++        seen.add(key);unique.append(row)
+         if len(unique)>=limit:break
+     return unique
+ 
+-def answer_memory_query(query:str,index:dict,current_event_id=None)->dict:
++
++def is_inquiry_query(query:str)->bool:
++    """Structural discourse query over C4's own previously spoken ASK events."""
++    outside=outside_direct_questions(query).casefold().replace('ё','е')
++    if '?' not in outside:return False
++    question_act=bool(re.search(r'\b(?:вопрос[а-я]*|спрашивал[а-я]*|спросил[а-я]*|задавал[а-я]*|задал[а-я]*)\b',outside))
++    self_ref=bool(re.search(r'\b(?:ты|тебя|тво[ияе][а-я]*|сво[ияе][а-я]*|сама|сам[а-я]*)\b',outside))
++    return question_act and self_ref
++
++
++def attributed_inquiry_recall(query:str,inquiries)->dict|None:
++    """Query the witnessed C4 ASK ledger, not general lexical facts.
++
++    A concept-level interrogative referring to C4's past questions acts as a
++    query over typed ASK events. Only its surface intent is recognized; question
++    content and status are retrieved from real stored events.
++    """
++    if not is_inquiry_query(query):return None
++    outside=outside_direct_questions(query).casefold().replace('ё','е')
++    items=[q for q in inquiries if isinstance(q,dict) and q.get('event_id') and q.get('text')]
++    if not items:return None
++    # Filter by meaningful topic overlap; absent a topic this is an event-type
++    # query and can enumerate open/inactive inquiries without word matching.
++    # Functional terms indicate a query about discourse, not its content topic.
++    # This lexical grammar is open-domain; no specific entity/content is special.
++    functional=re.compile(r'^(?:вопрос|ответ|спраш|спрос|зада|задал|помн|вспом|сво|тво|мо[йие]|сам|стар|прошл|раньш|остал|неотвеч|каки|како|скольк|три|два|один|перв|втор|трет)',re.I)
++    topic={w for w in features(query) if not functional.match(w)}
++    matches=[]
++    for q in items:
++        f=features(q['text']);common=topic & f
++        if topic and not common:continue
++        if topic and len(common)*2 < len(topic):continue
++        matches.append(q)
++    if not matches:return None
++    # Explicitly asking about still-open items filters by the actual state.
++    open_only=bool(re.search(r'\b(?:открыт[а-я]*|без\s+ответ[а-я]*|неотвеченн[а-я]*|остал[а-я]*)\b',outside))
++    if open_only:matches=[q for q in matches if q.get('status') in ('OPEN','BACKGROUND')]
++    if not matches:return None
++    ordered=sorted(matches,key=lambda q:(int(q.get('created_step',0)),str(q['event_id'])))
++    lines=[f'«{q["text"][:180]}» — {q.get("status","UNKNOWN")}' for q in ordered[-12:]]
++    refs=[{'event_id':q['event_id'],'text':q['text'],'episode_kind':'QUESTION',
++           'source_kind':'C4_ASK', 'status':q.get('status','UNKNOWN')} for q in ordered[-12:]]
++    return {'status':'RETRIEVED_INQUIRIES',
++            'reply':'У меня есть записи собственных вопросов:\n'+'\n'.join(lines)+
++                    '\nЭто мои прежние вопросы, а не доказательство ответов.',
++            'refs':refs}
++
++
++def answer_memory_query(query:str,index:dict,current_event_id=None,inquiries=())->dict:
++    own=attributed_inquiry_recall(query,inquiries)
++    if own is not None:return own
+     matches=retrieve(query,index,current_event_id=current_event_id)
+     if not matches:
+         return {'status':'NO_EVIDENCE','reply':'Не нахожу достаточно похожего более раннего сообщения. Я не буду придумывать воспоминание.', 'refs':[]}
+@@ -125,7 +196,7 @@
+     return {'status':'RETRIEVED_TEXT','reply':msg,'refs':matches}
+ 
+ 
+-def answer_batch(episodes:List[dict],index:dict,current_event_id=None,max_items:int=32)->dict:
++def answer_batch(episodes:List[dict],index:dict,current_event_id=None,max_items:int=32,inquiries=())->dict:
+     lines=[];refs=[];nq=0;found=0
+     for ep in episodes:
+         if ep.get('kind')!='QUESTION':continue
+@@ -134,7 +205,7 @@
+         q=ep['text']
+         num=ep.get('number') or nq
+         if is_memory_query(q):
+-            r=answer_memory_query(q,index,current_event_id)
++            r=answer_memory_query(q,index,current_event_id,inquiries=inquiries)
+             refs.extend(r['refs'])
+             if r['refs']:
+                 found+=1
+diff -ruN /mnt/data/c4_g328/candidate/runtime/c4child/inquiry_link.py candidate/runtime/c4child/inquiry_link.py
+--- /mnt/data/c4_g328/candidate/runtime/c4child/inquiry_link.py	1970-01-01 00:00:00.000000000 +0000
++++ candidate/runtime/c4child/inquiry_link.py	2026-10-08 13:35:47.945215122 +0000
+@@ -0,0 +1,41 @@
++"""Event-source inquiry alignment: candidates, never an automatic ANSWER/VERIFIED claim.
++
++The next turn is not an answer. This is EVAL-only comparison of utterance
++content and simultaneously open ASK objects. Only unambiguous content overlap
++proposes a link. COMMIT does not resolve the question or adopt the content.
++"""
++from __future__ import annotations
++from .episodic_memory import features, split_episodes
++
++
++def evaluate_inquiry_link(text, inquiries, source_event_id=None):
++    units=split_episodes(text)
++    if not units or any(x['kind']=='QUESTION' for x in units):
++        return {'status':'NOT_ANSWER','candidates':[],'source_event_id':source_event_id}
++    # The protocol does not interpret a quoted example as the user's answer.
++    from .semantic_spine import outside_quotes
++    surface=outside_quotes(text).strip()
++    if not surface:
++        return {'status':'NOT_ANSWER','candidates':[],'source_event_id':source_event_id}
++    ff=features(surface)
++    if not ff:
++        return {'status':'NO_MATCH','candidates':[],'source_event_id':source_event_id}
++    viable=[]
++    for q in inquiries:
++        if q.get('status') not in {'OPEN','BACKGROUND'}:continue
++        # An ASK's surface is not a basis; only its content features supply a link.
++        f=features(q.get('text',''))
++        same=ff & f
++        if not same:continue
++        precision=len(same)/max(1,len(ff))
++        recall=len(same)/max(1,len(f))
++        viable.append({'question_event_id':q['event_id'], 'score':round((precision+recall)/2,5),
++                       'shared_features':sorted(same),'source_event_id':source_event_id})
++    viable.sort(key=lambda q:(-q['score'],q['question_event_id']))
++    if not viable:
++        status='NO_MATCH'
++    elif len(viable)>1 and viable[0]['score']-viable[1]['score']<0.15:
++        status='AMBIGUOUS'
++    else:
++        status='CANDIDATE'
++    return {'status':status,'candidates':viable[:8],'source_event_id':source_event_id}
+diff -ruN /mnt/data/c4_g328/candidate/runtime/c4child/runtime.py candidate/runtime/c4child/runtime.py
+--- /mnt/data/c4_g328/candidate/runtime/c4child/runtime.py	2026-10-08 13:20:42.025874525 +0000
++++ candidate/runtime/c4child/runtime.py	2026-10-08 13:49:05.645676516 +0000
+@@ -24,7 +24,8 @@
+ from .perspective_composition import chain_summary, perspective_entity_inquiry
+ from .metacognitive_probe import inspect_question
+ from .discourse_bridge import resolve_disposition
+-from .episodic_memory import index_event, is_query_batch, is_memory_query, answer_batch, answer_memory_query
++from .episodic_memory import index_event, is_query_batch, is_memory_query, is_inquiry_query, answer_batch, answer_memory_query
++from .inquiry_link import evaluate_inquiry_link
+ 
+ @dataclass
+ class OutboundEvent:
+@@ -91,6 +92,7 @@
+         self.semantic_spine=SemanticSpine()
+         # G328: immutable-source transcript episode index. No admission authority.
+         self.episode_index={}
++        self.last_inquiry_evaluation=None
+         # Observational telemetry is opt-in, non-persistent, and distinct from
+         # cognition. The host receives actual event records, never a fake chain.
+         self._trace_mode='OFF'
+@@ -168,6 +170,13 @@
+         if parsed is not None:row["parsed"]=parsed
+         if semantic_eids:row["semantic_eids"]=list(dict.fromkeys(semantic_eids))
+         self.dialogue_history.append(row)
++        # Published C4 speech is a witnessed utterance, not a world receipt.
++        # Store it with speaker provenance so an old ASK can be retrieved as ASK.
++        if str(speaker)=='C4' and event_id and kind in {'ASK','ASK_EMBEDDED','REPLY'}:
++            entry=index_event(str(event_id),self.external_seq,str(text))
++            entry['source_kind']='C4_ASK' if kind in {'ASK','ASK_EMBEDDED'} else 'C4_REPLY'
++            entry['scope']='SPOKEN_INQUIRY' if kind in {'ASK','ASK_EMBEDDED'} else 'C4_PUBLIC_REPLY'
++            self.episode_index[str(event_id)]=entry
+         extra={}
+         if reason is not None:extra["reason"]=reason
+         if semantic_eids:extra["semantic_eids"]=list(dict.fromkeys(semantic_eids))
+@@ -847,7 +856,68 @@
+         if self.inbound_events:
+             ev=self.inbound_events.popleft();ev["status"]="PROCESSING"
+             self._record_life_event("C4","COGNITIVE_PROCESS",status="STARTED",source_event_id=ev["event_id"],extra={"external_order":ev.get("external_order")})
+-            out=self._process_user_message_now(ev.get("text",""),source_event_id=ev["event_id"],publish=bool(allow_public_output))
++            before_facts=set(self.dialogue.g.facts)
++            before_entities=set(self.dialogue.g.entities)
++            before_order=self.dialogue.g.order
++            before_tx=len(self.semantic_spine.transactions)
++            before_inquiries={qid:(q.get('status'),len(q.get('answer_candidates',[]))) for qid,q in self.inquiries.items()}
++            # All open questions are compared; no latest-ASK lock, no automatic truth/closure.
++            link=evaluate_inquiry_link(ev.get('text',''),list(self.inquiries.values()),ev['event_id'])
++            self.last_inquiry_evaluation=link
++            self._record_life_event('C4','EVAL_INQUIRY_LINK',status=link['status'],source_event_id=ev['event_id'],
++                                    extra={'influence':'AVAIL','candidates':link['candidates']})
++            # Legacy dialogue.pending_ask was a single-answer shortcut. It may
++            # contextualize an answer only if EVAL matched its actual ASK ID.
++            # Suspending the pointer changes AVAIL, not the underlying inquiry.
++            old_pa=self.dialogue.pending_ask
++            chosen=link['candidates'][0]['question_event_id'] if link['status']=='CANDIDATE' else None
++            pending_ids=[q['event_id'] for q in self.inquiries.values()
++                         if q.get('status') in {'OPEN','BACKGROUND'}]
++            matched_last=bool(chosen and pending_ids and chosen==pending_ids[-1])
++            # Anaphora remains lawful when there is exactly one unresolved focus.
++            # An older ASK which already received a candidate answer may stay OPEN
++            # epistemically, but it is not a competing foreground referent.
++            competing=[self.inquiries[qid] for qid in pending_ids[:-1]
++                       if qid in self.inquiries and not self.inquiries[qid].get('answer_candidates')]
++            unambiguous_focus=bool(not pending_ids or len(pending_ids)==1 or not competing)
++            suspend=bool(self.inquiries and old_pa and not (matched_last or unambiguous_focus))
++            if suspend:
++                self.dialogue.pending_ask=None
++                self._record_life_event('C4','EVAL_LEGACY_ANSWER_POINTER',status='SUSPENDED',
++                                        source_event_id=ev['event_id'],
++                                        extra={'influence':'MASK','reason':'NO_SUPPORTED_ASK_ID_MATCH',
++                                               'legacy_subject_eid':old_pa.get('eid') if isinstance(old_pa,dict) else None})
++            try:
++                out=self._process_user_message_now(ev.get("text",""),source_event_id=ev["event_id"],publish=bool(allow_public_output))
++            finally:
++                if suspend and self.dialogue.pending_ask is None:
++                    self.dialogue.pending_ask=old_pa
++            if link['status']=='CANDIDATE':
++                qid=link['candidates'][0]['question_event_id']
++                q=self.inquiries.get(qid)
++                if q is not None and q.get('status') in {'OPEN','BACKGROUND'}:
++                    # A human message is evidence of words received, not evidence
++                    # the question was accurately answered. Keep OPEN until lawful resolution.
++                    q.setdefault('answer_candidates',[]).append({'source_event_id':ev['event_id'],
++                                                                  'shared_features':link['candidates'][0]['shared_features'],
++                                                                  'status':'UNVERIFIED'})
++                    self._record_life_event('C4','COMMIT_INQUIRY_CANDIDATE',status='RECORDED',source_event_id=ev['event_id'],
++                                            extra={'influence':'STATUS','question_event_id':qid,
++                                                   'evidence_scope':'USER_SAID_NOT_WORLD','resolved':False})
++            added_facts=sorted(set(self.dialogue.g.facts)-before_facts)
++            removed_facts=sorted(before_facts-set(self.dialogue.g.facts))
++            added_entities=sorted(set(self.dialogue.g.entities)-before_entities)
++            changed_q=[{'question_event_id':qid,'before':before_inquiries.get(qid),
++                        'after':(q.get('status'),len(q.get('answer_candidates',[])))}
++                       for qid,q in self.inquiries.items()
++                       if before_inquiries.get(qid)!=(q.get('status'),len(q.get('answer_candidates',[])))]
++            self._record_life_event('C4','CASCADE_OUTCOME',status='OBSERVED',source_event_id=ev['event_id'],
++                                    extra={'influence':'STATUS','graph_delta':{'added_fact_ids':added_facts,
++                                        'removed_fact_ids':removed_facts,'added_entity_ids':added_entities,
++                                        'order_before':before_order,'order_after':self.dialogue.g.order},
++                                        'inquiry_changes':changed_q,
++                                        'new_transaction_ids':[t.get('transaction_id') for t in self.semantic_spine.transactions[before_tx:]],
++                                        'selected_public_event_id':((out.get('event') or {}).get('event_id') if isinstance(out,dict) else None)})
+             # G320 composition: represent what the message expressed without
+             # turning representation into truth.
+             parsed=out.get('parsed') if isinstance(out,dict) else None
+@@ -902,9 +972,9 @@
+         episodes=indexed['episodes']
+         candidate=None
+         if is_query_batch(episodes):
+-            candidate=answer_batch(episodes,self.episode_index,current_event_id=source_event_id)
+-        elif len(episodes)==1 and is_memory_query(episodes[0]['text']):
+-            candidate=answer_memory_query(episodes[0]['text'],self.episode_index,current_event_id=source_event_id)
++            candidate=answer_batch(episodes,self.episode_index,current_event_id=source_event_id,inquiries=list(self.inquiries.values()))
++        elif len(episodes)==1 and (is_memory_query(episodes[0]['text']) or is_inquiry_query(episodes[0]['text'])):
++            candidate=answer_memory_query(episodes[0]['text'],self.episode_index,current_event_id=source_event_id,inquiries=list(self.inquiries.values()))
+         if candidate is not None:
+             self.step+=1;self.last_user_step=self.step
+             self._record_life_event('C4','EVAL_SOURCE_EPISODES',status='CANDIDATE',
+@@ -1478,7 +1548,9 @@
+                 'actualEventRows':items, 'episodeIndexEvents':len(self.episode_index),
+                 'graphFacts':len(self.dialogue.g.facts),'worldTruthNotInferred':True,
+                 'transactions':list(self.semantic_spine.transactions[-min(cap,10):]),
+-                'pendingInquiries':[dict(q) for q in self.inquiries.values() if q.get('status') in ('OPEN','BACKGROUND')][-10:]}
++                'pendingInquiries':[dict(q) for q in self.inquiries.values() if q.get('status') in ('OPEN','BACKGROUND')][-10:],
++                'lastInquiryEvaluation':self.last_inquiry_evaluation,
++                'lastCascade':next((dict(e) for e in reversed(self.life_events) if e.get('kind')=='CASCADE_OUTCOME'),None)}
+ 
+     def poll(self,limit:int=100):
+         out=[];budget=max(0,int(limit))
+@@ -1508,6 +1580,7 @@
+                 "semantic_composition":self.composition.to_dict(),
+                 "semantic_spine":self.semantic_spine.to_dict(),
+                 "episode_index":list(self.episode_index.values()),
++                "last_inquiry_evaluation":self.last_inquiry_evaluation,
+                 "life_events":list(self.life_events),"inbound_events":list(self.inbound_events),"external_seq":int(self.external_seq),
+                 "pending_public_acts":list(self.pending_public_acts),
+                 "inquiries":[self.inquiries[qid] for qid in self.inquiry_order if qid in self.inquiries],
+@@ -1568,6 +1641,7 @@
+         self.semantic_context=deque((dict(x) for x in d.get("semantic_context",[]) if isinstance(x,dict) and x.get("eid") in self.dialogue.g.entities),maxlen=96)
+         self.composition=SemanticComposition.from_dict(d.get("semantic_composition") or {})
+         self.semantic_spine=SemanticSpine.from_dict(d.get("semantic_spine") or {})
++        self.last_inquiry_evaluation=d.get("last_inquiry_evaluation")
+         self.episode_index={str(e['event_id']):dict(e) for e in d.get('episode_index',[])
+                             if isinstance(e,dict) and e.get('event_id')}
+         # Backfill upgraded G327 checkpoints from recorded non-authoritative
