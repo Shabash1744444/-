@@ -1,0 +1,103 @@
+{
+  "status": "EXPERIMENTAL_SIMULATION_ONLY",
+  "old_model_sha": "052f30fb0f79b79dad93e25ad77ad81f29ff5bc2be6981fefc85630a56f791c1",
+  "experiments": {
+    "sim_p4_CONTEXT_SWITCH": {
+      "fit": {
+        "status": "LEARNED_ASSOCIATION",
+        "n": 840,
+        "parents": [
+          "a",
+          "b",
+          "c"
+        ],
+        "penalized_nll": 34.8198038394094,
+        "quarantined_roots": 0,
+        "scope": "SIMULATION"
+      },
+      "heldout": [
+        {
+          "seed": 0,
+          "evaluated": 400,
+          "coverage": 1.0,
+          "accuracy_when_answered": 1.0
+        },
+        {
+          "seed": 1,
+          "evaluated": 400,
+          "coverage": 1.0,
+          "accuracy_when_answered": 1.0
+        }
+      ],
+      "training_events": 840
+    },
+    "sim_p4_LAGGED_TRANSITION": {
+      "fit": {
+        "status": "LEARNED_ASSOCIATION",
+        "n": 480,
+        "parents": [
+          "a",
+          "b"
+        ],
+        "penalized_nll": 16.297739204784435,
+        "quarantined_roots": 0,
+        "scope": "SIMULATION"
+      },
+      "heldout": [
+        {
+          "seed": 0,
+          "evaluated": 400,
+          "coverage": 1.0,
+          "accuracy_when_answered": 1.0
+        },
+        {
+          "seed": 1,
+          "evaluated": 400,
+          "coverage": 1.0,
+          "accuracy_when_answered": 1.0
+        }
+      ],
+      "training_events": 480
+    },
+    "sim_p4_FOUR_WAY_INTEGRATION": {
+      "fit": {
+        "status": "LEARNED_ASSOCIATION",
+        "n": 1040,
+        "parents": [
+          "a",
+          "b",
+          "c",
+          "d"
+        ],
+        "penalized_nll": 71.2122124003313,
+        "quarantined_roots": 0,
+        "scope": "SIMULATION"
+      },
+      "heldout": [
+        {
+          "seed": 0,
+          "evaluated": 400,
+          "coverage": 1.0,
+          "accuracy_when_answered": 1.0
+        },
+        {
+          "seed": 1,
+          "evaluated": 400,
+          "coverage": 1.0,
+          "accuracy_when_answered": 1.0
+        }
+      ],
+      "training_events": 1040
+    }
+  },
+  "extra_episodes": 2360,
+  "source": "G324_P3",
+  "graph_before_after": [
+    10727,
+    10781,
+    22306
+  ],
+  "cold_reload": true,
+  "model_sha256": "f33ecb8228ce19d910aa3cce2877f9b5d2544977f79d855efa2491c0c11f2b77",
+  "model_bytes": 2030190
+}
