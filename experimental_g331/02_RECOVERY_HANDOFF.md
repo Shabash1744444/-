@@ -25,3 +25,7 @@
 
 ## Шаг C001
 Провести read-only аудит траектории событий и frozen held-out тестов на действующей версии G331; записать первый RED, затем исправление в **родном** `c4child`. По завершении — реальное выполнение тестов и холодная загрузка, новое сообщение в журнале и immutable checkpoint.
+
+
+## NEWEST checkpoint 2026-10-08
+C001 DONE. Code commit: a6aea791ed9c1896ca49ad3a2584bacb064bb39e. See 01_WORK_JOURNAL.md and C001_README.md. C002 NOT STARTED. Begin C002 with START checkpoint on native c4child; freeze nested perspective + relative time RED. Do not redo C001.
