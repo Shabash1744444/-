@@ -1,0 +1,42 @@
+{
+  "experiment": "C4_G324_P1_RECURSIVE_CAUSAL_MATRYOSHKA",
+  "date": "2026-10-08",
+  "parent": "C4 G324-P0 physically copied, originally based on G322-P8; canonical G309 unchanged",
+  "focused": {
+    "passed": 42,
+    "failed": 0
+  },
+  "full_regression": {
+    "passed": 530,
+    "failed": 27,
+    "same_failure_identities_as_parent": true,
+    "failure_type": "FileNotFoundError old external checkpoints"
+  },
+  "additive_tests_since_parent": 23,
+  "property_oracle": {
+    "seed": 324101,
+    "cases": 256,
+    "passed": 256,
+    "note": "finite synthetic CSP with independent source roots; not empirical cognition"
+  },
+  "supported_properties": [
+    "finite external-boundary associativity",
+    "nested posterior marginalization",
+    "root provenance union",
+    "identical replay dedup",
+    "shared dependent root rejection",
+    "hidden cross-boundary leak rejection",
+    "incomplete evaluation fail closed",
+    "contradictory dependency root quarantine"
+  ],
+  "not_supported": [
+    "G322 false WORLD admission unresolved",
+    "no learned perception factor discovery",
+    "no four-law constitutional completeness proof",
+    "not 54 cognition laws proved"
+  ],
+  "parent_model_sha256": "6baf2864ce8a811738d13cf3593f739e8dcc5a8734d17ce0f5647bc23da06301",
+  "candidate_retrained": false,
+  "deployed": false,
+  "published_to_main": false
+}
