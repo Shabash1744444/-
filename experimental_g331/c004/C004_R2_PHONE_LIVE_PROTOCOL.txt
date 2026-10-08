@@ -1,0 +1,56 @@
+C4 G331 — C004-R2 / PHONE LIVE ACCEPTANCE PROTOCOL
+2026-10-09 · EXPERIMENTAL · C004 DEVICE PENDING
+
+PURPOSE
+Test the EXISTING C4 G329/G331 organism, not a second runtime.
+The native Android host must execute only C4-authorized room requests, report the actual before/after, and permit SIM learning only after the private Java -> Python receipt. A success message is NOT world truth, and Python/CI PASS is not an Android device test.
+
+BUILD PAIR — DO NOT MIX VERSIONS
+Android app: Shabash1744444/Emu branch experiments/c4-c004-native-host, GitHub Actions 37851562352 (C004-R2 Java target forwarding), or a NEWER successful run on that same branch.
+Python runtime ZIP: C4_G331_C004_R2_NATIVE_RUNTIME.zip
+Runtime ZIP SHA256: 7bd314029d4b927eb00e847ec52d2d3d45ffba06b7f30bba094a06af6be47f76
+Existing original G329 organism .c4m should be used as a COPIED backup; do not overwrite your sole copy. Its reference SHA256 is dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f.
+
+PRECONDITIONS
+1) Stop C4; back up the currently selected .c4m and trace.
+2) Install the experimental Android app build (not main branch); import R2 runtime ZIP, then your backed-up .c4m. Start the brain. Enable detailed cognitive and transport logs.
+3) In the world/room, check: BALL at floor-left and no object held. If room state differs, do NOT force an old-state assertion; export the actual state instead.
+
+SEND ONE MESSAGE PER LINE (copy exact text including @c4)
+
+@c4 {"op":"GOAL","scope":"SIM","scene":"home","initial":{"subject":"BALL","relation":"LOCATION","object":"floor-left"},"target":{"subject":"BALL","relation":"LOCATION","object":"held"}}
+
+@c4 {"op":"DEMO","scope":"SIM","scene":"home","action":"TAKE","before":{"subject":"SAMPLE","relation":"LOCATION","object":"floor-left"},"after":{"subject":"SAMPLE","relation":"LOCATION","object":"held"}}
+
+@c4 {"op":"PLAN","scope":"SIM","scene":"home"}
+
+Expected: C4 DRIVE proposed TAKE, Java native room executed TAKE, HOST_WORLD C4_NATIVE_ROOM_TRANSITION, room.after.location=held, c4Credit.status=SIM_SUCCESS, goal_status=ACHIEVED_SIM. WITHOUT this native receipt, the proposal must NOT be considered complete.
+
+Second action (only if TAKE really succeeded and BALL is now held):
+
+@c4 {"op":"GOAL","scope":"SIM","scene":"home","initial":{"subject":"BALL","relation":"LOCATION","object":"held"},"target":{"subject":"BALL","relation":"LOCATION","object":"basket"}}
+
+@c4 {"op":"DEMO","scope":"SIM","scene":"home","action":"PLACE","before":{"subject":"SAMPLE","relation":"LOCATION","object":"held"},"after":{"subject":"SAMPLE","relation":"LOCATION","object":"basket"}}
+
+@c4 {"op":"PLAN","scope":"SIM","scene":"home"}
+
+Expected: ACTION_REQUEST action=PLACE object=BALL target=basket; Java forwards target=basket (not its former default floor-right); actual after.location=basket; only then c4Credit.status=SIM_SUCCESS and goal_status=ACHIEVED_SIM.
+
+@c4 {"op":"REFLECT","scope":"SIM","scene":"home"}
+
+Expected: a trace grounded in received host SIM results; no WORLD fact admitted simply for having performed a sandbox action.
+
+SAFETY / NEGATIVE CHECKS
+- Send a normal chat message that CLAIMS the action succeeded; it must not count as an independent host receipt.
+- Sending a textual @c4 command with op=RECEIPT must be rejected or marked unsupported; do not alter Android JavaScript or invoke private methods.
+- After completion, repeated PLAN must not execute the same completed action again.
+- Restart the brain ONLY after creating a checkpoint. Old session receipts must not be accepted in the new session; existing SIM history must survive cold reload.
+- If a wrong before state, unsupported room object, forbidden destination, or failed Java action occurs, preserve log as a RED. Do not re-label it a success.
+
+WHAT TO SEND BACK
+1) Export Android transport/runtime trace (including HOST_WORLD C4_NATIVE_ROOM_TRANSITION or C4_NATIVE_ROOM_REJECTED), cognitive trace where available, and screenshots of room before/after.
+2) Report Android app GitHub Actions run ID, runtime ZIP hash/version, .c4m original vs post-checkpoint size/hash, any error line, and whether after-state persisted on cold reload.
+3) Do not claim a DEVICE PASS until a real smartphone log demonstrates complete request -> Java execution -> private receipt -> state update -> restart.
+
+CURRENT LIMITATIONS
+Experimental SIM-scoped cognitive learning only; not true physical-world observation, no free Russian language implementation, no proof of general intelligence. The Android APK build succeeding is not the same as receiving a physical device trace.
