@@ -1,0 +1,57 @@
+--- a/runtime/c4child/runtime.py
++++ b/runtime/c4child/runtime.py
+@@ -40,7 +40,7 @@
+     cognition may later emit ASK/PUBLISH events into an outbox without a new
+     user message. The shell delivers events but never invents them.
+     """
+-    def __init__(self,dialogue:Optional[C4ChildDialogue]=None,initiative_cooldown:int=8,strict_world_admission:bool=False):
++    def __init__(self,dialogue:Optional[C4ChildDialogue]=None,initiative_cooldown:int=8,strict_world_admission:bool=False,hardened_truth_gate:bool=False):
+         self.dialogue=dialogue or C4ChildDialogue()
+         self.step=0
+         self.outbox=deque()
+@@ -97,6 +97,14 @@
+         self.inquiry_order=deque(maxlen=128)
+         self.max_foreground_inquiries=3       # presentation budget, not epistemic law
+         self.dialogue.reasoner.rule_induction=self.rule_induction
++        if hardened_truth_gate:self.enable_hardened_truth()
++
++    def enable_hardened_truth(self):
++        """Experimental fail-closed gate for ALL graph commit/replace/forget APIs."""
++        self.dialogue.g.set_constitutional_mode('STRICT')
++        self.dialogue.g.hardened_gate=True
++        self.epistemic.strict_world=True
++        return True
+ 
+     def _event(self,kind,text,reason,urgency=0.5,cause_id=None,requires_user=False):
+         self._seq+=1
+@@ -561,12 +569,12 @@
+                 gap.status=OPEN;gap.last_step=self.step
+         return out
+ 
+-    def begin_causal_study(self, study_id, features, *, frame='ROOT', epoch='E0'):
++    def begin_causal_study(self, study_id, features, *, frame='ROOT', epoch='E0', max_parents=3):
+         """Experimental simulation-scoped association study (not world truth)."""
+         if study_id in self.causal_studies:
+             raise ValueError('study already registered')
+         self.causal_studies[study_id]=EmpiricalConstraintLearner(features,
+-            scope='SIMULATION',frame=frame,epoch=epoch)
++            scope='SIMULATION',frame=frame,epoch=epoch,max_parents=max_parents)
+         return {'study_id':study_id,'scope':'SIMULATION','status':'CREATED'}
+ 
+     def learn_simulated_constraint(self, study_id, inputs, outcome, *, root, receipt, frame=None, epoch=None):
+@@ -1323,6 +1331,7 @@
+                 "contact_physics":self.contact_physics.to_dict(),
+                 "support_physics":self.support_physics.to_dict(),
+                 "causal_studies":{k:v.to_dict() for k,v in self.causal_studies.items()},
++                "hardened_truth_gate":bool(getattr(self.dialogue.g,"hardened_gate",False)),
+                 "learning_sessions":self.learning.to_dict(),"competencies":self.competencies.to_dict(),"rule_induction":self.rule_induction.to_dict(),"epistemic":self.epistemic.to_dict(),
+                 "last_initiative_step":self.last_initiative_step,"last_user_step":self.last_user_step,"initiative_cooldown":self.initiative_cooldown,
+                 "dialogue_focus_eid":self.dialogue.focus_eid,"dialogue_focus_stack":list(getattr(self.dialogue,"focus_stack",[])),
+@@ -1371,6 +1380,7 @@
+         self.competencies=CompetencyRegistry.from_dict(d.get('competencies'))
+         self.rule_induction=RuleInductionOrgan.from_dict(d.get('rule_induction') or {})
+         self.epistemic=EpistemicAdmissionOrgan.from_dict(d.get('epistemic') or {})
++        if d.get("hardened_truth_gate",False):self.enable_hardened_truth()
+         self.causal_studies={str(k):EmpiricalConstraintLearner.from_dict(v) for k,v in (d.get('causal_studies') or {}).items()}
+         self.nursery=NurseryState.from_dict(d['nursery']) if d.get('nursery') else NurseryState()
+         self.spatial_effects=SpatialEffectLearner.from_dict(d.get('spatial_effects') or {})
