@@ -1,0 +1,10 @@
+C4 executable skeleton: C4_EXECUTABLE_SPINE_M1_M3_V1
+Что думает Маша? -> SUPPORTED (('Иван',),) receipt: SENT
+Что произошло по рассказу? -> SUPPORTED (('Иван',),) receipt: SENT
+Это доказательство во внешнем мире? -> UNKNOWN () receipt: SENT
+Автономный цикл -> SENT собственные вопросы: ('Что такое температура?',)
+Следующий цикл -> INTERNAL
+Новый предмет по двум демонстрациям -> INFERRED
+Факт в реальном мире? -> UNKNOWN
+Cold restore: True ; events: 12 ; claims: 4
+Owners: ['COMMIT', 'DRIVE', 'EVAL', 'MEDIATE'] ; trace records: 44
