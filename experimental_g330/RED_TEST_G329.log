@@ -1,0 +1,71 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_ test_current_episode_query_not_replaced_by_blanket_refusal[\u0418\u0440\u0430 \u0443\u043d\u0435\u0441\u043b\u0430 \u0431\u043e\u043b\u044c\u0448\u043e\u0439 \u043a\u0430\u043c\u0435\u043d\u044c \u043a \u043c\u043e\u0441\u0442\u0443.-\u041a\u0442\u043e \u0443\u043d\u0435\u0441 \u043a\u0430\u043c\u0435\u043d\u044c?] _
+
+premise = 'Ира унесла большой камень к мосту.', question = 'Кто унес камень?'
+
+    @pytest.mark.parametrize('premise,question',[
+     ('Ира унесла большой камень к мосту.','Кто унес камень?'),
+     ('Сева поставил стакан на полку.','Где находится стакан в этом рассказе?'),
+    ])
+    def test_current_episode_query_not_replaced_by_blanket_refusal(premise,question):
+        spans=split_episodes('1. '+premise+'\n2. '+question+'\n3. Откуда ты знаешь ответ?')
+        output=answer_batch(spans,index={},inquiries=())
+>       assert 'Это отдельный вопрос. Я пока не могу надёжно связать его' not in output['reply']
+E       AssertionError: assert 'Это отдельн... связать его' not in 'Разобрала с...ами из базы.'
+E         
+E         'Это отдельный вопр...надёжно связать его' is contained here:
+E           наний:
+E           2. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+E           3. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+
+test_g330_real_device_red.py:19: AssertionError
+_ test_current_episode_query_not_replaced_by_blanket_refusal[\u0421\u0435\u0432\u0430 \u043f\u043e\u0441\u0442\u0430\u0432\u0438\u043b \u0441\u0442\u0430\u043a\u0430\u043d \u043d\u0430 \u043f\u043e\u043b\u043a\u0443.-\u0413\u0434\u0435 \u043d\u0430\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u0441\u0442\u0430\u043a\u0430\u043d \u0432 \u044d\u0442\u043e\u043c \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0435?] _
+
+premise = 'Сева поставил стакан на полку.'
+question = 'Где находится стакан в этом рассказе?'
+
+    @pytest.mark.parametrize('premise,question',[
+     ('Ира унесла большой камень к мосту.','Кто унес камень?'),
+     ('Сева поставил стакан на полку.','Где находится стакан в этом рассказе?'),
+    ])
+    def test_current_episode_query_not_replaced_by_blanket_refusal(premise,question):
+        spans=split_episodes('1. '+premise+'\n2. '+question+'\n3. Откуда ты знаешь ответ?')
+        output=answer_batch(spans,index={},inquiries=())
+>       assert 'Это отдельный вопрос. Я пока не могу надёжно связать его' not in output['reply']
+E       AssertionError: assert 'Это отдельн... связать его' not in 'Разобрала с...ами из базы.'
+E         
+E         'Это отдельный вопр...надёжно связать его' is contained here:
+E           наний:
+E           2. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+E           3. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+
+test_g330_real_device_red.py:19: AssertionError
+__________ test_own_ask_recall_cannot_source_from_user_exam_question ___________
+
+    def test_own_ask_recall_cannot_source_from_user_exam_question():
+        archive={'u1':index_event('u1',1,'1. Какие вопросы ты сама задавала?\n2. Помнишь, какой вопрос задала мне?')}
+        result=answer_memory_query('Какие вопросы ты сама мне задавала раньше?',archive,inquiries=())
+>       assert not any(r.get('source_kind')=='USER_MESSAGE' for r in result.get('refs',[])), result
+E       AssertionError: {'refs': [{'episode_kind': 'QUESTION', 'event_id': 'u1', 'external_order': 1, 'line': 1, ...}], 'reply': 'В сохранённо...акие вопросы ты сама задавала?» Это запись текста, а не доказательство описанных событий.', 'status': 'RETRIEVED_TEXT'}
+E       assert not True
+E        +  where True = any(<generator object test_own_ask_recall_cannot_source_from_user_exam_question.<locals>.<genexpr> at 0x7fe25e285630>)
+
+test_g330_real_device_red.py:25: AssertionError
+=========================== short test summary info ============================
+FAILED test_g330_real_device_red.py::test_current_episode_query_not_replaced_by_blanket_refusal[\u0418\u0440\u0430 \u0443\u043d\u0435\u0441\u043b\u0430 \u0431\u043e\u043b\u044c\u0448\u043e\u0439 \u043a\u0430\u043c\u0435\u043d\u044c \u043a \u043c\u043e\u0441\u0442\u0443.-\u041a\u0442\u043e \u0443\u043d\u0435\u0441 \u043a\u0430\u043c\u0435\u043d\u044c?] - AssertionError: assert 'Это отдельн... связать его' not in 'Разобрала с...ами из базы.'
+  
+  'Это отдельный вопр...надёжно связать его' is contained here:
+    наний:
+    2. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+    3. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+FAILED test_g330_real_device_red.py::test_current_episode_query_not_replaced_by_blanket_refusal[\u0421\u0435\u0432\u0430 \u043f\u043e\u0441\u0442\u0430\u0432\u0438\u043b \u0441\u0442\u0430\u043a\u0430\u043d \u043d\u0430 \u043f\u043e\u043b\u043a\u0443.-\u0413\u0434\u0435 \u043d\u0430\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u0441\u0442\u0430\u043a\u0430\u043d \u0432 \u044d\u0442\u043e\u043c \u0440\u0430\u0441\u0441\u043a\u0430\u0437\u0435?] - AssertionError: assert 'Это отдельн... связать его' not in 'Разобрала с...ами из базы.'
+  
+  'Это отдельный вопр...надёжно связать его' is contained here:
+    наний:
+    2. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+    3. Это отдельный вопрос. Я пока не могу надёжно связать его с нужной ситуацией; не буду подменять ответ словами из базы.
+FAILED test_g330_real_device_red.py::test_own_ask_recall_cannot_source_from_user_exam_question - AssertionError: {'refs': [{'episode_kind': 'QUESTION', 'event_id': 'u1', 'external_order': 1, 'line': 1, ...}], 'reply': 'В сохранённо...акие вопросы ты сама задавала?» Это запись текста, а не доказательство описанных событий.', 'status': 'RETRIEVED_TEXT'}
+assert not True
+ +  where True = any(<generator object test_own_ask_recall_cannot_source_from_user_exam_question.<locals>.<genexpr> at 0x7fe25e285630>)
+3 failed in 0.16s
