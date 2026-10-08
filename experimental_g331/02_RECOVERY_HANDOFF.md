@@ -1,3 +1,14 @@
+# CURRENT RECOVERY — C004 R1/R2 CODE GREEN, PHYSICAL ANDROID PENDING (2026-10-09)
+Last fully completed cognitive cycle: C003. C004 implemented + compiled but NOT DONE until on-device evidence.
+LATEST physical checkpoint: `experimental_g331/checkpoints/CP_C4_G331_C004_R1_R2_CODE_GREEN_DEVICE_PENDING.md`.
+LATEST work journal: `experimental_g331/01_WORK_JOURNAL.md`, bottom C004-R1/R2.
+C4 code/ZIP pin: `3aa7a3c798fb052f028ba51a21b495bd5f00d2f4`; runtime ZIP SHA256 `7bd314029d4b927eb00e847ec52d2d3d45ffba06b7f30bba094a06af6be47f76`. C4 CI 37851791773 SUCCESS 114 PASS / 2 SKIP.
+Android experimental branch `Shabash1744444/Emu` `experiments/c4-c004-native-host` latest required at least commit `a528129a8ed7b6a675ee49d9f8c0ecaf0cfd6952`; CI 37851562352 SUCCESS, app APK compiled.
+R1 closed: JavaScript cannot preempt native C4-owned trial:* request IDs. R2 closed: PLACE/RELEASE exact destination carried from DRIVE through native Android Java to witnessed SIM outcome, no Java default destination.
+Real G329 .c4m 10,781 facts and baseline hash unchanged, local cold PASS. Physical Android true live NOT ATTESTED. Original .c4m never overwrite.
+FIRST next action: physical paired phone test using `experimental_g331/c004/C004_R2_PHONE_LIVE_PROTOCOL.txt`, collect native HOST_WORLD transition and actual room before/after, private c4Credit and cold reload. If unavailable, remain C004 DEVICE_PENDING; do not forge a green run or start C005.
+Four owner laws, 5 influence classes, G215 and anti-cascade guard, no 80 handcrafted cases; no second memory/runtime; no autonomous mass pretraining.
+---
 # CURRENT STATUS 2026-10-09: C003 DONE; C004 INTEGRATED / DEVICE PENDING (NOT DONE)
 Native C4 C004 integration source and exact 56-module ZIP pinned at commit f4fc8e5bb210cf9c1c39899be81c0a1865460e7b; C4 GitHub Actions SUCCESS run 37845141293: 104 passed, 2 skipped, SHA+cmp verified, constitution gate PASS, autonomous_pretrain BLOCKED.
 Companion Android app branch Shabash1744444/Emu experiments/c4-c004-native-host at commit 0ba500e28bb406a1a6fb391ae55f233fe1249f29, Android assembleDebug SUCCESS run 37844344905. Pair the APK from this run with C004_NATIVE_RUNTIME.zip, never G331 C003/old app. Native runtime SHA256 eefcd7c89706357aafc5c5bae59ce3522ccdf2619817858b48cff5f90426d641.
