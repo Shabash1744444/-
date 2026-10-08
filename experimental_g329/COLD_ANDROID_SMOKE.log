@@ -1,0 +1,14 @@
+{
+  "zip_members": 55,
+  "python_modules": 55,
+  "model_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "model_bytes": 2065628,
+  "runtime_hardened_gate": true,
+  "epistemic_strict_world": true,
+  "cold_causal_studies": 7,
+  "c4_asks": 3,
+  "traces": 10,
+  "reloaded": true,
+  "graph_facts": 10782,
+  "graph_entities": 10728
+}
