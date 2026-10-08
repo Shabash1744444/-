@@ -1,0 +1,19 @@
+{
+  "C4_G328_ANDROID_RUNTIME.zip": {
+    "bytes": 236897,
+    "sha256": "29cff48e22f06783da8ac66361311cd33b3a5d37dcdcef8b9ad11d092fd7ee10",
+    "zip_members": 54
+  },
+  "C4_G328_ANDROID_CLEAN_ORGANISM.c4m": {
+    "bytes": 2065628,
+    "sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+    "zip_members": 5
+  },
+  "C4_G328_SOURCE_TESTS_CHECKPOINT.zip": {
+    "bytes": 2295155,
+    "sha256": "ebfa44e983ffa6dbea4fe33c614ae443f1e6cb0c0ad3cd2d8928f9c14966cb12",
+    "zip_members": 65
+  },
+  "original_model_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "model_unchanged": true
+}
