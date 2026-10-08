@@ -1,3 +1,11 @@
+# CURRENT STATUS 2026-10-09: C003 DONE; C004 INTEGRATED / DEVICE PENDING (NOT DONE)
+Native C4 C004 integration source and exact 56-module ZIP pinned at commit f4fc8e5bb210cf9c1c39899be81c0a1865460e7b; C4 GitHub Actions SUCCESS run 37845141293: 104 passed, 2 skipped, SHA+cmp verified, constitution gate PASS, autonomous_pretrain BLOCKED.
+Companion Android app branch Shabash1744444/Emu experiments/c4-c004-native-host at commit 0ba500e28bb406a1a6fb391ae55f233fe1249f29, Android assembleDebug SUCCESS run 37844344905. Pair the APK from this run with C004_NATIVE_RUNTIME.zip, never G331 C003/old app. Native runtime SHA256 eefcd7c89706357aafc5c5bae59ce3522ccdf2619817858b48cff5f90426d641.
+Previous G329 trained .c4m unchanged (10,781 facts after cold). Local C004 83 PASS; no fresh full old test sweep; Android physical end-to-end NOT ATTESTED.
+C004 cannot be marked DONE until a real phone trace shows ACTION_REQUEST → Java SANDBOX before/action/after → private native_room_receipt → original C4 SIM learning/cold reload plus replay/session negative tests. Background actions are fail-closed.
+Next: physical device experiment and log assessment; no C005 unless C004 duly closed or status escalated BLOCKED with explicit reason. Consult 01_WORK_JOURNAL.md last and checkpoints/CP_C4_G331_C004_INTEGRATED_DEVICE_PENDING.md. Do not create second brain/memory or remove four-owner/anti-cascade guards.
+
+---
 # CURRENT HANDOFF: C003 DONE → C004 NOT STARTED
 Updated 2026-10-08. Read the BOTTOM of `01_WORK_JOURNAL.md` FIRST. The last DONE is C003. C003 source SHA update `272b2cd4e8c770b5670967621fc0be3f00a45379`, CI run `37836262293` SUCCESS (95 PASS 2 SKIP), journal commit `8ffa1cda93c6c34731d78df4ecabfeee8fc2270e`. The old 10,781-fact `.c4m` survived cold reload unchanged. C003 runtime ZIP in Library `/C4_Candidates/G331_NATIVE_COGNITION/C003/`. GitHub C003 test: `experimental_g331/tests/test_c003_causal_credit.py`. Local full 633 PASS / 27 historical fixtures missing.
 
