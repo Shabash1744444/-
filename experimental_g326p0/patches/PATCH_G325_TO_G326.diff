@@ -1,0 +1,272 @@
+--- a/runtime/c4child/semantic_spine.py
++++ b/runtime/c4child/semantic_spine.py
+@@ -2,8 +2,9 @@
+ from dataclasses import dataclass, asdict
+ from typing import Any, Dict, List, Optional
+ import hashlib, re, time
++from .perspective_composition import parse_perspective
+ 
+-SPINE_VERSION = "C4_SEMANTIC_SPINE_V0_2"
++SPINE_VERSION = "C4_SEMANTIC_SPINE_V0_3_G326"
+ 
+ _QUOTE_RE = re.compile(r'«([^»]*)»|“([^”]*)”|"([^"]*)"')
+ 
+@@ -86,6 +87,7 @@
+         self.events: Dict[str, Dict[str,Any]]={}
+         self.interpretations: Dict[str, List[Dict[str,Any]]]={}
+         self.transactions: List[Dict[str,Any]]=[]
++        self.perspective_frames: Dict[str, Dict[str,Any]]={}
+         self.last_external_event_id: Optional[str]=None
+ 
+     def record_event(self, *, event_id:str, actor:str, channel:str, payload:str,
+@@ -125,6 +127,17 @@
+     def analyze_surface(self,event_id:str,text:str):
+         """Cheap structural EVAL candidates. No truth mutation and no final parse authority."""
+         txt=str(text).strip();out=[];ts=temporal_scope(txt);emode=epistemic_mode(txt)
++        # Candidate-only recursive representation. Never gives COMMIT authority.
++        try:
++            pf=parse_perspective(txt,source_event=str(event_id))
++        except ValueError:
++            pf=None
++        if pf is not None:
++            self.perspective_frames[str(event_id)]=pf
++            out.append(self.add_candidate(event_id,source="PERSPECTIVE_COMPOSITION",
++                                          speech_act="PERSPECTIVE_FRAME",quoted_depth=1,
++                                          epistemic_mode="HYPOTHETICAL",confidence=.7,
++                                          note="NON_AUTHORITATIVE_RECURSIVE_FRAME"))
+         qs=quoted_fragments(txt)
+         for q in qs:
+             out.append(self.add_candidate(event_id,source="QUOTE_LAYER",speech_act="QUOTED_SPEECH",
+@@ -167,7 +180,7 @@
+ 
+     def to_dict(self):
+         return {"version":self.version,"events":list(self.events.values()),"interpretations":self.interpretations,
+-                "transactions":self.transactions,"last_external_event_id":self.last_external_event_id}
++                "transactions":self.transactions,"perspective_frames":self.perspective_frames,"last_external_event_id":self.last_external_event_id}
+ 
+     @classmethod
+     def from_dict(cls,d):
+@@ -176,5 +189,6 @@
+             if isinstance(ev,dict) and ev.get("event_id"):s.events[str(ev["event_id"])]=dict(ev)
+         s.interpretations={str(k):[dict(x) for x in v if isinstance(x,dict)] for k,v in (d.get("interpretations") or {}).items() if isinstance(v,list)}
+         s.transactions=[dict(x) for x in d.get("transactions",[]) if isinstance(x,dict)]
++        s.perspective_frames={str(k):dict(v) for k,v in (d.get("perspective_frames") or {}).items() if isinstance(v,dict)}
+         s.last_external_event_id=d.get("last_external_event_id")
+         return s
+--- a/runtime/c4child/runtime.py
++++ b/runtime/c4child/runtime.py
+@@ -21,6 +21,8 @@
+ from .lexical_grounding import SoundSymbolBridge
+ from .composition import SemanticComposition
+ from .semantic_spine import SemanticSpine, quoted_fragments, outside_quotes, temporal_scope, epistemic_mode, social_role
++from .perspective_composition import chain_summary, perspective_entity_inquiry
++from .metacognitive_probe import inspect_question
+ 
+ @dataclass
+ class OutboundEvent:
+@@ -957,7 +959,43 @@
+         self._record_life_event('C4','EVAL_INTERPRETATION_SET',status='CANDIDATE',
+                                 extra={"candidates":icands,"count":len(icands)})
+ 
+-        if decision.handled:
++        # G326: if the old language organ cannot understand a perspective frame,
++        # preserve the recursive semantics as a candidate instead of flattening it
++        # into a WORLD fact. Acknowledgment is generated from structure, not a
++        # phrase-specific chatbot answer. The existing intent/dialogue path wins
++        # when it has a recognized interpretation.
++        frame = self.semantic_spine.perspective_frames.get(source_event_id or '')
++        self_audit = inspect_question(text, self.dialogue_history, self.semantic_spine.events)
++        participant_info=perspective_entity_inquiry(text,self.semantic_spine.perspective_frames)
++        # In fallback-only situations, source-aware metacognitive EVAL supersedes
++        # generic topic overlap, which otherwise misassigns «ты» to the user.
++        perspective_fallback = bool(frame and not decision.handled and parsed.kind == 'UNKNOWN')
++        if participant_info and not decision.handled and parsed.kind=='UNKNOWN':
++            self._record_life_event('C4','EVAL_CONTEXT_PARTICIPANT',status='CANDIDATE',
++                                    extra={'source_event_id':source_event_id})
++            self._record_life_event('C4','DRIVE_SPEECH_ACT',status='SELECTED',
++                                    extra={'speech_act':'CONTEXT_PARTICIPANT','basis':'EVAL_CONTEXT'})
++            reply=participant_info['reply'];reply_kind='CONTEXT_PARTICIPANT';receipts=[];unknown_words=[]
++            gap_requests=[];asked_now=[];deferred=[]
++            self.dialogue.last_used=[];self.dialogue.last_unknown_words=[]
++        elif self_audit and not decision.handled:
++            self._record_life_event('C4','EVAL_SOURCE_SELF_AUDIT',status='CANDIDATE',
++                                    extra={'kind':self_audit['kind'],'source_event_id':source_event_id})
++            self._record_life_event('C4','DRIVE_SPEECH_ACT',status='SELECTED',
++                                    extra={'speech_act':'SOURCE_SELF_AUDIT','basis':'EVAL_SOURCE_META'})
++            reply=self_audit['reply'];reply_kind='SOURCE_SELF_AUDIT';receipts=[];unknown_words=[]
++            gap_requests=[];asked_now=[];deferred=[]
++            self.dialogue.last_used=[];self.dialogue.last_unknown_words=[]
++        elif perspective_fallback:
++            self._record_life_event('C4','EVAL_RECURSIVE_PERSPECTIVE',status='CANDIDATE',
++                                    extra={'source_event_id':source_event_id,'frame':frame})
++            self._record_life_event('C4','DRIVE_SPEECH_ACT',status='SELECTED',
++                                    extra={'speech_act':'PERSPECTIVE_ACK','basis':'STRUCTURAL_EVAL'})
++            reply = 'Различаю вложенные точки зрения: ' + chain_summary(frame) + '. Это представление чужой речи или мысли, а не подтверждённый факт мира.'
++            reply_kind='PERSPECTIVE_ACK';receipts=[];unknown_words=[]
++            gap_requests=[];asked_now=[];deferred=[]
++            self.dialogue.last_used=[];self.dialogue.last_unknown_words=[]
++        elif decision.handled:
+             # The discourse organ proposes an interpretation (EVAL). Runtime DRIVE
+             # selects the public speech act; this selection carries no COMMIT power.
+             self._record_life_event('C4','EVAL_INTERPRETATION',status='CANDIDATE',extra={
+--- a/runtime/c4child/perspective_composition.py
++++ b/runtime/c4child/perspective_composition.py
+@@ -0,0 +1,123 @@
++"""G326 experimental, conservative, recursive perspective/EVAL frame extraction.
++
++Outputs candidates, not WORLD facts or authority. Surface-level grammar with abstention;
++it does NOT claim to be general Russian language comprehension.
++"""
++from __future__ import annotations
++from dataclasses import dataclass, asdict, field
++from typing import Optional, Tuple
++import hashlib
++import re
++import json
++
++_OPEN_CLOSE = {'«':'»', '“':'”', '"':'"'}
++_WORD = r'[А-ЯЁа-яёA-Za-z][А-ЯЁа-яёA-Za-z-]*'
++_REPORT = re.compile(rf'^\s*(?P<who>{_WORD})\s+(?P<verb>сказал[аи]?|говорил[аи]?|сообщил[аи]?|рассказал[аи]?|написал[аи]?|подумал[аи]?|думает|думал[аи]?|считает|считал[аи]?|полагает|полага[лла]+|верит|верил[аи]?)\s*(?P<sep>:|,?\s+что\s+)\s*(?P<body>.+)$',re.I|re.S)
++_MODAL = re.compile(r'^\s*(?P<modal>представь|допустим|предположим|вообрази)\s*:\s*(?P<body>.+)$',re.I|re.S)
++_REPORTED = re.compile(r'(?:говор|сказ|сообщ|рассказ|напис)',re.I)
++
++@dataclass
++class PerspectiveNode:
++    holder: str
++    act: str
++    content: str
++    mode: str
++    child: Optional['PerspectiveNode'] = None
++    referent: Optional[str] = None
++    source_event: Optional[str] = None
++    scope: str = 'SOURCE_ASSERTION'
++    evidence_roots: Tuple[str,...] = field(default_factory=tuple)
++    def as_dict(self):
++        return json.loads(json.dumps(asdict(self),ensure_ascii=False))
++
++def _unquote(t):
++    t=t.strip()
++    if len(t)>=2 and t[0] in _OPEN_CLOSE and t[-1]==_OPEN_CLOSE[t[0]]:
++        return t[1:-1].strip(),True
++    return t,False
++
++def _deictic(content,holder,origin_speaker,origin_recipient):
++    """First person in an *attributed* utterance refers to attributed speaker.
++    Outside an attributed frame, these refer to the origin dialogue participants.
++    No object/subject entity is created from the text.
++    """
++    m=re.search(r'\b(?:я|меня|мне|мной)\b',content,re.I)
++    if m:return holder
++    m=re.search(r'\b(?:ты|тебя|тебе|тобой)\b',content,re.I)
++    if m:return origin_recipient if holder==origin_speaker else None
++    return None
++
++def _one(text, *, parent_holder, deictic_holder, origin_speaker, origin_recipient, source_event, depth, limit):
++    if depth>limit:raise ValueError('PERSPECTIVE_DEPTH_LIMIT')
++    text=text.strip()
++    raw,was_quote=_unquote(text)
++    if was_quote:
++        child=_one(raw,parent_holder=parent_holder,deictic_holder=parent_holder,origin_speaker=origin_speaker,
++                   origin_recipient=origin_recipient,source_event=source_event,depth=depth+1,limit=limit)
++        return PerspectiveNode(parent_holder,'QUOTE',raw,'REPORTED',child,
++                               source_event=source_event,evidence_roots=(source_event,))
++    modal=_MODAL.match(raw)
++    if modal:
++        child=_one(modal['body'],parent_holder=parent_holder,deictic_holder=deictic_holder,origin_speaker=origin_speaker,
++                   origin_recipient=origin_recipient,source_event=source_event,depth=depth+1,limit=limit)
++        return PerspectiveNode(parent_holder,'HYPOTHETICAL',raw,'HYPOTHETICAL',child,
++                               source_event=source_event,evidence_roots=(source_event,))
++    report=_REPORT.match(raw)
++    if report:
++        token=report['who']; who=origin_speaker if token.lower()=='я' else origin_recipient if token.lower()=='ты' else token
++        verb=report['verb']; mode='REPORTED_SPEECH' if _REPORTED.search(verb) else 'BELIEF'
++        body=report['body'].strip()
++        child=_one(body,parent_holder=who,deictic_holder=(who if report['sep'].strip()==':' else deictic_holder),origin_speaker=origin_speaker,
++                   origin_recipient=origin_recipient,source_event=source_event,depth=depth+1,limit=limit)
++        return PerspectiveNode(who,mode,body,mode,child,source_event=source_event,evidence_roots=(source_event,))
++    return PerspectiveNode(parent_holder,'CONTENT',raw,'UNVERIFIED',None,
++                           referent=_deictic(raw,deictic_holder,origin_speaker,origin_recipient),
++                           source_event=source_event,evidence_roots=(source_event,))
++
++def parse_perspective(text:str, *, source_event:str, origin_speaker='USER',origin_recipient='C4',depth_limit=10):
++    """Conservative candidate: None if no perspective construction is found."""
++    text=str(text).strip()
++    # Strip leading 'imagine' wrapper only through the same recursive parser.
++    if not (_MODAL.match(text) or _REPORT.match(text) or (len(text)>1 and text[0] in _OPEN_CLOSE and text[-1]==_OPEN_CLOSE[text[0]])):
++        return None
++    if not source_event:raise ValueError('source_event required')
++    tree=_one(text,parent_holder=origin_speaker,deictic_holder=origin_speaker,origin_speaker=origin_speaker,
++              origin_recipient=origin_recipient,source_event=str(source_event),depth=0,limit=depth_limit)
++    return tree.as_dict()
++
++def chain_summary(frame:dict)->str:
++    """Generic human-readable trace; not a claim of external truth."""
++    segments=[];cur=frame
++    while isinstance(cur,dict):
++        act=cur.get('act')
++        if act=='BELIEF':segments.append(f"{cur.get('holder','?')} предполагает")
++        elif act=='REPORTED_SPEECH':segments.append(f"{cur.get('holder','?')} сообщил(а)")
++        elif act=='HYPOTHETICAL':segments.append('в воображаемой ситуации')
++        elif act=='QUOTE':segments.append('цитата')
++        else:
++            segments.append('содержание: '+cur.get('content',''))
++            break
++        cur=cur.get('child')
++    return ' → '.join(segments)
++
++def perspective_entity_inquiry(text, event_frames):
++    """Resolve 'who X' using ONLY prior attributed appearances, not world identity."""
++    t=str(text).strip().rstrip('?!. ')
++    patterns=(r'^(?:а\s+)?(?P<name>[А-ЯЁ][а-яё]+)\s+кто$',
++              r'^(?:а\s+)?кто\s+(?:(?:такая|такой|это)\s+)?(?P<name>[А-ЯЁ][а-яё]+)$')
++    who=None
++    for p in patterns:
++        m=re.match(p,t,re.I)
++        if m:who=m['name'];break
++    if not who:return None
++    names=[]
++    for v in event_frames.values():
++        node=v
++        while isinstance(node,dict):
++            holder=node.get('holder')
++            if holder and str(holder).casefold()==who.casefold():names.append(node.get('act'))
++            node=node.get('child')
++    if not names:return None
++    return {'kind':'CONTEXT_PARTICIPANT','reply':
++            f'В этой переписке {who} упоминалась или упоминался в чужой речи либо мысли. '
++            f'По одному этому упоминанию я не могу установить, кто это в реальном мире.'}
+--- a/runtime/c4child/metacognitive_probe.py
++++ b/runtime/c4child/metacognitive_probe.py
+@@ -0,0 +1,32 @@
++"""Conservative provenance self-query resolver. EVAL-only, no self-evidence."""
++import re
++
++_WHY=re.compile(r'\b(?:почему|на\s+каком\s+основании|откуда)\b',re.I)
++_SELF=re.compile(r'\b(?:ты|тебя|твой|твоя|твоё|твое|твоём|твоем|твои|тебе|у\s+тебя)\b',re.I)
++_JUSTIFY=re.compile(r'\b(?:уверен\w*|знаешь|считаешь|говоришь|утверждаешь|думаешь|ответ\w*|основан\w*|доказател\w*|вывод\w*)\b',re.I)
++_DISTINGUISH=re.compile(r'\b(?:знаешь|видел\w*|наблюдал\w*|предполагаешь|предположени\w*|действительно|основани\w*)\b',re.I)
++
++def inspect_question(text, history, events):
++    """Return candidate narrative grounded in known channel metadata or None.
++
++    Asks why THIS system is confident; distinguish its own report from independent
++    world verification. Do not claim even an admitted legacy fact as observation.
++    """
++    t=str(text).strip()
++    if not _SELF.search(t):return None
++    history=list(history)
++    prev=next((r for r in reversed(history) if r.get('speaker')=='C4'),None)
++    if _WHY.search(t) and _JUSTIFY.search(t):
++        if prev is None:
++            return {'kind':'SOURCE_SELF_AUDIT','reply':'У меня пока нет собственного предыдущего ответа для проверки его оснований.'}
++        reason=prev.get('reason','не указан')
++        return {'kind':'SOURCE_SELF_AUDIT','reply':f'Мой предыдущий ответ — мой вывод, а не независимое наблюдение. Записанная причина ответа: {reason}. Без проверки источников я не могу утверждать, что он достоверен.'}
++    # A self-source-discrimination query rather than a question about a world object.
++    if ('?' in t and len(_DISTINGUISH.findall(t))>=2):
++        channels={str(e.get('channel')) for e in (events or {}).values()}
++        if channels<= {'CHAT_TEXT'}:
++            reply='Я получила текстовые сообщения, но в этой записи нет независимого сенсорного подтверждения описанных ими событий. Мои интерпретации — гипотезы, а не наблюдения мира.'
++        else:
++            reply='Я различаю сообщения, гипотезы и зарегистрированные внешние события, но подтверждение конкретного факта требует проверки его источника и receipt.'
++        return {'kind':'SOURCE_SELF_AUDIT','reply':reply}
++    return None
