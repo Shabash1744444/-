@@ -35,12 +35,14 @@ The real G322 integration in this experiment is deliberately narrow: a *generic 
 | Old fixture errors (same test IDs) | 27 | 27 |
 | G322 quote attributions `Маша сказала: «Меня зовут Аня»` | duplicate flat outer candidate appears | duplicate outer name candidate absent |
 
+Cold extraction of the portable ZIP independently reproduced **19/19 PASS** for the added test suite and confirmed the unchanged model SHA256.
+
 The 27 fails are historical `FileNotFoundError` for previous model/fixture archives missing in the extracted runtime environment. Consequently, **the whole suite is not green**.
 
 19 new test functions/parameter cases include:
 - 54 **independent synthetic structural identity schemas** tested with one algorithm;
 - 54 **simultaneously coupled** binary processes in one hypernetwork, resolved by generic constraint propagation;
-- a 54-process hypergraph where deleting one bridge changes a unique assignment into two valid assignments;
+- a separate four-node hypergraph where deleting one bridge changes a unique assignment into two valid assignments;
 - 64 order/permutation robustness trials;
 - two-source XOR three-way synergy (artificial, not cognition);
 - repeated same-root evidence must not inflate independent root count;
