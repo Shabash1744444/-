@@ -1,0 +1,145 @@
+--- G326/runtime/c4child/runtime.py
++++ G327/runtime/c4child/runtime.py
+@@ -23,6 +23,7 @@
+ from .semantic_spine import SemanticSpine, quoted_fragments, outside_quotes, temporal_scope, epistemic_mode, social_role
+ from .perspective_composition import chain_summary, perspective_entity_inquiry
+ from .metacognitive_probe import inspect_question
++from .discourse_bridge import resolve_disposition
+ 
+ @dataclass
+ class OutboundEvent:
+@@ -648,11 +649,22 @@
+         coordinated clause from becoming one opaque pseudo-concept.
+         """
+         text=str(text)
+-        coarse=[];start=0
+-        for m in re.finditer(r'(?:[.!?]+(?=\s|$)|\n+)',text):
+-            end=m.end();seg=text[start:end].strip()
+-            if seg:coarse.append(seg)
+-            start=end
++        # Segment only *outside* nested quote delimiters. Transport punctuation in
++        # attributed speech is not a new independent user speech act.
++        coarse=[];start=0;stack=[];pairs={'«':'»','“':'”','"':'"'}
++        i=0
++        while i<len(text):
++            c=text[i]
++            if stack and c==stack[-1]:stack.pop()
++            elif c in pairs and (not stack or c!='"'):
++                stack.append(pairs[c])
++            if not stack and (c=='\n' or (c in '.!?' and (i+1==len(text) or text[i+1].isspace()))):
++                end=i+1
++                while end<len(text) and text[end] in '.!?':end+=1
++                seg=text[start:end].strip()
++                if seg:coarse.append(seg)
++                start=end;i=end;continue
++            i+=1
+         tail=text[start:].strip()
+         if tail:coarse.append(tail)
+         out=[]
+@@ -967,10 +979,26 @@
+         frame = self.semantic_spine.perspective_frames.get(source_event_id or '')
+         self_audit = inspect_question(text, self.dialogue_history, self.semantic_spine.events)
+         participant_info=perspective_entity_inquiry(text,self.semantic_spine.perspective_frames)
++        # G327: a single read-only discourse query layer traverses ALL attributed
++        # events before ordinary lexical retrieval. Interpretation != WORLD truth.
++        scoped_query=resolve_disposition(text,self.semantic_spine,self.dialogue_history)
+         # In fallback-only situations, source-aware metacognitive EVAL supersedes
+         # generic topic overlap, which otherwise misassigns «ты» to the user.
+-        perspective_fallback = bool(frame and not decision.handled and parsed.kind == 'UNKNOWN')
+-        if participant_info and not decision.handled and parsed.kind=='UNKNOWN':
++        # Any attributed statement, even one recognized by the old copula parser,
++        # is a SOURCE-REPRESENTATION. It must never fall into direct WORLD teaching.
++        perspective_fallback = bool(frame)
++        if scoped_query:
++            self._record_life_event('C4','EVAL_DISCOURSE_GRAPH_QUERY',status='CANDIDATE',
++                                    source_event_id=source_event_id,
++                                    extra={'query_kind':scoped_query['kind'],'basis_events':scoped_query['refs'],
++                                           'scope':scoped_query['scope']})
++            self._record_life_event('C4','DRIVE_SPEECH_ACT',status='SELECTED',
++                                    source_event_id=source_event_id,
++                                    extra={'speech_act':scoped_query['kind'],'basis':'READ_ONLY_SOURCE_GRAPH'})
++            reply=scoped_query['reply'];reply_kind=scoped_query['kind'];receipts=[];unknown_words=[]
++            gap_requests=[];asked_now=[];deferred=[]
++            self.dialogue.last_used=[];self.dialogue.last_unknown_words=[]
++        elif participant_info and not decision.handled and parsed.kind=='UNKNOWN':
+             self._record_life_event('C4','EVAL_CONTEXT_PARTICIPANT',status='CANDIDATE',
+                                     extra={'source_event_id':source_event_id})
+             self._record_life_event('C4','DRIVE_SPEECH_ACT',status='SELECTED',
+--- G326/runtime/c4child/perspective_composition.py
++++ G327/runtime/c4child/perspective_composition.py
+@@ -77,6 +77,10 @@
+ def parse_perspective(text:str, *, source_event:str, origin_speaker='USER',origin_recipient='C4',depth_limit=10):
+     """Conservative candidate: None if no perspective construction is found."""
+     text=str(text).strip()
++    # A question ABOUT a belief/report is not itself a new belief/report.
++    # C4 must not turn 'Кто думает, что X?' into a source named 'Кто'.
++    if text.endswith('?'):
++        return None
+     # Strip leading 'imagine' wrapper only through the same recursive parser.
+     if not (_MODAL.match(text) or _REPORT.match(text) or (len(text)>1 and text[0] in _OPEN_CLOSE and text[-1]==_OPEN_CLOSE[text[0]])):
+         return None
+--- G326/runtime/c4child/semantic_spine.py
++++ G327/runtime/c4child/semantic_spine.py
+@@ -4,7 +4,7 @@
+ import hashlib, re, time
+ from .perspective_composition import parse_perspective
+ 
+-SPINE_VERSION = "C4_SEMANTIC_SPINE_V0_3_G326"
++SPINE_VERSION = "C4_SEMANTIC_SPINE_V0_4_G327"
+ 
+ _QUOTE_RE = re.compile(r'«([^»]*)»|“([^”]*)”|"([^"]*)"')
+ 
+--- G326/LIVE_SESSION.py
++++ G327/LIVE_SESSION.py
+@@ -17,11 +17,12 @@
+ 
+ def parse():
+     a=argparse.ArgumentParser()
+-    a.add_argument('--model',type=Path,default=ROOT/'model/child_g326_p0_unified_pre_live_candidate.c4m')
++    a.add_argument('--model',type=Path,default=ROOT/'model/child_g327_runtime_compatible_weights_UNCHANGED.c4m')
+     a.add_argument('--out',type=Path,default=ROOT/'LIVE_session.jsonl')
+     a.add_argument('--replay',type=Path,default=None)
+     a.add_argument('--save-state',type=Path,default=None)
+     a.add_argument('--fail-on-unsafe',action='store_true')
++    a.add_argument('--trace',action='store_true',help='Log four-law events, EVAL candidates, origin and receipts')
+     return a.parse_args()
+ 
+ def main():
+@@ -34,7 +35,7 @@
+     rt=C4LivingRuntime.open(str(args.model),store='memory')
+     if not (getattr(rt.dialogue.g,'hardened_gate',False) and rt.epistemic.strict_world):
+         raise SystemExit('FAIL CLOSED: unguarded state/model; not approved for this harness')
+-    print('C4 G326 experimental. SIMULATED local talk ≠ human/device LIVE validation')
++    print('C4 G327 revised runtime (G326 learned state, NOT G323 source merge). SIMULATED local talk ≠ human/device LIVE validation')
+     print('Model SHA256:',model_sha,'| Source logs:',args.out)
+     if not args.replay:print('Введите текст; /exit завершает. /save сохранит отдельный checkpoint при указании --save-state.')
+     if args.replay:
+@@ -59,7 +60,16 @@
+                     rt.save(str(args.save_state));print('SAVED:',args.save_state)
+                 else:print('No --save-state specified; input model unchanged.')
+                 continue
++            if line.strip()=='/status':
++                summary={'step':rt.step,'graph_facts':len(rt.dialogue.g.facts),
++                         'graph_entities':len(rt.dialogue.g.entities),
++                         'perspective_frames':len(rt.semantic_spine.perspective_frames),
++                         'learned_studies':list(rt.causal_studies),
++                         'strict_world':bool(rt.epistemic.strict_world),
++                         'hardened_gate':bool(rt.dialogue.g.hardened_gate)}
++                print(json.dumps(summary,ensure_ascii=False,indent=2));continue
+             before_f=len(rt.dialogue.g.facts);before_e=len(rt.dialogue.g.entities)
++            before_life=len(rt.life_events);before_tx=len(rt.semantic_spine.transactions)
+             stamp=time.time()
+             try:
+                 response=rt.user_message(line)
+@@ -71,6 +81,11 @@
+                      'delta_entities':len(rt.dialogue.g.entities)-before_e,
+                      'gated':bool(rt.dialogue.g.hardened_gate),'epistemic_strict':bool(rt.epistemic.strict_world),
+                      'time':stamp,'status':'PROCESSED','model_sha256':model_sha}
++                if args.trace:
++                    row['causal_trace']=list(rt.life_events)[before_life:]
++                    row['eval_candidates']=rt.semantic_spine.interpretations.get(ev.get('event_id',''),[])
++                    row['commit_transactions']=rt.semantic_spine.transactions[before_tx:]
++                    row['causal_studies_available']=list(rt.causal_studies.keys())
+                 print('C4>',response.get('reply'))
+             except Exception as ex:
+                 row={'user':line,'time':stamp,'status':'EXCEPTION',
