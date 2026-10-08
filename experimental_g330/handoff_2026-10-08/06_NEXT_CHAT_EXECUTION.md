@@ -1,6 +1,8 @@
-> **G323 source blocker (verified 2026-10-08):** See [07_G323_SOURCE_BLOCKER_AND_RECOVERY.md](07_G323_SOURCE_BLOCKER_AND_RECOVERY.md). Full G323 sources NOT present under checked repo path; do not require them to implement experimental M1–M2. Do not claim missing sources are merged.
-
 # ПЕРЕДАЧА СЛЕДУЮЩЕМУ ЧАТУ — C4, 2026-10-08
+
+**ПРИОРИТЕТ АВТОРА:** создать новый целостный когнитивный скелет и затем реальные Python-механизмы. **G323 не обязателен, искать и восстанавливать его перед M1–M2 НЕ НУЖНО.** Хронология старых сборок — только вспомогательное исследование.
+
+**ЧЕСТНЫЙ СТАТУС:** предыдущий ассистент сказал «сохранил весь чат», но в репозитории только частичная подборка дословных пользовательских сообщений и редакторская передача. Не называть полным дословным экспортом. Не утверждать, что код M1–M2 создан.
 ## Зачем читать
 Пользователь попросил сохранить его идеи и доступную беседу на GitHub и собрать скелет когнитивной системы, прежде чем чат закончится. Эта задача находится в **том же самом чате**, не выдумывай «другой чат». C4 ≠ Singularity OS.
 
@@ -21,7 +23,7 @@
 - `C4_FOUR_LAWS_MATHEMATICAL_SKELETON_V01_2026-10-08.md`.
 - `C4_FIFTH_LAW_INTELLIGENCE_NON_CONSTITUTIONAL_2026-10-08.md`.
 - `FOUR_LAWS_TRAINING_AUDIT_G222_G310_2026-10-08.md`.
-- `C4_NEXT_CHAT_HANDOFF_G322_TO_G323_2026-10-08.md`, `00_READ_ME_FIRST.md`, `01_NEXT_CHAT_HANDOFF.md`.
+- Исторические `C4_NEXT_CHAT_HANDOFF_G322_TO_G323_2026-10-08.md`, `00_READ_ME_FIRST.md`, `01_NEXT_CHAT_HANDOFF.md` — **по необходимости**, не приоритет и не условие старта.
 - `RUNTIME_ARCHITECTURE_PRINCIPLES.md`, `DEVELOPMENTAL_TRAINING_METHODOLOGY.md`.
 - `experimental_g330/G329_REAL_DEVICE_CAUSAL_AUDIT.md`.
 - `experimental_g330/tests/test_g330_real_device_red.py`.
@@ -40,11 +42,11 @@
 
 ## Следующее практическое действие, без повторного философского круга
 
-1. Найти конкретные source paths G323 и G329 и проанализировать дифф контрактов representation/commit/drive/mediate.
+1. Использовать `04_C4_COMPLETE_SKELETON_SPEC.md` как архитектурную основу. Исторические исходники читать там, где они физически доступны, но **НЕ блокировать** реализацию M1–M2 отсутствующим архивом G323.
 2. Реализовать минимально исполняемый **typed Event → Frame → EVAL hypotheses → single COMMIT gate → DRIVE decision → MEDIATE receipt** со snapshot/replay и автономными TICK; начать без русского.
 3. Написать property-based tests с генерацией новых участников/историй/времён/scope, в т.ч. C4 own ASK != USER quote.
 4. Подключить существующий русский язык и обучающий organ через интерфейсы, не подгонять ответы под frozen tests.
-5. Сравнить G329, G323 и clean integration candidate на holdout и реальном Android. После **GREEN** и cold reload выпускать артефакты со строгими SHA.
+5. Сравнить новое ядро с воспроизводимыми G329 RED и остальными доступными старыми тестами; G323 использовать как дополнительный comparator только если есть оригинальный проверенный артефакт. После **GREEN** и cold reload выпускать артефакты со строгими SHA.
 
 Отвечать пользователю на «Продолжай» конкретными коммитами, тестами, статусом M*, а не описанием ещё одного большого плана.
 
