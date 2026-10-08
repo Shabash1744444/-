@@ -1,0 +1,26 @@
+[
+  {
+    "regime": "same_thresholds",
+    "link_on": 0.045,
+    "link_off": 0.085,
+    "n": 6720,
+    "accuracy": 0.874702380952381,
+    "majority_baseline": 0.7136904761904762
+  },
+  {
+    "regime": "wide_links",
+    "link_on": 0.2,
+    "link_off": 0.3,
+    "n": 6720,
+    "accuracy": 0.6450892857142857,
+    "majority_baseline": 0.7367559523809524
+  },
+  {
+    "regime": "narrow_links",
+    "link_on": 0.015,
+    "link_off": 0.03,
+    "n": 6720,
+    "accuracy": 0.9339285714285714,
+    "majority_baseline": 0.8785714285714286
+  }
+]
