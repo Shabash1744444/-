@@ -1,0 +1,50 @@
+--- /mnt/data/c4_g324p2/candidate/runtime/c4child/epistemic.py	2026-10-08 06:33:52.000000000 +0000
++++ /mnt/data/c4_g324p3/candidate/runtime/c4child/epistemic.py	2026-10-08 11:25:17.042210063 +0000
+@@ -56,8 +56,9 @@
+     still use the explicit bootstrap path, but MODEL/self-derived material cannot
+     promote itself through this organ.
+     """
+-    def __init__(self,degrade_after:int=3,rehabilitate_after:int=5):
++    def __init__(self,degrade_after:int=3,rehabilitate_after:int=5,strict_world:bool=False):
+         self.order=0
++        self.strict_world=bool(strict_world)
+         self.candidates:Dict[str,EpistemicCandidate]={}
+         self.slot_index:Dict[str,set[str]]={}
+         self.family_failures:Dict[str,int]={}
+@@ -292,6 +293,18 @@
+                 fresh=self._record_verified_failure(fam,ckey,lineage)
+                 calibration={'result':'VERIFIED_WRONG','fresh':fresh,**self.source_calibration(lineage)}
+ 
++        # G324-P3 strict mode: testimony about WORLD is not a MEDIATE receipt.
++        # This organ has no trusted boundary to verify physical-world outcomes;
++        # even three mutually independent human/model/corpus reports cannot
++        # directly create a WORLD fact. Keep claims as candidates only. Verified
++        # observations must enter via an independently guarded MEDIATE path.
++        # Legacy policy retained ONLY to compare older tests, not for live release.
++        if self.strict_world:
++            c.status='NEEDS_GROUNDING'
++            c.failure_reason='NO_VERIFIED_WORLD_BOUNDARY'
++            return {'status':c.status,'reason':c.failure_reason,
++                    'candidate_id':c.candidate_id,'mutated':False,'calibration':calibration}
++
+         # Opposite evidence is not enough by itself to retract.  Retraction is at least
+         # as strict as admission: the incoming opposite stance must itself have mature
+         # proposal evidence plus an independent non-model challenge.
+@@ -392,7 +405,7 @@
+         return [c.candidate_id for c in self.candidates.values() if c.status=='NEEDS_CHALLENGE']
+ 
+     def to_dict(self):
+-        return {'schema':'C4_EPISTEMIC_ADMISSION_V0.5','order':self.order,'degrade_after':self.degrade_after,'rehabilitate_after':self.rehabilitate_after,
++        return {'schema':'C4_EPISTEMIC_ADMISSION_V0.6','strict_world':self.strict_world,'order':self.order,'degrade_after':self.degrade_after,'rehabilitate_after':self.rehabilitate_after,
+                 'source_registry':{k:fast_asdict(v) for k,v in self.source_registry.items()},
+                 'evidence_registry':dict(self.evidence_registry),
+                 'lineage_failures':dict(self.lineage_failures),
+@@ -407,7 +420,7 @@
+ 
+     @classmethod
+     def from_dict(cls,d):
+-        o=cls(d.get('degrade_after',3),d.get('rehabilitate_after',5));o.order=int(d.get('order',0));o.family_failures={str(k):int(v) for k,v in d.get('family_failures',{}).items()};o.family_failure_keys={str(k):set(v) for k,v in d.get('family_failure_keys',{}).items()};o.family_recovery_keys={str(k):set(v) for k,v in d.get('family_recovery_keys',{}).items()};o.degraded_families=set(d.get('degraded_families',[]));o.lineage_failures={str(k):int(v) for k,v in d.get('lineage_failures',{}).items()};o.lineage_failure_keys={str(k):set(v) for k,v in d.get('lineage_failure_keys',{}).items()};o.lineage_recovery_keys={str(k):set(v) for k,v in d.get('lineage_recovery_keys',{}).items()};o.degraded_lineages=set(d.get('degraded_lineages',[]));o.evidence_registry={str(k):str(v) for k,v in d.get('evidence_registry',{}).items()}
++        o=cls(d.get('degrade_after',3),d.get('rehabilitate_after',5),d.get('strict_world',False));o.order=int(d.get('order',0));o.family_failures={str(k):int(v) for k,v in d.get('family_failures',{}).items()};o.family_failure_keys={str(k):set(v) for k,v in d.get('family_failure_keys',{}).items()};o.family_recovery_keys={str(k):set(v) for k,v in d.get('family_recovery_keys',{}).items()};o.degraded_families=set(d.get('degraded_families',[]));o.lineage_failures={str(k):int(v) for k,v in d.get('lineage_failures',{}).items()};o.lineage_failure_keys={str(k):set(v) for k,v in d.get('lineage_failure_keys',{}).items()};o.lineage_recovery_keys={str(k):set(v) for k,v in d.get('lineage_recovery_keys',{}).items()};o.degraded_lineages=set(d.get('degraded_lineages',[]));o.evidence_registry={str(k):str(v) for k,v in d.get('evidence_registry',{}).items()}
+         for k,v in d.get('source_registry',{}).items():
+             row=dict(v);row.setdefault('source_lineage',row.get('source_family',k));o.source_registry[str(k)]=SourceIdentity(**row)
+         for row in d.get('candidates',[]):
