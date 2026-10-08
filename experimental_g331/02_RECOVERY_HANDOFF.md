@@ -1,3 +1,10 @@
+# CURRENT HANDOFF: C003 DONE → C004 NOT STARTED
+Updated 2026-10-08. Read the BOTTOM of `01_WORK_JOURNAL.md` FIRST. The last DONE is C003. C003 source SHA update `272b2cd4e8c770b5670967621fc0be3f00a45379`, CI run `37836262293` SUCCESS (95 PASS 2 SKIP), journal commit `8ffa1cda93c6c34731d78df4ecabfeee8fc2270e`. The old 10,781-fact `.c4m` survived cold reload unchanged. C003 runtime ZIP in Library `/C4_Candidates/G331_NATIVE_COGNITION/C003/`. GitHub C003 test: `experimental_g331/tests/test_c003_causal_credit.py`. Local full 633 PASS / 27 historical fixtures missing.
+
+C004 NOT STARTED. BEFORE any code change: physical START checkpoint, frozen RED for Android host delivery/execution/feedback and independent lineage. Work ONLY in existing c4child/Emu integration; do not duplicate graph, model or memory. Do not call SIM mock an Android observation. Retain constitutional stage-gate and run native regressions/cold and CI.
+
+---
+
 # CURRENT HANDOFF: C002 DONE → C003 NOT STARTED (2026-10-08)
 Start from `01_WORK_JOURNAL.md` bottom C002 DONE. Native code `8c88ed01c9a9914e495b7f94f043b0d056edbe7f`. Frozen regression workflow `10525f834f77175f92aae8d1142c363ac42d9013` (GitHub Actions 37832089735; inspect latest status). C002 79 directed PASS, 615 broad PASS / 27 historical fixture failures, original C4M cold 10781→10783. Runtime ZIP physically pinned at `experimental_g331/assets/C4_G331_C002_NATIVE_RUNTIME.zip`, same C4 G329/G331 model and native c4child. `governance/constitution_contract.json` and `tools/c4_stage_gate.py`: unproven autonomous pretraining BLOCKED. Android LIVE not attested.
 NEXT **C003**: before editing any source, write physical START checkpoint; freeze RED on independent-root learning, delayed verified SIM outcomes and multi-step causal transfer. Never rebuild second memory/weights. Export trace and cold C4M; journal every cycle. 
