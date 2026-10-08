@@ -1,4 +1,5 @@
-# Latest checkpoint: C001 DONE → C002 NOT STARTED (2026-10-08)
+# CURRENT STATE — C002 DONE; C003 NOT STARTED (8 October 2026)
+Read `01_WORK_JOURNAL.md` last DONE, `02_RECOVERY_HANDOFF.md`, `04_LONG_HORIZON_TRAINING_AND_NO_DRIFT.md`, `governance/constitution_contract.json`, `checkpoints/CP_C4_G331_C002_DONE.md` first. Native code tested: `4dd85f34625bbe0986795c81e7ec1d3a0603d49e`; GitHub Actions success run 37832745676 (77 pass, 2 absent-model skips). Local 79 directed PASS and broad 615 PASS / 27 missing historical fixtures. Real C4M cold load PASS, Android physical live NOT VERIFIED. Autonomous pretraining BLOCKED until acceptance gates evidenced. Every future cycle: START→RED→repair→reattack→regression→C4M reload→DONE checkpoint. Preserve original G329 .c4m and all owner/influence invariants.\n\n# Latest checkpoint: C001 DONE → C002 NOT STARTED (2026-10-08)
 Сначала читать `01_WORK_JOURNAL.md` и последнюю секцию `02_RECOVERY_HANDOFF.md`. Исполняемые изменения C001: `a6aea791ed9c1896ca49ad3a2584bacb064bb39e`. Не повторять уже законченный C001.
 
 # C4 — READ ME FIRST (G331 → дальнейшая разработка)
