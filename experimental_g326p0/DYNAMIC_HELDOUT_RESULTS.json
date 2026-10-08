@@ -1,0 +1,57 @@
+{
+  "status": "SIMULATION_ONLY",
+  "parent_sha256": "f33ecb8228ce19d910aa3cce2877f9b5d2544977f79d855efa2491c0c11f2b77",
+  "trained_model_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "trained_model_bytes": 2065628,
+  "train_events": 7560,
+  "fit": {
+    "status": "LEARNED_ASSOCIATION",
+    "n": 7560,
+    "parents": [
+      "old_edge",
+      "local_close",
+      "macro_high",
+      "r_high"
+    ],
+    "penalized_nll": 2708.273558371391,
+    "quarantined_roots": 0,
+    "scope": "SIMULATION"
+  },
+  "heldout": [
+    {
+      "total": 3360,
+      "answered": 3360,
+      "coverage": 1.0,
+      "accuracy_answered": 0.8732142857142857,
+      "majority_baseline_accuracy": 0.7241071428571428,
+      "brier_answered": 0.10419628873742537,
+      "label_positive_fraction": 0.27589285714285716
+    },
+    {
+      "total": 3360,
+      "answered": 3360,
+      "coverage": 1.0,
+      "accuracy_answered": 0.8693452380952381,
+      "majority_baseline_accuracy": 0.7041666666666667,
+      "brier_answered": 0.10625075851035505,
+      "label_positive_fraction": 0.29583333333333334
+    },
+    {
+      "total": 3360,
+      "answered": 3360,
+      "coverage": 1.0,
+      "accuracy_answered": 0.8696428571428572,
+      "majority_baseline_accuracy": 0.7080357142857143,
+      "brier_answered": 0.10692217536105757,
+      "label_positive_fraction": 0.29196428571428573
+    }
+  ],
+  "original_graph_counts": [
+    10727,
+    10781,
+    22306
+  ],
+  "cold_reload": true,
+  "model_scoped": "SIMULATION",
+  "study_count": 7
+}
