@@ -31,3 +31,20 @@ Git commit/checkpoint:
 Итог: инфраструктура восстановления. Это **не** означает завершения этапа «человеческая когниция».
 Физическая точка: `checkpoints/CP_C4_G331_C000_JOURNAL_BOOTSTRAP.md`, GitHub commit, содержащий эти четыре/пять файлов.
 Следующее первое действие C001: снять точную карту путей событий `user_message → EVAL → COMMIT → DRIVE → MEDIATE → runtime_state / C4M` по фактическому G329/G331 коду, затем сформулировать и выполнить **один** held-out сквозной тест непрерывного диалога; только после получения RED делать минимальный ремонт.
+
+### C001 — START
+Commit `3f4cfe673eeac0cc71b2edd30b8dcc5db59f52ce`, до изменения исполняемых файлов. Frozen RED: операция CORRECT возвращает REJECTED.
+
+### C001 — Temporal self-correction of a dialogue statement — DONE
+Дата: 2026-10-08.
+Базовый HEAD: `0051e696db82b55d0fccbfccb5bf9011189e21e5`; физический START: `3f4cfe673eeac0cc71b2edd30b8dcc5db59f52ce`.
+Исполняемый commit: `a6aea791ed9c1896ca49ad3a2584bacb064bb39e`.
+Цель: на **существующем C4Child/G329→G331** различать конфликт независимых SOURCE-свидетельств и явное исправление того же сообщения источником; отвечать на текущий и исторический запросы без WORLD-подмены и без потери памяти после compact C4M restart.
+Замороженные RED: (1) `CORRECT` отклонялся, (2) cold reload терял историческую SOURCE-запись, (3) настоящий G329 10 781-фактный C4M отклонял отношение `COLOR`, потому что оно обучено как `entity`, в отличие от пустого `literal`-графа.
+Изменения: старые `c4child/structured_cognition.py` и `c4child/checkpoint.py`; добавлен `tests/test_c001_temporal_dialogue.py`. **Новой памяти/весов/серверов нет.** `SOURCE_SUPERSEDED` сохраняется в hot-части прежнего `C4Graph`, версия C4M не менялась. Прямое указание старого `source_event_id` и исходного scope/scene/frames необходимо; другое событие корректировать нельзя.
+Исполнение: `PYTHONPATH=. pytest -q tests/test_c001_temporal_dialogue.py tests/test_g331_real_organism.py` — **32 PASSED**. Полный `PYTHONPATH=. pytest -q tests` — **568 PASSED / 27 FAILED**. Все 27 FAIL являются `FileNotFoundError` для отсутствующих исторических G137/G151/G153/G207/G280/G302/G308/G309 контрольных моделей; никаких иных FAIL в этом запуске. Общий набор НЕ GREEN.
+Настоящий исходный G329 C4M: хеш SHA256 `dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f`, **не перезаписывался**. `10781 → 10783` факта после двух сообщений, `10783` после холодной загрузки compact C4M. Исторический запрос: `teal`, текущий `amber` (в сцене `shapes-room`); пример не заложен в код. Графовые атрибуты и источник сохраняются.
+Android: **НЕ ПРОВЕРЕНО на устройстве**. Новый исполняемый ZIP — 56 исходных модулей `c4child`, холодный импорт в отдельной папке, `C4LivingRuntime` и диалоговый smoke PASS. SHA256 `C4_G331_C001_NATIVE_RUNTIME.zip`: `0a7e6801cfcfe1494dee2dd1c5a70987a3df114697819f42d8302e789c676bbe`.
+Артефакты в Library: `/C4_Candidates/G331_NATIVE_COGNITION/C001/` — native runtime, полный handoff, исходники, patch, trace и полные тестовые логи. Исходники и checkpoint в GitHub: `experimental_g331/C001_README.md`, `native_c4child/structured_cognition.py`, `native_c4child/checkpoint.py`, `tests/test_c001_temporal_dialogue.py`, `checkpoints/CP_C4_G331_C001_DONE.md`.
+Нерешённые вопросы: полные три времени, самостоятельное понимание русского, нестандартные причинные операторы, реальный Android host-receipt. Нельзя заявлять, что один локальный ремонт создал человеческий диалог.
+Следующее первое действие **C002**: зафиксировать unseen контрпример вложенных чужих высказываний с относительным временем события/сообщения/понимания; получить RED на истинном C4M, затем минимально править уже имеющийся `c4child`, делать re-attack, regression и cold reload. Перед работой — физический START.
