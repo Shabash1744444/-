@@ -1,0 +1,52 @@
+name: C4 Native Constitution and Cognitive Regression Gate
+on:
+  push:
+    branches:
+      - experiments/c4-g331-native-cognition
+  workflow_dispatch:
+jobs:
+  native-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pytest
+        run: python -m pip install pytest
+      - name: Verify pinned original C4 native runtime archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'b9551694410aacbf798635d4d5bcb5485d8e2bc76a2e92e0233a960063b3fc4e  experimental_g331/assets/C4_G331_C002_NATIVE_RUNTIME.zip' | sha256sum -c -
+          mkdir -p /tmp/c4-native
+          unzip -q experimental_g331/assets/C4_G331_C002_NATIVE_RUNTIME.zip -d /tmp/c4-native
+          test -s /tmp/c4-native/c4child/runtime.py
+          test -s /tmp/c4-native/c4child/structured_cognition.py
+      - name: Run frozen native cognition plus constitutional gates
+        env:
+          PYTHONPATH: /tmp/c4-native:experimental_g331
+        run: |
+          python -m pytest -q \
+            experimental_g331/tests/test_g331_real_organism.py \
+            experimental_g331/tests/test_c001_temporal_dialogue.py \
+            experimental_g331/tests/test_c002_nested_time.py \
+            experimental_g331/tests/test_c002_foundational_gate.py \
+            experimental_g331/tests/test_c002_training_gate.py
+      - name: Check constitution and block unsafe autonomous pretraining
+        shell: bash
+        env:
+          PYTHONPATH: experimental_g331
+        run: |
+          set -euo pipefail
+          python experimental_g331/tools/c4_stage_gate.py --request constitution_only --contract experimental_g331/governance/constitution_contract.json
+          set +e
+          python experimental_g331/tools/c4_stage_gate.py --request autonomous_pretrain --contract experimental_g331/governance/constitution_contract.json
+          code=$?
+          set -e
+          if [ "$code" -ne 2 ]; then
+            echo 'ERROR: autonomous pretraining gate bypassed or changed unexpectedly.'
+            exit 1
+          fi
+          echo 'UNPROVEN_AUTONOMOUS_PRETRAINING_CORRECTLY_BLOCKED'
