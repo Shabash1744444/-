@@ -1,0 +1,37 @@
+name: C4 Cognitive Core Guard V2
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - experiments/c4-g330-device-red-cascade
+    paths:
+      - experimental_g330/m1_m3_runtime/**
+      - .github/workflows/c4-guard-v2.yml
+jobs:
+  cognitive-guards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pytest
+        run: python -m pip install --disable-pip-version-check pytest
+      - name: Run cognitive counterexamples, replay, and CLI
+        working-directory: experimental_g330/m1_m3_runtime/C4_EXECUTABLE_COGNITIVE_CORE
+        run: |
+          set -o pipefail
+          python -m pytest -q tests | tee TEST_RESULTS_CI.txt
+          python demo.py | tee DEMO_OUTPUT_CI.txt
+          python -m c4core.cli --state C4_CLI_CI.c4j < example_session.jsonl | tee CLI_OUTPUT_CI.jsonl
+      - name: Preserve checkpoint and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: C4-GUARD-V2-TESTS
+          path: |
+            experimental_g330/m1_m3_runtime/C4_EXECUTABLE_COGNITIVE_CORE/TEST_RESULTS_CI.txt
+            experimental_g330/m1_m3_runtime/C4_EXECUTABLE_COGNITIVE_CORE/DEMO_OUTPUT_CI.txt
+            experimental_g330/m1_m3_runtime/C4_EXECUTABLE_COGNITIVE_CORE/CLI_OUTPUT_CI.jsonl
+            experimental_g330/m1_m3_runtime/C4_EXECUTABLE_COGNITIVE_CORE/C4_CLI_CI.c4j
+          if-no-files-found: warn
