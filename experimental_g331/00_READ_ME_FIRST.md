@@ -1,3 +1,8 @@
+# CURRENT: C003 DONE, C004 NOT STARTED (2026-10-08)
+Latest verified GitHub Actions: https://github.com/Shabash1744444/-/actions/runs/37836262293 (95 PASS, 2 SKIP). Read `01_WORK_JOURNAL.md` bottom + `02_RECOVERY_HANDOFF.md` top + `checkpoints/CP_C4_G331_C003_CI_GREEN.md`. The original C4 G329 .c4m was NOT replaced; local broad 633 PASS / 27 missing historic fixture FAIL; no Android live attestation. Follow constitutional and cascade laws; never start new memory or second runtime. C004 must write START before editing.
+
+---
+
 # CURRENT STATE — C002 DONE; C003 NOT STARTED (8 October 2026)
 Read `01_WORK_JOURNAL.md` last DONE, `02_RECOVERY_HANDOFF.md`, `04_LONG_HORIZON_TRAINING_AND_NO_DRIFT.md`, `governance/constitution_contract.json`, `checkpoints/CP_C4_G331_C002_DONE.md` first. Native code tested: `4dd85f34625bbe0986795c81e7ec1d3a0603d49e`; GitHub Actions success run 37832745676 (77 pass, 2 absent-model skips). Local 79 directed PASS and broad 615 PASS / 27 missing historical fixtures. Real C4M cold load PASS, Android physical live NOT VERIFIED. Autonomous pretraining BLOCKED until acceptance gates evidenced. Every future cycle: START→RED→repair→reattack→regression→C4M reload→DONE checkpoint. Preserve original G329 .c4m and all owner/influence invariants.\n\n# Latest checkpoint: C001 DONE → C002 NOT STARTED (2026-10-08)
 Сначала читать `01_WORK_JOURNAL.md` и последнюю секцию `02_RECOVERY_HANDOFF.md`. Исполняемые изменения C001: `a6aea791ed9c1896ca49ad3a2584bacb064bb39e`. Не повторять уже законченный C001.
