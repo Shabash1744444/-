@@ -1,0 +1,35 @@
+{
+  "contract_version":"C4_DEVELOPMENT_GATE_V1_C002",
+  "architecture":"C4 (not Singularity OS)",
+  "canonical_owners":["EVAL","COMMIT","DRIVE","MEDIATE"],
+  "influence_classes":["MASK","VALUE","AVAIL","TRIGGER","STATUS"],
+  "edge_matrix":"4x4x5 signatures, not 80 scripted handlers",
+  "non_constitutional_intelligence_criterion":"Интеллект — это сЮ�ן�w�особность решать нестандартные задачи нестандартными методами",
+  "forbidden_promotions":[
+    "SOURCE_ASSERTION_TO_WORLD_WITHOUT_INDEPENDENT_ADMISSION",
+    "STORY_OR_SIM_TO_WORLD",
+    "REPLAY_TO_OBSERVATION",
+    "PREDICTION_TO_OBSERVATION",
+    "PROPOSED_ACTION_TO_DELIVERED_WITHOUT_HOST_RECEIPT",
+    "DISAGREEMENT_WITH_INTERNAL_BELIEF_TO_TRUST_PENALTY",
+    "DEPENDENT_EXAMPLES_TO_INDEPENDENT_SUPPORT",
+    "RESOURCE_FAILURE_TO_SEMANTIC_FALSE"
+  ],
+  "never_discard":["original C4M and its provenance","C4Graph canonical knowledge","source roots and dependencies","historical corrections","existing Android ABI","full failure log and cold-reload evidence"],
+  "required_evidence_for_done":["frozen counterexample RED first","minimal repair on original c4child","second differently instantiated attack","directed tests and old regressions","C4M cold load","causal owner trace","physical SHA checkpoint and journal"],
+  "acceptance_gates":{
+    "A0_native_C4M_compatibility":"LOCAL_PARTIAL",
+    "A1_discourse_lifeline":"PARTIAL",
+    "A2_recursive_perspective":"PARTIAL",
+    "A3_three_times":"PARTIAL",
+    "A4_causal_reasoning":"NOT_PROVEN",
+    "A5_self_initiation":"PARTIAL",
+    "A6_independent_outcomes":"NOT_PROVEN_ON_ANDROID",
+    "A7_G215_source_independence":"PARTIAL",
+    "A8_open_ended_operator_learning":"NOT_PROVEN",
+    "A9_free_russian_language":"NOT_PROVEN",
+    "A10_android_physical_trace":"NOT_ATTESTED"
+  },
+  "mass_autonomous_pretraining_allowed":false,
+  "teacher_principle":"LLM generates hypotheses/curricula; LLM testimony never verifies its own exercises; novel holdout and independent consequences are decisive"
+}

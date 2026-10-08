@@ -1,0 +1,23 @@
+{
+  "original_model_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "original_fact_count": 10781,
+  "after_reports": 10783,
+  "cold_fact_count": 10783,
+  "source_event_a": "in:bb67934cb5583fc2",
+  "reported_current_day12": [
+    "cobalt"
+  ],
+  "reported_current_day13": [
+    "ivory"
+  ],
+  "cold_day12": [
+    "cobalt"
+  ],
+  "cold_day13": [
+    "ivory"
+  ],
+  "cross_frame": "UNKNOWN",
+  "cross_scene": "UNKNOWN",
+  "world_promotion": 0,
+  "storage": "original C4M checkpoint format; original model unchanged"
+}

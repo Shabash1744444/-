@@ -13,6 +13,12 @@ from .constitution import evaluate_mutation, STRICT
 
 PREFIX='@c4 '
 OPS={'SOCIAL','TOPIC','REPORT','CORRECT','QUERY','GOAL','DEMO','PLAN','REFLECT'}
+_ALLOWED_FIELDS={
+    'SOCIAL':{'act'},'TOPIC':{'subject'},'REPORT':{'fact','time'},
+    'CORRECT':{'fact','replaces','time'},'QUERY':{'fact','time','as_of_turn'},
+    'GOAL':{'target'},'DEMO':{'action','before','after'},
+    'PLAN':{'goal_id'},'REFLECT':set(),
+}
 SOCIAL={'GREET','PRAISE','THANK','ACCEPT_THANKS','ACK'}
 SCOPES={'SOURCE','STORY','SIM'} # NO WORLD admission from text
 MODES={'BELIEF','QUOTE','REPORT','WISH','JOKE','IRONY','SIMULATED'}
@@ -46,6 +52,69 @@ def _ctx(payload):
     principal='PSEUDO:'+hashlib.sha256(json.dumps(context,sort_keys=True,ensure_ascii=False).encode()).hexdigest()[:24]
     return context,principal
 
+def _day(value):
+    # Symbolic time in a narrated domain; not the host's wall clock.
+    if type(value) is not int or not -3_000_000 <= value <= 3_000_000:
+        raise ValueError('INVALID_SCENE_DAY')
+    return value
+
+
+def _temporal_syntax(op, value):
+    """Require a typed, finite clock contract; never silently ignore time."""
+    if not isinstance(value,dict):raise ValueError('TIME_EXPECTED_OBJECT')
+    if op=='QUERY':
+        if set(value)!={'about_day'}:raise ValueError('QUERY_TIME_SHAPE')
+        _day(value['about_day'])
+        return
+    if op not in {'REPORT','CORRECT'}:raise ValueError('TIME_NOT_VALID_FOR_OPERATION')
+    if set(value)!={'utterance_day','about'}:raise ValueError('REPORT_TIME_SHAPE')
+    _day(value['utterance_day'])
+    about=value['about']
+    if not isinstance(about,dict) or 'basis' not in about:raise ValueError('RELATIVE_TIME_EXPECTED')
+    if about['basis']=='UTTERANCE':
+        if set(about)!={'basis','offset_days'}:raise ValueError('UTTERANCE_TIME_SHAPE')
+    elif about['basis']=='SOURCE_CONTENT':
+        if set(about)!={'basis','event_id','offset_days'}:raise ValueError('SOURCE_TIME_SHAPE')
+        _atom(about['event_id'])
+    else:raise ValueError('RELATIVE_TIME_BASIS')
+    _day(about['offset_days'])
+
+
+def _resolve_temporal(r,ctx,p):
+    """Resolve a user-claimed event clock, keeping reception clock separate.
+
+    Dependence on source content requires same context, and a real native graph
+    claim from that source; an arbitrary ID cannot become temporal evidence.
+    """
+    spec=p.get('time')
+    if spec is None:return None
+    about=spec['about']
+    if about['basis']=='UTTERANCE':
+        base=spec['utterance_day']
+    else:
+        eid=about['event_id']
+        event=r.semantic_spine.events.get(eid)
+        if not event or event.get('c4_context')!=ctx or not isinstance(event.get('c4_temporal'),dict):
+            raise ValueError('TEMPORAL_ANCHOR_CONTEXT_UNVERIFIED')
+        if not any(f.source_ref==eid and f.status in {'SOURCE_ASSERTED','SOURCE_SUPERSEDED'}
+                   for f in r.dialogue.g.facts.values()):
+            raise ValueError('TEMPORAL_ANCHOR_HAS_NO_SOURCE_CLAIM')
+        base=event['c4_temporal']['about_day']
+    represented=_day(base+about['offset_days'])
+    return {'claimed_utterance_day':spec['utterance_day'],
+            'about_day':represented,'basis':about['basis'],
+            'anchor_event_id':about.get('event_id'),
+            'offset_days':about['offset_days']}
+
+
+def _register_temporal(r,source,ctx,temporal):
+    if temporal is None:return
+    row=r.semantic_spine.events[source]
+    # known_turn / wall_time are host observations, not speaker asserted dates.
+    row['c4_temporal']={**temporal,'known_turn':row['external_order']}
+    row['c4_context']=ctx
+
+
 def parse(text):
     if not isinstance(text,str) or not text.startswith(PREFIX):return None
     if len(text)>8192:raise ValueError('INPUT_SIZE_LIMIT')
@@ -53,11 +122,13 @@ def parse(text):
     if not isinstance(p,dict):raise ValueError('EXPECTED_OBJECT')
     op=str(p.get('op','')).upper()
     if op not in OPS:raise ValueError('UNKNOWN_OPERATION')
+    if set(p)-({'op','scope','scene','frames'}|_ALLOWED_FIELDS[op]):raise ValueError('UNKNOWN_OPERATION_FIELDS')
     # No forged origin, source, result verification or agent speech through chat.
     forbidden={'verified','origin','source_group','source_ref','as_actor','reward','delivered','receipt','actor','source_root'}
     if forbidden.intersection(p):raise ValueError('SPOOFED_AUTHORITY')
     _ctx(p)
     if op in {'REPORT','CORRECT','QUERY'}:_fact(p.get('fact'))
+    if 'time' in p:_temporal_syntax(op,p['time'])
     if op=='CORRECT':_atom(p.get('replaces'))
     if op=='QUERY' and p.get('as_of_turn') is not None:
         n=p['as_of_turn']
@@ -146,6 +217,11 @@ def process(r,p,source,publish=True):
     g=r.dialogue.g
     if op=='REPORT':
         prop=_fact(p['fact'])
+        try: temporal=_resolve_temporal(r,ctx,p)
+        except ValueError as ex:
+            _record(r,'COMMIT','SOURCE_TIME_REJECTED',source,reason=str(ex))
+            return _reply(r,'Не могу л�u���P�дтвердить временную ссылку источника.',op,source,
+                          publish=publish,semantic={'status':'REJECTED','reason':str(ex)})
         # EVAL->COMMIT exactly as ordinary USER_SAID must be: CLAIM_ONLY, never WORLD.
         law=evaluate_mutation(mode=STRICT,operation='COMMIT',origin='USER_SAID',authority='USER')
         if law.disposition!='CLAIM_ONLY':raise RuntimeError('SOURCE_ONLY_CONSTITUTION_BROKEN')
@@ -155,13 +231,30 @@ def process(r,p,source,publish=True):
                                object_kind=object_kind,origin='USER_SAID',principal=principal,privacy='PRIVATE',authority='USER',
                                source_ref=source,source_group='OTHER_CHAT_LINEAGE',
                                decision_reason=law.reason)
+        _register_temporal(r,source,ctx,temporal)
         _record(r,'COMMIT','SOURCE_ASSERTION',source,fact_id=f.fact_id,claim_status=f.status,
                 scope=ctx['scope'],scene=ctx['scene'],frames=ctx['frames'])
-        msg=f"Приняла как сообщение источника в {ctx['scope']}/{ctx['scene']}: {prop['subject']} {prop['relation']} {prop['object']}. Это не проверенный факт мира."
+        msg=f"Прины�u���P�а как сообщение источника в {ctx['scope']}/{ctx['scene']}: {prop['subject']} {prop['relation']} {prop['object']}. Это не л�u���Q�оверенный факт мира."
         _record(r,'DRIVE','SPEECH_CHOICE',source,choice='SOURCE_ACK')
         return _reply(r,msg,op,source,mutated=True,publish=publish,semantic={'fact_id':f.fact_id,'status':f.status})
     if op=='CORRECT':
         prop=_fact(p['fact']);replaces=p['replaces']
+        previous_time=r.semantic_spine.events.get(replaces,{}).get('c4_temporal')
+        try: temporal=_resolve_temporal(r,ctx,p)
+        except ValueError as ex:
+            _record(r,'COMMIT','CORRECTION_REJECTED',source,reason=str(ex))
+            return _reply(r,'Временная ссылка исЮ�ן�w�равления неверна.',op,source,
+                          publish=publish,semantic={'status':'REJECTED','reason':str(ex)})
+        if temporal is None and previous_time is not None:
+            # An explicit correction preserves *which event* is under discussion,
+            # but cannot inherit the previous speaker's claimed utterance date.
+            temporal={'claimed_utterance_day':None,'about_day':previous_time['about_day'],
+                      'basis':'INHERITED_TARGET_ONLY','anchor_event_id':replaces,'offset_days':0}
+        if ((previous_time is None)!=(temporal is None) or
+              (previous_time is not None and previous_time['about_day']!=temporal['about_day'])):
+            _record(r,'COMMIT','CORRECTION_REJECTED',source,reason='CROSS_TIME_CORRECTION')
+            return _reply(r,'Это другое время события, а не исЮ�ן�w�равление той же зал�u���P�си.',op,source,
+                          publish=publish,semantic={'status':'REJECTED','reason':'CROSS_TIME_CORRECTION'})
         eid=g.resolve(prop['subject'])
         # Only the actual earlier report of this user, in this exact context,
         # with this subject and predicate, is eligible. No time/context shift,
@@ -173,7 +266,7 @@ def process(r,p,source,publish=True):
         if old is None or _claim_value(g,old).casefold()==prop['object'].casefold():
             _record(r,'COMMIT','CORRECTION_REJECTED',source,replaces=replaces,
                     reason='NO_MATCHING_ACTIVE_SOURCE_CLAIM_OR_NO_CHANGE')
-            return _reply(r,'Не могу связать исправление с прежним сообщением этого источника в том же контексте.',
+            return _reply(r,'Не могу связать исправление с л�u���Q�ежним сообщением этого источника в том же контексте.',
                           op,source,publish=publish,semantic={'status':'REJECTED','replaces':replaces})
         spec=g.relation_spec(prop['relation'])
         law=evaluate_mutation(mode=STRICT,operation='COMMIT',origin='USER_SAID',authority='USER')
@@ -183,13 +276,14 @@ def process(r,p,source,publish=True):
         # assertion being corrected. Both facts must live in the same typed slot.
         if object_kind!=old.object_kind:
             _record(r,'COMMIT','CORRECTION_REJECTED',source,replaces=replaces,reason='OBJECT_TYPE_MISMATCH')
-            return _reply(r,'Тип значения изменился: прежнее сообщение не заменено.',op,source,
+            return _reply(r,'ТиЮ�ן�w� значения изменился: прежнее сообщение не заменено.',op,source,
                           publish=publish,semantic={'status':'REJECTED'})
         new=g._record_claim_only(eid,prop['relation'],object_value,object_kind=object_kind,origin='USER_SAID',
                                  principal=principal,privacy='PRIVATE',authority='USER',
                                  source_ref=source,source_group=old.source_group,
                                  decision_reason='EXPLICIT_SAME_SOURCE_CORRECTION')
         new.correction_of=old.fact_id;g._touch_fact(new)
+        _register_temporal(r,source,ctx,temporal)
         old.status='SOURCE_SUPERSEDED';g._touch_fact(old)
         g.audit.append({'order':g.order,'type':'SOURCE_CORRECTION','old_fact_id':old.fact_id,
                         'new_fact_id':new.fact_id,'owner':'COMMIT','scope':ctx['scope'],
@@ -198,8 +292,8 @@ def process(r,p,source,publish=True):
                 old_fact_id=old.fact_id,new_fact_id=new.fact_id,replaces=replaces,
                 scope=ctx['scope'],scene=ctx['scene'])
         _record(r,'DRIVE','SPEECH_CHOICE',source,choice='ACK_SOURCE_REVISION')
-        return _reply(r,'Исправление источника записано: '+prop['subject']+' '+prop['relation']+' '+prop['object']+
-                      '. Предыдущее сообщение сохранено для исторического запроса, не как факт мира.',
+        return _reply(r,'ИсЮ�ן�w�равление источника заЮ�ן�w�исано: '+prop['subject']+' '+prop['relation']+' '+prop['object']+
+                      '. Л�u���Q�едыдущее сообщение сохранено для исторического заЮ�ן�w�роса, не как факт мира.',
                       op,source,mutated=True,publish=publish,
                       semantic={'status':'SOURCE_CORRECTED','old_fact_id':old.fact_id,
                                 'new_fact_id':new.fact_id,'replaces':replaces})
@@ -208,12 +302,15 @@ def process(r,p,source,publish=True):
         as_of=p.get('as_of_turn')
         if as_of is not None and as_of>r.external_seq:
             _record(r,'EVAL','RETRIEVAL_REJECTED',source,reason='FUTURE_DIALOGUE_CUTOFF')
-            return _reply(r,'Нельзя проверить ещё не наступившую реплику диалога.',op,source,publish=publish,
+            return _reply(r,'Нельзя л�u���Q�оверить ещё не наступившую реЮ�ן�w�лику диалога.',op,source,publish=publish,
                           semantic={'status':'REJECTED','as_of_turn':as_of})
         eid=g.resolve(prop['subject'])
         same=[f for f in g.facts.values() if eid and f.subject==eid and f.principal==principal and
               f.relation==prop['relation'].upper()]
         matches=_claims_at(r,same,as_of)
+        if p.get('time') is not None:
+            day=p['time']['about_day']
+            matches=[f for f in matches if r.semantic_spine.events.get(f.source_ref,{}).get('c4_temporal',{}).get('about_day')==day]
         values={_claim_value(g,f) for f in matches}
         want=prop['object']; found=[f for f in matches if want=='?' or _claim_value(g,f).casefold()==want.casefold()]
         if len(values)>1:status='CONFLICT'
@@ -223,22 +320,22 @@ def process(r,p,source,publish=True):
         if status=='CONFLICT':
             msg='Есть несовместимые сообщения в одном контексте: '+', '.join(sorted(values))+'. Нужна независимая проверка.'
         elif status=='SOURCE_REPORTED':
-            msg='По сообщению источника: '+', '.join(sorted({_claim_value(g,f) for f in found}))+'. Проверки мира нет.'
+            msg='Л�u���P� сообщению источника: '+', '.join(sorted({_claim_value(g,f) for f in found}))+'. Проверки мира нет.'
         else:
-            msg='В этом контексте не знаю. Что могло бы проверить '+prop['relation']+' для '+prop['subject']+'?'
+            msg='В этом контексте не знаю. Что могло бы Ю�ן�w�роверить '+prop['relation']+' для '+prop['subject']+'?'
         _record(r,'EVAL','RETRIEVAL',source,status=status,basis=[f.fact_id for f in matches],scope=ctx['scope'],scene=ctx['scene'])
         _record(r,'COMMIT','NOOP',source,reason='QUERY_NOT_TEACHING')
         _record(r,'DRIVE','SPEECH_CHOICE',source,choice='INQUIRE' if status!='SOURCE_REPORTED' else 'ANSWER_BOUNDED')
         return _reply(r,msg,op,source,publish=publish,semantic={'status':status,'basis':[f.fact_id for f in matches],
                                        'values':sorted({_claim_value(g,f) for f in found}),
-                                       'as_of_turn':as_of})
+                                       'as_of_turn':as_of,'about_day':p.get('time',{}).get('about_day')})
     if op=='SOCIAL':
         act=p['act'].upper()
         last=next((x for x in reversed(r.dialogue_history) if x.get('speaker')=='C4'),None)
         last_id=last.get('event_id') if last else None
         # Require causal link for a continuation act; no imaginary prior turn.
         if act=='ACCEPT_THANKS' and (not last or last.get('text')!='Спасибо!'):
-            msg='Пока не вижу предыдущей благодарности, к которой это относится.'
+            msg='Л�u���P�ка не вижу предыдущей благодарности, к которой это относится.'
             label='UNRESOLVED_SOCIAL_REFERENCE'
         else:
             msg={'GREET':'Привет!','PRAISE':'Спасибо!','THANK':'Пожалуйста!',
@@ -271,7 +368,7 @@ def process(r,p,source,publish=True):
         r.cognitive_goals[gid]={'goal_id':gid,'target':target,'context':ctx,'status':'OPEN','source_event_id':source}
         _record(r,'COMMIT','GOAL_CREATED',source,goal_id=gid,scope='SIM')
         _record(r,'DRIVE','GOAL_ACTIVATED',source,goal_id=gid)
-        return _reply(r,'Цель в SIM поставлена: '+target['subject']+' '+target['relation']+' '+target['object']+'. Проверю доступные действия.',op,source,mutated=True,publish=publish,semantic={'goal_id':gid})
+        return _reply(r,'Цель в SIM л�u���P�ставлена: '+target['subject']+' '+target['relation']+' '+target['object']+'. Проверю достул�u���P�ые действия.',op,source,mutated=True,publish=publish,semantic={'goal_id':gid})
     if op=='DEMO':
         before=_fact(p['before']);after=_fact(p['after']);action=_atom(p['action'])
         # A teacher's example is not an independently executed experiment.
@@ -281,13 +378,13 @@ def process(r,p,source,publish=True):
         _record(r,'COMMIT','EXAMPLE_CANDIDATE',source,status='UNVERIFIED',action=action,
                 basis='USER_SAID_NOT_SIM_RECEIPT')
         _record(r,'DRIVE','EXPERIMENT_NEEDED',source,action=action)
-        return _reply(r,'Сохранила пример как неподтверждённую гипотезу для SIM. Нужен реальный результат действия.',op,source,mutated=True,publish=publish)
+        return _reply(r,'Сохранила л�u���Q�имер как нел�u���P�дтверждённую гил�u���P�тезу для SIM. Нужен реальный результат действия.',op,source,mutated=True,publish=publish)
     if op=='PLAN':
         selected=p.get('goal_id')
         goals=[g for g in r.cognitive_goals.values() if g['status']=='OPEN' and (selected is None or g['goal_id']==selected)]
         if not goals:
             _record(r,'DRIVE','NO_PLAN',source,reason='NO_OPEN_GOAL')
-            return _reply(r,'Нет подходящей открытой цели.',op,source,publish=publish,semantic={'status':'NO_GOAL'})
+            return _reply(r,'Нет л�u���P�дходы�u���Q�ей открытой цели.',op,source,publish=publish,semantic={'status':'NO_GOAL'})
         goal=goals[-1];ctx=goal['context'];target=goal['target']
         # Learnable: match by relational roles and effects, not object names.
         candidates=[d for d in r.cognitive_demonstrations if d['context']==ctx and
@@ -295,7 +392,7 @@ def process(r,p,source,publish=True):
                     d['status']=='UNVERIFIED_TEACHER_EXAMPLE']
         if not candidates:
             _record(r,'DRIVE','NO_PLAN',source,goal_id=goal['goal_id'],reason='NO_EFFECT_MODEL')
-            return _reply(r,'Нет даже пробной стратегии. Надо исследовать действие или спросить об опыте.',op,source,publish=publish,semantic={'status':'NO_MODEL'})
+            return _reply(r,'Нет даже пробной стратегии. Надо исследовать действие или спросить об ол�u���Q�те.',op,source,publish=publish,semantic={'status':'NO_MODEL'})
         weights=Counter(d['action'] for d in candidates)
         # Verified SIM consequences dominate teacher reports, *for a strategy*;
         # disagreement does not change provenance/source trust or graph truth.
@@ -309,7 +406,7 @@ def process(r,p,source,publish=True):
         action=ranked[0]
         if outcomes and max(outcomes.get(a,0)+min(weights[a],2)*.2 for a in ranked)<=0:
             _record(r,'DRIVE','EXPERIMENT_NEEDED',source,goal_id=goal['goal_id'],reason='ALL_EVALUATED_STRATEGIES_FAILED')
-            return _reply(r,'Из проверенных стратегий пока нет успешной. Нужен другой способ или новый эксперимент.',op,source,publish=publish,
+            return _reply(r,'Из проверенных стратегий пока нет усЮ�ן�w�ешной. Нужен другой способ или новый эксЮ�ן�w�еримент.',op,source,publish=publish,
                           semantic={'status':'NEEDS_NEW_STRATEGY'})
         aid='trial:'+source
         r.cognitive_actions[aid]={'action_id':aid,'goal_id':goal['goal_id'],'action':action,'context':ctx,
@@ -318,7 +415,7 @@ def process(r,p,source,publish=True):
         _record(r,'DRIVE','ACTION_PROPOSED',source,action_id=aid,action=action,goal_id=goal['goal_id'],
                 status='PROPOSED',basis=r.cognitive_actions[aid]['candidate_example_ids'])
         # NO MEDIATE claim of execution/delivery/result.
-        return _reply(r,'Могу попробовать в SIM действие '+action+', но выполнения и результата ещё нет.',op,source,mutated=True,publish=publish,
+        return _reply(r,'Могу Ю�ן�w�опробовать в SIM действие '+action+', но выл�u���P�лнения и результата ещё нет.',op,source,mutated=True,publish=publish,
                       semantic={'action_id':aid,'status':'PROPOSED_NOT_EXECUTED','action':action})
     if op=='REFLECT':
         # Re-evaluate experienced consequences, not a canned narrative.
@@ -327,7 +424,7 @@ def process(r,p,source,publish=True):
         candidates=[x for x in rows if x['status']=='PROPOSED_NOT_EXECUTED']
         _record(r,'EVAL','SELF_REVIEW',source,verified_sim_results=len(observed),unexecuted_proposals=len(candidates))
         _record(r,'DRIVE','SPEECH_CHOICE',source,choice='UNCERTAINTY_DISCLOSURE')
-        return _reply(r,f'Предложений без результата: {len(candidates)}. Подтверждённых результатов симуляции: {len(observed)}. Не буду объявлять предложения успехом.',op,source,publish=publish,
+        return _reply(r,f'Предложений без результата: {len(candidates)}. Подтверждённых результатов симулы�u���Q�ии: {len(observed)}. Не буду объявлять л�u���Q�едложения усл�u���P�хом.',op,source,publish=publish,
                       semantic={'unexecuted':len(candidates),'confirmed_sim':len(observed)})
     raise ValueError('UNREACHABLE')
 
