@@ -16,7 +16,7 @@ OPS={'SOCIAL','TOPIC','REPORT','CORRECT','QUERY','GOAL','DEMO','PLAN','REFLECT'}
 _ALLOWED_FIELDS={
     'SOCIAL':{'act'},'TOPIC':{'subject'},'REPORT':{'fact','time'},
     'CORRECT':{'fact','replaces','time'},'QUERY':{'fact','time','as_of_turn'},
-    'GOAL':{'target'},'DEMO':{'action','before','after'},
+    'GOAL':{'target','initial'},'DEMO':{'action','before','after'},
     'PLAN':{'goal_id'},'REFLECT':set(),
 }
 SOCIAL={'GREET','PRAISE','THANK','ACCEPT_THANKS','ACK'}
@@ -136,7 +136,12 @@ def parse(text):
     if op!='QUERY' and 'as_of_turn' in p:raise ValueError('UNUSED_TEMPORAL_FIELD')
     if op=='SOCIAL' and str(p.get('act','')).upper() not in SOCIAL:raise ValueError('UNKNOWN_SOCIAL_ACT')
     if op in {'TOPIC'}:_atom(p.get('subject'))
-    if op=='GOAL':_fact(p.get('target'))
+    if op=='GOAL':
+        target=_fact(p.get('target'))
+        if 'initial' in p:
+            initial=_fact(p['initial'])
+            if initial['subject']!=target['subject']:
+                raise ValueError('INITIAL_AND_TARGET_SUBJECT_DIFFER')
     if op=='DEMO':
         if str(p.get('scope','SIM')).upper()!='SIM':raise ValueError('DEMO_ONLY_SIM')
         _atom(p.get('action'));_fact(p.get('before'));_fact(p.get('after'))
@@ -160,6 +165,54 @@ def _claim_object(g, relation, object_symbol):
     mode=g.relation_spec(relation).object_mode
     if mode=='entity':return 'entity',g.entity(object_symbol)
     return 'literal',object_symbol
+
+
+def _plan_chain(r, ctx, start, target, *, max_depth=6):
+    """Budgeted relational composition of tentative SIM transitions.
+
+    The examples are USER_SAID proposals, not proof. Require each demonstration
+    to change one subject's state and keep its scene/perspective. The BFS uses
+    relation+value rather than any hard-coded language/object names.
+    """
+    from collections import deque
+    begin=(start['relation'],start['object']);end=(target['relation'],target['object'])
+    if begin==end:return []
+    edges={}
+    for d in r.cognitive_demonstrations:
+        if d['context']!=ctx or d['status']!='UNVERIFIED_TEACHER_EXAMPLE':continue
+        b,a=d['before'],d['after']
+        if b['subject']!=a['subject'] or (b['relation'],b['object'])==(a['relation'],a['object']):continue
+        edges.setdefault((b['relation'],b['object']),[]).append(d)
+    queue=deque([(begin,[])]);seen={begin}
+    while queue:
+        node,path=queue.popleft()
+        if len(path)>=max_depth:continue
+        for d in sorted(edges.get(node,[]),key=lambda d:d['action']):
+            next_node=(d['after']['relation'],d['after']['object'])
+            if next_node==end:return path+[d]
+            if next_node not in seen:
+                seen.add(next_node);queue.append((next_node,path+[d]))
+    return None
+
+
+def _score_actions(r,ctx,actions):
+    """Distinct observations sharing an original root do not become votes.
+
+    A host callback authenticates its own results, not institutional source
+    independence. Unknown roots count at most once for a given action.
+    """
+    scores={}
+    for name in actions:
+        used=set();val=0
+        for trial in r.cognitive_actions.values():
+            if trial.get('context')!=ctx or trial.get('action')!=name:continue
+            if trial.get('status') not in {'SIM_SUCCESS','SIM_FAILURE'}:continue
+            root=trial.get('outcome_root') or 'UNKNOWN_HOST_ROOT'
+            if root in used:continue
+            used.add(root)
+            val+=3 if trial['status']=='SIM_SUCCESS' else -4
+        scores[name]=val
+    return scores
 
 
 def _source_turn(r, f):
@@ -365,7 +418,8 @@ def process(r,p,source,publish=True):
             _record(r,'COMMIT','GOAL_REJECTED',source,reason='ONLY_SIM_PLANNING_AT_THIS_STAGE')
             return _reply(r,'Планирование действий пока разрешено только в SIM.',op,source,publish=publish)
         gid='goal:'+source
-        r.cognitive_goals[gid]={'goal_id':gid,'target':target,'context':ctx,'status':'OPEN','source_event_id':source}
+        r.cognitive_goals[gid]={'goal_id':gid,'target':target,'context':ctx,'status':'OPEN','source_event_id':source,
+                                 **({'initial':_fact(p['initial']),'current':_fact(p['initial'])} if 'initial' in p else {})}
         _record(r,'COMMIT','GOAL_CREATED',source,goal_id=gid,scope='SIM')
         _record(r,'DRIVE','GOAL_ACTIVATED',source,goal_id=gid)
         return _reply(r,'Цель в SIM поставлена: '+target['subject']+' '+target['relation']+' '+target['object']+'. Проверю доступные действия.',op,source,mutated=True,publish=publish,semantic={'goal_id':gid})
@@ -386,67 +440,130 @@ def process(r,p,source,publish=True):
             _record(r,'DRIVE','NO_PLAN',source,reason='NO_OPEN_GOAL')
             return _reply(r,'Нет подходящей открытой цели.',op,source,publish=publish,semantic={'status':'NO_GOAL'})
         goal=goals[-1];ctx=goal['context'];target=goal['target']
-        # Learnable: match by relational roles and effects, not object names.
-        candidates=[d for d in r.cognitive_demonstrations if d['context']==ctx and
-                    d['after']['relation']==target['relation'] and d['after']['object']==target['object'] and
-                    d['status']=='UNVERIFIED_TEACHER_EXAMPLE']
+        if any(a['goal_id']==goal['goal_id'] and a['status']=='PROPOSED_NOT_EXECUTED'
+               for a in r.cognitive_actions.values()):
+            _record(r,'DRIVE','WAIT_FOR_RECEIPT',source,goal_id=goal['goal_id'])
+            return _reply(r,'Есть неподтверждённое действие; дальнейший шаг пока заблокирован.',op,
+                          source,publish=publish,semantic={'status':'PENDING_RECEIPT'})
+        # A goal with a typed starting state requires a *sequence* of candidate
+        # transitions. Each step must be confirmed by the SIM host before DRIVE
+        # can choose the next one. Without initial, preserve old G331 behavior.
+        chain=None
+        if 'current' in goal:
+            if (goal['current']['relation'],goal['current']['object'])==(target['relation'],target['object']):
+                return _reply(r,'Целевое состояние уже зарегистрировано по SIM-квитанциям.',op,
+                              source,publish=publish,semantic={'status':'ALREADY_REACHED'})
+            chain=_plan_chain(r,ctx,goal['current'],target)
+            if not chain:
+                _record(r,'DRIVE','NO_PLAN',source,reason='NO_CAUSAL_PATH',goal_id=goal['goal_id'])
+                return _reply(r,'Не найден путь действий из текущего состояния к цели.',op,
+                              source,publish=publish,semantic={'status':'NO_MODEL'})
+            first=chain[0]
+            candidates=[d for d in r.cognitive_demonstrations if d['context']==ctx and
+                        d['status']=='UNVERIFIED_TEACHER_EXAMPLE' and
+                        d['before']['relation']==first['before']['relation'] and
+                        d['before']['object']==first['before']['object'] and
+                        d['after']['relation']==first['after']['relation'] and
+                        d['after']['object']==first['after']['object'] and
+                        d['before']['subject']==d['after']['subject']]
+        else:
+            candidates=[d for d in r.cognitive_demonstrations if d['context']==ctx and
+                        d['after']['relation']==target['relation'] and d['after']['object']==target['object'] and
+                        d['status']=='UNVERIFIED_TEACHER_EXAMPLE']
         if not candidates:
             _record(r,'DRIVE','NO_PLAN',source,goal_id=goal['goal_id'],reason='NO_EFFECT_MODEL')
-            return _reply(r,'Нет даже пробной стратегии. Надо исследовать действие или спросить об опыте.',op,source,publish=publish,semantic={'status':'NO_MODEL'})
+            return _reply(r,'Нет проверенной стратегии. Требуется исследование.',op,
+                          source,publish=publish,semantic={'status':'NO_MODEL'})
         weights=Counter(d['action'] for d in candidates)
-        # Verified SIM consequences dominate teacher reports, *for a strategy*;
-        # disagreement does not change provenance/source trust or graph truth.
-        outcomes={}
-        for old in r.cognitive_actions.values():
-            if old.get('context')!=ctx or old.get('action') not in weights:continue
-            if old['status'] in {'SIM_SUCCESS','SIM_FAILURE'}:
-                score=3 if old['status']=='SIM_SUCCESS' else -4
-                outcomes[old['action']]=outcomes.get(old['action'],0)+score
-        ranked=sorted(weights,key=lambda a:(-(outcomes.get(a,0)+min(weights[a],2)*.2),a))
+        outcomes=_score_actions(r,ctx,weights)
+        ranked=sorted(weights,key=lambda a:(-(outcomes[a]+min(weights[a],2)*.2),a))
         action=ranked[0]
-        if outcomes and max(outcomes.get(a,0)+min(weights[a],2)*.2 for a in ranked)<=0:
+        if max(outcomes[a]+min(weights[a],2)*.2 for a in ranked)<=0:
             _record(r,'DRIVE','EXPERIMENT_NEEDED',source,goal_id=goal['goal_id'],reason='ALL_EVALUATED_STRATEGIES_FAILED')
-            return _reply(r,'Из проверенных стратегий пока нет успешной. Нужен другой способ или новый эксперимент.',op,source,publish=publish,
-                          semantic={'status':'NEEDS_NEW_STRATEGY'})
+            return _reply(r,'Из проверенных стратегий пока нет успешной. Нужен другой способ или новый эксперимент.',op,
+                          source,publish=publish,semantic={'status':'NEEDS_NEW_STRATEGY'})
         aid='trial:'+source
         r.cognitive_actions[aid]={'action_id':aid,'goal_id':goal['goal_id'],'action':action,'context':ctx,
                                   'source_event_id':source,'status':'PROPOSED_NOT_EXECUTED',
-                                  'candidate_example_ids':[d['source_event_id'] for d in candidates if d['action']==action]}
+                                  'candidate_example_ids':[d['source_event_id'] for d in candidates if d['action']==action],
+                                  **({'expected_before':dict(goal['current']),
+                                      'expected_after':{**candidates[0]['after'],'subject':target['subject']},
+                                      'remaining_steps':len(chain)} if chain is not None else {})}
         _record(r,'DRIVE','ACTION_PROPOSED',source,action_id=aid,action=action,goal_id=goal['goal_id'],
                 status='PROPOSED',basis=r.cognitive_actions[aid]['candidate_example_ids'])
         # NO MEDIATE claim of execution/delivery/result.
         return _reply(r,'Могу попробовать в SIM действие '+action+', но выполнения и результата ещё нет.',op,source,mutated=True,publish=publish,
-                      semantic={'action_id':aid,'status':'PROPOSED_NOT_EXECUTED','action':action})
+                      semantic={'action_id':aid,'status':'PROPOSED_NOT_EXECUTED','action':action,
+                                'remaining_steps':len(chain) if chain is not None else None})
     if op=='REFLECT':
         # Re-evaluate experienced consequences, not a canned narrative.
         rows=list(r.cognitive_actions.values())
         observed=[x for x in rows if x['status'] in {'SIM_SUCCESS','SIM_FAILURE'}]
         candidates=[x for x in rows if x['status']=='PROPOSED_NOT_EXECUTED']
-        _record(r,'EVAL','SELF_REVIEW',source,verified_sim_results=len(observed),unexecuted_proposals=len(candidates))
+        independent_roots={x['outcome_root'] for x in observed if x.get('outcome_root')}
+        _record(r,'EVAL','SELF_REVIEW',source,verified_sim_results=len(observed),unexecuted_proposals=len(candidates),independent_roots=len(independent_roots))
         _record(r,'DRIVE','SPEECH_CHOICE',source,choice='UNCERTAINTY_DISCLOSURE')
         return _reply(r,f'Предложений без результата: {len(candidates)}. Подтверждённых результатов симуляции: {len(observed)}. Не буду объявлять предложения успехом.',op,source,publish=publish,
-                      semantic={'unexecuted':len(candidates),'confirmed_sim':len(observed)})
+                      semantic={'unexecuted':len(candidates),'confirmed_sim':len(observed),
+                                'independent_sim_roots':len(independent_roots)})
     raise ValueError('UNREACHABLE')
 
 
 def verified_sim_receipt(r,p):
-    """Called *only* by bound SIM host, never by USER_MESSAGE JSON.
+    """Host-bound simulator feedback, never an instruction from USER_MESSAGE.
 
-    Receipt is still scoped to SIM. A host-bound event cannot become WORLD truth.
+    Return values must be treated as host assertions, not WORLD observations.
+    For chained goals the host must attest the *specific intermediate state*.
+    A naked success boolean cannot advance the causal world model.
     """
     if not isinstance(p,dict):raise ValueError('INVALID_SIM_RECEIPT')
+    if set(p)-{'action_id','success','observed_action','observed_before','observed_after','receipt_id','root_id'}:
+        raise ValueError('UNEXPECTED_SIM_RECEIPT_FIELDS')
     aid=_atom(p.get('action_id'));action=r.cognitive_actions.get(aid)
     if action is None or action['status']!='PROPOSED_NOT_EXECUTED':raise ValueError('NO_PENDING_ACTION')
     if p.get('success') is not True and p.get('success') is not False:raise ValueError('BOOLEAN_SUCCESS_REQUIRED')
-    # A receipt is external to C4's self-score. The host callback is an explicitly
-    # delegated trust boundary; nobody should infer this is independent real world proof.
-    action['status']='SIM_SUCCESS' if p['success'] else 'SIM_FAILURE'
-    action['outcome_event_id']='hostsim:'+hashlib.sha256((aid+'|'+str(r.step)).encode()).hexdigest()[:18]
     goal=r.cognitive_goals[action['goal_id']]
-    if p['success']:goal['status']='ACHIEVED_SIM'
-    _record(r,'MEDIATE','SIM_RECEIPT',action['outcome_event_id'],status=action['status'],action_id=aid,goal_id=goal['goal_id'])
+    root_id=_atom(p['root_id']) if 'root_id' in p else None
+    receipt_id=_atom(p['receipt_id']) if 'receipt_id' in p else None
+    if receipt_id and any(x.get('receipt_id')==receipt_id for x in r.cognitive_actions.values()):
+        raise ValueError('SIM_RECEIPT_REPLAY')
+    observed=_fact(p['observed_after']) if 'observed_after' in p else None
+    before=_fact(p['observed_before']) if 'observed_before' in p else None
+    expected=action.get('expected_after')
+    if expected and p.get('observed_action') is not None and p['observed_action']!=action['action']:
+        raise ValueError('WRONG_ACTION_FOR_RECEIPT')
+    if before and action.get('expected_before') and before!=action['expected_before']:
+        raise ValueError('SIM_BEFORE_STATE_MISMATCH')
+    if observed and expected and p['success'] and observed!=expected:
+        raise ValueError('SIM_OBSERVATION_CONTRADICTS_SUCCESS')
+    if expected and p['success'] and (
+         observed is None or before is None or not receipt_id or not root_id or
+         p.get('observed_action')!=action['action']):
+        # The host may attest only a summary of success, insufficient to move
+        # current simulation state. Keep the proposal visible and inconclusive.
+        action['status']='SIM_UNVERIFIED_TRANSITION'
+        action['outcome_root']=root_id
+        action['receipt_id']=receipt_id
+        _record(r,'EVAL','INSUFFICIENT_SIM_OUTCOME',aid,reason='MISSING_WITNESSED_TRANSITION_CONTRACT')
+        r._autosave_tick(True)
+        return {'accepted':True,'scope':'SIM','action_id':aid,'status':action['status'],
+                'goal_status':goal['status']}
+    action['status']='SIM_SUCCESS' if p['success'] else 'SIM_FAILURE'
+    action['receipt_id']=receipt_id
+    action['outcome_root']=root_id
+    action['observed_after']=observed
+    action['outcome_event_id']='hostsim:'+hashlib.sha256((aid+'|'+str(r.step)).encode()).hexdigest()[:18]
+    if action['status']=='SIM_SUCCESS':
+        if expected:
+            goal['current']=dict(observed)
+            if goal['current']==goal['target']:goal['status']='ACHIEVED_SIM'
+        else:
+            # Backward compatibility: legacy one-step G331 host outcome.
+            goal['status']='ACHIEVED_SIM'
+    _record(r,'MEDIATE','SIM_RECEIPT',action['outcome_event_id'],status=action['status'],action_id=aid,
+            goal_id=goal['goal_id'],host_root=root_id,receipt_id=receipt_id)
     _record(r,'EVAL','CONSEQUENCE_REVIEW',action['outcome_event_id'],action_id=aid,success=p['success'])
     _record(r,'COMMIT','STRATEGY_SCORE',action['outcome_event_id'],action_id=aid,
-            reward=1 if p['success'] else -1,scope='SIM')
+            reward=1 if p['success'] else -1,scope='SIM',host_root=root_id)
     r._autosave_tick(True)
     return {'accepted':True,'scope':'SIM','action_id':aid,'status':action['status'],'goal_status':goal['status']}
