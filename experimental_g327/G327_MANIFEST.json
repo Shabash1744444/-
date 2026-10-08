@@ -1,0 +1,12 @@
+{
+  "name": "C4_G327_P0_REVISED_DIALOGUE_RUNTIME_PLUS_G326_WEIGHTS_2026-10-08.zip",
+  "sha256": "f35baac4d632d26bf166f026d39cda7f84210422f0857851bc0c0338804ef866",
+  "size_bytes": 10474267,
+  "file_count": 195,
+  "weight_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "focused": "76/76 PASS",
+  "full": "654 PASS / 27 historical missing fixture FAIL",
+  "prelive_turns": 20,
+  "exception_count": 0,
+  "same_model_weights": true
+}
