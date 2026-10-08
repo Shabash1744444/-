@@ -1,3 +1,5 @@
+> **UPDATE:** G323 source isn't stored in this GitHub branch. Read [07_G323_SOURCE_BLOCKER_AND_RECOVERY.md](07_G323_SOURCE_BLOCKER_AND_RECOVERY.md) before trying to locate it. M1–M2 work is not blocked by the unavailable G323 archive.
+
 # C4 — ЧАТ + АВТОРСКИЕ ИДЕИ + ПОЛНЫЙ КОГНИТИВНЫЙ СКЕЛЕТ
 **Дата:** 2026-10-08. **Статус:** ГОТОВЫЙ текстовый handoff и архитектурная спецификация; **НЕ новый Python-runtime, НЕ обученный C4M, НЕ GREEN**.
 
