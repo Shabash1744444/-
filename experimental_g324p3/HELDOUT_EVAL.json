@@ -1,0 +1,732 @@
+{
+  "kind": "SYNTHETIC_HELDOUT_SIMULATION_ASSOCIATION_NOT_CAUSAL_LEARNING",
+  "results": [
+    {
+      "family": "XOR",
+      "seed": 0,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 1,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.505,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 2,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5375,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 3,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.4775,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 4,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.505,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 5,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.555,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 6,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.48,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 7,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.47,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 8,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.49,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 9,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 10,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.535,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "XOR",
+      "seed": 11,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.4775,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 0,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.73,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 1,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7625,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 2,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7575,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 3,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7675,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 4,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7375,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 5,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7675,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 6,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7475,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 7,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.735,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 8,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7775,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 9,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.735,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 10,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.72,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "OR",
+      "seed": 11,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.78,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 0,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.4925,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 1,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.465,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 2,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5075,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 3,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.525,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 4,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.545,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 5,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.4975,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 6,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.4925,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 7,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.51,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 8,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5375,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 9,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.48,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 10,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "MAJORITY",
+      "seed": 11,
+      "parents": [
+        "a",
+        "b",
+        "c"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.4825,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 0,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9325,
+      "coverage": 1.0,
+      "majority_baseline": 0.475,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 1,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9225,
+      "coverage": 1.0,
+      "majority_baseline": 0.5,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 2,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9325,
+      "coverage": 1.0,
+      "majority_baseline": 0.485,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 3,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9275,
+      "coverage": 1.0,
+      "majority_baseline": 0.5175,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 4,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.8925,
+      "coverage": 1.0,
+      "majority_baseline": 0.465,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 5,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9475,
+      "coverage": 1.0,
+      "majority_baseline": 0.535,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 6,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9075,
+      "coverage": 1.0,
+      "majority_baseline": 0.515,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 7,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9325,
+      "coverage": 1.0,
+      "majority_baseline": 0.4725,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 8,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9025,
+      "coverage": 1.0,
+      "majority_baseline": 0.515,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 9,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.925,
+      "coverage": 1.0,
+      "majority_baseline": 0.5075,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 10,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.925,
+      "coverage": 1.0,
+      "majority_baseline": 0.49,
+      "train_n": 240,
+      "test_n": 400
+    },
+    {
+      "family": "NOISY_XOR",
+      "seed": 11,
+      "parents": [
+        "a",
+        "b"
+      ],
+      "fit_status": "LEARNED_ASSOCIATION",
+      "accuracy": 0.9325,
+      "coverage": 1.0,
+      "majority_baseline": 0.48,
+      "train_n": 240,
+      "test_n": 400
+    }
+  ],
+  "summary": {
+    "XOR": {
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5027,
+      "parents_discovered": [
+        "a,b"
+      ],
+      "seeds": 12
+    },
+    "OR": {
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.7515,
+      "parents_discovered": [
+        "a,b"
+      ],
+      "seeds": 12
+    },
+    "MAJORITY": {
+      "accuracy": 1.0,
+      "coverage": 1.0,
+      "majority_baseline": 0.5029,
+      "parents_discovered": [
+        "a,b,c"
+      ],
+      "seeds": 12
+    },
+    "NOISY_XOR": {
+      "accuracy": 0.9233,
+      "coverage": 1.0,
+      "majority_baseline": 0.4965,
+      "parents_discovered": [
+        "a,b"
+      ],
+      "seeds": 12
+    }
+  },
+  "totals": {
+    "trained_models": 48,
+    "training_episodes": 11520,
+    "test_episodes": 19200
+  }
+}
