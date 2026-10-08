@@ -82,14 +82,14 @@ def test_different_perspectives_and_scenes_cannot_steal_time_anchors(seed):
         out=talk(r,'REPORT',**wrong,fact=fact(s,'warm'),time={'utterance_day':11,'about':{'basis':'SOURCE_CONTENT','event_id':eid,'offset_days':1}})
         assert out['cognitive']['status']=='REJECTED'
     assert len(r.dialogue.g.facts)==1
-    q=talk(r,'QUERY',**ctx,fact=fact(s,'.ù◊üäwù'),time={'about_day':6})
+    q=talk(r,'QUERY',**ctx,fact=fact(s,'?'),time={'about_day':6})
     assert q['cognitive']['values']==['cold']
 
 
 def test_owners_leave_causal_trace_on_native_source_time_dialogue():
     r=C4LivingRuntime()
     talk(r,'REPORT',scope='STORY',scene='ex',fact=fact('k','A'),time={'utterance_day':-1,'about':{'basis':'UTTERANCE','offset_days':2}})
-    talk(r,'QUERY',scope='STORY',scene='ex',fact=fact('k','.ù◊üäwù'),time={'about_day':1})
+    talk(r,'QUERY',scope='STORY',scene='ex',fact=fact('k','?'),time={'about_day':1})
     parts=' '.join(str(x.get('kind','')) for x in r.life_events)
     for owner in ['EVAL_','COMMIT_','DRIVE_']:
         assert owner in parts

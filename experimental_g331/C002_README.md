@@ -22,7 +22,7 @@
 
 ```text
 @c4 {"op":"REPORT","scope":"STORY","scene":"volume3","frames":[{"actor":"Nadia","mode":"BELIEF"},{"actor":"Anton","mode":"QUOTE"}],"fact":{"subject":"parcel","relation":"STATE","object":"sealed"},"time":{"utterance_day":18,"about":{"basis":"UTTERANCE","offset_days":2}}}
-@c4 {"op":"QUERY","scope":"STORY","scene":"volume3","frames":[{"actor":"Nadia","mode":"BELIEF"},{"actor":"Anton","mode":"QUOTE"}],"fact":{"subject":"parcel","relation":"STATE","object":".ù◊üäwù"},"time":{"about_day":20}}
+@c4 {"op":"QUERY","scope":"STORY","scene":"volume3","frames":[{"actor":"Nadia","mode":"BELIEF"},{"actor":"Anton","mode":"QUOTE"}],"fact":{"subject":"parcel","relation":"STATE","object":"?"},"time":{"about_day":20}}
 @c4 {"op":"QUERY","scope":"STORY","scene":"volume3","frames":[{"actor":"Nadia","mode":"BELIEF"},{"actor":"Anton","mode":"QUOTE"}],"fact":{"subject":"parcel","relation":"STATE","object":"?"},"time":{"about_day":18}}
 ```
 

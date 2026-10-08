@@ -46,14 +46,14 @@ def test_telemetry_three_times_and_cold_reload(tmp_path):
     assert t['claimed_utterance_day']==-8 and t['about_day']==-4
     assert t['known_turn']==row['external_order'] and isinstance(row['wall_time'],float)
     assert t['basis']=='UTTERANCE'
-    assert send(c,'QUERY',scope=p['scope'],scene=p['scene'],frames=p['frames'],fact=f('globe','STATE','.ù◊üäwù'),time={'about_day':-4})['cognitive']['values']==['lit']
+    assert send(c,'QUERY',scope=p['scope'],scene=p['scene'],frames=p['frames'],fact=f('globe','STATE','?'),time={'about_day':-4})['cognitive']['values']==['lit']
     path=tmp_path/'native.c4m'
     save_c4m_compact(path,c.dialogue.g,runtime_state=c.runtime_state(),include_cold=True)
     g,h,m,rs=load_c4m_compact(path,with_runtime=True)
     cold=C4LivingRuntime(C4ChildDialogue(g));cold.load_runtime_state(rs)
     assert cold.semantic_spine.events[fid]['c4_temporal']==t
-    assert send(cold,'QUERY',scope=p['scope'],scene=p['scene'],frames=p['frames'],fact=f('globe','STATE','.ù◊üäwù'),time={'about_day':-4})['cognitive']['values']==['lit']
-    assert send(cold,'QUERY',scope=p['scope'],scene=p['scene'],frames=p['frames'],fact=f('globe','STATE','.ù◊üäwù'),time={'about_day':-3})['cognitive']['status']=='UNKNOWN'
+    assert send(cold,'QUERY',scope=p['scope'],scene=p['scene'],frames=p['frames'],fact=f('globe','STATE','?'),time={'about_day':-4})['cognitive']['values']==['lit']
+    assert send(cold,'QUERY',scope=p['scope'],scene=p['scene'],frames=p['frames'],fact=f('globe','STATE','?'),time={'about_day':-3})['cognitive']['status']=='UNKNOWN'
 
 
 def test_temporal_source_correction_is_slot_scoped():
@@ -93,7 +93,7 @@ def test_g215_nonpenalization_even_when_temporal_claims_conflict():
     k=dict(scope='SOURCE',scene='glass',fact=f('bird','STATE','sleeping'),time={'utterance_day':2,'about':{'basis':'UTTERANCE','offset_days':0}})
     send(c,'REPORT',**k)
     send(c,'REPORT',scope='SOURCE',scene='glass',fact=f('bird','STATE','flying'),time={'utterance_day':2,'about':{'basis':'UTTERANCE','offset_days':0}})
-    q=send(c,'QUERY',scope='SOURCE',scene='glass',fact=f('bird','STATE','.ù◊üäwù'),time={'about_day':2})
+    q=send(c,'QUERY',scope='SOURCE',scene='glass',fact=f('bird','STATE','?'),time={'about_day':2})
     assert q['cognitive']['status']=='CONFLICT'
     assert not any('TRUST_PENALTY' in str(x) for x in c.life_events)
     assert all(x.status=='SOURCE_ASSERTED' for x in c.dialogue.g.facts.values())

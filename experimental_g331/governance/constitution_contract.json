@@ -4,7 +4,7 @@
   "canonical_owners":["EVAL","COMMIT","DRIVE","MEDIATE"],
   "influence_classes":["MASK","VALUE","AVAIL","TRIGGER","STATUS"],
   "edge_matrix":"4x4x5 signatures, not 80 scripted handlers",
-  "non_constitutional_intelligence_criterion":"Интеллект — это сЮ�ן�w�особность решать нестандартные задачи нестандартными методами",
+  "non_constitutional_intelligence_criterion":"Интеллект — это способность решать нестандартные задачи нестандартными методами",
   "forbidden_promotions":[
     "SOURCE_ASSERTION_TO_WORLD_WITHOUT_INDEPENDENT_ADMISSION",
     "STORY_OR_SIM_TO_WORLD",
