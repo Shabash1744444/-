@@ -12,7 +12,7 @@ from collections import Counter
 from .constitution import evaluate_mutation, STRICT
 
 PREFIX='@c4 '
-OPS={'SOCIAL','TOPIC','REPORT','QUERY','GOAL','DEMO','PLAN','REFLECT'}
+OPS={'SOCIAL','TOPIC','REPORT','CORRECT','QUERY','GOAL','DEMO','PLAN','REFLECT'}
 SOCIAL={'GREET','PRAISE','THANK','ACCEPT_THANKS','ACK'}
 SCOPES={'SOURCE','STORY','SIM'} # NO WORLD admission from text
 MODES={'BELIEF','QUOTE','REPORT','WISH','JOKE','IRONY','SIMULATED'}
@@ -57,7 +57,12 @@ def parse(text):
     forbidden={'verified','origin','source_group','source_ref','as_actor','reward','delivered','receipt','actor','source_root'}
     if forbidden.intersection(p):raise ValueError('SPOOFED_AUTHORITY')
     _ctx(p)
-    if op in {'REPORT','QUERY'}:_fact(p.get('fact'))
+    if op in {'REPORT','CORRECT','QUERY'}:_fact(p.get('fact'))
+    if op=='CORRECT':_atom(p.get('replaces'))
+    if op=='QUERY' and p.get('as_of_turn') is not None:
+        n=p['as_of_turn']
+        if type(n) is not int or n < 0:raise ValueError('INVALID_DIALOGUE_TURN')
+    if op!='QUERY' and 'as_of_turn' in p:raise ValueError('UNUSED_TEMPORAL_FIELD')
     if op=='SOCIAL' and str(p.get('act','')).upper() not in SOCIAL:raise ValueError('UNKNOWN_SOCIAL_ACT')
     if op in {'TOPIC'}:_atom(p.get('subject'))
     if op=='GOAL':_fact(p.get('target'))
@@ -73,6 +78,51 @@ def _record(r,owner,kind,source,**details):
 
 def _key(ctx,prop):
     return json.dumps({'context':ctx,'fact':prop},ensure_ascii=False,sort_keys=True)
+
+def _claim_value(g, fact):
+    """Surface form of a typed graph object; never treat entity ID as speech."""
+    return g.label(fact.object_value) if fact.object_kind=='entity' else fact.object_value
+
+
+def _claim_object(g, relation, object_symbol):
+    """Preserve the native per-relation object type of the loaded C4M graph."""
+    mode=g.relation_spec(relation).object_mode
+    if mode=='entity':return 'entity',g.entity(object_symbol)
+    return 'literal',object_symbol
+
+
+def _source_turn(r, f):
+    """External reception order, never the event-time asserted by the speaker."""
+    event=r.semantic_spine.events.get(f.source_ref,{})
+    n=event.get('external_order')
+    return n if type(n) is int else None
+
+
+def _claims_at(r, matches, as_of_turn):
+    """Reconstruct which SOURCE claims were active at a dialogue cutoff.
+
+    A SOURCE_SUPERSEDED claim is evidence of a historic utterance. It is not
+    currently asserted, but may be quoted by an as-of query before its explicit
+    linked correction. No graph canonical truth is changed by this read.
+    """
+    if as_of_turn is None:
+        return [f for f in matches if f.status in {'SOURCE_ASSERTED','ADMITTED','REVISED'}]
+    corrections={f.correction_of: f for f in r.dialogue.g.facts.values() if f.correction_of}
+    out=[]
+    for f in matches:
+        recv=_source_turn(r,f)
+        if recv is None or recv>as_of_turn:continue
+        if f.status=='SOURCE_SUPERSEDED':
+            replacement=corrections.get(f.fact_id)
+            # Do not resurrect an orphaned or non-temporally verifiable record.
+            if replacement is None:continue
+            at=_source_turn(r,replacement)
+            if at is None or at<=as_of_turn:continue
+        elif f.status not in {'SOURCE_ASSERTED','ADMITTED','REVISED'}:
+            continue
+        out.append(f)
+    return out
+
 
 def _reply(r,reply,op,source,*,mutated=False,publish=True,semantic=None):
     r._record_turn('USER',r.semantic_spine.events.get(source,{}).get('payload',''),kind='PSEUDO_'+op,event_id=source)
@@ -100,9 +150,9 @@ def process(r,p,source,publish=True):
         law=evaluate_mutation(mode=STRICT,operation='COMMIT',origin='USER_SAID',authority='USER')
         if law.disposition!='CLAIM_ONLY':raise RuntimeError('SOURCE_ONLY_CONSTITUTION_BROKEN')
         # Existing graph records source-only evidence; no parallel memory/database.
-        if g.relation_spec(prop['relation']).object_mode=='entity':raise ValueError('ENTITY_TYPED_RELATION_NOT_SUPPORTED_IN_PSEUDO')
-        f=g._record_claim_only(g.entity(prop['subject']),prop['relation'],prop['object'],
-                               origin='USER_SAID',principal=principal,privacy='PRIVATE',authority='USER',
+        object_kind,object_value=_claim_object(g,prop['relation'],prop['object'])
+        f=g._record_claim_only(g.entity(prop['subject']),prop['relation'],object_value,
+                               object_kind=object_kind,origin='USER_SAID',principal=principal,privacy='PRIVATE',authority='USER',
                                source_ref=source,source_group='OTHER_CHAT_LINEAGE',
                                decision_reason=law.reason)
         _record(r,'COMMIT','SOURCE_ASSERTION',source,fact_id=f.fact_id,claim_status=f.status,
@@ -110,13 +160,62 @@ def process(r,p,source,publish=True):
         msg=f"Приняла как сообщение источника в {ctx['scope']}/{ctx['scene']}: {prop['subject']} {prop['relation']} {prop['object']}. Это не проверенный факт мира."
         _record(r,'DRIVE','SPEECH_CHOICE',source,choice='SOURCE_ACK')
         return _reply(r,msg,op,source,mutated=True,publish=publish,semantic={'fact_id':f.fact_id,'status':f.status})
+    if op=='CORRECT':
+        prop=_fact(p['fact']);replaces=p['replaces']
+        eid=g.resolve(prop['subject'])
+        # Only the actual earlier report of this user, in this exact context,
+        # with this subject and predicate, is eligible. No time/context shift,
+        # no correction of another source, no trust-score adjustment.
+        old=next((f for f in g.facts.values() if f.source_ref==replaces and
+                  f.origin=='USER_SAID' and f.status=='SOURCE_ASSERTED' and
+                  f.principal==principal and f.subject==eid and
+                  f.relation==prop['relation'].upper()),None)
+        if old is None or _claim_value(g,old).casefold()==prop['object'].casefold():
+            _record(r,'COMMIT','CORRECTION_REJECTED',source,replaces=replaces,
+                    reason='NO_MATCHING_ACTIVE_SOURCE_CLAIM_OR_NO_CHANGE')
+            return _reply(r,'Не могу связать исправление с прежним сообщением этого источника в том же контексте.',
+                          op,source,publish=publish,semantic={'status':'REJECTED','replaces':replaces})
+        spec=g.relation_spec(prop['relation'])
+        law=evaluate_mutation(mode=STRICT,operation='COMMIT',origin='USER_SAID',authority='USER')
+        if law.disposition!='CLAIM_ONLY':raise RuntimeError('SOURCE_ONLY_CONSTITUTION_BROKEN')
+        object_kind,object_value=_claim_object(g,prop['relation'],prop['object'])
+        # A learned schema change cannot silently change the object type of the
+        # assertion being corrected. Both facts must live in the same typed slot.
+        if object_kind!=old.object_kind:
+            _record(r,'COMMIT','CORRECTION_REJECTED',source,replaces=replaces,reason='OBJECT_TYPE_MISMATCH')
+            return _reply(r,'Тип значения изменился: прежнее сообщение не заменено.',op,source,
+                          publish=publish,semantic={'status':'REJECTED'})
+        new=g._record_claim_only(eid,prop['relation'],object_value,object_kind=object_kind,origin='USER_SAID',
+                                 principal=principal,privacy='PRIVATE',authority='USER',
+                                 source_ref=source,source_group=old.source_group,
+                                 decision_reason='EXPLICIT_SAME_SOURCE_CORRECTION')
+        new.correction_of=old.fact_id;g._touch_fact(new)
+        old.status='SOURCE_SUPERSEDED';g._touch_fact(old)
+        g.audit.append({'order':g.order,'type':'SOURCE_CORRECTION','old_fact_id':old.fact_id,
+                        'new_fact_id':new.fact_id,'owner':'COMMIT','scope':ctx['scope'],
+                        'source_event_id':source,'replaces_source_event_id':replaces})
+        _record(r,'COMMIT','SOURCE_CORRECTION',source,status='SOURCE_CORRECTED',
+                old_fact_id=old.fact_id,new_fact_id=new.fact_id,replaces=replaces,
+                scope=ctx['scope'],scene=ctx['scene'])
+        _record(r,'DRIVE','SPEECH_CHOICE',source,choice='ACK_SOURCE_REVISION')
+        return _reply(r,'Исправление источника записано: '+prop['subject']+' '+prop['relation']+' '+prop['object']+
+                      '. Предыдущее сообщение сохранено для исторического запроса, не как факт мира.',
+                      op,source,mutated=True,publish=publish,
+                      semantic={'status':'SOURCE_CORRECTED','old_fact_id':old.fact_id,
+                                'new_fact_id':new.fact_id,'replaces':replaces})
     if op=='QUERY':
         prop=_fact(p['fact'])
+        as_of=p.get('as_of_turn')
+        if as_of is not None and as_of>r.external_seq:
+            _record(r,'EVAL','RETRIEVAL_REJECTED',source,reason='FUTURE_DIALOGUE_CUTOFF')
+            return _reply(r,'Нельзя проверить ещё не наступившую реплику диалога.',op,source,publish=publish,
+                          semantic={'status':'REJECTED','as_of_turn':as_of})
         eid=g.resolve(prop['subject'])
-        matches=[f for f in g.facts.values() if eid and f.subject==eid and f.principal==principal and
-                 f.relation==prop['relation'].upper() and f.status in {'SOURCE_ASSERTED','ADMITTED','REVISED'}]
-        values={f.object_value for f in matches}
-        want=prop['object']; found=[f for f in matches if want=='?' or f.object_value==want]
+        same=[f for f in g.facts.values() if eid and f.subject==eid and f.principal==principal and
+              f.relation==prop['relation'].upper()]
+        matches=_claims_at(r,same,as_of)
+        values={_claim_value(g,f) for f in matches}
+        want=prop['object']; found=[f for f in matches if want=='?' or _claim_value(g,f).casefold()==want.casefold()]
         if len(values)>1:status='CONFLICT'
         elif found:status='SOURCE_REPORTED'
         else:status='UNKNOWN'
@@ -124,13 +223,15 @@ def process(r,p,source,publish=True):
         if status=='CONFLICT':
             msg='Есть несовместимые сообщения в одном контексте: '+', '.join(sorted(values))+'. Нужна независимая проверка.'
         elif status=='SOURCE_REPORTED':
-            msg='По сообщению источника: '+', '.join(sorted({f.object_value for f in found}))+'. Проверки мира нет.'
+            msg='По сообщению источника: '+', '.join(sorted({_claim_value(g,f) for f in found}))+'. Проверки мира нет.'
         else:
             msg='В этом контексте не знаю. Что могло бы проверить '+prop['relation']+' для '+prop['subject']+'?'
         _record(r,'EVAL','RETRIEVAL',source,status=status,basis=[f.fact_id for f in matches],scope=ctx['scope'],scene=ctx['scene'])
         _record(r,'COMMIT','NOOP',source,reason='QUERY_NOT_TEACHING')
         _record(r,'DRIVE','SPEECH_CHOICE',source,choice='INQUIRE' if status!='SOURCE_REPORTED' else 'ANSWER_BOUNDED')
-        return _reply(r,msg,op,source,publish=publish,semantic={'status':status,'basis':[f.fact_id for f in matches]})
+        return _reply(r,msg,op,source,publish=publish,semantic={'status':status,'basis':[f.fact_id for f in matches],
+                                       'values':sorted({_claim_value(g,f) for f in found}),
+                                       'as_of_turn':as_of})
     if op=='SOCIAL':
         act=p['act'].upper()
         last=next((x for x in reversed(r.dialogue_history) if x.get('speaker')=='C4'),None)

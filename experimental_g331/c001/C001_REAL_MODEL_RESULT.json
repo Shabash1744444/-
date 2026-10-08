@@ -1,0 +1,13 @@
+{
+  "source_model": "C4_G329_ANDROID_CLEAN_ORGANISM.c4m",
+  "source_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "source_facts": 10781,
+  "after_facts": 10783,
+  "cold_reloaded_facts": 10783,
+  "cold_historic_status": "SOURCE_REPORTED",
+  "cold_historic_values": [
+    "teal"
+  ],
+  "canonical_world_promotions": 0,
+  "phone_android_status": "NOT_TESTED"
+}
