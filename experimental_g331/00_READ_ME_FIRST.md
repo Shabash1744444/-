@@ -1,3 +1,6 @@
+# CURRENT — C004 R1/R2 CODE GREEN, DEVICE PENDING
+Read `01_WORK_JOURNAL.md` last entry and `02_RECOVERY_HANDOFF.md` first block. C003 is last FULL DONE. C004 private host/target fixes are tested and committed, but no physical phone attestation. Runtime ZIP sha256 `7bd314029d4b927eb00e847ec52d2d3d45ffba06b7f30bba094a06af6be47f76`; C4 CI 37851791773 SUCCESS and Android CI 37851562352 SUCCESS. Next step physical Android protocol: `c004/C004_R2_PHONE_LIVE_PROTOCOL.txt`. Do not repeat source fixes or erase existing model. Preserve four laws/anti-cascade controls.
+---
 # LATEST (2026-10-09): C004 INTEGRATED / DEVICE PENDING; C003 last DONE
 Read `02_RECOVERY_HANDOFF.md` newest top, `01_WORK_JOURNAL.md` last entry, and `checkpoints/CP_C4_G331_C004_INTEGRATED_DEVICE_PENDING.md`.
 C4 native code+ZIP: `f4fc8e5bb210cf9c1c39899be81c0a1865460e7b`; Github Actions SUCCESS `37845141293` (104 PASS, 2 SKIP). Companion Android app branch `experiments/c4-c004-native-host` build SUCCESS `37844344905`. **No real device live attestation.** Keep C004 open until physical proof; no C005 yet. Four owners, G215/source roots, anti-cascade gate and original .c4m remain mandatory.
