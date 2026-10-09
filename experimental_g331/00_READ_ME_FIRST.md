@@ -1,3 +1,8 @@
+# CURRENT AS OF 2026-10-09: C004-R3 CODE GREEN, PHYSICAL ANDROID PENDING
+Latest complete development cycle: C003 DONE. C004 currently code-integrated R1/R2/R3, but **NOT DONE** without real Android host trace. Read `01_WORK_JOURNAL.md` BOTTOM then `02_RECOVERY_HANDOFF.md` TOP, followed by `checkpoints/CP_C4_G331_C004_R3_REAL_G329_COLD.md`. R3 CI run [37877301280](https://github.com/Shabash1744444/-/actions/runs/37877301280) 123 PASS/2 SKIP. Real original 10,781-fact G329 .c4m survived R3 temporary-copy cold reload. 56-module runtime in Library /C4_Candidates/G331_NATIVE_COGNITION/C004_R3/. Never claim human-level dialogue, WORLD evidence, finished C004 or autonomous training. Next physical phone test using experimental Emu host and R3 runtime; preserve original C4M.
+
+---
+
 # CURRENT — C004 R1/R2 CODE GREEN, DEVICE PENDING
 Read `01_WORK_JOURNAL.md` last entry and `02_RECOVERY_HANDOFF.md` first block. C003 is last FULL DONE. C004 private host/target fixes are tested and committed, but no physical phone attestation. Runtime ZIP sha256 `7bd314029d4b927eb00e847ec52d2d3d45ffba06b7f30bba094a06af6be47f76`; C4 CI 37851791773 SUCCESS and Android CI 37851562352 SUCCESS. Next step physical Android protocol: `c004/C004_R2_PHONE_LIVE_PROTOCOL.txt`. Do not repeat source fixes or erase existing model. Preserve four laws/anti-cascade controls.
 ---
