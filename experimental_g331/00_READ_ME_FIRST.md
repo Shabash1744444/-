@@ -1,3 +1,8 @@
+# CURRENT 2026-10-09: C004-R5 CODE GREEN — WAITING PHYSICAL ANDROID
+Last full DONE C003. New R5 Android host-result UI gate tested GitHub Actions `37887788310` SUCCESS, exact Emu commit `3b7ef023a6d687ab9b429eb6fbbf5e658e7765bb`. Existing native C4 R4 runtime 56 modules unchanged. C004 NOT DONE; Android live and cold phone receipt evidence missing. C005 not started. Start with latest work journal section and `checkpoints/CP_C4_G331_C004_R5_UI_DIAGNOSTICS_GREEN_DEVICE_PENDING.md`; follow physical C004_R4_PHONE_LIVE_PROTOCOL; no parallel brain, no false PASS claims.
+
+---
+
 # CURRENT 2026-10-09 — C004-R4 CODE GREEN / ANDROID DEVICE PENDING
 Last FULL DONE: C003. Current C004 R1–R4 code updates, R4 CI `37882337180` SUCCESS (126 PASS / 2 SKIP), no native device proof; C004 NOT DONE, C005 NOT STARTED. Root independence R4 checkpoint: `checkpoints/CP_C4_G331_C004_R4_CODE_GREEN_DEVICE_PENDING.md`. Tested old G329 C4M 10781 facts cold and source SHA intact. Android Emu branch `experiments/c4-c004-native-host`; new 56-module runtime ZIP from Library `/C4_Candidates/G331_NATIVE_COGNITION/C004_R4/C4_G331_C004_R4_NATIVE_RUNTIME.zip` (SHA256 9dd72f1d5bfc57c6c1ad757503b46ec0dbde637fc4ded285e3e59c6d8173eaa3). NEXT: paired APK+runtime phone native private receipt trace, negative replay/stale session, cold C4M; log physical results or BLOCKED; never declare human-level cognition based on these gates.
 
