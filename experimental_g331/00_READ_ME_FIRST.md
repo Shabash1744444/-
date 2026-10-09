@@ -1,3 +1,8 @@
+# CURRENT 2026-10-09 — C004-R4 CODE GREEN / ANDROID DEVICE PENDING
+Last FULL DONE: C003. Current C004 R1–R4 code updates, R4 CI `37882337180` SUCCESS (126 PASS / 2 SKIP), no native device proof; C004 NOT DONE, C005 NOT STARTED. Root independence R4 checkpoint: `checkpoints/CP_C4_G331_C004_R4_CODE_GREEN_DEVICE_PENDING.md`. Tested old G329 C4M 10781 facts cold and source SHA intact. Android Emu branch `experiments/c4-c004-native-host`; new 56-module runtime ZIP from Library `/C4_Candidates/G331_NATIVE_COGNITION/C004_R4/C4_G331_C004_R4_NATIVE_RUNTIME.zip` (SHA256 9dd72f1d5bfc57c6c1ad757503b46ec0dbde637fc4ded285e3e59c6d8173eaa3). NEXT: paired APK+runtime phone native private receipt trace, negative replay/stale session, cold C4M; log physical results or BLOCKED; never declare human-level cognition based on these gates.
+
+---
+
 # CURRENT AS OF 2026-10-09: C004-R3 CODE GREEN, PHYSICAL ANDROID PENDING
 Latest complete development cycle: C003 DONE. C004 currently code-integrated R1/R2/R3, but **NOT DONE** without real Android host trace. Read `01_WORK_JOURNAL.md` BOTTOM then `02_RECOVERY_HANDOFF.md` TOP, followed by `checkpoints/CP_C4_G331_C004_R3_REAL_G329_COLD.md`. R3 CI run [37877301280](https://github.com/Shabash1744444/-/actions/runs/37877301280) 123 PASS/2 SKIP. Real original 10,781-fact G329 .c4m survived R3 temporary-copy cold reload. 56-module runtime in Library /C4_Candidates/G331_NATIVE_COGNITION/C004_R3/. Never claim human-level dialogue, WORLD evidence, finished C004 or autonomous training. Next physical phone test using experimental Emu host and R3 runtime; preserve original C4M.
 
