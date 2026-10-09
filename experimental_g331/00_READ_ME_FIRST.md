@@ -1,3 +1,6 @@
+# LATEST (2026-10-09) — C004-R6 SAFE CORRECTION CODE GREEN, FREE SPEECH LIVE RED
+On real Android, G329 speech failed most multi-turn understanding; a dangerous correction wrong-target retraction was reproduced and repaired by a native referent guard. CI `37890870570`: 132 PASS, 2 SKIP, 2 honest XFAIL. Exact 56-module R6 ZIP in Library /C4_Candidates/G331_NATIVE_COGNITION/C004_R6/, SHA256 14af8bf804ebd9fa1813f5f9da6aff416b490348b4638f94123fea00896b67cf. READ `c004/C004_R6_REAL_PHONE_DIALOGUE_ANALYSIS.md`, latest journal and checkpoint. Android action receipt physical test still NOT DONE; C003 last full DONE, C005 not started. Do not count xfails as proof of cognition or trace failures as evidence of internal absence.
+---
 # CURRENT 2026-10-09: C004-R5 CODE GREEN — WAITING PHYSICAL ANDROID
 Last full DONE C003. New R5 Android host-result UI gate tested GitHub Actions `37887788310` SUCCESS, exact Emu commit `3b7ef023a6d687ab9b429eb6fbbf5e658e7765bb`. Existing native C4 R4 runtime 56 modules unchanged. C004 NOT DONE; Android live and cold phone receipt evidence missing. C005 not started. Start with latest work journal section and `checkpoints/CP_C4_G331_C004_R5_UI_DIAGNOSTICS_GREEN_DEVICE_PENDING.md`; follow physical C004_R4_PHONE_LIVE_PROTOCOL; no parallel brain, no false PASS claims.
 
