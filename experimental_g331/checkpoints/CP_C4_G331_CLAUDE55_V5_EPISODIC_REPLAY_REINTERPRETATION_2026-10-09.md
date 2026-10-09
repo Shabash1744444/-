@@ -1,0 +1,13 @@
+# C4 G331 — CLAUDE V5 episodic replay / reinterpretation research handoff (2026-10-09)
+
+Packaging-only conceptual update, **not a new experimental PASS**. C4 originated as an independently designed dynamic cognitive graph architecture; C4 is NOT Singularity OS. Four owner laws remain unchanged.
+
+User adds a crucial cognitive requirement: C4 should revisit older raw messages, prior graph versions and its own provisional interpretations, iteratively and autonomously even when no new user input arrives. This inspired an episodic replay / reconsolidation candidate informed by neuroscience but should not be confused with a claim that biological memory is a byte-perfect archive, that repeated thoughts create evidence, or that multiple passes fix D1/D3 without learned representational operators.
+
+Physical new master TXT: `C4_CLAUDE55_MASTER_RESEARCH_G270_G300_G331_D5_V5_EPISODIC_REPLAY_2026-10-09.txt`, bytes `362536`, `6054` LF lines, SHA256 `d640e48a529f295985f1b5ec644c7c8b0caa56675a4a5e121fddb2347a15a49c`. Exact previous V4 TXT unchanged as V5 suffix, complete original experiment/code dossier intact. Physically stored Library `/C4_Candidates/G331_NATIVE_COGNITION/CLAUDE_RESEARCH_HANDOFF_2026_10_09/`. Send **V5**, not older versions.
+
+V5 addendum proposes ONE native C4Graph with immutable source episode anchors E_i, versioned interpretations H_i^v and mutable learning/working state W_t; selective internally prioritized replay/retrieval of original episode/scope; recursive EVAL hypotheses, factual COMMIT only on admissible evidence, DRIVE-computable stop/ask/rest/act, MEDIATE receipts. D1 omission of features and D3 AST representability cannot be corrected by looping unchanged readout. Ablation plan: zero/one/100 unchanged passes, raw episode retrieval alone, learned scope+link learner with 1–100 passes, misleading replay, compute-matched no-replay training, cold load, independent human syntax heldouts, source roots, explicit old-vs-new timeline and intervention outcomes. Do not build phrase-specific parser, second brain, or Qwen inference replacement.
+
+Neuroscience sources (analogies, not implementation proof): 2025 van der Meer & Bendor critical awake replay review (https://pubmed.ncbi.nlm.nih.gov/40121166/); Squire et al systems consolidation (https://pmc.ncbi.nlm.nih.gov/articles/PMC4526749/); Wang & Morris reconsolidation (https://doi.org/10.1146/annurev.psych.093008.100523).
+
+Scientific verdict unchanged: D5 limited learned graph-edge selection, poor general OOD natural language and no live speech-loop connection. C4 is currently NO-GO as standalone LLM replacement. Claude prior G270/G300 context must be reconciled to G331/D5, not treated as infallible.
