@@ -1,0 +1,50 @@
+--- a/c4child/runtime.py
++++ b/c4child/runtime.py
+@@ -971,6 +971,35 @@
+             return {"reply":None,"mutated":False,"initiative":emitted,"event":None,"parsed":None}
+         return {"reply":None,"mutated":False,"initiative":[],"event":None,"parsed":None}
+ 
++    def learned_narrative_turn(self, text:str, frame:dict):
++        """D1 EXPERIMENT: same C4 organism, graph, history and four-owner trace.
++
++        Requires an externally grounded STORY frame (not a verified WORLD fact).
++        Free-text parsing into that frame is NOT solved by this experiment.
++        """
++        from .narrative_policy import LearnedNarrativePolicy
++        import copy
++        frame=dict(frame or {})
++        if str(frame.get('scope','STORY')).upper() not in {'STORY','SIM'}:
++            return {'status':'ABSTAIN','reason':'ONLY_STORY_OR_SIM'}
++        previous=[x for x in self.dialogue_history if x.get('speaker')=='C4' and x.get('kind')=='D1_REPLICA']
++        if previous and 'previous_reply_act' not in frame:
++            frame['previous_reply_act']=previous[-1].get('reason','NONE')
++        if not previous and 'previous_reply_act' not in frame:frame['previous_reply_act']='NONE'
++        self.step+=1
++        decision=LearnedNarrativePolicy(self.dialogue.g).decide(text,frame)
++        self._record_life_event('USER','D1_STORY_INPUT',text=text,status='SOURCE_ASSERTED',
++                                extra={'scope':frame.get('scope','STORY')})
++        self._record_life_event('C4','EVAL_D1_POLICY',status=decision['status'],
++                                extra={'intent':decision.get('intent'),'reason':decision.get('reason')})
++        self._record_life_event('C4','COMMIT_NOOP',status='BLOCKED',
++                                extra={'reason':'NARRATIVE_SPEECH_NOT_WORLD'})
++        if decision['status']=='REPLY':
++            self._record_life_event('C4','DRIVE_D1_SPEECH',status='SELECTED',
++                                    extra={'speech_act':decision['reply_act'],'scope':'STORY'})
++            self._record_turn('C4',decision['reply'],kind='D1_REPLICA',reason=decision['reply_act'])
++        return copy.deepcopy(decision)
++
+     def user_message(self,text:str):
+         """Compatibility surface: receive one message and immediately run one cognitive step.
+ 
+--- a/c4child/scope.py
++++ b/c4child/scope.py
+@@ -14,7 +14,8 @@
+ LANGUAGE_RELATIONS={
+     'WORD_FORM','GRAM_GENDER','PREDICATE_RELATION','QUERY_RELATION',
+     'PREDICATE_PRESENT_FORM','PREDICATE_PAST_FORM','LETTER_NAME','GROUNDS',
+-    'SYNONYM','ANTONYM','MEANS'
++    'SYNONYM','ANTONYM','MEANS',
++    'DIALOGUE_POLICY_WEIGHT','DIALOGUE_REPLY_PATTERN'
+ }
+ SYSTEM_RELATIONS={'FOUNDATIONAL','RULE'}
+ SOCIAL_RELATIONS={'NAME','LIKES','HAS','ROLE'}
