@@ -30,3 +30,11 @@ Run raw free-text `C4LivingRuntime.user_message` (no supplied typed frame), free
 
 ## CI gate
 Native GitHub Actions workflow `.github/workflows/c4-native-constitution-gate.yml` updated to run original suite before D1, then apply exact patch, SHA-check changed modules, run `test_d1_policy_learning_ci.py`, and produce D1 native ZIP artifact. Inspect **latest workflow run conclusion**, not any earlier successful run. If new CI fails, record it as RED until fixed; D1 local evidence remains local only.
+
+
+## Final verified CI + D2 raw-text failure
+GitHub Actions **37903537950 SUCCESS** on commit `914a0f535bd2140802f6c5afa4dbda89e3c33a76`: historical native 139 PASS /2 SKIP /2 XFAIL and D1 additional 3 PASS. D1 patched runtime 57 modules packaged as artifact `C4-G331-D1-EXPERIMENTAL-GRAPH-POLICY`; exact patched module source digests verified. [CI run](https://github.com/Shabash1744444/-/actions/runs/37903537950).
+
+NEW FROZEN D2 RED: genuine normal `C4LivingRuntime.user_message` with **NO external typed frame**, eight-turn story about new characters and an imaginary object. Original L1 and D1 trained model produced **IDENTICAL replies for 8/8 turns**, mostly `NOT_UNDERSTOOD`. D1 experimental `learned_narrative_turn` was never invoked through standard user_message. This confirms **D1 does NOT yet improve actual phone-like free dialogue**. Exact JSON `D2_FROZEN_FREE_TEXT_RED.json` and portable script `d2_free_text_frozen_red.py` physically preserved in Library D1 folder; script committed in GitHub `training/d1/`. Do NOT call D1 a conversational-complete stage.
+
+A single mobile-friendly package with trained .c4m, runtime, test data, report, D2 RED, source and tests is saved Library `/C4_Candidates/G331_NATIVE_COGNITION/D1_DIALOGUE_POLICY_2026_10_09/C4_D1_LEARNABILITY_PROOF_PACKAGE_20261009.zip`; SHA256 `e81b0385e609a963f8fe1e0734df6db670f01c237d9c5b4e038b06dbccaa0ad2`.
