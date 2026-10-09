@@ -37,6 +37,10 @@ jobs:
           patch -d /tmp/c4-native -p1 < experimental_g331/c004/C004_R6_CORRECTION_REF_GUARD.patch
           echo 'bc1fa13b94b9207ac78e9a707575d2f9f75729c3d13516e8780f5e484e5021e7  /tmp/c4-native/c4child/dialogue.py' | sha256sum -c -
           echo '08221fd4bce26dbbdf17a32c2757a5f77d73b1d157d2d177fc3b98cdf8b17e70  /tmp/c4-native/c4child/graph.py' | sha256sum -c -
+          # L1 supervised *language only* external-corpus teacher.
+          # This is an authority/provenance guard, NOT a WORLD admission bypass.
+          patch -d /tmp/c4-native -p1 < experimental_g331/training/l1/L1_EXTERNAL_LANGUAGE_ORIGIN.patch
+          echo '0e4eba5eb9abff5de206ec3faf58ce9d65196a18521d266f68f12eec64cc110e  /tmp/c4-native/c4child/graph.py' | sha256sum -c -
       - name: Run frozen native cognition plus constitutional gates
         env:
           PYTHONPATH: /tmp/c4-native:experimental_g331
@@ -52,7 +56,8 @@ jobs:
             experimental_g331/tests/test_c004_room_target.py \
             experimental_g331/tests/test_c004_r3_outcome_distinction.py \
             experimental_g331/tests/test_c004_r4_host_source_roots.py \
-            experimental_g331/tests/test_c004_r6_real_live_retraction.py
+            experimental_g331/tests/test_c004_r6_real_live_retraction.py \
+            experimental_g331/tests/test_c4_l1_teacher_lexicon.py
       - name: Check constitution and block unsafe autonomous pretraining
         shell: bash
         env:
@@ -74,12 +79,12 @@ jobs:
         run: |
           set -euo pipefail
           cd /tmp/c4-native
-          zip -q -r "$GITHUB_WORKSPACE/C4_G331_C004_R6_NATIVE_RUNTIME.zip" c4child -i 'c4child/*.py'
-          unzip -t "$GITHUB_WORKSPACE/C4_G331_C004_R6_NATIVE_RUNTIME.zip" | tail -1
+          zip -q -r "$GITHUB_WORKSPACE/C4_G331_C004_R6_L1_NATIVE_RUNTIME.zip" c4child -i 'c4child/*.py'
+          unzip -t "$GITHUB_WORKSPACE/C4_G331_C004_R6_L1_NATIVE_RUNTIME.zip" | tail -1
           cmp c4child/structured_cognition.py "$GITHUB_WORKSPACE/experimental_g331/native_c4child/structured_cognition.py"
           cmp c4child/runtime.py "$GITHUB_WORKSPACE/experimental_g331/native_c4child/runtime.py"
       - uses: actions/upload-artifact@v4
         with:
-          name: C4-G331-C004-R6-TESTED-RUNTIME
-          path: C4_G331_C004_R6_NATIVE_RUNTIME.zip
+          name: C4-G331-C004-R6-L1-TESTED-RUNTIME
+          path: C4_G331_C004_R6_L1_NATIVE_RUNTIME.zip
           if-no-files-found: error
