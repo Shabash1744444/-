@@ -1,3 +1,10 @@
+# LATEST RECOVERY: C004-R3 CODE GREEN — DEVICE PENDING (2026-10-09)
+C003 is last complete DONE; C004 NOT DONE. Native C4 current R3 repaired execution-vs-prediction evidence, original graph/.c4m retained, nine new tests, GitHub CI `37877301280` SUCCESS 123 PASS / 2 SKIP and mass_pretrain BLOCKED. Paired Android test NOT ATTESTED. Runtime `C4_G331_C004_R3_NATIVE_RUNTIME.zip` in Library `/C4_Candidates/G331_NATIVE_COGNITION/C004_R3/`, 56 original `c4child` Python modules. Android APK remains experimental `Shabash1744444/Emu` branch `experiments/c4-c004-native-host`.
+Real original G329 `10781` facts cold-loaded with wrong predicted LOOK result, honest SIM_FAILURE persisted across cold, C4M source SHA unchanged. Details in `checkpoints/CP_C4_G331_C004_R3_REAL_G329_COLD.md` and `checkpoints/CP_C4_G331_C004_R3_CODE_GREEN_DEVICE_PENDING.md`.
+NEXT: physical phone (same G329 .c4m backup) with R3 runtime and experimental host APK, test private before/action/after→MEDIATE/EVAL/COMMIT, replay and stale session, export runtime trace. Mark C004 DONE ONLY with real device evidence. Do not start C005 by bypassing device gate. Four owners, five influences, lineage/G215/no cascading errors, original C4M, and editability remain inviolable.
+
+---
+
 # CURRENT RECOVERY — C004 R1/R2 CODE GREEN, PHYSICAL ANDROID PENDING (2026-10-09)
 Last fully completed cognitive cycle: C003. C004 implemented + compiled but NOT DONE until on-device evidence.
 LATEST physical checkpoint: `experimental_g331/checkpoints/CP_C4_G331_C004_R1_R2_CODE_GREEN_DEVICE_PENDING.md`.
