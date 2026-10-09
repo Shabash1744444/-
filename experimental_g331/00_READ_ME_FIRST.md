@@ -1,3 +1,7 @@
+# LATEST 2026-10-09: FIRST ACTUALLY TRAINED COPY OF G329 EXIST (L1)
+New weights `C4_G329_L1_LEARNED_ORGANISM_20261009.c4m` SHA256 bba87b3d1b7c48f929236868c2244d05153532b4b173c8d7768783dadc6ef7ce in Library /C4_Candidates/G331_NATIVE_COGNITION/L1_SUPERVISED_LEXICAL_2026_10_09/. L1 supervised lexical forms: 0/48 baseline -> 48/48 new-combination cold; 12 verb lexemes taught, no WORLD / no free dialogue. Trained code+report in `training/l1`; checkpoint `checkpoints/CP_C4_G331_L1_TRAINED_ORGANISM_CODE_GREEN_2026-10-09.md`; latest journal bottom. CI `37895557084` 139 PASS/2 SKIP/2 XFAIL, autonomous pretrain BLOCKED. C004 physical Android host action live still not verified; C003 last full DONE, C005 NOT STARTED.
+---
+
 # LATEST (2026-10-09) — C004-R6 SAFE CORRECTION CODE GREEN, FREE SPEECH LIVE RED
 On real Android, G329 speech failed most multi-turn understanding; a dangerous correction wrong-target retraction was reproduced and repaired by a native referent guard. CI `37890870570`: 132 PASS, 2 SKIP, 2 honest XFAIL. Exact 56-module R6 ZIP in Library /C4_Candidates/G331_NATIVE_COGNITION/C004_R6/, SHA256 14af8bf804ebd9fa1813f5f9da6aff416b490348b4638f94123fea00896b67cf. READ `c004/C004_R6_REAL_PHONE_DIALOGUE_ANALYSIS.md`, latest journal and checkpoint. Android action receipt physical test still NOT DONE; C003 last full DONE, C005 not started. Do not count xfails as proof of cognition or trace failures as evidence of internal absence.
 ---
