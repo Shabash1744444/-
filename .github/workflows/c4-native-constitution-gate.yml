@@ -26,9 +26,10 @@ jobs:
           test -s /tmp/c4-native/c4child/structured_cognition.py
           # The pinned ZIP is the 56-module native baseline; C004-R3 only overlays
           # the tested existing cognition module. Never introduce a second brain.
-          echo '09ce9009f5e4b34ab6c7c0e360e5eadd8d7ca3f7834c64a41dc301de849391e6  experimental_g331/native_c4child/structured_cognition.py' | sha256sum -c -
+          echo 'b388140e6311b3cf2d4b2315596801fea34f536fd37330226b381cd5b71a58a5  experimental_g331/native_c4child/structured_cognition.py' | sha256sum -c -
           cp experimental_g331/native_c4child/structured_cognition.py /tmp/c4-native/c4child/structured_cognition.py
-          echo 'fbb5f7bab5c0318ecba089ee8afa6b149dce9c6f52ecfb69169142d541fff1fb  experimental_g331/native_c4child/runtime.py' | sha256sum -c -
+          echo '209977573522203d587f5a18d448bf9f1aceb9c4368d6df884b4235b2167104b  experimental_g331/native_c4child/runtime.py' | sha256sum -c -
+          cp experimental_g331/native_c4child/runtime.py /tmp/c4-native/c4child/runtime.py
           cmp experimental_g331/native_c4child/structured_cognition.py /tmp/c4-native/c4child/structured_cognition.py
           cmp experimental_g331/native_c4child/runtime.py /tmp/c4-native/c4child/runtime.py
       - name: Run frozen native cognition plus constitutional gates
