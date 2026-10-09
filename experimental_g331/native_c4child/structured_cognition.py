@@ -584,6 +584,7 @@ def verified_sim_receipt(r,p,*,allow_prediction_refutation=False):
     action['prediction_confirmed']=None if expected is None or observed is None else (not prediction_mismatch)
     action['receipt_id']=receipt_id
     action['outcome_root']=root_id
+    action['outcome_trial_id']=receipt_id  # distinct intervention, not source independence
     action['observed_after']=observed
     action['outcome_event_id']='hostsim:'+hashlib.sha256((aid+'|'+str(r.step)).encode()).hexdigest()[:18]
     # Current SIM state belongs to the witnessed environment, not to C4's
