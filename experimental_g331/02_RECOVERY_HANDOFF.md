@@ -1,3 +1,8 @@
+# CURRENT 2026-10-09 — C004-R4 CODE GREEN / ANDROID DEVICE PENDING
+Last FULL DONE: C003. Current C004 R1–R4 code updates, R4 CI `37882337180` SUCCESS (126 PASS / 2 SKIP), no native device proof; C004 NOT DONE, C005 NOT STARTED. Root independence R4 checkpoint: `checkpoints/CP_C4_G331_C004_R4_CODE_GREEN_DEVICE_PENDING.md`. Tested old G329 C4M 10781 facts cold and source SHA intact. Android Emu branch `experiments/c4-c004-native-host`; new 56-module runtime ZIP from Library `/C4_Candidates/G331_NATIVE_COGNITION/C004_R4/C4_G331_C004_R4_NATIVE_RUNTIME.zip` (SHA256 9dd72f1d5bfc57c6c1ad757503b46ec0dbde637fc4ded285e3e59c6d8173eaa3). NEXT: paired APK+runtime phone native private receipt trace, negative replay/stale session, cold C4M; log physical results or BLOCKED; never declare human-level cognition based on these gates.
+
+---
+
 # LATEST RECOVERY: C004-R3 CODE GREEN — DEVICE PENDING (2026-10-09)
 C003 is last complete DONE; C004 NOT DONE. Native C4 current R3 repaired execution-vs-prediction evidence, original graph/.c4m retained, nine new tests, GitHub CI `37877301280` SUCCESS 123 PASS / 2 SKIP and mass_pretrain BLOCKED. Paired Android test NOT ATTESTED. Runtime `C4_G331_C004_R3_NATIVE_RUNTIME.zip` in Library `/C4_Candidates/G331_NATIVE_COGNITION/C004_R3/`, 56 original `c4child` Python modules. Android APK remains experimental `Shabash1744444/Emu` branch `experiments/c4-c004-native-host`.
 Real original G329 `10781` facts cold-loaded with wrong predicted LOOK result, honest SIM_FAILURE persisted across cold, C4M source SHA unchanged. Details in `checkpoints/CP_C4_G331_C004_R3_REAL_G329_COLD.md` and `checkpoints/CP_C4_G331_C004_R3_CODE_GREEN_DEVICE_PENDING.md`.
