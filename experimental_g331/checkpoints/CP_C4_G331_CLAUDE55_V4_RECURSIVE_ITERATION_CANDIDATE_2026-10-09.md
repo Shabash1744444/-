@@ -1,0 +1,12 @@
+# C4 CLAUDE55 — V4 RESEARCH CONTEXT: SELF-ITERATION IS A CANDIDATE, NOT AN ASSERTED FIX
+Date 2026-10-09. No model/experiment changed; research handoff correction only.
+
+User explicitly emphasizes continuous recursive/iterative self-cognition as CORE of independently created C4. However user suggests high numbers of internal reconsideration passes (2,3, perhaps 100) as a possible axis to investigate whether D1/D3 limitations might be overcome, **not a scientifically proven hypothesis or mandatory architectural mechanism**. Do not assume self-repetition creates new information.
+
+The full 353588-byte UTF-8 master dossier `C4_CLAUDE55_MASTER_RESEARCH_G270_G300_G331_D5_V4_RECURSIVE_HYPOTHESIS_2026-10-09.txt` SHA256 `b89c71d96023f1044af3d083d0a5e0a3706fbafdb8aba26f9991edbdd26c64f9`, 6007 lines, in Library `/C4_Candidates/G331_NATIVE_COGNITION/CLAUDE_RESEARCH_HANDOFF_2026_10_09/`. This V4 prepends an experimental-scope addendum to the complete UNCHANGED V3, which itself includes all V2/V1 source material. SEND V4.
+
+Critical logical distinction for external scientific review: when prior D1 features identify logically distinct situations or prior D3 fixed AST excludes inverse-order structure, rerunning exactly the same unchanged deterministic function on same lost input cannot fix its representational ceiling. Recursion/iteration may help ONLY if a trainable relational operator, different retrieval/state/hypotheses, or new valid evidence adds what the original input discarded. Inner generated self-text is not independent evidence and cannot promote to WORLD.
+
+V4 adds rigorous frozen ablation: pass budgets 1,2,3,5,10,30,100; compare compute-matched one-pass and repeated, same native original C4; D1 input collisions, D3 scope and inverse HOLDER, scope/negation/quotation, nested role semantics, internal self-revision, idle initiative, cost/latency, stagnation and confidence calibration. Include zero-weight, shuffled labels, oracle/predicted structure and independent human-written holdout controls. Stop criteria via DRIVE, lawful COMMIT/provenance, MEDIATE receipts, event interrupt; no GPU infinite loop. Four laws unchanged.
+
+Claude already familiar with earlier G270 and G300 and should reconcile actual preceding work; user's desired outcome is executable method HOW to learn generalized C4 cognition rather than another conceptual discussion. Preserve all D1-D5 negative evidence and truthful LLM replacement NO-GO in current C4. No mass Qwen-Omni teacher until independent proof.
