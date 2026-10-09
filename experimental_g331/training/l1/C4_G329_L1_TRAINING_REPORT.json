@@ -1,0 +1,43 @@
+{
+  "schema": "C4_L1_SUPERVISED_LEXICAL_TRANSFER_V1",
+  "description": "Existing G329 graph + minimally repaired R6 provenance gate acquired lexical forms, NOT free discourse.",
+  "baseline_sha256": "dfe4b40211b1ce2d3400e95217ecc9210fc1f0a93076ee42a51e55f0be0b090f",
+  "trained_sha256": "bba87b3d1b7c48f929236868c2244d05153532b4b173c8d7768783dadc6ef7ce",
+  "original_facts": 10789,
+  "final_facts": 10908,
+  "new_facts": 119,
+  "deduplicated_lessons": 1,
+  "original_entities": 10727,
+  "final_entities": 10737,
+  "lessons": 12,
+  "training_events": 120,
+  "one_dependent_teacher_root": "curated:assistant-teacher:c4-l1-lexical:2026-10-09",
+  "training_origin": "EXTERNAL_CORPUS",
+  "teacher": "ASSISTANT_CURATED_NOT_USER_WITNESS",
+  "holdout_unit": "full sentences and subject/object combinations; learned lexeme/forms included in training",
+  "holdout_cases": 48,
+  "baseline_pass": 0,
+  "trained_pass": 48,
+  "cold_pass": 48,
+  "negative_unknown_predicates": {
+    "сверкает": true,
+    "прыгает": true,
+    "плывёт": true,
+    "дремлет": true,
+    "разглядывает": true,
+    "задремал": true
+  },
+  "no_world_commit": true,
+  "original_canonical_slots_unchanged": true,
+  "runtime_state_unchanged": true,
+  "retained_original_organs": true,
+  "old_model_sha_unchanged": true,
+  "untested": [
+    "free language dialogue",
+    "nested speakers",
+    "ellipsis",
+    "unseen verbs",
+    "semantic action selection",
+    "real Android LIVE"
+  ]
+}
