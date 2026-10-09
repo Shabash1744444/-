@@ -1,0 +1,58 @@
+--- a/c4child/graph.py
++++ b/c4child/graph.py
+@@ -629,7 +629,7 @@
+         return ok
+ 
+     def retract_latest_source_assertion(self,*,source_group,principal="SELF",origin="USER_SAID",authority="USER",
+-                                       constitutional_basis="SOURCE_SELF_RETRACTION"):
++                                       constitutional_basis="SOURCE_SELF_RETRACTION",target_source_ref=None):
+         """Retract the latest assertion event from the same source without asserting its opposite.
+ 
+         This only changes STATUS on SOURCE_ASSERTED history. Canonical truth is untouched.
+@@ -640,6 +640,11 @@
+         if decision.disposition!="COMMIT":
+             return []
+         cand=[f for f in self.facts.values() if f.principal==principal and f.status=="SOURCE_ASSERTED" and self._fact_source_group(f)==str(source_group)]
++        # A free-speech correction can provide an EVAL-grounded, exact source
++        # reference. COMMIT must never silently fall back to an unrelated latest
++        # assertion if the referenced one is missing or has been superseded.
++        if target_source_ref is not None:
++            cand=[f for f in cand if f.source_ref==target_source_ref]
+         if not cand:return []
+         last=max(cand,key=lambda f:f.order);ref=last.source_ref
+         hits=[f for f in cand if (ref is not None and f.source_ref==ref) or (ref is None and f.fact_id==last.fact_id)]
+--- a/c4child/dialogue.py
++++ b/c4child/dialogue.py
+@@ -13,6 +13,7 @@
+ from .inflect_ru import RussianSpeechFormsV1
+ from .fact_retrieval import AdmittedFactRetriever, TECHNICAL_RELATIONS, STOPWORDS, stems as _stems, content_tokens, stem as _stem, stem_full as _stem_full
+ from .graph import ACTIVE_STATUSES
++from .episodic_memory import features as _source_features
+ from collections import Counter
+ 
+ ENTITY_OBJECT_RELATIONS={"IS_A","PART_OF","OPPOSITE","CAUSES"}
+@@ -899,8 +900,23 @@
+                 if f.object_kind=='entity' and f.object_value in targets:hit=True;break
+             if hit:break
+         if not hit:return None
++        # Do not interpret "I was wrong about X" as permission to retract an
++        # unrelated latest claim about Y. Preserve unmatched/ambiguous speech as
++        # a candidate for clarification; it is not a COMMIT instruction.
++        change_text=raw.partition(':')[2] if ':' in raw else raw[len(m.group(0)):]
++        mentioned=_source_features(change_text)
++        claimed=[f for f in self.g.facts.values()
++                 if f.principal==self.principal and f.status=='SOURCE_ASSERTED'
++                 and f.source_ref is not None
++                 and self.g._fact_source_group(f)==f"USER:{self.principal}"]
++        matching={f.source_ref for f in claimed if mentioned & _source_features(f.source_ref)}
++        if len(matching)!=1:
++            self.last_used=[]
++            return ('CORRECTION','Я поняла, что ты исправляешь сказанное, но не могу однозначно установить, какое именно утверждение. Ничего не отзываю.')
++        target_ref=next(iter(matching))
+         ids=self.g.retract_latest_source_assertion(source_group=f"USER:{self.principal}",principal=self.principal,
+-                                                   origin='USER_SAID',authority='USER',constitutional_basis='SOURCE_SELF_RETRACTION')
++                                                   origin='USER_SAID',authority='USER',constitutional_basis='SOURCE_SELF_RETRACTION',
++                                                   target_source_ref=target_ref)
+         if ids:
+             self.last_used=[]
+             return ('CORRECTION','Поняла. Твоё предыдущее утверждение отозвано; противоположное автоматически истинным не считаю.')
