@@ -1642,13 +1642,21 @@ class C4LivingRuntime:
             return {'accepted':False,'error':'NATIVE_STATE_WITNESS_INVALID'}
         # Java verifies this requestId is written only once on executed actions.
         # Repeating an API call still fails: the prior proposal is no longer pending.
+        # LOOK's native room contract attests a successful observation without
+        # claiming to move the object. A teacher may falsely predict a move;
+        # that is a refuted strategy, not a fraudulent actuator receipt.
+        # For state-changing verbs success + wrong destination still fails
+        # closed; never relax generic adapter/witness validation.
+        allow_refutation=(verb=='LOOK' and receipt['executionSuccess'] is True
+                          and z['location']==b['location'])
         result=structured_cognition.verified_sim_receipt(self,{
             'action_id':aid,'success':receipt['executionSuccess'],
             'observed_action':verb,
             'observed_before':{'subject':subject,'relation':'LOCATION','object':b['location']},
             'observed_after':{'subject':subject,'relation':'LOCATION','object':z['location']},
             'receipt_id':'android:'+session_id+':'+aid,
-            'root_id':'host_room_session:'+session_id+':'+aid})
+            'root_id':'host_room_session:'+session_id+':'+aid},
+            allow_prediction_refutation=allow_refutation)
         return result
 
     def runtime_state(self):
