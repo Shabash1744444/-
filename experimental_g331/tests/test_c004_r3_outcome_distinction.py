@@ -83,3 +83,17 @@ def test_cold_reload_retains_negative_prediction_evidence_without_host_authority
         assert a['execution_success'] is True and a['prediction_confirmed'] is False
         assert new.cognitive_goals[a['goal_id']]['status']=='OPEN'
         assert new.native_room_receipt({'requestId':aid},'c4-r3')['error']=='NATIVE_SESSION_MISMATCH'
+
+def test_contradictory_take_success_rejected_without_reward():
+    import pytest
+    r,aid=scenario('BALL','TAKE','floor-left','held')
+    with pytest.raises(ValueError,match='SIM_OBSERVATION_CONTRADICTS_SUCCESS'):
+        native(r,aid,action='TAKE',after='floor-left',success=True)
+    assert r.cognitive_actions[aid]['status']=='PROPOSED_NOT_EXECUTED'
+
+def test_contradictory_place_success_rejected_without_reward():
+    import pytest
+    r,aid=scenario('BALL','PLACE','held','basket')
+    with pytest.raises(ValueError,match='SIM_OBSERVATION_CONTRADICTS_SUCCESS'):
+        native(r,aid,action='PLACE',before='held',after='floor-right',success=True)
+    assert r.cognitive_actions[aid]['status']=='PROPOSED_NOT_EXECUTED'
