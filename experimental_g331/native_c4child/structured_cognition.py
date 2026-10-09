@@ -532,7 +532,7 @@ def process(r,p,source,publish=True):
     raise ValueError('UNREACHABLE')
 
 
-def verified_sim_receipt(r,p):
+def verified_sim_receipt(r,p,*,allow_prediction_refutation=False):
     """Host-bound simulator feedback, never an instruction from USER_MESSAGE.
 
     Return values must be treated as host assertions, not WORLD observations.
@@ -561,6 +561,11 @@ def verified_sim_receipt(r,p):
     # Preserve the host's witnessed SIM transition; do not erase surprising
     # evidence or turn a prediction failure into a forged execution failure.
     prediction_mismatch=bool(expected and observed and observed!=expected)
+    # Generic host-SIM successes must match their claimed effect: an arbitrary
+    # callback cannot excuse contradictory telemetry. Only a separately
+    # validated native actuator effect contract may enable a refutation.
+    if prediction_mismatch and p['success'] and not allow_prediction_refutation:
+        raise ValueError('SIM_OBSERVATION_CONTRADICTS_SUCCESS')
     effective_success=bool(p['success'] and not prediction_mismatch)
     if expected and p['success'] and (
          observed is None or before is None or not receipt_id or not root_id or
