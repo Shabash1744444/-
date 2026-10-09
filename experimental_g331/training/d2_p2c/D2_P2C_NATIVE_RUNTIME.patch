@@ -1,0 +1,58 @@
+--- a/c4child/runtime.py
++++ b/c4child/runtime.py
+@@ -1057,6 +1057,35 @@
+         return {'reply':None,'proposed_reply':decision['reply'],'mutated':False,
+                 'event':None,'parsed':parsed,'public_act':dict(act)}
+ 
++    def _d2_relational_user_turn(self,text,source_event_id,publish):
++        """Read trained relationship candidate without inventing a speech surface.
++
++        A successful binding is NOT a WORLD observation, nor an approved
++        proposition. Public output requires a separately learned renderer.
++        Silence here is an explicit non-action, not fabricated fluent dialogue.
++        """
++        from .d2_relational import LearnedRelationBinder
++        candidate=LearnedRelationBinder(self.dialogue.g).interpret(text)
++        if candidate.get('status')!='CANDIDATE':return None
++        self.step+=1;self.last_user_step=self.step
++        parsed={'kind':'LEARNED_RELATION_CANDIDATE','source_event_id':source_event_id,
++                'scope':candidate['scope'],'epistemic_status':'USER_REPORTED_NOT_VERIFIED',
++                'relation_kind':candidate['kind'],'polarity':candidate['polarity'],
++                'roles':candidate['roles']}
++        self._record_life_event('C4','EVAL_D2_RELATION',status='CANDIDATE',source_event_id=source_event_id,
++                                extra={'scope':candidate['scope'],'roles':candidate['roles'],
++                                       'relation_kind':candidate['kind'],'polarity':candidate['polarity']})
++        self._record_life_event('C4','COMMIT_NOOP',status='BLOCKED',source_event_id=source_event_id,
++                                extra={'reason':'UNVERIFIED_SOURCE_BELIEF_OR_FICTION'})
++        self._record_turn('USER',text,kind='D2_RELATIONAL_INPUT',parsed=parsed)
++        # DRIVE has no acquired general renderer for this relational operator.
++        # Do not insert one canned sentence in Python or pretend policy exists.
++        self._record_life_event('C4','DRIVE_D2_RELATIONAL_DEFER',status='DEFERRED',source_event_id=source_event_id,
++                                extra={'reason':'NO_TRAINED_SPEECH_ACT_FOR_RELATIONAL_FRAME'})
++        self._autosave_tick(False)
++        return {'reply':None,'proposed_reply':None,'mutated':False,'event':None,
++                'parsed':parsed,'reply_kind':'LEARNED_RELATION_NO_SURFACE','status':'DEFERRED'}
++
+     def _process_user_message_now(self,text:str,source_event_id=None,publish=True):
+         self.human_active=True;self._asked_since_user=False
+         # Receiving a human event is a TRIGGER for DRIVE, not proof that any
+@@ -1071,6 +1100,8 @@
+         episodes=indexed['episodes']
+         d2=self._d2_grounded_user_turn(text,source_event_id,publish)
+         if d2 is not None:return d2
++        rel=self._d2_relational_user_turn(text,source_event_id,publish)
++        if rel is not None:return rel
+         candidate=None
+         if is_query_batch(episodes):
+             candidate=answer_batch(episodes,self.episode_index,current_event_id=source_event_id,inquiries=list(self.inquiries.values()))
+--- a/c4child/scope.py
++++ b/c4child/scope.py
+@@ -15,7 +15,7 @@
+     'WORD_FORM','GRAM_GENDER','PREDICATE_RELATION','QUERY_RELATION',
+     'PREDICATE_PRESENT_FORM','PREDICATE_PAST_FORM','LETTER_NAME','GROUNDS',
+     'SYNONYM','ANTONYM','MEANS',
+-    'DIALOGUE_POLICY_WEIGHT','DIALOGUE_REPLY_PATTERN','D2_GROUNDER_WEIGHT'
++    'DIALOGUE_POLICY_WEIGHT','DIALOGUE_REPLY_PATTERN','D2_GROUNDER_WEIGHT','D2_RELATION_WEIGHT'
+ }
+ SYSTEM_RELATIONS={'FOUNDATIONAL','RULE'}
+ SOCIAL_RELATIONS={'NAME','LIKES','HAS','ROLE'}
