@@ -7,3 +7,6 @@ Frozen source file SHA256 `cb3bce1eb07e4b5938c965cfdb73de7828129e8f2dc13d9199d92
 - Actual phone voice/chat proof is NOT sandbox host action proof; C004 remains DEVICE_ACTION_PENDING, latest full DONE C003, C005 NOT STARTED.
 - Transport tracing overflow 57,680,192 bytes; DEEP next interaction only first greeting, cannot attribute deeper decision traces to other turns.
 - Next: real native sandbox action + cold proof; then functional learned speech composer and model-state training with Claude. Keep four owners, five influence types, provenance, no G215 or LLM-driven autonomous pretrain unverified.
+
+## Additional original G329 cold test
+Native C4-R6 replay with original 10,781-fact G329 model: after narrative-source claim, unparsed cube description and unrelated correction, 10,782 facts (one SOURCE_ASSERTED name-text candidate) and NO correction mutation; save to disposable temp copy, cold reload recovers all 10,782 facts and preserves same SOURCE_ASSERTED status. Original G329 SHA256 unchanged. This validates safety fix and persistence only; fictional roles are still incorrectly encoded IS_A and human natural dialogue remains RED. Android physical room action still pending.
