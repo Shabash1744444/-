@@ -1,0 +1,46 @@
+C4 G331 / C004-R4 — ANDROID PHONE LIVE PROTOCOL
+2026-10-09 · Code gates green; real Android test still pending.
+
+A. INSTALL MATCHED BUILDS
+- Android app: Shabash1744444/Emu, branch experiments/c4-c004-native-host
+  Latest verified experimental APK run in prior checkpoint: https://github.com/Shabash1744444/Emu/actions/runs/37851562352
+- Python runtime: C4_G331_C004_R4_NATIVE_RUNTIME.zip
+  SHA256: 9dd72f1d5bfc57c6c1ad757503b46ec0dbde637fc4ded285e3e59c6d8173eaa3
+- Use a COPY of your existing G329 .c4m, NOT the only original. Do not import the C4 LIFE demo.
+- Stop C4 before importing; enable runtime and cognitive trace. In the room verify BALL is actually at floor-left and your virtual hand is empty. If not, do not fabricate this starting state.
+
+B. SEND ONE MESSAGE AT A TIME (entire line, including @c4)
+
+@c4 {"op":"GOAL","scope":"SIM","scene":"home","initial":{"subject":"BALL","relation":"LOCATION","object":"floor-left"},"target":{"subject":"BALL","relation":"LOCATION","object":"held"}}
+
+@c4 {"op":"DEMO","scope":"SIM","scene":"home","action":"TAKE","before":{"subject":"SAMPLE","relation":"LOCATION","object":"floor-left"},"after":{"subject":"SAMPLE","relation":"LOCATION","object":"held"}}
+
+@c4 {"op":"PLAN","scope":"SIM","scene":"home"}
+
+Expect: DRIVE proposed TAKE -> native Java world changes BALL floor-left->held -> C4 private receipt -> SIM_SUCCESS. Mere speech is NOT a result.
+
+If the first action really succeeded, continue:
+
+@c4 {"op":"GOAL","scope":"SIM","scene":"home","initial":{"subject":"BALL","relation":"LOCATION","object":"held"},"target":{"subject":"BALL","relation":"LOCATION","object":"basket"}}
+
+@c4 {"op":"DEMO","scope":"SIM","scene":"home","action":"PLACE","before":{"subject":"SAMPLE","relation":"LOCATION","object":"held"},"after":{"subject":"SAMPLE","relation":"LOCATION","object":"basket"}}
+
+@c4 {"op":"PLAN","scope":"SIM","scene":"home"}
+
+Expect: Java uses exact target basket, not a guessed default destination; only a witnessed basket result earns SIM_SUCCESS.
+
+@c4 {"op":"REFLECT","scope":"SIM","scene":"home"}
+
+Expect: confirmed_sim reflects distinct witnessed actions, but independent_sim_roots MUST NOT increase to 2 just because the two receipts have different action/request IDs within one Android session. Source root and intervention ID are different fields. A new session may be a different recorded source root, but independent statistics still require causal scrutiny.
+
+C. NEGATIVE CHECKS
+- A normal chat line "I successfully moved BALL" must NOT produce a private credit.
+- @c4 {"op":"RECEIPT","success":true} must be rejected; this is not a host-origin receipt.
+- Duplicate PLAN must NOT re-run a pending/completed identical action.
+- Save checkpoint, stop/restart organism, and ensure previously witnessed SIM history remains but old session authorization does not.
+
+D. RETURN EVIDENCE
+- Export Android native transport trace, specifically HOST_WORLD C4_NATIVE_ROOM_TRANSITION/REJECTED and c4Credit, plus C4 owner/decision trace.
+- Capture screenshots of room before/after and note any errors.
+- Send APK run, runtime ZIP SHA, before/after .c4m copy SHA, and checkpoint/cold restart result.
+- Device gate remains OPEN until this is validated on a real phone. Do not claim WORLD truth from SIM sandbox receipts.
