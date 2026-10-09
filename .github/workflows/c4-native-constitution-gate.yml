@@ -88,3 +88,31 @@ jobs:
           name: C4-G331-C004-R6-L1-TESTED-RUNTIME
           path: C4_G331_C004_R6_L1_NATIVE_RUNTIME.zip
           if-no-files-found: error
+
+      - name: D1 experimental graph policy source gate
+        shell: bash
+        env:
+          PYTHONPATH: /tmp/c4-native:experimental_g331/training/d1
+        run: |
+          set -euo pipefail
+          # Preserve the earlier L1 tested archive and its 139-case gates.
+          # Overlay the exact minimal delta on the very same native organism.
+          patch -d /tmp/c4-native -p1 < experimental_g331/training/d1/D1_NATIVE_DELTA.patch
+          cp experimental_g331/training/d1/narrative_policy.py /tmp/c4-native/c4child/narrative_policy.py
+          echo 'da71557c56238a7f90356604c87b3c385fa7c956ba959fd6440a9c85ee4a08d1  /tmp/c4-native/c4child/runtime.py' | sha256sum -c -
+          echo '3414220284883ea957a6f8282b44964759cae907e351addb5715a7007032175a  /tmp/c4-native/c4child/scope.py' | sha256sum -c -
+          echo '5cfe79028a2baf15eb0295ca27eaa9ef737ba06a8a1958a58007ca106d505b5b  /tmp/c4-native/c4child/narrative_policy.py' | sha256sum -c -
+          python -m pytest -q experimental_g331/tests/test_d1_policy_learning_ci.py
+      - name: Package experimentally tested C4 D1 native runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/c4-native
+          zip -q -r "$GITHUB_WORKSPACE/C4_G331_R6_L1_D1_NATIVE_RUNTIME.zip" c4child -i 'c4child/*.py'
+          test "$(unzip -Z1 "$GITHUB_WORKSPACE/C4_G331_R6_L1_D1_NATIVE_RUNTIME.zip" | grep -c '^c4child/.*\.py$')" -eq 57
+          unzip -t "$GITHUB_WORKSPACE/C4_G331_R6_L1_D1_NATIVE_RUNTIME.zip" | tail -1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: C4-G331-D1-EXPERIMENTAL-GRAPH-POLICY
+          path: C4_G331_R6_L1_D1_NATIVE_RUNTIME.zip
+          if-no-files-found: error
