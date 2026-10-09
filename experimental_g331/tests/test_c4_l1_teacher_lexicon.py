@@ -56,3 +56,19 @@ def test_model_self_teacher_cannot_mint_linguistic_fact():
 def test_source_root_remains_one_dependence():
     g=strict_graph();BootstrapTeacher(g).ingest([lesson('PREDICATE_RELATION','CAUSES'),lesson('WORD_FORM','варьирует')])
     assert {f.source_group for f in g.facts.values()}=={'assistant_curated:one_root'}
+
+
+def test_supervised_transfer_to_unseen_combinations_with_cold_reload(tmp_path):
+    from c4child.checkpoint import save_c4m_compact, load_c4m_compact
+    from training.l1.train_language_l1 import curriculum, examples, parse_results, SOURCE_ROOT
+    g=strict_graph();tests=examples()
+    assert sum(x['ok'] for x in parse_results(g,tests)) == 0
+    m=BootstrapTeacher(g).ingest(curriculum())
+    assert m.rejected==0 and m.admitted==120
+    assert sum(x['ok'] for x in parse_results(g,tests))==48
+    assert {f.source_group for f in g.facts.values()}=={SOURCE_ROOT}
+    assert all(fact_scope(g,f)==LANGUAGE_CONVENTION for f in g.facts.values())
+    p=tmp_path/'lesson.c4m';save_c4m_compact(p,g,include_cold=True)
+    cold,_,_=load_c4m_compact(p,hydrate_cold=True)
+    assert sum(x['ok'] for x in parse_results(cold,tests))==48
+    assert len(cold.facts)==120
