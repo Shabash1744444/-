@@ -1,3 +1,7 @@
+# NEW CHAT START HERE — 2026-10-09: COMPLETE L1 + C004 HANDOFF
+**Read `03_NEXT_CHAT_HANDOFF_L1_LANGUAGE_2026-10-09.md` FIRST**, then latest `02_RECOVERY_HANDOFF.md` and `01_WORK_JOURNAL.md` bottom. L1 is a genuine new trained `.c4m` copy (0→48/48 *trained verb forms, unseen subject/object combinations*, not free dialogue); C004 native Android action still physical-device pending. User asks next L2 experimental learned speech composition, local Gemma ~4B as potential teacher, measured operations/time, and Claude 5.5 Agent at 20:00. No second brain or hardcoded canned language. Do not claim L1 = general-language competence.
+
+---
 # LATEST 2026-10-09: FIRST ACTUALLY TRAINED COPY OF G329 EXIST (L1)
 New weights `C4_G329_L1_LEARNED_ORGANISM_20261009.c4m` SHA256 bba87b3d1b7c48f929236868c2244d05153532b4b173c8d7768783dadc6ef7ce in Library /C4_Candidates/G331_NATIVE_COGNITION/L1_SUPERVISED_LEXICAL_2026_10_09/. L1 supervised lexical forms: 0/48 baseline -> 48/48 new-combination cold; 12 verb lexemes taught, no WORLD / no free dialogue. Trained code+report in `training/l1`; checkpoint `checkpoints/CP_C4_G331_L1_TRAINED_ORGANISM_CODE_GREEN_2026-10-09.md`; latest journal bottom. CI `37895557084` 139 PASS/2 SKIP/2 XFAIL, autonomous pretrain BLOCKED. C004 physical Android host action live still not verified; C003 last full DONE, C005 NOT STARTED.
 ---
