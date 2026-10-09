@@ -1655,7 +1655,7 @@ class C4LivingRuntime:
             'observed_before':{'subject':subject,'relation':'LOCATION','object':b['location']},
             'observed_after':{'subject':subject,'relation':'LOCATION','object':z['location']},
             'receipt_id':'android:'+session_id+':'+aid,
-            'root_id':'host_room_session:'+session_id+':'+aid},
+            'root_id':'host_room_session:'+session_id},
             allow_prediction_refutation=allow_refutation)
         return result
 
