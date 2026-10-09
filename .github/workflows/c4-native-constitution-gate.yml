@@ -24,7 +24,10 @@ jobs:
           unzip -q experimental_g331/assets/C4_G331_C004_NATIVE_RUNTIME.zip -d /tmp/c4-native
           test -s /tmp/c4-native/c4child/runtime.py
           test -s /tmp/c4-native/c4child/structured_cognition.py
-          echo 'e61f417c78a594db6d49262e9a876771795e4f1b98872fb893f8898657bbef13  experimental_g331/native_c4child/structured_cognition.py' | sha256sum -c -
+          # The pinned ZIP is the 56-module native baseline; C004-R3 only overlays
+          # the tested existing cognition module. Never introduce a second brain.
+          echo '09ce9009f5e4b34ab6c7c0e360e5eadd8d7ca3f7834c64a41dc301de849391e6  experimental_g331/native_c4child/structured_cognition.py' | sha256sum -c -
+          cp experimental_g331/native_c4child/structured_cognition.py /tmp/c4-native/c4child/structured_cognition.py
           echo 'fbb5f7bab5c0318ecba089ee8afa6b149dce9c6f52ecfb69169142d541fff1fb  experimental_g331/native_c4child/runtime.py' | sha256sum -c -
           cmp experimental_g331/native_c4child/structured_cognition.py /tmp/c4-native/c4child/structured_cognition.py
           cmp experimental_g331/native_c4child/runtime.py /tmp/c4-native/c4child/runtime.py
@@ -40,7 +43,8 @@ jobs:
             experimental_g331/tests/test_c002_training_gate.py \
             experimental_g331/tests/test_c003_causal_credit.py \
             experimental_g331/tests/test_c004_native_host.py \
-            experimental_g331/tests/test_c004_room_target.py
+            experimental_g331/tests/test_c004_room_target.py \
+            experimental_g331/tests/test_c004_r3_outcome_distinction.py
       - name: Check constitution and block unsafe autonomous pretraining
         shell: bash
         env:
@@ -62,12 +66,12 @@ jobs:
         run: |
           set -euo pipefail
           cd /tmp/c4-native
-          zip -q -r "$GITHUB_WORKSPACE/C4_G331_C004_NATIVE_RUNTIME.zip" c4child -i 'c4child/*.py'
-          unzip -t "$GITHUB_WORKSPACE/C4_G331_C004_NATIVE_RUNTIME.zip" | tail -1
+          zip -q -r "$GITHUB_WORKSPACE/C4_G331_C004_R3_NATIVE_RUNTIME.zip" c4child -i 'c4child/*.py'
+          unzip -t "$GITHUB_WORKSPACE/C4_G331_C004_R3_NATIVE_RUNTIME.zip" | tail -1
           cmp c4child/structured_cognition.py "$GITHUB_WORKSPACE/experimental_g331/native_c4child/structured_cognition.py"
           cmp c4child/runtime.py "$GITHUB_WORKSPACE/experimental_g331/native_c4child/runtime.py"
       - uses: actions/upload-artifact@v4
         with:
-          name: C4-G331-C004-TESTED-RUNTIME
-          path: C4_G331_C004_NATIVE_RUNTIME.zip
+          name: C4-G331-C004-R3-TESTED-RUNTIME
+          path: C4_G331_C004_R3_NATIVE_RUNTIME.zip
           if-no-files-found: error
