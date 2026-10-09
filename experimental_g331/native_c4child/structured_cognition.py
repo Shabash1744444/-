@@ -557,8 +557,11 @@ def verified_sim_receipt(r,p):
         raise ValueError('WRONG_ACTION_FOR_RECEIPT')
     if before and action.get('expected_before') and before!=action['expected_before']:
         raise ValueError('SIM_BEFORE_STATE_MISMATCH')
-    if observed and expected and p['success'] and observed!=expected:
-        raise ValueError('SIM_OBSERVATION_CONTRADICTS_SUCCESS')
+    # An actuator can run correctly while the predicted effect is false.
+    # Preserve the host's witnessed SIM transition; do not erase surprising
+    # evidence or turn a prediction failure into a forged execution failure.
+    prediction_mismatch=bool(expected and observed and observed!=expected)
+    effective_success=bool(p['success'] and not prediction_mismatch)
     if expected and p['success'] and (
          observed is None or before is None or not receipt_id or not root_id or
          p.get('observed_action')!=action['action']):
@@ -571,22 +574,31 @@ def verified_sim_receipt(r,p):
         r._autosave_tick(True)
         return {'accepted':True,'scope':'SIM','action_id':aid,'status':action['status'],
                 'goal_status':goal['status']}
-    action['status']='SIM_SUCCESS' if p['success'] else 'SIM_FAILURE'
+    action['status']='SIM_SUCCESS' if effective_success else 'SIM_FAILURE'
+    action['execution_success']=p['success']
+    action['prediction_confirmed']=None if expected is None or observed is None else (not prediction_mismatch)
     action['receipt_id']=receipt_id
     action['outcome_root']=root_id
     action['observed_after']=observed
     action['outcome_event_id']='hostsim:'+hashlib.sha256((aid+'|'+str(r.step)).encode()).hexdigest()[:18]
+    # Current SIM state belongs to the witnessed environment, not to C4's
+    # prediction; retain surprising outcomes for subsequent planning.
+    if expected and before and observed:
+        goal['current']=dict(observed)
     if action['status']=='SIM_SUCCESS':
         if expected:
-            goal['current']=dict(observed)
             if goal['current']==goal['target']:goal['status']='ACHIEVED_SIM'
         else:
             # Backward compatibility: legacy one-step G331 host outcome.
             goal['status']='ACHIEVED_SIM'
     _record(r,'MEDIATE','SIM_RECEIPT',action['outcome_event_id'],status=action['status'],action_id=aid,
-            goal_id=goal['goal_id'],host_root=root_id,receipt_id=receipt_id)
-    _record(r,'EVAL','CONSEQUENCE_REVIEW',action['outcome_event_id'],action_id=aid,success=p['success'])
+            goal_id=goal['goal_id'],host_root=root_id,receipt_id=receipt_id,execution_success=p['success'])
+    if prediction_mismatch:
+        _record(r,'EVAL','SIM_PREDICTION_REFUTED',action['outcome_event_id'],action_id=aid,
+                expected_after=expected,observed_after=observed)
+    _record(r,'EVAL','CONSEQUENCE_REVIEW',action['outcome_event_id'],action_id=aid,
+            execution_success=p['success'],strategy_success=effective_success)
     _record(r,'COMMIT','STRATEGY_SCORE',action['outcome_event_id'],action_id=aid,
-            reward=1 if p['success'] else -1,scope='SIM',host_root=root_id)
+            reward=1 if effective_success else -1,scope='SIM',host_root=root_id)
     r._autosave_tick(True)
     return {'accepted':True,'scope':'SIM','action_id':aid,'status':action['status'],'goal_status':goal['status']}
