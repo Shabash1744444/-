@@ -1,3 +1,7 @@
+# NEW CHAT — READ COMPLETE VERIFIED D1/D2 HANDOFF FIRST (2026-10-09)
+Physical **L1 AND D1 trained .c4m** exist, and D2 ordinary `user_message` is still **RED (8/8 identical before/after D1)**. Verified D1 112/125 is a restricted synthetic external-frame policy test, NOT free Russian. Read `06_NEXT_CHAT_FULL_HANDOFF_D1_D2_2026-10-09.md` in full and D1 proof Library `/C4_Candidates/G331_NATIVE_COGNITION/D1_DIALOGUE_POLICY_2026_10_09/`. SHA256 trained D1 `86986428afd7bd6957f57bea30596a5ccbb361647c2bf0bd29cbc6d1ddd1aa01`, 57-module runtime `0125e17eb4e889b5de8dd4e9b4f657e89ba0e71f2c26324c4612dee975c8a52e`. D1 CI `37903537950` SUCCESS; direct 7/7 rechecked; D2 8/8 identical replay. **Next D2** trained text→context/scene/referents→speech-act through normal runtime, new copied .c4m, hold out whole operator families; do not repeat D1 or hardcode questions. Separate **C004 phone physical room action/receipt remains DEVICE_PENDING**, C003 last full DONE, C005 not started.
+---
+
 # NEW CHAT HANDOFF 2026-10-09 — CURRENT SOURCE OF TRUTH
 Read **`03_NEXT_CHAT_HANDOFF_L1_LANGUAGE_2026-10-09.md`** for all recovered files, exact SHA256 weights and runtime, real phone RED, L1 learning results and planned L2 generalization experiment. C003 last full DONE, C004 room physical gate PENDING, L1 separate genuine supervised learned COPY of original G329, C005 not started. Preserve the four constitutional owners and source lineage. User wants teaching experiments, not another Python script catalogue.
 
