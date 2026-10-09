@@ -1,0 +1,7 @@
+# C004-R3 START — distinguish executed action from predicted goal outcome
+Date: 2026-10-09
+Base GitHub HEAD: 1baac0d33582dca7b65f66741ca2738432765d88. C004 still DEVICE PENDING; C003 remains last complete cycle.
+Observed code path: native_room_receipt maps Android executionSuccess into verified_sim_receipt(success). For an actually executed LOOK/TAP/GRASP command with valid before/after where the observed state differs from the C4-predicted state, verified_sim_receipt raises SIM_OBSERVATION_CONTRADICTS_SUCCESS; the action remains PROPOSED_NOT_EXECUTED and the system loses adverse evidence.
+Frozen hypothesis / RED: action executed successfully, C4's environmental prediction false -> expected result is witnessed SIM failure/prediction error, negative *strategy* feedback only (no trust punishment; no WORLD promotion), correct observed simulated state and no replay.
+Constitution: MEDIATE attests actuator execution; COMMIT grounds outcome under SIM scope; DRIVE may revise policy, EVAL revises hypothesis. Action execution success != goal achievement. Host receipt must include before, after, origin, session, matching action. No new memory, no separate brain. Preserve original C4M.
+Workflow: RED test -> minimal native c4child repair -> reattack with alternate object/action -> directed/full regression + cold -> physically pinned archive & GitHub Actions -> checkpoint. Never close C004 without real phone trace.
