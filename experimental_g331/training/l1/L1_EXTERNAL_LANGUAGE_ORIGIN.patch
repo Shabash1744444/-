@@ -1,0 +1,11 @@
+--- a/c4child/graph.py
++++ b/c4child/graph.py
+@@ -450,7 +450,7 @@
+                 (basis=='SOCIAL_SELF_REPORT' and rel in {'LIKES','HAS','ROLE'} and identity=='USER')))
+             # Linguistic conventions are separately scoped and don't make WORLD claims.
+             from .scope import LANGUAGE_RELATIONS
+-            linguistic=(org=='USER_SAID' and auth=='TEACHER' and
++            linguistic=(org in {'USER_SAID','EXTERNAL_CORPUS'} and auth=='TEACHER' and
+                         basis=='LANGUAGE_CONVENTION' and rel in LANGUAGE_RELATIONS)
+             if social or linguistic:
+                 return None
